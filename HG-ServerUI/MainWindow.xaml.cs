@@ -25,5 +25,10 @@ namespace HG_ServerUI
         {
             InitializeComponent();
         }
+
+        private void MnExit_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
