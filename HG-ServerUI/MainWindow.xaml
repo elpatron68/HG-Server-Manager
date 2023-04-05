@@ -6,7 +6,7 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:HG_ServerUI" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
                   mc:Ignorable="d"
-        Title="HG Server UI" Height="600" Width="800">
+        Title="HG Server UI" Height="600" Width="1000">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -42,7 +42,7 @@
         </Menu>
 
         <StatusBar Name="sbar" 
-            VerticalAlignment="Bottom"
+            VerticalAlignment="Center"
             Grid.Column="0"
             Grid.Row="3"
             Grid.ColumnSpan="8"
@@ -55,6 +55,7 @@
                     x:Name="lbStatus"
                     FontSize="16" 
                     Content="Server inactive"
+                    VerticalAlignment="Center"
                     >
                 </Label>
             </StatusBarItem>
@@ -78,7 +79,6 @@
             VerticalAlignment="Top" 
             >
         </Label>
-
         <Label 
             Content="Server name" 
             HorizontalAlignment="Left" 
@@ -195,5 +195,163 @@
             Grid.ColumnSpan="2" 
             Width="180">
         </Button>
+        <Label 
+            Content="Race Settings" 
+            HorizontalAlignment="Left" 
+            Margin="10,10,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top"
+            Grid.ColumnSpan="2"
+            FontWeight="Bold"
+            >
+        </Label>
+        <Label 
+            Content="Boat" 
+            HorizontalAlignment="Left" 
+            Margin="10,40,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top"
+            Grid.ColumnSpan="2"
+            >
+        </Label>
+        <Label 
+            Content="Location" 
+            HorizontalAlignment="Left" 
+            Margin="10,70,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top"
+            Grid.ColumnSpan="2"
+            >
+        </Label>
+        <Label 
+            Content="Course" 
+            HorizontalAlignment="Left" 
+            Margin="10,100,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top"
+            Grid.ColumnSpan="2"
+            >
+        </Label>
+        <Label 
+            Content="Maximum clients" 
+            HorizontalAlignment="Left" 
+            Margin="10,130,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top"
+            Grid.ColumnSpan="2"
+            >
+        </Label>
+        <Label 
+            Content="Min players" 
+            HorizontalAlignment="Left" 
+            Margin="10,160,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top"
+            Grid.ColumnSpan="2"
+            >
+        </Label>
+        <Label 
+            Content="Password" 
+            HorizontalAlignment="Left" 
+            Margin="10,190,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top"
+            Grid.ColumnSpan="2"
+            >
+        </Label>
+        <Label 
+            Content="Admin password" 
+            HorizontalAlignment="Left" 
+            Margin="10,220,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top"
+            Grid.ColumnSpan="2"
+            >
+        </Label>
+        <Label 
+            Content="Max race time" 
+            HorizontalAlignment="Left" 
+            Margin="10,250,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top"
+            Grid.ColumnSpan="2"
+            >
+        </Label>
+        <ComboBox 
+            Grid.Column="1" 
+            HorizontalAlignment="Left" 
+            Margin="10,40,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top" 
+            Width="105">
+        </ComboBox>
+        <ComboBox 
+            Grid.Column="1" 
+            HorizontalAlignment="Left" 
+            Margin="10,70,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top" 
+            Width="105">
+        </ComboBox>
+        <ComboBox 
+            Grid.Column="1" 
+            HorizontalAlignment="Left" 
+            Margin="10,100,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top" 
+            Width="105"
+            >
+        </ComboBox>
+        <mah:NumericUpDown 
+            Grid.Column="1" 
+            HorizontalAlignment="Left" 
+            Margin="10,130,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top" 
+            Width="105"
+            Value="16"
+            >
+        </mah:NumericUpDown>
+        <mah:NumericUpDown 
+            Grid.Column="1" 
+            HorizontalAlignment="Left" 
+            Margin="10,160,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top" 
+            Width="105"
+            Value="2"
+            >
+        </mah:NumericUpDown>
+
+        <TextBox 
+            Grid.Column="1" 
+            HorizontalAlignment="Left" 
+            Margin="10,190,0,0" 
+            Grid.Row="2" 
+            TextWrapping="Wrap" 
+            Text="TextBox" 
+            VerticalAlignment="Top" 
+            Width="105">
+        </TextBox>
+        <TextBox 
+            Grid.Column="1" 
+            HorizontalAlignment="Left" 
+            Margin="10,220,0,0" 
+            Grid.Row="2" 
+            TextWrapping="Wrap" 
+            Text="TextBox" 
+            VerticalAlignment="Top" 
+            Width="105">
+        </TextBox>
+        <mah:NumericUpDown 
+            Grid.Column="1" 
+            HorizontalAlignment="Left" 
+            Margin="10,250,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top" 
+            Width="105"
+            Value="20"
+            >
+        </mah:NumericUpDown>
     </Grid>
 </mah:MetroWindow>
