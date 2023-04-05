@@ -6,8 +6,8 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:HG_ServerUI" 
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-        Title="HG Server UI" 
-        Height="580" 
+        Title="HG Server Manager" 
+        Height="590" 
         Width="1000" 
         ResizeMode="NoResize"
         >
