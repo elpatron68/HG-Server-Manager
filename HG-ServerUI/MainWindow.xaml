@@ -7,8 +7,10 @@
         xmlns:local="clr-namespace:HG_ServerUI" 
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         Title="HG Server UI" 
-        Height="600" 
-        Width="1000">
+        Height="580" 
+        Width="1000" 
+        ResizeMode="NoResize"
+        >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -663,7 +665,7 @@
             VerticalAlignment="Top"
             Height="30"
             Width="30"
-            Checked="{Binding Usecollisions}"
+            IsChecked="{Binding Usecollisions}"
             >
         </CheckBox>
         <mah:NumericUpDown 
