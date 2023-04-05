@@ -534,5 +534,115 @@
             Width="105"
             >
         </mah:NumericUpDown>
+        <Label 
+            Grid.Column="6" 
+            Content="Rules" 
+            HorizontalAlignment="Left" 
+            Margin="10,10,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top"
+            FontWeight="Bold"
+            >
+        </Label>
+        <Label 
+            Grid.Column="6" 
+            Content="OCS drag gain" 
+            HorizontalAlignment="Left" 
+            Margin="10,40,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top"
+            >
+        </Label>
+        <Label 
+            Grid.Column="6" 
+            Content="Boundary drag" 
+            HorizontalAlignment="Left" 
+            Margin="10,70,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top"
+            >
+        </Label>
+        <Label 
+            Grid.Column="6" 
+            Content="Penalty drag gain" 
+            HorizontalAlignment="Left" 
+            Margin="10,100,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top"
+            >
+        </Label>
+        <Label 
+            Grid.Column="6" 
+            Content="Use collisions" 
+            HorizontalAlignment="Left" 
+            Margin="10,130,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top"
+            >
+        </Label>
+        <Label 
+            Grid.Column="6" 
+            Content="Wind shadows scale" 
+            HorizontalAlignment="Left" 
+            Margin="10,160,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top"
+            >
+        </Label>
+        <mah:NumericUpDown 
+            Grid.Column="7" 
+            HorizontalAlignment="Left" 
+            Margin="10,40,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top"
+            Width="105"
+            Value=".15"
+            Interval=".05"
+            >
+        </mah:NumericUpDown>
+        <mah:NumericUpDown 
+            Grid.Column="7" 
+            HorizontalAlignment="Left" 
+            Margin="10,70,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top"
+            Width="105"
+            Value="1"
+            Interval=".05"
+            >
+        </mah:NumericUpDown>
+        <mah:NumericUpDown 
+            Grid.Column="7" 
+            HorizontalAlignment="Left" 
+            Margin="10,100,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top"
+            Width="105"
+            Value=".15"
+            Interval=".05"
+            >
+        </mah:NumericUpDown>
+        <CheckBox 
+            Grid.Column="7" 
+            Content="" 
+            HorizontalAlignment="Left" 
+            Margin="10,130,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top"
+            Height="30"
+            Width="30"
+            >
+        </CheckBox>
+        <mah:NumericUpDown 
+            Grid.Column="7" 
+            HorizontalAlignment="Left" 
+            Margin="10,160,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top"
+            Width="105"
+            Value="1"
+            Interval=".1"
+            >
+        </mah:NumericUpDown>
     </Grid>
 </mah:MetroWindow>
