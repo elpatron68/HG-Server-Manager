@@ -6,7 +6,7 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:HG_ServerUI" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
                   mc:Ignorable="d"
-        Title="HG Server UI" Height="450" Width="800">
+        Title="HG Server UI" Height="600" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -19,17 +19,17 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="200"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Menu DockPanel.Dock="Top"
             Grid.Column="0"
             Grid.Row="0"
             Grid.ColumnSpan="8"
             >
-            
+
             <MenuItem Header="_File">
                 <MenuItem x:Name="MnExit"
                           Header="_Exit" Click="MnExit_Click" 
@@ -59,7 +59,141 @@
                 </Label>
             </StatusBarItem>
         </StatusBar>
+        <Label 
+            Content="Server Settings" 
+            HorizontalAlignment="Left" 
+            Margin="10,10,0,0" 
+            Grid.Row="1" 
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Top" 
+            FontWeight="Bold"
+            >
+        </Label>
+        <Label 
+            Content="Path to hg_server.exe" 
+            HorizontalAlignment="Left" 
+            Margin="10,40,0,0" 
+            Grid.Row="1" 
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Top" 
+            >
+        </Label>
 
-
+        <Label 
+            Content="Server name" 
+            HorizontalAlignment="Left" 
+            Margin="10,70,0,0" 
+            Grid.Row="1" 
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Top" 
+            >
+        </Label>
+        <Label 
+            Content="TCP Port" 
+            HorizontalAlignment="Left" 
+            Margin="10,100,0,0" 
+            Grid.Row="1" 
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Top" 
+            >
+        </Label>
+        <Label 
+            Content="UDP Port" 
+            HorizontalAlignment="Left" 
+            Margin="10,130,0,0" 
+            Grid.Row="1" 
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Top" 
+            >
+        </Label>
+        <Label 
+            Content="Steam Port" 
+            HorizontalAlignment="Left" 
+            Margin="10,160,0,0" 
+            Grid.Row="1" 
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Top" 
+            >
+        </Label>
+        <TextBox 
+            x:Name="TxExeFilePath"
+            Grid.Column="2" 
+            Grid.ColumnSpan="4" 
+            HorizontalAlignment="Left" 
+            Margin="10,40,0,0" 
+            Grid.Row="1" 
+            TextWrapping="Wrap" 
+            Text="hg_server.exe" 
+            VerticalAlignment="Top" 
+            Width="380">
+        </TextBox>
+        <TextBox 
+            x:Name="TxServerName"
+            Grid.Column="2" 
+            Grid.ColumnSpan="4" 
+            HorizontalAlignment="Left" 
+            Margin="10,70,0,0" 
+            Grid.Row="1" 
+            TextWrapping="Wrap" 
+            Text="DontFlyTooHigh" 
+            VerticalAlignment="Top" 
+            Width="380">
+        </TextBox>
+        <TextBox 
+            x:Name="TxPortTcp"
+            Grid.Column="2" 
+            Grid.ColumnSpan="4" 
+            HorizontalAlignment="Left" 
+            Margin="10,100,0,0" 
+            Grid.Row="1" 
+            TextWrapping="Wrap" 
+            Text="3333" 
+            VerticalAlignment="Top" 
+            Width="380">
+        </TextBox>
+        <TextBox 
+            x:Name="TxPortUdp"
+            Grid.Column="2" 
+            Grid.ColumnSpan="4" 
+            HorizontalAlignment="Left" 
+            Margin="10,130,0,0" 
+            Grid.Row="1" 
+            TextWrapping="Wrap" 
+            Text="3334" 
+            VerticalAlignment="Top" 
+            Width="380">
+        </TextBox>
+        <TextBox 
+            x:Name="TxPortSteam"
+            Grid.Column="2" 
+            Grid.ColumnSpan="4" 
+            HorizontalAlignment="Left" 
+            Margin="10,160,0,0" 
+            Grid.Row="1" 
+            TextWrapping="Wrap" 
+            Text="27015" 
+            VerticalAlignment="Top" 
+            Width="380">
+        </TextBox>
+        <Button 
+            Grid.Column="6" 
+            Content="_Browse" 
+            HorizontalAlignment="Left" 
+            Margin="10,40,0,0" 
+            Grid.Row="1" 
+            VerticalAlignment="Top" 
+            Grid.ColumnSpan="2" 
+            Width="180">
+        </Button>
+        <Button 
+            Grid.Column="6" 
+            Content="_Start server" 
+            HorizontalAlignment="Left" 
+            Margin="10,160,0,0" 
+            Grid.Row="1" 
+            VerticalAlignment="Top" 
+            Grid.ColumnSpan="2" 
+            Width="180">
+        </Button>
     </Grid>
 </mah:MetroWindow>
