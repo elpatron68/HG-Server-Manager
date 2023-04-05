@@ -22,8 +22,14 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-        <Menu DockPanel.Dock="Top">
+        <Menu DockPanel.Dock="Top"
+            Grid.Column="0"
+            Grid.Row="0"
+            Grid.ColumnSpan="8"
+            >
+            
             <MenuItem Header="_File">
                 <MenuItem x:Name="MnExit"
                           Header="_Exit" Click="MnExit_Click" 
@@ -34,6 +40,26 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
+
+        <StatusBar Name="sbar" 
+            VerticalAlignment="Bottom"
+            Grid.Column="0"
+            Grid.Row="3"
+            Grid.ColumnSpan="8"
+            >
+            <StatusBarItem>
+                <TextBlock FontSize="16">Status:</TextBlock>
+            </StatusBarItem>
+            <StatusBarItem>
+                <Label
+                    x:Name="lbStatus"
+                    FontSize="16" 
+                    Content="Server inactive"
+                    >
+                </Label>
+            </StatusBarItem>
+        </StatusBar>
+
 
     </Grid>
 </mah:MetroWindow>
