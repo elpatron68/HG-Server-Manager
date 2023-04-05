@@ -9,8 +9,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="placeholder_image.jpg" />
+    <None Remove="placeholder_image2.jpg" />
+    <None Remove="placeholder_image3.jpg" />
+    <None Remove="placeholder_image4.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MahApps.Metro" Version="2.4.9" />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="placeholder_image.jpg" />
+    <Resource Include="placeholder_image2.jpg" />
+    <Resource Include="placeholder_image3.jpg" />
+    <Resource Include="placeholder_image4.jpg" />
   </ItemGroup>
 
 </Project>
