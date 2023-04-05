@@ -194,15 +194,13 @@
             Width="105" Click="BtBrowse_Click">
         </Button>
         <Button 
-            Grid.Column="3" 
+            Grid.Column="6" 
             Content="_Start server" 
             HorizontalAlignment="Left" 
-            Margin="10,160,0,0" 
+            Margin="10,10,0,0" 
             Grid.Row="1" 
             VerticalAlignment="Top" 
-            Grid.ColumnSpan="2" 
-            Width="105">
-        </Button>
+            Width="105"/>
         <Label 
             Content="Race Settings" 
             HorizontalAlignment="Left" 
@@ -710,66 +708,66 @@
             Width="230" 
             Grid.ColumnSpan="2" Source="/placeholder_image4.jpg" Stretch="UniformToFill"/>
         <Label 
-            Grid.Column="6" 
+            Grid.Column="2" 
             Content="Penalties" 
             HorizontalAlignment="Left" 
-            Margin="10,10,0,0" 
-            Grid.Row="1" 
+            Margin="10,130,0,0" 
+            Grid.Row="2" 
             VerticalAlignment="Top"
             FontWeight="Bold"
             >
         </Label>
         <Label 
-            Grid.Column="6" 
+            Grid.Column="2" 
             Content="Gap to clear" 
             HorizontalAlignment="Left" 
-            Margin="10,40,0,0" 
-            Grid.Row="1" 
+            Margin="10,160,0,0" 
+            Grid.Row="2" 
             VerticalAlignment="Top"
             >
         </Label>
         <Label 
-            Grid.Column="6" 
+            Grid.Column="2" 
             Content="Client slowdown" 
             HorizontalAlignment="Left" 
-            Margin="10,70,0,0" 
-            Grid.Row="1" 
+            Margin="10,190,0,0" 
+            Grid.Row="2" 
             VerticalAlignment="Top"
             >
         </Label>
         <Label 
-            Grid.Column="6" 
+            Grid.Column="2" 
             Content="Penalty duration" 
             HorizontalAlignment="Left" 
-            Margin="10,100,0,0" 
-            Grid.Row="1" 
+            Margin="10,220,0,0" 
+            Grid.Row="2" 
             VerticalAlignment="Top"
             >
         </Label>
         <Label 
-            Grid.Column="6" 
+            Grid.Column="2" 
             Content="Black flag time" 
             HorizontalAlignment="Left" 
-            Margin="10,130,0,0" 
-            Grid.Row="1" 
+            Margin="10,250,0,0" 
+            Grid.Row="2" 
             VerticalAlignment="Top"
             >
         </Label>
         <Label 
-            Grid.Column="6" 
+            Grid.Column="2" 
             Content="Black flag legs" 
             HorizontalAlignment="Left" 
-            Margin="10,160,0,0" 
-            Grid.Row="1" 
+            Margin="10,280,0,0" 
+            Grid.Row="2" 
             VerticalAlignment="Top"
             >
         </Label>
         <mah:NumericUpDown 
             x:Name="NmGapToClear"
-            Grid.Column="7" 
+            Grid.Column="3" 
             HorizontalAlignment="Left" 
-            Margin="10,40,0,0" 
-            Grid.Row="1" 
+            Margin="10,160,0,0" 
+            Grid.Row="2" 
             VerticalAlignment="Top"
             Value="{Binding Gaptoclear}"
             Width="105"
@@ -777,10 +775,10 @@
         </mah:NumericUpDown>
         <mah:NumericUpDown 
             x:Name="NmClientSlowdown"
-            Grid.Column="7" 
+            Grid.Column="3" 
             HorizontalAlignment="Left" 
-            Margin="10,70,0,0" 
-            Grid.Row="1" 
+            Margin="10,190,0,0" 
+            Grid.Row="2" 
             VerticalAlignment="Top"
             Value="{Binding Clientslowdown}"
             Width="105"
@@ -788,10 +786,10 @@
         </mah:NumericUpDown>
         <mah:NumericUpDown 
             x:Name="NmPenaltyDuration"
-            Grid.Column="7" 
+            Grid.Column="3" 
             HorizontalAlignment="Left" 
-            Margin="10,100,0,0" 
-            Grid.Row="1" 
+            Margin="10,220,0,0" 
+            Grid.Row="2" 
             VerticalAlignment="Top"
             Value="{Binding Penaltyduration}"
             Width="105"
@@ -799,10 +797,10 @@
         </mah:NumericUpDown>
         <mah:NumericUpDown 
             x:Name="NmBlackFlagDuration"
-            Grid.Column="7" 
+            Grid.Column="3" 
             HorizontalAlignment="Left" 
-            Margin="10,130,0,0" 
-            Grid.Row="1" 
+            Margin="10,250,0,0" 
+            Grid.Row="2" 
             VerticalAlignment="Top"
             Value="{Binding Blackflagduration}"
             Width="105"
@@ -810,10 +808,10 @@
         </mah:NumericUpDown>
         <mah:NumericUpDown 
             x:Name="NmBlackFlagLegs"
-            Grid.Column="7" 
+            Grid.Column="3" 
             HorizontalAlignment="Left" 
-            Margin="10,160,0,0" 
-            Grid.Row="1" 
+            Margin="10,280,0,0" 
+            Grid.Row="2" 
             VerticalAlignment="Top"
             Value="{Binding Blackflaglegs}"
             Width="105"

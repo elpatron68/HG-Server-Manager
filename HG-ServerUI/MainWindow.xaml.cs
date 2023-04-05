@@ -53,6 +53,7 @@ namespace HG_ServerUI
             NmWindVariation.DataContext = settingsModel;
             NmWindEvolutionGain.DataContext = settingsModel;
             NmOcsDragGain.DataContext = settingsModel;
+            NmWindShadowScale.DataContext = settingsModel;
             NmBoundaryDrag.DataContext = settingsModel;
             NmPenaltyDragGain.DataContext = settingsModel;
             CheckUseCollisions.DataContext = settingsModel;
