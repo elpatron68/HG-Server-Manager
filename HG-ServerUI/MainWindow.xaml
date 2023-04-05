@@ -656,5 +656,110 @@
             VerticalAlignment="Top" 
             Width="230" 
             Grid.ColumnSpan="2" Source="/placeholder_image4.jpg" Stretch="UniformToFill"/>
+        <Label 
+            Grid.Column="6" 
+            Content="Penalties" 
+            HorizontalAlignment="Left" 
+            Margin="10,10,0,0" 
+            Grid.Row="1" 
+            VerticalAlignment="Top"
+            FontWeight="Bold"
+            >
+        </Label>
+        <Label 
+            Grid.Column="6" 
+            Content="Gap to clear" 
+            HorizontalAlignment="Left" 
+            Margin="10,40,0,0" 
+            Grid.Row="1" 
+            VerticalAlignment="Top"
+            >
+        </Label>
+        <Label 
+            Grid.Column="6" 
+            Content="Client slowdown" 
+            HorizontalAlignment="Left" 
+            Margin="10,70,0,0" 
+            Grid.Row="1" 
+            VerticalAlignment="Top"
+            >
+        </Label>
+        <Label 
+            Grid.Column="6" 
+            Content="Penalty duration" 
+            HorizontalAlignment="Left" 
+            Margin="10,100,0,0" 
+            Grid.Row="1" 
+            VerticalAlignment="Top"
+            >
+        </Label>
+        <Label 
+            Grid.Column="6" 
+            Content="Black flag time" 
+            HorizontalAlignment="Left" 
+            Margin="10,130,0,0" 
+            Grid.Row="1" 
+            VerticalAlignment="Top"
+            >
+        </Label>
+        <Label 
+            Grid.Column="6" 
+            Content="Black flag legs" 
+            HorizontalAlignment="Left" 
+            Margin="10,160,0,0" 
+            Grid.Row="1" 
+            VerticalAlignment="Top"
+            >
+        </Label>
+        <mah:NumericUpDown 
+            Grid.Column="7" 
+            HorizontalAlignment="Left" 
+            Margin="10,40,0,0" 
+            Grid.Row="1" 
+            VerticalAlignment="Top"
+            Value="30"
+            Width="105"
+            >
+        </mah:NumericUpDown>
+        <mah:NumericUpDown 
+            Grid.Column="7" 
+            HorizontalAlignment="Left" 
+            Margin="10,70,0,0" 
+            Grid.Row="1" 
+            VerticalAlignment="Top"
+            Value="0"
+            Width="105"
+            >
+        </mah:NumericUpDown>
+        <mah:NumericUpDown 
+            Grid.Column="7" 
+            HorizontalAlignment="Left" 
+            Margin="10,100,0,0" 
+            Grid.Row="1" 
+            VerticalAlignment="Top"
+            Value="60"
+            Width="105"
+            >
+        </mah:NumericUpDown>
+        <mah:NumericUpDown 
+            Grid.Column="7" 
+            HorizontalAlignment="Left" 
+            Margin="10,130,0,0" 
+            Grid.Row="1" 
+            VerticalAlignment="Top"
+            Value="60"
+            Width="105"
+            >
+        </mah:NumericUpDown>
+        <mah:NumericUpDown 
+            Grid.Column="7" 
+            HorizontalAlignment="Left" 
+            Margin="10,160,0,0" 
+            Grid.Row="1" 
+            VerticalAlignment="Top"
+            Value="1"
+            Width="105"
+            >
+        </mah:NumericUpDown>
     </Grid>
 </mah:MetroWindow>
