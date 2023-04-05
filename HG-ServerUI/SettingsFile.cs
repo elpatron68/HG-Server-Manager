@@ -9,13 +9,14 @@ using System.Windows.Shapes;
 
 namespace HG_ServerUI
 {
-    public class SettingsFileParser
+    public class SettingsFile
     {
+        private static string? _startdirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        private static string? _filename = System.IO.Path.Combine(Directory.GetParent(_startdirectory).ToString(), @"server\cfg\server_cfg.kl");
         public static SettingsModel Readfile() 
         {
             SettingsModel model = new SettingsModel();
-            string? _startdirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            string _filename = System.IO.Path.Combine(Directory.GetParent(_startdirectory).ToString(), @"server\cfg\server_cfg.kl");
+
 #if DEBUG
             _filename = @"E:\Games\Steam\steamapps\common\Hydrofoil Generation\server\cfg\server_cfg.kl";
 #endif
@@ -153,6 +154,95 @@ namespace HG_ServerUI
                 }
             }
             return model; 
+        }
+        public static void Writefile(SettingsModel model)
+        {
+            string content = """                                
+name=<servername>
+ports
+    tcp=<tcpport>
+    udp=<udpport>
+    steam=<steamport>
+
+boat=<boat>
+location=<location>
+course=<course>
+max_clients=<maxclients>
+max_spectators=<maxspectators>
+minimum_player_count=<minplayers>
+sleep_time_ms=0
+password=<password>
+admin_password=<adminpassword>
+max_race_time_minutes=<maxracetime>
+
+session_times
+    setup=<sessiontimesetup>
+    pre_start=<sessiontimeprestart>
+    post_race=<sessiontimepostrace>
+
+wind
+    min_speed=<windminspeed>
+    max_speed=<windmaxspeed>
+    hdg_variation=<windheading>,<windvariation>
+    evolution_gain=<windevolutiongain>
+
+
+rules
+    ocs_drag_gain=<ocsdraggain>
+    boundary_drag=<boundarydrag>
+    penalty_drag_gain=<penaltydraggain>
+    use_collisions=<usecollisions>
+    wind_shadows_scale=<windshadowscale>
+
+
+penalties
+    start
+
+    collisions
+        gap_to_clear=<gaptoclear>
+        client_slowdown=<clientslowdown>
+        penalty_duration=<penaltyduration>
+        black_flag_logic
+            time=<blackflagduration>
+            legs=<blackflaglegs>
+
+""";
+            content = content.Replace("<tcpport>", model.Tcpport)
+                .Replace("<udpport>", model.Udpport)
+                .Replace("<steamport>", model.Steamport)
+                .Replace("<boat>", model.Boat)
+                .Replace("<servername>", model.Servername)
+                .Replace("<location>", model.Location)
+                .Replace("<course>", model.Course)
+                .Replace("<maxclients>", model.Maxclients.ToString())
+                .Replace("<maxspectators>", model.Maxspectators.ToString())
+                .Replace("<minplayers>", model.Minplayers.ToString())
+                .Replace("<password>", model.Password)
+                .Replace("<adminpassword>", model.Adminpassword)
+                .Replace("<maxracetime>", model.Maxracetime.ToString())
+                .Replace("<sessiontimesetup>", model.Sessiontimesetup.ToString())
+                .Replace("<sessiontimeprestart>", model.Sessiontimeprestart.ToString())
+                .Replace("<sessiontimepostrace>", model.Sessiontimepostrace.ToString())
+                .Replace("<windminspeed>", model.Windminspeed.ToString())
+                .Replace("<windmaxspeed>", model.Windmaxspeed.ToString())
+                .Replace("<windheading>", model.Windheading.ToString())
+                .Replace("<windvariation>", model.Windvariation.ToString())
+                .Replace("<windevolutiongain>", model.Windevolutiongain.ToString())
+                .Replace("<ocsdraggain>", model.Ocsdraggain.ToString())
+                .Replace("<boundarydrag>", model.Boundarydrag.ToString())
+                .Replace("<penaltydraggain>", model.Penaltydraggain.ToString())
+                .Replace("<usecollisions>", model.Usecollisions.ToString().ToLower())
+                .Replace("<windshadowscale>", model.Windshadowscale.ToString())
+                .Replace("<gaptoclear>", model.Gaptoclear.ToString())
+                .Replace("<clientslowdown>", model.Clientslowdown.ToString())
+                .Replace("<penaltyduration>", model.Penaltyduration.ToString())
+                .Replace("<blackflagduration>", model.Blackflagduration.ToString())
+                .Replace("<blackflaglegs>", model.Blackflaglegs.ToString())
+                ;
+#if DEBUG
+            _filename = @"E:\Games\Steam\steamapps\common\Hydrofoil Generation\server\cfg\server_cfg.kl";
+#endif
+            File.WriteAllText(_filename, content);
         }
     }
 }
