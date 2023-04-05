@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:HG_ServerUI" 
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         Title="HG Server Manager" 
-        Height="590" 
+        Height="620" 
         Width="1000" 
         ResizeMode="NoResize"
         >
@@ -285,6 +285,15 @@
             Grid.ColumnSpan="2"
             >
         </Label>
+        <Label 
+            Content="Max spectators" 
+            HorizontalAlignment="Left" 
+            Margin="10,280,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top"
+            Grid.ColumnSpan="2"
+            >
+        </Label>
         <ComboBox 
             x:Name="CbBoat"
             Grid.Column="1" 
@@ -373,6 +382,17 @@
             VerticalAlignment="Top" 
             Width="105"
             Value="{Binding Maxracetime}"
+            >
+        </mah:NumericUpDown>
+        <mah:NumericUpDown 
+            x:Name="NmMaxSpectators"
+            Grid.Column="1" 
+            HorizontalAlignment="Left" 
+            Margin="10,280,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top" 
+            Width="105"
+            Value="{Binding Maxspectators}"
             >
         </mah:NumericUpDown>
         <Label 

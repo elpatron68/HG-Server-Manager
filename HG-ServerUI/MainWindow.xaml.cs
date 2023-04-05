@@ -29,6 +29,8 @@ namespace HG_ServerUI
         {
             InitializeComponent();
 
+            settingsModel = SettingsFileParser.Readfile();
+
             TxExeFilePath.DataContext = settingsModel;
             TxServerName.DataContext = settingsModel;
             TxPortTcp.DataContext = settingsModel;
@@ -59,6 +61,7 @@ namespace HG_ServerUI
             NmPenaltyDuration.DataContext = settingsModel;
             NmBlackFlagDuration.DataContext = settingsModel;
             NmBlackFlagLegs.DataContext = settingsModel;
+            NmMaxSpectators.DataContext = settingsModel;
         }
 
         private void MnExit_Click(object sender, RoutedEventArgs e)

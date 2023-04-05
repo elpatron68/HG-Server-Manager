@@ -227,6 +227,12 @@ namespace HG_ServerUI
             set { _blackflaglegs = value; OnPropertyChanged(); }
         }
 
+        private int _maxspectators;
+        public int Maxspectators
+        {
+            get { return _maxspectators; }
+            set { _maxspectators = value; OnPropertyChanged(); }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
