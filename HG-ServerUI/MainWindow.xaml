@@ -4,9 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        xmlns:local="clr-namespace:HG_ServerUI" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-                  mc:Ignorable="d"
-        Title="HG Server UI" Height="600" Width="1000">
+        xmlns:local="clr-namespace:HG_ServerUI" 
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        Title="HG Server UI" 
+        Height="600" 
+        Width="1000">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -122,7 +124,7 @@
             Margin="10,40,0,0" 
             Grid.Row="1" 
             TextWrapping="Wrap" 
-            Text="hg_server.exe" 
+            Text="{Binding Exepath}" 
             VerticalAlignment="Top" 
             Width="230">
         </TextBox>
@@ -134,7 +136,7 @@
             Margin="10,70,0,0" 
             Grid.Row="1" 
             TextWrapping="Wrap" 
-            Text="DontFlyTooHigh" 
+            Text="{Binding Servername}" 
             VerticalAlignment="Top" 
             Width="230"
             >
@@ -147,7 +149,7 @@
             Margin="10,100,0,0" 
             Grid.Row="1" 
             TextWrapping="Wrap" 
-            Text="3333" 
+            Text="{Binding Tcpport}" 
             VerticalAlignment="Top" 
             Width="230"
             >
@@ -160,7 +162,7 @@
             Margin="10,130,0,0" 
             Grid.Row="1" 
             TextWrapping="Wrap" 
-            Text="3334" 
+            Text="{Binding Udpport}" 
             VerticalAlignment="Top" 
             Width="230"
             >
@@ -173,12 +175,13 @@
             Margin="10,160,0,0" 
             Grid.Row="1" 
             TextWrapping="Wrap" 
-            Text="27015" 
+            Text="{Binding Steamport}" 
             VerticalAlignment="Top" 
             Width="230"
             >
         </TextBox>
         <Button 
+            x:Name="BtBrowse"
             Grid.Column="3" 
             Content="_Browse" 
             HorizontalAlignment="Left" 
@@ -186,7 +189,7 @@
             Grid.Row="1" 
             VerticalAlignment="Top" 
             Grid.ColumnSpan="2" 
-            Width="105">
+            Width="105" Click="BtBrowse_Click">
         </Button>
         <Button 
             Grid.Column="3" 
@@ -281,79 +284,93 @@
             >
         </Label>
         <ComboBox 
+            x:Name="CbBoat"
             Grid.Column="1" 
             HorizontalAlignment="Left" 
             Margin="10,40,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top" 
-            Width="105">
+            Width="105"
+            Text="{Binding Boat}"
+            >
         </ComboBox>
         <ComboBox 
+            x:Name="CbLocation"
             Grid.Column="1" 
             HorizontalAlignment="Left" 
             Margin="10,70,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top" 
-            Width="105">
+            Width="105"
+            Text="{Binding Location}"
+            >
         </ComboBox>
         <ComboBox 
+            x:Name="CbCourse"
             Grid.Column="1" 
             HorizontalAlignment="Left" 
             Margin="10,100,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top" 
             Width="105"
+            Text="{Binding Course}"
             >
         </ComboBox>
         <mah:NumericUpDown 
+            x:Name="NmMaxClients"
             Grid.Column="1" 
             HorizontalAlignment="Left" 
             Margin="10,130,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top" 
             Width="105"
-            Value="16"
+            Value="{Binding Maxclients}"
             >
         </mah:NumericUpDown>
         <mah:NumericUpDown 
+            x:Name="NmMinPlayers"
             Grid.Column="1" 
             HorizontalAlignment="Left" 
             Margin="10,160,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top" 
             Width="105"
-            Value="2"
+            Value="{Binding Minplayers}"
             >
         </mah:NumericUpDown>
 
         <TextBox 
+            x:Name="TxPassword"
             Grid.Column="1" 
             HorizontalAlignment="Left" 
             Margin="10,190,0,0" 
             Grid.Row="2" 
             TextWrapping="Wrap" 
-            Text="TextBox" 
+            Text="{Binding Password}" 
             VerticalAlignment="Top" 
-            Width="105">
+            Width="105"
+            >
         </TextBox>
         <TextBox 
+            x:Name="TxAdminPassword"
             Grid.Column="1" 
             HorizontalAlignment="Left" 
             Margin="10,220,0,0" 
             Grid.Row="2" 
             TextWrapping="Wrap" 
-            Text="TextBox" 
+            Text="{Binding Adminpassword}" 
             VerticalAlignment="Top" 
             Width="105">
         </TextBox>
         <mah:NumericUpDown 
+            x:Name="NmMaxRaceTime"
             Grid.Column="1" 
             HorizontalAlignment="Left" 
             Margin="10,250,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top" 
             Width="105"
-            Value="20"
+            Value="{Binding Maxracetime}"
             >
         </mah:NumericUpDown>
         <Label 
@@ -391,32 +408,35 @@
             VerticalAlignment="Top">
         </Label>
         <mah:NumericUpDown 
+            x:Name="NmSessiontimeSetup"
             Grid.Column="3" 
             HorizontalAlignment="Left" 
             Margin="10,40,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
-            Value="30"
+            Value="{Binding Sessiontimesetup}"
             Width="105"
             >
         </mah:NumericUpDown>
         <mah:NumericUpDown 
+            x:Name="NmSessiontimePrestart"
             Grid.Column="3" 
             HorizontalAlignment="Left" 
             Margin="10,70,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
-            Value="40"
+            Value="{Binding Sessiontimeprestart}"
             Width="105"
             >
         </mah:NumericUpDown>
         <mah:NumericUpDown 
+            x:Name="NmSessiontimePostrace"
             Grid.Column="3" 
             HorizontalAlignment="Left" 
             Margin="10,100,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
-            Value="120"
+            Value="{Binding Sessiontimepostrace}"
             Width="105"
             >
         </mah:NumericUpDown>
@@ -476,12 +496,13 @@
             >
         </Label>
         <mah:NumericUpDown 
+            x:Name="NmWindMinSpeed"
             Grid.Column="5" 
             HorizontalAlignment="Left" 
             Margin="10,40,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
-            Value="13.5"
+            Value="{Binding Windminspeed}"
             Maximum="25"
             StringFormat="N1"
             Interval=".5"
@@ -489,12 +510,13 @@
             >
         </mah:NumericUpDown>
         <mah:NumericUpDown 
+            x:Name="NmWindMaxSpeed"
             Grid.Column="5" 
             HorizontalAlignment="Left" 
             Margin="10,70,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
-            Value="16"
+            Value="{Binding Windmaxspeed}"
             Maximum="25"
             StringFormat="N1"
             Interval=".5"
@@ -502,36 +524,39 @@
             >
         </mah:NumericUpDown>
         <mah:NumericUpDown 
+            x:Name="NmWindHeading"
             Grid.Column="5" 
             HorizontalAlignment="Left" 
             Margin="10,100,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
-            Value="20"
+            Value="{Binding Windheading}"
             Maximum="25"
             Interval="5"
             Width="105"
             >
         </mah:NumericUpDown>
         <mah:NumericUpDown 
+            x:Name="NmWindVariation"
             Grid.Column="5" 
             HorizontalAlignment="Left" 
             Margin="10,130,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
-            Value="5"
+            Value="{Binding Windvariation}"
             Maximum="25"
             Interval="1"
             Width="105"
             >
         </mah:NumericUpDown>
         <mah:NumericUpDown 
+            x:Name="NmWindEvolutionGain"
             Grid.Column="5" 
             HorizontalAlignment="Left" 
             Margin="10,160,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
-            Value=".1"
+            Value="{Binding Windevolutiongain}"
             Maximum="1"
             Interval=".1"
             Width="105"
@@ -585,7 +610,7 @@
         </Label>
         <Label 
             Grid.Column="6" 
-            Content="Wind shadows scale" 
+            Content="Wind shadow scale" 
             HorizontalAlignment="Left" 
             Margin="10,160,0,0" 
             Grid.Row="2" 
@@ -593,39 +618,43 @@
             >
         </Label>
         <mah:NumericUpDown 
+            x:Name="NmOcsDragGain"
             Grid.Column="7" 
             HorizontalAlignment="Left" 
             Margin="10,40,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             Width="105"
-            Value=".15"
+            Value="{Binding Ocsdraggain}"
             Interval=".05"
             >
         </mah:NumericUpDown>
         <mah:NumericUpDown 
+            x:Name="NmBoundaryDrag"
             Grid.Column="7" 
             HorizontalAlignment="Left" 
             Margin="10,70,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             Width="105"
-            Value="1"
+            Value="{Binding Boundarydrag}"
             Interval=".05"
             >
         </mah:NumericUpDown>
         <mah:NumericUpDown 
+            x:Name="NmPenaltyDragGain"
             Grid.Column="7" 
             HorizontalAlignment="Left" 
             Margin="10,100,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             Width="105"
-            Value=".15"
+            Value="{Binding Penaltydraggain}"
             Interval=".05"
             >
         </mah:NumericUpDown>
         <CheckBox 
+            x:Name="CheckUseCollisions"
             Grid.Column="7" 
             Content="" 
             HorizontalAlignment="Left" 
@@ -634,16 +663,18 @@
             VerticalAlignment="Top"
             Height="30"
             Width="30"
+            Checked="{Binding Usecollisions}"
             >
         </CheckBox>
         <mah:NumericUpDown 
+            x:Name="NmWindShadowScale"
             Grid.Column="7" 
             HorizontalAlignment="Left" 
             Margin="10,160,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             Width="105"
-            Value="1"
+            Value="{Binding Windshadowscale}"
             Interval=".1"
             >
         </mah:NumericUpDown>
@@ -712,52 +743,57 @@
             >
         </Label>
         <mah:NumericUpDown 
+            x:Name="NmGapToClear"
             Grid.Column="7" 
             HorizontalAlignment="Left" 
             Margin="10,40,0,0" 
             Grid.Row="1" 
             VerticalAlignment="Top"
-            Value="30"
+            Value="{Binding Gaptoclear}"
             Width="105"
             >
         </mah:NumericUpDown>
         <mah:NumericUpDown 
+            x:Name="NmClientSlowdown"
             Grid.Column="7" 
             HorizontalAlignment="Left" 
             Margin="10,70,0,0" 
             Grid.Row="1" 
             VerticalAlignment="Top"
-            Value="0"
+            Value="{Binding Clientslowdown}"
             Width="105"
             >
         </mah:NumericUpDown>
         <mah:NumericUpDown 
+            x:Name="NmPenaltyDuration"
             Grid.Column="7" 
             HorizontalAlignment="Left" 
             Margin="10,100,0,0" 
             Grid.Row="1" 
             VerticalAlignment="Top"
-            Value="60"
+            Value="{Binding Penaltyduration}"
             Width="105"
             >
         </mah:NumericUpDown>
         <mah:NumericUpDown 
+            x:Name="NmBlackFlagDuration"
             Grid.Column="7" 
             HorizontalAlignment="Left" 
             Margin="10,130,0,0" 
             Grid.Row="1" 
             VerticalAlignment="Top"
-            Value="60"
+            Value="{Binding Blackflagduration}"
             Width="105"
             >
         </mah:NumericUpDown>
         <mah:NumericUpDown 
+            x:Name="NmBlackFlagLegs"
             Grid.Column="7" 
             HorizontalAlignment="Left" 
             Margin="10,160,0,0" 
             Grid.Row="1" 
             VerticalAlignment="Top"
-            Value="1"
+            Value="{Binding Blackflaglegs}"
             Width="105"
             >
         </mah:NumericUpDown>
