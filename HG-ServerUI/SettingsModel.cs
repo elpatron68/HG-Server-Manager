@@ -18,6 +18,13 @@ namespace HG_ServerUI
             set { _exepath = value; OnPropertyChanged(); }
         }
 
+        private string _exepathtext;
+        public string Exepathtext
+        {
+            get { return _exepathtext; }
+            set { _exepathtext = value; OnPropertyChanged(); } 
+        }
+
         private string _configfilepath;
         public string Configfilepath
         {
@@ -263,6 +270,13 @@ namespace HG_ServerUI
             set { _maxspectators = value; OnPropertyChanged(); }
         }
 
+        private string _externalip;
+        public string Externalip
+        {
+            get { return _externalip; }
+            set { _externalip = value; OnPropertyChanged(); }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
@@ -341,6 +355,8 @@ namespace HG_ServerUI
                 model.Locations[_count] = item.Split(@"\").Last();
                 _count++;
             }
+            model.Exepathtext = model.Exepath.Replace(@"\steamapps\common\", @"\[...]\");
+            model.Externalip = Network.GetExternalIpaddress();
             return model;
         }
     }

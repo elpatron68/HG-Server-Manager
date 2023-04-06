@@ -26,7 +26,7 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="200"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <Menu DockPanel.Dock="Top"
             Grid.Column="0"
@@ -50,14 +50,24 @@
             Grid.Column="0"
             Grid.Row="3"
             Grid.ColumnSpan="8"
+            Height="40"
             >
             <StatusBarItem>
                 <Label Content="Status: "/>
             </StatusBarItem>
             <StatusBarItem>
                 <Label
-                    x:Name="lbStatus"
+                    x:Name="LbServerStatus"
                     Content="Server inactive"
+                    VerticalAlignment="Center"
+                    >
+                </Label>
+            </StatusBarItem>
+            <StatusBarItem>
+                <Label
+                    x:Name="LbExternalIp"
+                    Content="{Binding Externalip}"
+                    ContentStringFormat="External Ip: {0}"
                     VerticalAlignment="Center"
                     >
                 </Label>
@@ -119,21 +129,23 @@
             >
         </Label>
         <TextBox 
-            x:Name="TxExeFilePath"
+            x:Name="TxExePath"
             Grid.Column="1" 
-            Grid.ColumnSpan="2" 
+            Grid.ColumnSpan="3" 
             HorizontalAlignment="Left" 
             Margin="10,40,0,0" 
             Grid.Row="1" 
-            TextWrapping="Wrap" 
-            Text="{Binding Exepath}" 
+            Text="{Binding Exepathtext}" 
             VerticalAlignment="Top" 
-            Width="230">
+            Width="355"
+            ToolTip="{Binding Exepath}"
+            TextWrapping="NoWrap"
+            >
         </TextBox>
         <TextBox 
             x:Name="TxServerName"
             Grid.Column="1" 
-            Grid.ColumnSpan="4" 
+            Grid.ColumnSpan="3" 
             HorizontalAlignment="Left" 
             Margin="10,70,0,0" 
             Grid.Row="1" 
@@ -146,7 +158,7 @@
         <TextBox 
             x:Name="TxPortTcp"
             Grid.Column="1" 
-            Grid.ColumnSpan="4" 
+            Grid.ColumnSpan="3" 
             HorizontalAlignment="Left" 
             Margin="10,100,0,0" 
             Grid.Row="1" 
@@ -159,7 +171,7 @@
         <TextBox 
             x:Name="TxPortUdp"
             Grid.Column="1" 
-            Grid.ColumnSpan="4" 
+            Grid.ColumnSpan="3" 
             HorizontalAlignment="Left" 
             Margin="10,130,0,0" 
             Grid.Row="1" 
@@ -172,7 +184,7 @@
         <TextBox 
             x:Name="TxPortSteam"
             Grid.Column="1" 
-            Grid.ColumnSpan="4" 
+            Grid.ColumnSpan="3" 
             HorizontalAlignment="Left" 
             Margin="10,160,0,0" 
             Grid.Row="1" 
@@ -182,17 +194,6 @@
             Width="230"
             >
         </TextBox>
-        <Button 
-            x:Name="BtBrowse"
-            Grid.Column="3" 
-            Content="_Browse" 
-            HorizontalAlignment="Left" 
-            Margin="10,40,0,0" 
-            Grid.Row="1" 
-            VerticalAlignment="Top" 
-            Grid.ColumnSpan="2" 
-            Width="105" Click="BtBrowse_Click">
-        </Button>
         <Button 
             Grid.Column="6" 
             Content="_Start server" 
@@ -312,7 +313,7 @@
             Grid.Row="2" 
             VerticalAlignment="Top" 
             Width="105"
-            Text="{Binding Location}"
+            SelectedValue="{Binding Location}"
             ItemsSource="{Binding Locations}"
             >
         </ComboBox>
@@ -324,7 +325,7 @@
             Grid.Row="2" 
             VerticalAlignment="Top" 
             Width="105"
-            Text="{Binding Course}"
+            SelectedValue="{Binding Course}"
             ItemsSource="{Binding Courses}"
             >
         </ComboBox>
@@ -820,5 +821,18 @@
             Width="105"
             >
         </mah:NumericUpDown>
+        <!--<TextBlock 
+            Grid.Column="3" 
+            HorizontalAlignment="Center" 
+            Margin="0,165,0,0" 
+            Grid.Row="1" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top">
+            <Hyperlink
+                NavigateUri="https://portforward.com/"
+            >
+            Port forwarding help
+            </Hyperlink>
+        </TextBlock>-->
     </Grid>
 </mah:MetroWindow>

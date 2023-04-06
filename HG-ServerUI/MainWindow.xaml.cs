@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,8 +32,8 @@ namespace HG_ServerUI
 
             settingsModel = SettingsFile.Readfile();
             settingsModel = SettingsModel.AddPaths(settingsModel);
-
-            TxExeFilePath.DataContext = settingsModel;
+            
+            TxExePath.DataContext = settingsModel;
             TxServerName.DataContext = settingsModel;
             TxPortTcp.DataContext = settingsModel;
             TxPortUdp.DataContext = settingsModel;
@@ -64,6 +65,7 @@ namespace HG_ServerUI
             NmBlackFlagDuration.DataContext = settingsModel;
             NmBlackFlagLegs.DataContext = settingsModel;
             NmMaxSpectators.DataContext = settingsModel;
+            LbExternalIp.DataContext = settingsModel;
         }
 
         private void MnExit_Click(object sender, RoutedEventArgs e)
