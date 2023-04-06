@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
@@ -84,6 +85,16 @@ namespace HG_ServerUI
         private void BtnStartServer_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void MnHgSteam_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://store.steampowered.com/app/1448820/Hydrofoil_Generation/");
+        }
+
+        private void MnHgDiscord_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://discord.gg/paQbBgWM");
         }
     }
 }

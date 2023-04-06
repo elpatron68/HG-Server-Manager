@@ -33,7 +33,6 @@
             Grid.Row="0"
             Grid.ColumnSpan="8"
             >
-
             <MenuItem Header="_File">
                 <MenuItem x:Name="MnSave"
                           Header="_Save configuration"
@@ -42,11 +41,53 @@
                         <iconPacks:PackIconMaterial Kind="ContentSave" />
                     </MenuItem.Icon>
                 </MenuItem>
+                <MenuItem x:Name="MnLoad"
+                          Header="_Load configuration"
+                          >
+                    <MenuItem.Icon>
+                        <iconPacks:Unicons Kind="FileImport"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="MnSaveAs"
+                          Header="Save configuration as"
+                          >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconUnicons Kind="FileExport" />
+                    </MenuItem.Icon>
+                </MenuItem>
                 <MenuItem x:Name="MnExit"
                           Header="_Exit" Click="MnExit_Click" 
                           >
                     <MenuItem.Icon>
                         <iconPacks:PackIconMaterial Kind="ExitRun" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem 
+                    x:Name="MnAbout"
+                    Header="_About HG Server Manager"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="InformationVariant" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem 
+                    x:Name="MnHgSteam"
+                    Header="Hydrofoil Generation on _Steam" 
+                    Click="MnHgSteam_Click"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconFontAwesome Kind="SteamBrands" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem 
+                    x:Name="MnHgDiscord"
+                    Header="Jaxx Vane Studio _Discord"
+                    Click="MnHgDiscord_Click" 
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="Discord" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
