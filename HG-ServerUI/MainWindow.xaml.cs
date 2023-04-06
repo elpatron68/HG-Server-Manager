@@ -96,5 +96,10 @@ namespace HG_ServerUI
         {
             Process.Start("https://discord.gg/paQbBgWM");
         }
+
+        private void MnProjectOnGithub_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://github.com/elpatron68/HG-ServerUI");
+        }
     }
 }

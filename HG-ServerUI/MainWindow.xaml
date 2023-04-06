@@ -73,6 +73,14 @@
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem 
+                    x:Name="MnProjectOnGithub"
+                    Header="_HG Server Manager Github" Click="MnProjectOnGithub_Click"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconEvaIcons Kind="Github" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem 
                     x:Name="MnHgSteam"
                     Header="Hydrofoil Generation on _Steam" 
                     Click="MnHgSteam_Click"
