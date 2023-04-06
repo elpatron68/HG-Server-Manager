@@ -30,8 +30,8 @@ namespace HG_ServerUI
         {
             InitializeComponent();
 
-            settingsModel = SettingsFile.Readfile();
             settingsModel = SettingsModel.AddPaths(settingsModel);
+            settingsModel = SettingsFile.Readfile(settingsModel);
             
             TxExePath.DataContext = settingsModel;
             TxServerName.DataContext = settingsModel;
@@ -79,6 +79,11 @@ namespace HG_ServerUI
             ofd.ShowDialog();
             string f = ofd.FileName;
             settingsModel.Exepath = f;
+        }
+
+        private void BtnStartServer_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

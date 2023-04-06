@@ -11,16 +11,9 @@ namespace HG_ServerUI
 {
     public class SettingsFile
     {
-        private static string? _startdirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-        private static string? _filename = System.IO.Path.Combine(Directory.GetParent(_startdirectory).ToString(), @"server\cfg\server_cfg.kl");
-        public static SettingsModel Readfile() 
+        public static SettingsModel Readfile(SettingsModel model) 
         {
-            SettingsModel model = new SettingsModel();
-
-#if DEBUG
-            _filename = @"E:\Games\Steam\steamapps\common\Hydrofoil Generation\server\cfg\server_cfg.kl";
-#endif
-            string readText = File.ReadAllText(_filename);
+            string readText = File.ReadAllText(model.Configfilepath);
 
             foreach (string line in readText.Split())
             {
@@ -239,9 +232,7 @@ penalties
                 .Replace("<blackflagduration>", model.Blackflagduration.ToString())
                 .Replace("<blackflaglegs>", model.Blackflaglegs.ToString())
                 ;
-#if DEBUG
-            _filename = @"E:\Games\Steam\steamapps\common\Hydrofoil Generation\server\cfg\server_cfg.kl";
-#endif
+            string _filename = model.Configfilepath;
             File.WriteAllText(_filename, content);
         }
     }

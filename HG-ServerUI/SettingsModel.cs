@@ -18,6 +18,13 @@ namespace HG_ServerUI
             set { _exepath = value; OnPropertyChanged(); }
         }
 
+        private bool _serverprocessrunning = false;
+        public bool Serverprocessrunning
+        {
+            get { return _serverprocessrunning; }
+            set { _serverprocessrunning = value; OnPropertyChanged(); }
+        }
+
         private string _exepathtext;
         public string Exepathtext
         {
@@ -320,6 +327,7 @@ namespace HG_ServerUI
             Penaltyduration = 60;
             Blackflagduration = 60;
             Blackflaglegs = 1;
+            Externalip = "";
         }
 
         private static string GetCfgFilenameFromExepath(string _exepath)

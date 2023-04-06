@@ -195,13 +195,14 @@
             >
         </TextBox>
         <Button 
+            x:Name="BtnStartServer"
             Grid.Column="6" 
             Content="_Start server" 
             HorizontalAlignment="Left" 
             Margin="10,10,0,0" 
             Grid.Row="1" 
             VerticalAlignment="Top" 
-            Width="105"/>
+            Width="105" Click="BtnStartServer_Click"/>
         <Label 
             Content="Race Settings" 
             HorizontalAlignment="Left" 
