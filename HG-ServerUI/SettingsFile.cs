@@ -161,7 +161,7 @@ namespace HG_ServerUI
             }
             return model; 
         }
-        public static void Writefile(SettingsModel model, string filename = "")
+        public static void WriteConfigfile(SettingsModel model, string filename = "")
         {
             if (filename == "")
             {

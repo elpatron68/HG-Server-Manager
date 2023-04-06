@@ -43,7 +43,8 @@
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem x:Name="MnLoad"
-                          Header="_Load configuration"
+                          Header="_Load configuration" 
+                          Click="MnLoad_Click"
                           >
                     <MenuItem.Icon>
                         <iconPacks:Unicons Kind="FileImport"/>
@@ -915,9 +916,9 @@
             Grid.Row="1" 
             Grid.ColumnSpan="2" 
             Margin="0,10,10,10" 
-            Background="Black"
-            Foreground="LightGray"
             FontFamily="Cascadia Mono, Consolas, Courier New, monospace"
+            Background="Black"
+            Foreground="LightGreen"
             VerticalScrollBarVisibility="Auto" 
             FontSize="10"
             >

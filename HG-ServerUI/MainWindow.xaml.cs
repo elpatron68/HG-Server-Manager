@@ -95,7 +95,7 @@ namespace HG_ServerUI
         private async void RunProcess()
         {
             Log.Information("Starting HG server");
-            SettingsFile.Writefile(settingsModel);
+            SettingsFile.WriteConfigfile(settingsModel);
             Process server = new Process();
             server.StartInfo.UseShellExecute = false;
             server.StartInfo.CreateNoWindow = true;
@@ -195,7 +195,7 @@ namespace HG_ServerUI
 
         private void MnSave_Click(object sender, RoutedEventArgs e)
         {
-            SettingsFile.Writefile(settingsModel);
+            SettingsFile.WriteConfigfile(settingsModel);
         }
 
         private void MnSaveAs_Click(object sender, RoutedEventArgs e)
@@ -206,7 +206,19 @@ namespace HG_ServerUI
             ofd.Filter = "HG configuration files (*.kl)|*.kl";
             if (ofd.ShowDialog() == true)
             {
-                SettingsFile.Writefile(settingsModel, ofd.FileName);
+                SettingsFile.WriteConfigfile(settingsModel, ofd.FileName);
+            }
+        }
+
+        private void MnLoad_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new();
+            ofd.InitialDirectory = settingsModel.Configfiledirectory;
+            ofd.DefaultExt = "kl";
+            ofd.Filter = "HG configuration files (*.kl)|*.kl";
+            if (ofd.ShowDialog() == true)
+            {
+                settingsModel = SettingsFile.ReadConfigfile(settingsModel);
             }
         }
     }
