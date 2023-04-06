@@ -25,6 +25,13 @@ namespace HG_ServerUI
             set { _serverprocessrunning = value; OnPropertyChanged(); }
         }
 
+        private int _processid;
+        public int Processid
+        {
+            get { return _processid; }
+            set { _processid = value; OnPropertyChanged(); }
+        }
+
         private string _exepathtext;
         public string Exepathtext
         {
@@ -298,6 +305,20 @@ namespace HG_ServerUI
             set { _externalip = value; OnPropertyChanged(); }
         }
 
+        private string _btnservercontent;
+        public string Btnservercontent
+        {
+            get { return _btnservercontent ?? string.Empty; }
+            set { _btnservercontent = value; OnPropertyChanged(); }
+        }
+
+        private bool _btnserverenabled;
+        public bool Btnserverenabled
+        {
+            get { return _btnserverenabled; }
+            set { _btnserverenabled = value; OnPropertyChanged(); }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
@@ -343,6 +364,7 @@ namespace HG_ServerUI
             Blackflaglegs = 1;
             Externalip = string.Empty; ;
             Configfiledirectory=string.Empty;
+            Serverprocessrunning = false;
         }
 
         private static string GetCfgFilenameFromExepath(string _exepath)
@@ -381,6 +403,8 @@ namespace HG_ServerUI
             model.Exepathtext = model.Exepath.Replace(@"\steamapps\common\", @"\[...]\");
             model.Externalip = Network.GetExternalIpaddress();
             model.Logfilepath= Path.GetDirectoryName(model.Exepath) + @"\log.log";
+            model.Btnservercontent = "_Start server";
+            model.Btnserverenabled = true;
             return model;
         }
     }

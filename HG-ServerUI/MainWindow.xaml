@@ -121,7 +121,8 @@
             <StatusBarItem>
                 <Label
                     x:Name="LbServerStatus"
-                    Content="Server inactive"
+                    Content="{Binding Serverprocessrunning}"
+                    ContentStringFormat="Server running: {0}"
                     VerticalAlignment="Center"
                     >
                 </Label>
@@ -260,12 +261,16 @@
         <Button 
             x:Name="BtnStartServer"
             Grid.Column="6" 
-            Content="_Start server" 
+            Content="{Binding Btnservercontent}" 
             HorizontalAlignment="Left" 
             Margin="10,10,0,0" 
             Grid.Row="1" 
             VerticalAlignment="Top" 
-            Width="105" Click="BtnStartServer_Click"/>
+            Width="105" 
+            Click="BtnStartServer_Click"
+            IsEnabled="{Binding Btnserverenabled}"
+            >
+        </Button>
         <Label 
             Content="Race Settings" 
             HorizontalAlignment="Left" 
@@ -648,6 +653,7 @@
             Maximum="1"
             Interval=".1"
             Width="105"
+            StringFormat="N1"
             >
         </mah:NumericUpDown>
         <Label 
@@ -715,6 +721,7 @@
             Width="105"
             Value="{Binding Ocsdraggain}"
             Interval=".05"
+            StringFormat="N2"
             >
         </mah:NumericUpDown>
         <mah:NumericUpDown 
@@ -727,6 +734,7 @@
             Width="105"
             Value="{Binding Boundarydrag}"
             Interval=".05"
+            StringFormat="N1"
             >
         </mah:NumericUpDown>
         <mah:NumericUpDown 
@@ -739,6 +747,7 @@
             Width="105"
             Value="{Binding Penaltydraggain}"
             Interval=".05"
+            StringFormat="N2"
             >
         </mah:NumericUpDown>
         <CheckBox 
@@ -764,6 +773,7 @@
             Width="105"
             Value="{Binding Windshadowscale}"
             Interval=".1"
+            StringFormat="N1"
             >
         </mah:NumericUpDown>
         <Image 

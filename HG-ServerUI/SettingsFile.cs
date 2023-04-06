@@ -99,7 +99,7 @@ namespace HG_ServerUI
                 }
                 if (line.Contains("hdg_variation="))
                 {
-                    model.Windminspeed = int.Parse(line.Split("=")[1].Trim().Split(",")[0]);
+                    model.Windheading = int.Parse(line.Split("=")[1].Trim().Split(",")[0]);
                     model.Windvariation = int.Parse(line.Split("=")[1].Trim().Split(",")[1]);
                 }
                 if (line.Contains("evolution_gain="))
@@ -168,7 +168,8 @@ namespace HG_ServerUI
                 filename = model.Configfilepath;
             }
             string content = """
-name =<servername>
+
+name=<servername>
 ports
     tcp=<tcpport>
     udp=<udpport>
@@ -196,14 +197,12 @@ wind
     hdg_variation=<windheading>,<windvariation>
     evolution_gain=<windevolutiongain>
 
-
 rules
     ocs_drag_gain=<ocsdraggain>
     boundary_drag=<boundarydrag>
     penalty_drag_gain=<penaltydraggain>
     use_collisions=<usecollisions>
     wind_shadows_scale=<windshadowscale>
-
 
 penalties
     start
@@ -233,16 +232,16 @@ penalties
                 .Replace("<sessiontimesetup>", model.Sessiontimesetup.ToString())
                 .Replace("<sessiontimeprestart>", model.Sessiontimeprestart.ToString())
                 .Replace("<sessiontimepostrace>", model.Sessiontimepostrace.ToString())
-                .Replace("<windminspeed>", model.Windminspeed.ToString())
-                .Replace("<windmaxspeed>", model.Windmaxspeed.ToString())
+                .Replace("<windminspeed>", model.Windminspeed.ToString("0.#", CultureInfo.InvariantCulture))
+                .Replace("<windmaxspeed>", model.Windmaxspeed.ToString("0.#", CultureInfo.InvariantCulture))
                 .Replace("<windheading>", model.Windheading.ToString())
                 .Replace("<windvariation>", model.Windvariation.ToString())
-                .Replace("<windevolutiongain>", model.Windevolutiongain.ToString())
-                .Replace("<ocsdraggain>", model.Ocsdraggain.ToString())
-                .Replace("<boundarydrag>", model.Boundarydrag.ToString())
-                .Replace("<penaltydraggain>", model.Penaltydraggain.ToString())
+                .Replace("<windevolutiongain>", model.Windevolutiongain.ToString("0.#", CultureInfo.InvariantCulture))
+                .Replace("<ocsdraggain>", model.Ocsdraggain.ToString("0.##", CultureInfo.InvariantCulture))
+                .Replace("<boundarydrag>", model.Boundarydrag.ToString("0.#", CultureInfo.InvariantCulture))
+                .Replace("<penaltydraggain>", model.Penaltydraggain.ToString("0.##", CultureInfo.InvariantCulture))
                 .Replace("<usecollisions>", model.Usecollisions.ToString().ToLower())
-                .Replace("<windshadowscale>", model.Windshadowscale.ToString())
+                .Replace("<windshadowscale>", model.Windshadowscale.ToString("0.#", CultureInfo.InvariantCulture))
                 .Replace("<gaptoclear>", model.Gaptoclear.ToString())
                 .Replace("<clientslowdown>", model.Clientslowdown.ToString())
                 .Replace("<penaltyduration>", model.Penaltyduration.ToString())
