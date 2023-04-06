@@ -300,6 +300,7 @@
             Grid.Row="2" 
             VerticalAlignment="Top" 
             Width="105"
+            ItemsSource="{Binding Boats}"
             Text="{Binding Boat}"
             >
         </ComboBox>
@@ -312,6 +313,7 @@
             VerticalAlignment="Top" 
             Width="105"
             Text="{Binding Location}"
+            ItemsSource="{Binding Locations}"
             >
         </ComboBox>
         <ComboBox 
@@ -323,6 +325,7 @@
             VerticalAlignment="Top" 
             Width="105"
             Text="{Binding Course}"
+            ItemsSource="{Binding Courses}"
             >
         </ComboBox>
         <mah:NumericUpDown 
