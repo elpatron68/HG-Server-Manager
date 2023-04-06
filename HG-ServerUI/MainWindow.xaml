@@ -76,7 +76,7 @@
             </MenuItem>
             <MenuItem Header="_Server monitor">
                 <MenuItem x:Name="MnOpenNtfy"
-                          Header="_Open Ntfy server launch events" 
+                          Header="_Open Ntfy launch events (web browser)" 
                           Click="MnOpenNtfy_Click">
                     <MenuItem.Icon>
                         <iconPacks:PackIconMaterialLight Kind="Bell" />
