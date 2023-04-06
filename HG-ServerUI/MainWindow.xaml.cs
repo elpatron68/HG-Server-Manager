@@ -30,6 +30,7 @@ namespace HG_ServerUI
             InitializeComponent();
 
             settingsModel = SettingsFile.Readfile();
+            settingsModel = SettingsModel.AddPaths(settingsModel);
 
             TxExeFilePath.DataContext = settingsModel;
             TxServerName.DataContext = settingsModel;

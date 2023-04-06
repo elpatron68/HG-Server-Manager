@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -15,6 +16,34 @@ namespace HG_ServerUI
         {
             get { return _exepath; }
             set { _exepath = value; OnPropertyChanged(); }
+        }
+
+        private string _configfilepath;
+        public string Configfilepath
+        {
+            get { return _configfilepath; }
+            set { _configfilepath = value; OnPropertyChanged(); }
+        }
+
+        private string[] _boats;
+        public string[] Boats
+        {
+            get { return _boats; }
+            set { _boats = value; OnPropertyChanged(); }
+        }
+
+        private string[] _courses;
+        public string[] Courses
+        {
+            get { return _courses; }
+            set { _courses = value; OnPropertyChanged(); }
+        }
+
+        private string[] _locations;
+        public string[] Locations
+        {
+            get { return _locations; }
+            set { _locations = value; OnPropertyChanged(); }
         }
 
         private string _servername;
@@ -277,6 +306,42 @@ namespace HG_ServerUI
             Penaltyduration = 60;
             Blackflagduration = 60;
             Blackflaglegs = 1;
+        }
+
+        private static string GetCfgFilenameFromExepath(string _exepath)
+        {
+            return Path.GetDirectoryName(_exepath) + @"\cfg\server_cfg.kl";
+        }
+
+        public static SettingsModel AddPaths(SettingsModel model)
+        {
+            int _count = 0;
+            model.Exepath = DiscoverPath.FindGameDirectoryFromSteam();
+            model.Configfilepath = GetCfgFilenameFromExepath(model.Exepath);
+            string _contentdirectory= Path.GetDirectoryName(model.Exepath) + @"\content";
+            model.Boats = Directory.GetDirectories(_contentdirectory + @"\boats");
+            _count = 0;
+            foreach (var item in model.Boats)
+            {
+                model.Boats[_count] = item.Split(@"\").Last();
+                _count++;
+            }
+            model.Courses = Directory.GetFiles(_contentdirectory + @"\courses","*.kl");
+
+            _count = 0;
+            foreach(var item in model.Courses)
+            {
+                model.Courses[_count] = item.Split(".")[0].Split(@"\").Last();
+                _count++;
+            }
+            model.Locations= Directory.GetDirectories(_contentdirectory + @"\locations");
+            _count = 0;
+            foreach(var item in model.Locations)
+            {
+                model.Locations[_count] = item.Split(@"\").Last();
+                _count++;
+            }
+            return model;
         }
     }
 }
