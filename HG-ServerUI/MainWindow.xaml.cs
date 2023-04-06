@@ -196,6 +196,8 @@ namespace HG_ServerUI
         private void MnSave_Click(object sender, RoutedEventArgs e)
         {
             SettingsFile.WriteConfigfile(settingsModel);
+            string filename = System.IO.Path.GetFileName(settingsModel.Configfilepath);
+            Log.Information($"Saved configuration as {filename}");
         }
 
         private void MnSaveAs_Click(object sender, RoutedEventArgs e)
@@ -209,6 +211,7 @@ namespace HG_ServerUI
             if (ofd.ShowDialog() == true)
             {
                 SettingsFile.WriteConfigfile(settingsModel, ofd.FileName);
+                Log.Information($"Saved configuration as {ofd.FileName}");
             }
         }
 
@@ -223,6 +226,7 @@ namespace HG_ServerUI
             if (ofd.ShowDialog() == true)
             {
                 settingsModel = SettingsFile.ReadConfigfile(settingsModel, ofd.FileName);
+                Log.Information($"Configuration loaded from {ofd.FileName}");
             }
         }
     }
