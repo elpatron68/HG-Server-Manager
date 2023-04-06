@@ -6,6 +6,8 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Net.Sockets;
+using System.Threading;
 
 namespace HG_ServerUI
 {
@@ -21,13 +23,37 @@ namespace HG_ServerUI
             process.StartInfo.CreateNoWindow = true;
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.RedirectStandardError = true;
-            process.Start();
+            try
+            {
+                process.Start();
+            }
+            catch 
+            {
+                return "n/a";
+            }
             string output = process.StandardOutput.ReadToEnd();
             string error = process.StandardError.ReadToEnd();
             process.WaitForExit();
             return output;
         }
 
+        public static bool Testport(string host, int port, TimeSpan timeout) 
+        {
+            try
+            {
+                using (var client = new TcpClient())
+                {
+                    var result = client.BeginConnect(host, port, null, null);
+                    var success = result.AsyncWaitHandle.WaitOne(timeout);
+                    client.EndConnect(result);
+                    return success;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
     }
 }

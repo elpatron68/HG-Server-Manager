@@ -116,6 +116,9 @@ namespace HG_ServerUI
             if (!settingsModel.Serverprocessrunning)
             {
                 RunProcess();
+                bool gameportopen = Network.Testport(settingsModel.Externalip, 
+                    int.Parse(settingsModel.Tcpport), 
+                    TimeSpan.FromSeconds(1));
             }
             else
             {
@@ -177,7 +180,7 @@ namespace HG_ServerUI
             {
                 Title = "A new Hydrofoil Generation server started!",
                 Message = $"Server name: {settingsModel.Servername}\n" +
-                $"Location: {settingsModel.Location}" +
+                $"Location: {settingsModel.Location}\n" +
                 $"Course: {settingsModel.Course}"
             };
             try
