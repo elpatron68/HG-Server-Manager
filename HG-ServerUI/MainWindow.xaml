@@ -55,6 +55,13 @@
                         <iconPacks:PackIconUnicons Kind="FileExport" />
                     </MenuItem.Icon>
                 </MenuItem>
+                <MenuItem x:Name="MnOpenLogfile"
+                          Header="_Open log file" Click="MnOpenLogfile_Click"
+                          >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconJamIcons Kind="Document" />
+                    </MenuItem.Icon>
+                </MenuItem>
                 <MenuItem x:Name="MnExit"
                           Header="_Exit" Click="MnExit_Click" 
                           >

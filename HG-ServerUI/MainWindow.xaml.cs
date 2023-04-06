@@ -101,5 +101,10 @@ namespace HG_ServerUI
         {
             Process.Start("https://github.com/elpatron68/HG-ServerUI");
         }
+
+        private void MnOpenLogfile_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("notepad.exe", settingsModel.Logfilepath);
+        }
     }
 }

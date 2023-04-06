@@ -39,6 +39,13 @@ namespace HG_ServerUI
             set { _configfilepath = value; OnPropertyChanged(); }
         }
 
+        private string _logfilepath;
+        public string Logfilepath
+        {
+            get { return _logfilepath; }
+            set { _logfilepath = value; OnPropertyChanged(); } 
+        }
+
         private string[] _boats;
         public string[] Boats
         {
@@ -365,6 +372,7 @@ namespace HG_ServerUI
             }
             model.Exepathtext = model.Exepath.Replace(@"\steamapps\common\", @"\[...]\");
             model.Externalip = Network.GetExternalIpaddress();
+            model.Logfilepath= Path.GetDirectoryName(model.Exepath) + @"\log.log";
             return model;
         }
     }
