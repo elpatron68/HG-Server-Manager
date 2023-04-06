@@ -222,7 +222,7 @@ namespace HG_ServerUI
             };
             if (ofd.ShowDialog() == true)
             {
-                settingsModel = SettingsFile.ReadConfigfile(settingsModel);
+                settingsModel = SettingsFile.ReadConfigfile(settingsModel, ofd.FileName);
             }
         }
     }
