@@ -35,7 +35,8 @@
             >
             <MenuItem Header="_File">
                 <MenuItem x:Name="MnSave"
-                          Header="_Save configuration"
+                          Header="_Save current configuration" 
+                          Click="MnSave_Click"
                           >
                     <MenuItem.Icon>
                         <iconPacks:PackIconMaterial Kind="ContentSave" />
@@ -79,9 +80,9 @@
                         <iconPacks:PackIconMaterialLight Kind="Bell" />
                     </MenuItem.Icon>
                 </MenuItem>
-                          
+
             </MenuItem>
-                <MenuItem Header="_Help">
+            <MenuItem Header="_Help">
                 <MenuItem 
                     x:Name="MnAbout"
                     Header="_About HG Server Manager"
@@ -214,7 +215,8 @@
             VerticalAlignment="Top" 
             Width="355"
             ToolTip="{Binding Exepath}"
-            TextWrapping="NoWrap"
+            TextWrapping="NoWrap" 
+            IsReadOnly="True"
             >
         </TextBox>
         <TextBox 
@@ -271,10 +273,10 @@
         </TextBox>
         <Button 
             x:Name="BtnStartServer"
-            Grid.Column="6" 
+            Grid.Column="3" 
             Content="{Binding Btnservercontent}" 
             HorizontalAlignment="Left" 
-            Margin="10,10,0,0" 
+            Margin="10,70,0,0" 
             Grid.Row="1" 
             VerticalAlignment="Top" 
             Width="105" 
@@ -906,6 +908,19 @@
             Width="105"
             >
         </mah:NumericUpDown>
+        <RichTextBox 
+            x:Name="RtbLogMessages"
+            Grid.Column="6" 
+            Grid.Row="1" 
+            Grid.ColumnSpan="2" 
+            Margin="0,10,10,10" 
+            Background="Black"
+            Foreground="LightGray"
+            FontFamily="Cascadia Mono, Consolas, Courier New, monospace"
+            VerticalScrollBarVisibility="Auto" 
+            FontSize="10"
+            >
+        </RichTextBox>
         <!--<TextBlock 
             Grid.Column="3" 
             HorizontalAlignment="Center" 

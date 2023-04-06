@@ -21,8 +21,8 @@ namespace HG_ServerUI
             key = Registry.CurrentUser.OpenSubKey(@"Software\Valve\Steam");
             try
             {
-                string _steamDirectory = (String)key.GetValue("SteamPath");
-                string _library = _steamDirectory.Replace("/", @"\") + @"\steamapps\libraryfolders.vdf";
+                string? _steamDirectory = (String?)key?.GetValue("SteamPath");
+                string? _library = _steamDirectory?.Replace("/", @"\") + @"\steamapps\libraryfolders.vdf";
 
                 string readText = File.ReadAllText(_library);
                 string _sectionpath = "";

@@ -21,6 +21,8 @@ using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using Microsoft.Win32;
 using ntfy;
+using Serilog;
+using Serilog.Sinks.RichTextBox;
 
 namespace HG_ServerUI
 {
@@ -30,12 +32,19 @@ namespace HG_ServerUI
     public partial class MainWindow : MetroWindow
     {
         SettingsModel settingsModel = new();
+
         public MainWindow()
         {
             InitializeComponent();
 
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.RichTextBox(RtbLogMessages)
+                .CreateLogger();
+            Log.Information("HG Server Manager started");
+
             settingsModel = SettingsModel.AddPaths(settingsModel);
             settingsModel = SettingsFile.ReadConfigfile(settingsModel);
+            Log.Information("Settings loaded");
 
             TxExePath.DataContext = settingsModel;
             TxServerName.DataContext = settingsModel;
@@ -71,7 +80,7 @@ namespace HG_ServerUI
             NmMaxSpectators.DataContext = settingsModel;
             LbExternalIp.DataContext = settingsModel;
             LbServerStatus.DataContext = settingsModel;
-            BtnStartServer.DataContext = settingsModel;
+            BtnStartServer.DataContext = settingsModel;            
         }
 
         private void MnExit_Click(object sender, RoutedEventArgs e)
@@ -79,16 +88,9 @@ namespace HG_ServerUI
             Close();
         }
 
-        private void BtBrowse_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.ShowDialog();
-            string f = ofd.FileName;
-            settingsModel.Exepath = f;
-        }
-
         private async void RunProcess()
         {
+            Log.Information("Starting HG server");
             SettingsFile.Writefile(settingsModel);
             Process server = new Process();
             server.StartInfo.UseShellExecute = false;
@@ -101,6 +103,7 @@ namespace HG_ServerUI
             settingsModel.Processid = server.Id;
             settingsModel.Serverprocessrunning = true;
             settingsModel.Btnservercontent = "_Stop server";
+            Log.Information("Sending message to Ntfy channel");
             await SendNtfyAsync();
         }
 
@@ -122,6 +125,7 @@ namespace HG_ServerUI
                             p.Kill();
                             settingsModel.Serverprocessrunning = false;
                             settingsModel.Btnservercontent = "_Start server";
+                            Log.Information("HG server stopped");
                         }
                         catch { }
                         //TimeSpan dauer = r.EndTime - r.StartTime;
@@ -183,6 +187,11 @@ namespace HG_ServerUI
         private void MnOpenNtfy_Click(object sender, RoutedEventArgs e)
         {
             _ = Process.Start("https://ntfy.sh/Hydrofoil_Generation_Servermonitor");
+        }
+
+        private void MnSave_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsFile.Writefile(settingsModel);
         }
     }
 }
