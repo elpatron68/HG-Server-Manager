@@ -87,22 +87,28 @@ namespace HG_ServerUI
             settingsModel.Exepath = f;
         }
 
+        private async void RunProcess()
+        {
+            SettingsFile.Writefile(settingsModel);
+            Process server = new Process();
+            server.StartInfo.UseShellExecute = false;
+            server.StartInfo.CreateNoWindow = true;
+            server.StartInfo.FileName = settingsModel.Exepath;
+            server.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(settingsModel.Exepath);
+            server.EnableRaisingEvents = true;
+            server.Exited += new EventHandler(ProcessExited);
+            server.Start();
+            settingsModel.Processid = server.Id;
+            settingsModel.Serverprocessrunning = true;
+            settingsModel.Btnservercontent = "_Stop server";
+            await SendNtfyAsync();
+        }
+
         private void BtnStartServer_Click(object sender, RoutedEventArgs e)
         {
             if (!settingsModel.Serverprocessrunning)
             {
-                SettingsFile.Writefile(settingsModel);
-                Process server = new Process();
-                server.StartInfo.UseShellExecute = false;
-                server.StartInfo.CreateNoWindow = true;
-                server.StartInfo.FileName = settingsModel.Exepath;
-                server.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(settingsModel.Exepath);
-                server.EnableRaisingEvents = true;
-                server.Exited += new EventHandler(ProcessExited);
-                server.Start();
-                settingsModel.Processid = server.Id;
-                settingsModel.Serverprocessrunning = true;
-                settingsModel.Btnservercontent = "_Stop server";
+                RunProcess();
             }
             else
             {
@@ -172,6 +178,11 @@ namespace HG_ServerUI
             {
                 Debug.WriteLine(ex.Message);
             }
+        }
+
+        private void MnOpenNtfy_Click(object sender, RoutedEventArgs e)
+        {
+            _ = Process.Start("https://ntfy.sh/Hydrofoil_Generation_Servermonitor");
         }
     }
 }

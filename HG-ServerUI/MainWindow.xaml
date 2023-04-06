@@ -63,14 +63,25 @@
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem x:Name="MnExit"
-                          Header="_Exit" Click="MnExit_Click" 
+                          Header="_Exit" 
+                          Click="MnExit_Click" 
                           >
                     <MenuItem.Icon>
                         <iconPacks:PackIconMaterial Kind="ExitRun" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="_Help">
+            <MenuItem Header="_Server monitor">
+                <MenuItem x:Name="MnOpenNtfy"
+                          Header="_Open Ntfy server launch events" 
+                          Click="MnOpenNtfy_Click">
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterialLight Kind="Bell" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                          
+            </MenuItem>
+                <MenuItem Header="_Help">
                 <MenuItem 
                     x:Name="MnAbout"
                     Header="_About HG Server Manager"
