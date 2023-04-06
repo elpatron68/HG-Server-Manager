@@ -200,10 +200,12 @@ namespace HG_ServerUI
 
         private void MnSaveAs_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog ofd = new();
-            ofd.InitialDirectory = settingsModel.Configfiledirectory;
-            ofd.DefaultExt = "kl";
-            ofd.Filter = "HG configuration files (*.kl)|*.kl";
+            OpenFileDialog ofd = new()
+            {
+                InitialDirectory = settingsModel.Configfiledirectory,
+                DefaultExt = "kl",
+                Filter = "HG configuration files (*.kl)|*.kl"
+            };
             if (ofd.ShowDialog() == true)
             {
                 SettingsFile.WriteConfigfile(settingsModel, ofd.FileName);
@@ -212,10 +214,12 @@ namespace HG_ServerUI
 
         private void MnLoad_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog ofd = new();
-            ofd.InitialDirectory = settingsModel.Configfiledirectory;
-            ofd.DefaultExt = "kl";
-            ofd.Filter = "HG configuration files (*.kl)|*.kl";
+            OpenFileDialog ofd = new()
+            {
+                InitialDirectory = settingsModel.Configfiledirectory,
+                DefaultExt = "kl",
+                Filter = "HG configuration files (*.kl)|*.kl"
+            };
             if (ofd.ShowDialog() == true)
             {
                 settingsModel = SettingsFile.ReadConfigfile(settingsModel);
