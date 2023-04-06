@@ -377,6 +377,7 @@ namespace HG_ServerUI
             int _count = 0;
             model.Exepath = DiscoverPath.FindGameDirectoryFromSteam();
             model.Configfilepath = GetCfgFilenameFromExepath(model.Exepath);
+            model.Configfiledirectory = Path.GetDirectoryName(model.Configfilepath);
             string _contentdirectory= Path.GetDirectoryName(model.Exepath) + @"\content";
             model.Boats = Directory.GetDirectories(_contentdirectory + @"\boats");
             _count = 0;

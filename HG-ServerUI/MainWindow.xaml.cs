@@ -193,5 +193,17 @@ namespace HG_ServerUI
         {
             SettingsFile.Writefile(settingsModel);
         }
+
+        private void MnSaveAs_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new();
+            ofd.InitialDirectory = settingsModel.Configfiledirectory;
+            ofd.DefaultExt = "kl";
+            ofd.Filter = "HG configuration files (*.kl)|*.kl";
+            if (ofd.ShowDialog() == true)
+            {
+                SettingsFile.Writefile(settingsModel, ofd.FileName);
+            }
+        }
     }
 }

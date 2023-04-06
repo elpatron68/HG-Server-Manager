@@ -50,7 +50,8 @@
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem x:Name="MnSaveAs"
-                          Header="Save configuration as"
+                          Header="Save configuration as" 
+                          Click="MnSaveAs_Click"
                           >
                     <MenuItem.Icon>
                         <iconPacks:PackIconUnicons Kind="FileExport" />
