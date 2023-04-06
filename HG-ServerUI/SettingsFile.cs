@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.IO.Enumeration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,9 +12,14 @@ namespace HG_ServerUI
 {
     public class SettingsFile
     {
-        public static SettingsModel ReadConfigfile(SettingsModel model) 
+        public static SettingsModel ReadConfigfile(SettingsModel model, string filename = "") 
         {
-            string readText = File.ReadAllText(model.Configfilepath);
+            if (filename == "")
+            {
+                filename = model.Configfilepath;
+            }
+
+            string readText = File.ReadAllText(filename);
 
             foreach (string line in readText.Split())
             {
@@ -155,10 +161,14 @@ namespace HG_ServerUI
             }
             return model; 
         }
-        public static void Writefile(SettingsModel model)
+        public static void Writefile(SettingsModel model, string filename = "")
         {
-            string content = """                                
-name=<servername>
+            if (filename == "")
+            {
+                filename = model.Configfilepath;
+            }
+            string content = """
+name =<servername>
 ports
     tcp=<tcpport>
     udp=<udpport>
@@ -239,8 +249,7 @@ penalties
                 .Replace("<blackflagduration>", model.Blackflagduration.ToString())
                 .Replace("<blackflaglegs>", model.Blackflaglegs.ToString())
                 ;
-            string _filename = model.Configfilepath;
-            File.WriteAllText(_filename, content);
+            File.WriteAllText(filename, content);
         }
     }
 }

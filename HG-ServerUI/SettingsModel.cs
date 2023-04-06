@@ -28,21 +28,28 @@ namespace HG_ServerUI
         private string _exepathtext;
         public string Exepathtext
         {
-            get { return _exepathtext; }
+            get { return _exepathtext ?? string.Empty; }
             set { _exepathtext = value; OnPropertyChanged(); } 
         }
 
         private string _configfilepath;
         public string Configfilepath
         {
-            get { return _configfilepath; }
+            get { return _configfilepath ?? string.Empty; }
             set { _configfilepath = value; OnPropertyChanged(); }
+        }
+
+        private string _configfiledirectory;
+        public string Configfiledirectory
+        {
+            get { return _configfiledirectory ?? string.Empty; }
+            set { _configfiledirectory = value; OnPropertyChanged(); }
         }
 
         private string _logfilepath;
         public string Logfilepath
         {
-            get { return _logfilepath; }
+            get { return _logfilepath ?? string.Empty; }
             set { _logfilepath = value; OnPropertyChanged(); } 
         }
 
@@ -70,49 +77,49 @@ namespace HG_ServerUI
         private string _servername;
         public string Servername
         {
-            get { return _servername; }
+            get { return _servername ?? string.Empty; }
             set { _servername = value; OnPropertyChanged(); }
         }
 
         private string _tcpport;
         public string Tcpport
         {
-            get { return _tcpport; }
+            get { return _tcpport ?? string.Empty; }
             set { _tcpport = value; OnPropertyChanged(); }
         }
 
         private string _udpport;
         public string Udpport
         {
-            get { return _udpport; }
+            get { return _udpport ?? string.Empty; }
             set { _udpport = value; OnPropertyChanged(); }
         }
 
         private string _steamport;
         public string Steamport
         {
-            get { return _steamport; }
+            get { return _steamport ?? string.Empty; }
             set { _steamport = value; OnPropertyChanged(); }
         }
 
         private string _boat;
         public string Boat
         {
-            get { return _boat; }
+            get { return _boat ?? string.Empty; }
             set { _boat = value; OnPropertyChanged(); }
         }
 
         private string _location;
         public string Location
         {
-            get { return _location; }
+            get { return _location ?? string.Empty; }
             set { _location = value; OnPropertyChanged(); }
         }
 
         private string _course;
         public string Course
         {
-            get { return _course; }
+            get { return _course ?? string.Empty; }
             set { _course = value; OnPropertyChanged(); }
         }
 
@@ -133,14 +140,14 @@ namespace HG_ServerUI
         private string _password;
         public string Password
         {
-            get { return _password; }
+            get { return _password ?? string.Empty; }
             set { _password = value; OnPropertyChanged(); }
         }
 
         private string _adminpassword;
         public string Adminpassword
         {
-            get { return _adminpassword; }
+            get { return _adminpassword ?? string.Empty; }
             set { _adminpassword = value; OnPropertyChanged(); }
         }
 
@@ -287,7 +294,7 @@ namespace HG_ServerUI
         private string _externalip;
         public string Externalip
         {
-            get { return _externalip; }
+            get { return _externalip ?? string.Empty; }
             set { _externalip = value; OnPropertyChanged(); }
         }
 
@@ -334,7 +341,8 @@ namespace HG_ServerUI
             Penaltyduration = 60;
             Blackflagduration = 60;
             Blackflaglegs = 1;
-            Externalip = "";
+            Externalip = string.Empty; ;
+            Configfiledirectory=string.Empty;
         }
 
         private static string GetCfgFilenameFromExepath(string _exepath)

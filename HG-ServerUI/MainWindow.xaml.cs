@@ -84,6 +84,7 @@ namespace HG_ServerUI
 
         private void BtnStartServer_Click(object sender, RoutedEventArgs e)
         {
+            SettingsFile.Writefile(settingsModel);
 
         }
 
