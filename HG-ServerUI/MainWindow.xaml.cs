@@ -176,7 +176,9 @@ namespace HG_ServerUI
             var message = new SendingMessage
             {
                 Title = "A new Hydrofoil Generation server started!",
-                Message = $"Server name: {settingsModel.Servername}"
+                Message = $"Server name: {settingsModel.Servername}\n" +
+                $"Location: {settingsModel.Location}" +
+                $"Course: {settingsModel.Course}"
             };
             try
             {
