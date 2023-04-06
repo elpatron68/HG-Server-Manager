@@ -20,7 +20,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using Microsoft.Win32;
-
+using ntfy;
 
 namespace HG_ServerUI
 {
@@ -94,6 +94,7 @@ namespace HG_ServerUI
                 SettingsFile.Writefile(settingsModel);
                 Process server = new Process();
                 server.StartInfo.UseShellExecute = false;
+                server.StartInfo.CreateNoWindow = true;
                 server.StartInfo.FileName = settingsModel.Exepath;
                 server.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(settingsModel.Exepath);
                 server.EnableRaisingEvents = true;
@@ -135,23 +136,42 @@ namespace HG_ServerUI
 
         private void MnHgSteam_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://store.steampowered.com/app/1448820/Hydrofoil_Generation/");
+            _ = Process.Start("https://store.steampowered.com/app/1448820/Hydrofoil_Generation/");
         }
 
         private void MnHgDiscord_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://discord.gg/paQbBgWM");
+            _ = Process.Start("https://discord.gg/paQbBgWM");
         }
 
         private void MnProjectOnGithub_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://github.com/elpatron68/HG-ServerUI");
+            _ = Process.Start("https://github.com/elpatron68/HG-ServerUI");
         }
 
         private void MnOpenLogfile_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("notepad.exe", settingsModel.Logfilepath);
+            _ = Process.Start("notepad.exe", settingsModel.Logfilepath);
         }
 
+        private async Task SendNtfyAsync()
+        {
+            // Create a new ntfy client
+            var topic = "Hydrofoil_Generation_Servermonitor";
+            var client = new Client("https://ntfy.sh");
+            var message = new SendingMessage
+            {
+                Title = "A new Hydrofoil Generation server started!",
+                Message = $"Server name: {settingsModel.Servername}"
+            };
+            try
+            {
+                await client.Publish(topic, message);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
     }
 }
