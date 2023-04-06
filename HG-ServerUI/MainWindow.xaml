@@ -35,6 +35,13 @@
             >
 
             <MenuItem Header="_File">
+                <MenuItem x:Name="MnSave"
+                          Header="_Save configuration"
+                          >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="ContentSave" />
+                    </MenuItem.Icon>
+                </MenuItem>
                 <MenuItem x:Name="MnExit"
                           Header="_Exit" Click="MnExit_Click" 
                           >

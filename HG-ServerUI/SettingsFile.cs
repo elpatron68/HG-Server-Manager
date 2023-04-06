@@ -11,7 +11,7 @@ namespace HG_ServerUI
 {
     public class SettingsFile
     {
-        public static SettingsModel Readfile(SettingsModel model) 
+        public static SettingsModel ReadConfigfile(SettingsModel model) 
         {
             string readText = File.ReadAllText(model.Configfilepath);
 
