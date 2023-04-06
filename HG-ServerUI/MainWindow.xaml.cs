@@ -23,6 +23,7 @@ using Microsoft.Win32;
 using ntfy;
 using Serilog;
 using Serilog.Sinks.RichTextBox;
+using Serilog.Sinks.RichTextBox.Themes;
 
 namespace HG_ServerUI
 {
@@ -38,7 +39,10 @@ namespace HG_ServerUI
             InitializeComponent();
 
             Log.Logger = new LoggerConfiguration()
-                .WriteTo.RichTextBox(RtbLogMessages)
+                .WriteTo.RichTextBox(RtbLogMessages,
+                theme: RichTextBoxConsoleTheme.Grayscale,
+                outputTemplate: "[{Timestamp:HH:mm:ss}] {Message:lj}{NewLine}{Exception}"
+                )
                 .CreateLogger();
             Log.Information("HG Server Manager started");
 
