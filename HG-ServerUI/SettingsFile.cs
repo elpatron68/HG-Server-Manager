@@ -83,11 +83,13 @@ namespace HG_ServerUI
                 }
                 if (line.Contains("min_speed="))
                 {
-                    model.Windminspeed = float.Parse(line.Split("=")[1].Trim(), CultureInfo.InvariantCulture.NumberFormat);
+                    model.Windminspeed = float.Parse(line.Split("=")[1].Trim(), 
+                        CultureInfo.InvariantCulture.NumberFormat);
                 }
                 if (line.Contains("max_speed="))
                 {
-                    model.Windmaxspeed = float.Parse(line.Split("=")[1].Trim(), CultureInfo.InvariantCulture.NumberFormat);
+                    model.Windmaxspeed = float.Parse(line.Split("=")[1].Trim(), 
+                        CultureInfo.InvariantCulture.NumberFormat);
                 }
                 if (line.Contains("hdg_variation="))
                 {
@@ -96,19 +98,23 @@ namespace HG_ServerUI
                 }
                 if (line.Contains("evolution_gain="))
                 {
-                    model.Windevolutiongain = float.Parse(line.Split("=")[1].Trim(), CultureInfo.InvariantCulture.NumberFormat);
+                    model.Windevolutiongain = float.Parse(line.Split("=")[1].Trim(), 
+                        CultureInfo.InvariantCulture.NumberFormat);
                 }
                 if (line.Contains("ocs_drag_gain="))
                 {
-                    model.Ocsdraggain = float.Parse(line.Split("=")[1].Trim(), CultureInfo.InvariantCulture.NumberFormat);
+                    model.Ocsdraggain = float.Parse(line.Split("=")[1].Trim(), 
+                        CultureInfo.InvariantCulture.NumberFormat);
                 }
                 if (line.Contains("boundary_drag="))
                 {
-                    model.Boundarydrag = float.Parse(line.Split("=")[1].Trim(), CultureInfo.InvariantCulture.NumberFormat);
+                    model.Boundarydrag = float.Parse(line.Split("=")[1].Trim(), 
+                        CultureInfo.InvariantCulture.NumberFormat);
                 }
                 if (line.Contains("penalty_drag_gain="))
                 {
-                    model.Penaltydraggain = float.Parse(line.Split("=")[1].Trim(), CultureInfo.InvariantCulture.NumberFormat);
+                    model.Penaltydraggain = float.Parse(line.Split("=")[1].Trim(), 
+                        CultureInfo.InvariantCulture.NumberFormat);
                 }
                 if (line.Contains("use_collisions="))
                 {
@@ -123,7 +129,8 @@ namespace HG_ServerUI
                 }
                 if (line.Contains("wind_shadows_scale="))
                 {
-                    model.Windshadowscale = float.Parse(line.Split("=")[1].Trim(), CultureInfo.InvariantCulture.NumberFormat);
+                    model.Windshadowscale = float.Parse(line.Split("=")[1].Trim(), 
+                        CultureInfo.InvariantCulture.NumberFormat);
                 }
                 if (line.Contains("gap_to_clear="))
                 {
