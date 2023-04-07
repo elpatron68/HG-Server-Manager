@@ -116,11 +116,11 @@ namespace HG_ServerUI
             }
             if (!Directory.Exists(settingsModel.Configfiledirectory))
             {
-                Log.Warning("HG server config directory not found!");
+                Log.Warning("HG server config dir not found!");
             }
             else
             {
-                Log.Information("HG server config directory exists");
+                Log.Information("HG server config dir exists");
             }
             Log.Information($"{settingsModel.Boats.Count()} boats found.");
             Log.Information($"{settingsModel.Courses.Count()} courses found.");
