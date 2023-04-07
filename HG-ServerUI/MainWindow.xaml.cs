@@ -193,6 +193,19 @@ namespace HG_ServerUI
             }
         }
 
+        private bool IsServerRunning()
+        {
+            Process[] process = Process.GetProcesses();
+            foreach (Process p in process)
+            {
+                if (p.ProcessName.Contains("hg_server"))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         private void ProcessExited(object sender, EventArgs e)
         {
             settingsModel.Btnservercontent = "_Start server";
