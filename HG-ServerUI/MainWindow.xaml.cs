@@ -102,6 +102,7 @@ namespace HG_ServerUI
         {
             settingsModel.Serverprocessrunning = IsServerRunning();
             Log.Debug($"ServerRunning: {settingsModel.Serverprocessrunning}");
+            //TestPortAsync();
         }
 
         private void PreFlightCheck()
@@ -173,7 +174,7 @@ namespace HG_ServerUI
             settingsModel.Processid = server.Id;
             settingsModel.Serverprocessrunning = true;
             settingsModel.Btnservercontent = "_Stop server";
-            Log.Information("Sending message to Ntfy channel");
+            Log.Information("Sending message to Ntfy channel 📫");
             await SendNtfyAsync();
         }
 
@@ -182,10 +183,7 @@ namespace HG_ServerUI
             if (!settingsModel.Serverprocessrunning)
             {
                 RunProcess();
-                //bool _gameportopen = Network.Testport(settingsModel.Externalip, 
-                //    int.Parse(settingsModel.Tcpport), 
-                //    TimeSpan.FromSeconds(1));
-                Thread.Sleep(4000);
+                //Thread.Sleep(4000);
                 TestPortAsync();
             }
             else
@@ -338,9 +336,10 @@ namespace HG_ServerUI
             }
         }
 
-        // https://stackoverflow.com/questions/18486585/tcpclient-connectasync-get-status
+
         public async void TestPortAsync()
         {
+            Thread.Sleep(4000);
             string address = settingsModel.Externalip;
             int port = int.Parse(settingsModel.Tcpport);
             int connectTimeoutMilliseconds = 1000;
@@ -390,8 +389,8 @@ namespace HG_ServerUI
             if(settingsModel.Serverprocessrunning)
             {
                 Log.Information("Exiting application");
-                MessageBoxResult result = MessageBox.Show("Attention!",
-                    "The server process is still runnning.\nKill server process and proceed?", MessageBoxButton.OKCancel);
+                MessageBoxResult result = MessageBox.Show("The server process is still runnning.\nKill server process and proceed?",
+                    "Warning", MessageBoxButton.OKCancel);
                 if (result == MessageBoxResult.OK)
                 {
                     KillServerProcess();
