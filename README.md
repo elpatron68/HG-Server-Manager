@@ -66,7 +66,7 @@ The status bar at the bottom of the window shows informations about the state of
 
 The protocol text box informs you about events and problems. Have a look at it if something does not work as expected.
 
-### Penaties
+### Penalties
 
 Occurring penalties are displayed in the *Penalties* text box. New penalties are signalized with a sound effect.
 
