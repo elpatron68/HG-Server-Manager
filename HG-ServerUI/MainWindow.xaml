@@ -911,7 +911,7 @@
             FontSize="10"
             >
         </RichTextBox>
-        <Image 
+        <!--<Image 
             Grid.Column="4" 
             Grid.ColumnSpan="5" 
             HorizontalAlignment="Left" 
@@ -922,7 +922,7 @@
             Width="480" 
             Stretch="None" 
             Source="/placeholder_image6.jpg" MouseLeftButtonDown="Image_MouseLeftButtonDown">
-        </Image>
+        </Image>-->
         <Label 
             Grid.Column="4" 
             Content="Protocol" 
