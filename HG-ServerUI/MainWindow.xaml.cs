@@ -21,6 +21,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Win32;
 using ntfy;
 using Serilog;
@@ -127,25 +128,31 @@ namespace HG_ServerUI
             }
             else
             {
-                Process[] process = Process.GetProcesses();
-                foreach (Process p in process)
+                KillServerProcess();
+            }
+        }
+
+        private void KillServerProcess()
+        {
+            Process[] process = Process.GetProcesses();
+            foreach (Process p in process)
+            {
+                if (p.Id == settingsModel.Processid)
                 {
-                    if (p.Id == settingsModel.Processid)
+                    try
                     {
-                        try
-                        {
-                            p.Kill();
-                            settingsModel.Serverprocessrunning = false;
-                            settingsModel.Btnservercontent = "_Start server";
-                            Log.Information("HG server stopped");
-                        }
-                        catch { }
-                        //TimeSpan dauer = r.EndTime - r.StartTime;
-                        //string d = dauer.ToString(@"hh\:mm\:ss", null);
-                        //SendMsg(r.TargetId, $"Die Remote-Spiegelsitzung von {r.SourceUserName} wurde beendet.");
-                        //Log.Information($"{_localUsername}::Session (process id {r.ProcessId}) terminated by exiting the application. Duration: {d}");
-                        break;
+                        p.Kill();
+                        settingsModel.Serverprocessrunning = false;
+                        settingsModel.Serverreachable = false;
+                        settingsModel.Btnservercontent = "_Start server";
+                        Log.Information("HG server stopped");
                     }
+                    catch { }
+                    //TimeSpan dauer = r.EndTime - r.StartTime;
+                    //string d = dauer.ToString(@"hh\:mm\:ss", null);
+                    //SendMsg(r.TargetId, $"Die Remote-Spiegelsitzung von {r.SourceUserName} wurde beendet.");
+                    //Log.Information($"{_localUsername}::Session (process id {r.ProcessId}) terminated by exiting the application. Duration: {d}");
+                    break;
                 }
             }
         }
@@ -282,5 +289,40 @@ namespace HG_ServerUI
             }
         }
 
+        /// <summary>
+        /// Display message dialog
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        private async Task<bool> MetroMessage(string title, string message)
+        {
+            MetroDialogSettings dialogSettings = new MetroDialogSettings();
+            //dialogSettings.AffirmativeButtonText = answers[rInt] + " [OK]";
+
+            MessageDialogResult dialogResult = await this.ShowMessageAsync(title,
+                message,
+                MessageDialogStyle.Affirmative, dialogSettings);
+
+            return dialogResult == MessageDialogResult.Affirmative;
+        }
+
+        private void MetroWindow_Closing(object sender, CancelEventArgs e)
+        {
+            if (settingsModel.Serverprocessrunning)
+            {
+                var answer = MessageBox.Show("The server process is still runnning.\n\n" +
+                                            "Kill server process and exit?", "Attention!", MessageBoxButton.OKCancel);
+                if (answer == MessageBoxResult.OK)
+                {
+                    KillServerProcess();
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
+
+        }
     }
 }
