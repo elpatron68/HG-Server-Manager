@@ -93,6 +93,15 @@
                 </MenuItem>
 
             </MenuItem>
+            <MenuItem Header="_Snaps">
+                <MenuItem x:Name="MnOpenSnaps"
+                          Header="_Open snaps" Click="MnOpenSnaps_Click"
+                          >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterialLight Kind="Folder" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
             <MenuItem Header="_Help">
                 <MenuItem 
                     x:Name="MnAbout"

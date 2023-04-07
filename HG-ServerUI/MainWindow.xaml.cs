@@ -471,5 +471,10 @@ namespace HG_ServerUI
                 SettingsFile.ReadConfigfile(settingsModel);
             }
         }
+
+        private void MnOpenSnaps_Click(object sender, RoutedEventArgs e)
+        {
+            _ = Process.Start("explorer.exe", settingsModel.Penatltiespath);
+        }
     }
 }
