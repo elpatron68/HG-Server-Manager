@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
@@ -129,7 +130,9 @@ namespace HG_ServerUI
                     string _boatname = _filename.Split("_on_")[1].Split("_")[0].Trim();
                     string _offence = _filename.Split("_-_")[1].Split('_')[1].Trim();
                     string _timestamp = $"[{DateTime.Now.ToString("HH:mm:ss")}]";
-                    settingsModel.Penalties += $"\n{_timestamp} {_username} on {_boatname}: {_offence}";
+                    settingsModel.Penalties += $"\n{_timestamp} {_offence}: {_username} on {_boatname}";
+                    SoundPlayer player = new(Properties.Resources.beep_sound);
+                    player.Play();
                 }
                 catch 
                 {
