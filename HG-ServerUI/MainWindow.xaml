@@ -911,7 +911,10 @@
             Margin="10,190,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top" 
-            Width="480" Stretch="None" Source="/placeholder_image5.jpg"/>
+            Width="480" 
+            Stretch="None" 
+            Source="/placeholder_image6.jpg">
+        </Image>
         <Label 
             Grid.Column="4" 
             Content="Protocol" 

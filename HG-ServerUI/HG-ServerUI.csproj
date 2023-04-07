@@ -11,6 +11,7 @@
   <ItemGroup>
     <None Remove="placeholder_image4.jpg" />
     <None Remove="placeholder_image5.jpg" />
+    <None Remove="placeholder_image6.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +29,7 @@
   <ItemGroup>
     <Resource Include="placeholder_image4.jpg" />
     <Resource Include="placeholder_image5.jpg" />
+    <Resource Include="placeholder_image6.jpg" />
   </ItemGroup>
 
 </Project>
