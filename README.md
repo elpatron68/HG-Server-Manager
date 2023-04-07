@@ -2,10 +2,6 @@
 
 *HG Server Manager* is a .NET Windows application that eases the management of the [Hydrofoil Generation](https://store.steampowered.com/app/1448820/Hydrofoil_Generation/) game server.
 
-[TOC]
-
-
-
 ## Features
 
 - Clean and nice looking user interface
