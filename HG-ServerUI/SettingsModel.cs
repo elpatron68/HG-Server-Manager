@@ -374,7 +374,7 @@ namespace HG_ServerUI
             Serverprocessrunning = false;
             Courses = Array.Empty<string>();
             Locations = Array.Empty<string>();
-            Boats= Array.Empty<string>();
+            Boats = Array.Empty<string>();
         }
 
         private static string GetCfgFilenameFromExepath(string _exepath)

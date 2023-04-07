@@ -108,48 +108,48 @@ namespace HG_ServerUI
         {
             if (!File.Exists(settingsModel.Exepath))
             {
-                Log.Error("Critical error:");
-                Log.Warning("HG server executable not found!");
+                Log.Error("Critical error! ⚠️");
+                Log.Warning("HG server executable not found! ⚠️");
                 settingsModel.Exepath= "HG server executable not found!";
-                BtnStartServer.Content = "Error";
+                BtnStartServer.Content = "Error ⚠️";
                 BtnStartServer.IsEnabled=false;
                 return;
             }
             else
             {
-                Log.Information("HG server executable found");
+                Log.Information("HG server executable found ✅");
             }
             if (!Directory.Exists(settingsModel.Configfiledirectory))
             {
-                Log.Warning("HG server config dir not found!");
+                Log.Warning("HG server config dir not found ⚠️");
                 return;
             }
             else
             {
-                Log.Information("HG server config dir exists");
+                Log.Information("HG server config dir exists ✅");
             }
-            Log.Information($"{settingsModel.Boats.Count()} boats found.");
-            Log.Information($"{settingsModel.Courses.Count()} courses found.");
-            Log.Information($"{settingsModel.Locations.Count()} locations found.");
+            Log.Information($"{settingsModel.Boats.Count()} boats found");
+            Log.Information($"{settingsModel.Courses.Count()} courses found");
+            Log.Information($"{settingsModel.Locations.Count()} locations found");
             Log.Information($"{Directory.GetFiles(settingsModel.Configfiledirectory).Count()} " +
                 $"configuration files found");
             if(Network.Testport("127.0.0.1", int.Parse(settingsModel.Tcpport), TimeSpan.FromMilliseconds(100)))
             {
-                Log.Warning($"Port {settingsModel.Tcpport} is open, server already running?");
+                Log.Warning($"Port {settingsModel.Tcpport} is open, server already running? ⚠️");
                 BtnStartServer.IsEnabled = false;
             }
             else
             {
-                Log.Information($"Server port {settingsModel.Tcpport} is free");
+                Log.Information($"Server port {settingsModel.Tcpport} is free  ✅");
             }
             if (IsServerRunning())
             {
-                Log.Warning("Another server process is running!");
+                Log.Warning("Another server process is running! ⚠️");
                 BtnStartServer.IsEnabled = false;
             }
             else
             {
-                Log.Information("No other server process is running");
+                Log.Information("No other server process is running ✅");
             }
         }
 
