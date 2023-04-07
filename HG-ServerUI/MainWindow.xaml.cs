@@ -238,18 +238,17 @@ namespace HG_ServerUI
 
         private void MnHgSteam_Click(object sender, RoutedEventArgs e)
         {
-            _ = Process.Start("https://store.steampowered.com/app/1448820/Hydrofoil_Generation/");
+            _ = Process.Start(new ProcessStartInfo("https://store.steampowered.com/app/1448820/Hydrofoil_Generation/") { UseShellExecute = true });
         }
 
         private void MnHgDiscord_Click(object sender, RoutedEventArgs e)
         {
-            _ = Process.Start("https://discord.gg/paQbBgWM");
+            _ = Process.Start(new ProcessStartInfo("https://discord.gg/paQbBgWM") { UseShellExecute = true });
         }
 
         private void MnProjectOnGithub_Click(object sender, RoutedEventArgs e)
         {
-            //_ = Process.Start("https://github.com/elpatron68/HG-ServerUI");
-            Process.Start(new ProcessStartInfo("https://github.com/elpatron68/HG-ServerUI") { UseShellExecute = true });
+            _ = Process.Start(new ProcessStartInfo("https://github.com/elpatron68/HG-Server-Manager") { UseShellExecute = true });
         }
 
         private void MnOpenLogfile_Click(object sender, RoutedEventArgs e)
@@ -297,7 +296,7 @@ namespace HG_ServerUI
 
         private void MnOpenNtfy_Click(object sender, RoutedEventArgs e)
         {
-            _ = Process.Start("https://ntfy.sh/Hydrofoil_Generation_Servermonitor");
+            _ = Process.Start(new ProcessStartInfo("https://ntfy.sh/Hydrofoil_Generation_Servermonitor") { UseShellExecute = true });
         }
 
         private void MnSave_Click(object sender, RoutedEventArgs e)
@@ -406,7 +405,7 @@ namespace HG_ServerUI
 
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Process.Start("https://github.com/elpatron68/HG-Server-Manager");
+            _ = Process.Start(new ProcessStartInfo("https://github.com/elpatron68/HG-Server-Manager") { UseShellExecute = true });
         }
     }
 }
