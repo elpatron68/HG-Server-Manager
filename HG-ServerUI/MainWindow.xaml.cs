@@ -186,7 +186,8 @@ namespace HG_ServerUI
                 Title = "A new Hydrofoil Generation server started!",
                 Message = $"Server name: {settingsModel.Servername}\n" +
                 $"Location: {settingsModel.Location}\n" +
-                $"Course: {settingsModel.Course}"
+                $"Course: {settingsModel.Course}\n" +
+                $"Wind: Min {settingsModel.Windminspeed}, max {settingsModel.Windmaxspeed}"
             };
             try
             {
@@ -240,6 +241,7 @@ namespace HG_ServerUI
             }
         }
 
+        // https://stackoverflow.com/questions/18486585/tcpclient-connectasync-get-status
         public async void TestPortAsync()
         {
             string address = settingsModel.Externalip;
