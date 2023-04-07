@@ -315,7 +315,7 @@ namespace HG_ServerUI
             if(settingsModel.Serverprocessrunning)
             {
                 Log.Information("Exiting application");
-                var result = MessageBox.Show("Attention!",
+                MessageBoxResult result = MessageBox.Show("Attention!",
                     "The server process is still runnning.\nKill server process and proceed?", MessageBoxButton.OKCancel);
                 if (result == MessageBoxResult.OK)
                 {
