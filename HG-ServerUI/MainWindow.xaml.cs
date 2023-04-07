@@ -101,6 +101,7 @@ namespace HG_ServerUI
         private void checkServerRunningTimer_Tick(object? sender, EventArgs e)
         {
             settingsModel.Serverprocessrunning = IsServerRunning();
+            Log.Debug($"ServerRunning: {settingsModel.Serverprocessrunning}");
         }
 
         private void PreFlightCheck()
@@ -134,6 +135,15 @@ namespace HG_ServerUI
             else
             {
                 Log.Information($"Server port {settingsModel.Tcpport} is free");
+            }
+            if (IsServerRunning())
+            {
+                Log.Warning("Another server process is running!");
+                BtnStartServer.IsEnabled = false;
+            }
+            else
+            {
+                Log.Information("No other server process is running");
             }
         }
 
