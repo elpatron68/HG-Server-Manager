@@ -53,6 +53,8 @@ namespace HG_ServerUI
             settingsModel = SettingsFile.ReadConfigfile(settingsModel);
             Log.Information("Settings loaded");
 
+            PreFlightCheck();
+
             TxExePath.DataContext = settingsModel;
             TxServerName.DataContext = settingsModel;
             TxPortTcp.DataContext = settingsModel;
@@ -89,6 +91,40 @@ namespace HG_ServerUI
             LbServerStatus.DataContext = settingsModel;
             LbServerReachable.DataContext = settingsModel;
             BtnStartServer.DataContext = settingsModel;            
+        }
+
+        private void PreFlightCheck()
+        {
+            if (settingsModel.Exepath == "" ^ !File.Exists(settingsModel.Exepath))
+            {
+                Log.Warning("HG server executable not found!");
+            }
+            else
+            {
+                Log.Information("HG server executable found");
+            }
+            if (!Directory.Exists(settingsModel.Configfiledirectory))
+            {
+                Log.Warning("HG server config directory not found!");
+            }
+            else
+            {
+                Log.Information("HG server config directory exists");
+            }
+            Log.Information($"{settingsModel.Boats.Count()} boats found.");
+            Log.Information($"{settingsModel.Courses.Count()} courses found.");
+            Log.Information($"{settingsModel.Locations.Count()} locations found.");
+            Log.Information($"{Directory.GetFiles(settingsModel.Configfiledirectory).Count()} " +
+                $"configuration files found");
+            if(Network.Testport("127.0.0.1", int.Parse(settingsModel.Tcpport), TimeSpan.FromMilliseconds(100)))
+            {
+                Log.Warning($"Port {settingsModel.Tcpport} is open, server already running?");
+                BtnStartServer.IsEnabled = false;
+            }
+            else
+            {
+                Log.Information($"Server port {settingsModel.Tcpport} is free");
+            }
         }
 
         private void MnExit_Click(object sender, RoutedEventArgs e)
