@@ -6,8 +6,10 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -84,6 +86,7 @@ namespace HG_ServerUI
             NmMaxSpectators.DataContext = settingsModel;
             LbExternalIp.DataContext = settingsModel;
             LbServerStatus.DataContext = settingsModel;
+            LbServerReachable.DataContext = settingsModel;
             BtnStartServer.DataContext = settingsModel;            
         }
 
@@ -116,9 +119,11 @@ namespace HG_ServerUI
             if (!settingsModel.Serverprocessrunning)
             {
                 RunProcess();
-                bool gameportopen = Network.Testport(settingsModel.Externalip, 
-                    int.Parse(settingsModel.Tcpport), 
-                    TimeSpan.FromSeconds(1));
+                //bool _gameportopen = Network.Testport(settingsModel.Externalip, 
+                //    int.Parse(settingsModel.Tcpport), 
+                //    TimeSpan.FromSeconds(1));
+                Thread.Sleep(4000);
+                TestPortAsync();
             }
             else
             {
@@ -234,5 +239,32 @@ namespace HG_ServerUI
                 Log.Information($"Configuration loaded from {ofd.FileName}");
             }
         }
+
+        public async void TestPortAsync()
+        {
+            string address = settingsModel.Externalip;
+            int port = int.Parse(settingsModel.Tcpport);
+            int connectTimeoutMilliseconds = 1000;
+
+            var tcpClient = new TcpClient();
+            var connectionTask = tcpClient
+                .ConnectAsync(address, port).ContinueWith(task => {
+                    return task.IsFaulted ? null : tcpClient;
+                }, TaskContinuationOptions.ExecuteSynchronously);
+            var timeoutTask = Task.Delay(connectTimeoutMilliseconds)
+                .ContinueWith<TcpClient>(task => null, TaskContinuationOptions.ExecuteSynchronously);
+            var resultTask = Task.WhenAny(connectionTask, timeoutTask).Unwrap();
+            var resultTcpClient = await resultTask.ConfigureAwait(false);
+
+            if (resultTcpClient != null)
+            {
+                settingsModel.Serverreachable = true;
+            }
+            else
+            {
+                settingsModel.Serverreachable = false;
+            }
+        }
+
     }
 }

@@ -150,6 +150,15 @@
                     >
                 </Label>
             </StatusBarItem>
+            <StatusBarItem>
+                <Label
+                    x:Name="LbServerReachable"
+                    Content="{Binding Serverreachable}"
+                    ContentStringFormat="Server reachable: {0}"
+                    VerticalAlignment="Center"
+                    >
+                </Label>
+            </StatusBarItem>
         </StatusBar>
         <Label 
             Content="Server Settings" 

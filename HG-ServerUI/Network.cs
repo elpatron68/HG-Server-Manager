@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Net.Sockets;
 using System.Threading;
+using System.Windows.Controls;
 
 namespace HG_ServerUI
 {

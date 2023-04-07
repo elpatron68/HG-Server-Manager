@@ -25,6 +25,13 @@ namespace HG_ServerUI
             set { _serverprocessrunning = value; OnPropertyChanged(); }
         }
 
+        private bool _serverreachable;
+        public bool Serverreachable
+        {
+            get { return _serverreachable; }
+            set { _serverreachable = value; OnPropertyChanged(); } 
+        }
+
         private int _processid;
         public int Processid
         {
@@ -406,6 +413,7 @@ namespace HG_ServerUI
             model.Logfilepath= Path.GetDirectoryName(model.Exepath) + @"\log.log";
             model.Btnservercontent = "_Start server";
             model.Btnserverenabled = true;
+            model.Serverreachable = false;
             return model;
         }
     }
