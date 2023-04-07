@@ -39,6 +39,7 @@ namespace HG_ServerUI
         SettingsModel settingsModel = new();
         private readonly DispatcherTimer checkServerRunningTimer = new DispatcherTimer();
         private readonly FileSystemWatcher _cfgFileSystemWatcher;
+        private readonly FileSystemWatcher _penaltiesFileSystemWatcher;
 
         public MainWindow()
         {
@@ -57,11 +58,22 @@ namespace HG_ServerUI
             Log.Information("Settings loaded");
 
             PreFlightCheck();
+
+            // Initialize file system watschers
             _cfgFileSystemWatcher = new FileSystemWatcher(settingsModel.Configfiledirectory);
             _cfgFileSystemWatcher.Filter = $"{System.IO.Path.GetFileName(settingsModel.Configfilepath)}";
-            _cfgFileSystemWatcher.NotifyFilter = NotifyFilters.LastWrite;
-            _cfgFileSystemWatcher.Changed += HandleChanged;
+            _cfgFileSystemWatcher.NotifyFilter = NotifyFilters.LastAccess | 
+                NotifyFilters.LastWrite | 
+                NotifyFilters.FileName;
+            _cfgFileSystemWatcher.Changed += CfgHandleChanged;
             _cfgFileSystemWatcher.EnableRaisingEvents = true;
+            _penaltiesFileSystemWatcher = new FileSystemWatcher(settingsModel.Penatltiespath);
+            _penaltiesFileSystemWatcher.Filter = "*.svg";
+            _penaltiesFileSystemWatcher.NotifyFilter = NotifyFilters.LastAccess | 
+                NotifyFilters.LastWrite | 
+                NotifyFilters.FileName;
+            _penaltiesFileSystemWatcher.Created += PenHandleChanged;
+            _penaltiesFileSystemWatcher.EnableRaisingEvents=true;
 
             checkServerRunningTimer.Interval = TimeSpan.FromSeconds(5);
             checkServerRunningTimer.Tick += checkServerRunningTimer_Tick;
@@ -101,7 +113,29 @@ namespace HG_ServerUI
             LbExternalIp.DataContext = settingsModel;
             LbServerStatus.DataContext = settingsModel;
             LbServerReachable.DataContext = settingsModel;
-            BtnStartServer.DataContext = settingsModel;            
+            BtnStartServer.DataContext = settingsModel;
+            TbPenalties.DataContext = settingsModel;
+        }
+
+        private void PenHandleChanged(object sender, FileSystemEventArgs e)
+        {
+            Log.Information("New penalty");
+            string? _filename = e.Name;
+            if (_filename != null)
+            {
+                try
+                {
+                    string _username = _filename.Split("_on_")[0].Trim();
+                    string _boatname = _filename.Split("_on_")[1].Split("_")[0].Trim();
+                    string _offence = _filename.Split("_-_")[1].Split('_')[1].Trim();
+                    string _timestamp = $"[{DateTime.Now.ToString("HH:mm:ss")}]";
+                    settingsModel.Penalties += $"\n{_timestamp} {_username} on {_boatname}: {_offence}";
+                }
+                catch 
+                {
+                }
+            }
+
         }
 
         private void checkServerRunningTimer_Tick(object? sender, EventArgs e)
@@ -425,7 +459,7 @@ namespace HG_ServerUI
             Process.Start("notepad.exe", $"{settingsModel.Configfilepath}");
         }
 
-        private void HandleChanged(object sender, FileSystemEventArgs e)
+        private void CfgHandleChanged(object sender, FileSystemEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show($"The configuration file {settingsModel.Configfilepath} has been modified outside the application.\n\nLoad changes?",
                     "Warning", MessageBoxButton.OKCancel);

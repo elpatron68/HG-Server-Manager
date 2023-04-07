@@ -326,6 +326,20 @@ namespace HG_ServerUI
             set { _btnserverenabled = value; OnPropertyChanged(); }
         }
 
+        private string _penalties;
+        public string Penalties
+        {
+            get { return _penalties ?? string.Empty; }
+            set { _penalties = value; OnPropertyChanged(); }
+        }
+
+        private string _penatltiespath;
+        public string Penatltiespath
+        {
+            get { return _penatltiespath ?? string.Empty; }
+            set { _penatltiespath = value; OnPropertyChanged(); }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
@@ -375,6 +389,8 @@ namespace HG_ServerUI
             Courses = Array.Empty<string>();
             Locations = Array.Empty<string>();
             Boats = Array.Empty<string>();
+            Penalties = string.Empty;
+            Penatltiespath= string.Empty;
         }
 
         private static string GetCfgFilenameFromExepath(string _exepath)
@@ -416,6 +432,7 @@ namespace HG_ServerUI
                 model.Exepathtext = model.Exepath.Replace(@"\steamapps\common\", @"\[...]\");
                 model.Externalip = Network.GetExternalIpaddress();
                 model.Logfilepath = Path.GetDirectoryName(model.Exepath) + @"\log.log";
+                model.Penatltiespath = Path.GetDirectoryName(model.Exepath) + @"\snaps";
                 model.Btnservercontent = "_Start server";
                 model.Btnserverenabled = true;
                 model.Serverreachable = false;

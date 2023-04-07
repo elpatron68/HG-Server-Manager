@@ -539,7 +539,7 @@
             Grid.Column="4" 
             Content="Wind" 
             HorizontalAlignment="Left" 
-            Margin="10,10,0,0" 
+            Margin="10,130,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             FontWeight="Bold"
@@ -549,7 +549,7 @@
             Grid.Column="4" 
             Content="Min speed" 
             HorizontalAlignment="Left" 
-            Margin="10,40,0,0" 
+            Margin="10,160,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top" 
             >
@@ -558,7 +558,7 @@
             Grid.Column="4" 
             Content="Max speed" 
             HorizontalAlignment="Left" 
-            Margin="10,70,0,0" 
+            Margin="10,190,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top" 
             >
@@ -567,7 +567,7 @@
             Grid.Column="4" 
             Content="Heading" 
             HorizontalAlignment="Left" 
-            Margin="10,100,0,0" 
+            Margin="10,220,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top" 
             >
@@ -576,7 +576,7 @@
             Grid.Column="4" 
             Content="Variation" 
             HorizontalAlignment="Left" 
-            Margin="10,130,0,0" 
+            Margin="10,250,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top" 
             >
@@ -585,7 +585,7 @@
             Grid.Column="4" 
             Content="Evolution gain" 
             HorizontalAlignment="Center" 
-            Margin="0,160,0,0" 
+            Margin="0,280,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top" 
             >
@@ -594,7 +594,7 @@
             x:Name="NmWindMinSpeed"
             Grid.Column="6" 
             HorizontalAlignment="Center" 
-            Margin="0,40,0,0" 
+            Margin="0,160,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             Value="{Binding Windminspeed}"
@@ -608,7 +608,7 @@
             x:Name="NmWindMaxSpeed"
             Grid.Column="6" 
             HorizontalAlignment="Center" 
-            Margin="0,70,0,0" 
+            Margin="0,190,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             Value="{Binding Windmaxspeed}"
@@ -622,7 +622,7 @@
             x:Name="NmWindHeading"
             Grid.Column="6" 
             HorizontalAlignment="Center" 
-            Margin="0,100,0,0" 
+            Margin="0,220,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             Value="{Binding Windheading}"
@@ -635,7 +635,7 @@
             x:Name="NmWindVariation"
             Grid.Column="6" 
             HorizontalAlignment="Center" 
-            Margin="0,130,0,0" 
+            Margin="0,250,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             Value="{Binding Windvariation}"
@@ -648,7 +648,7 @@
             x:Name="NmWindEvolutionGain"
             Grid.Column="6" 
             HorizontalAlignment="Center" 
-            Margin="0,160,0,0" 
+            Margin="0,280,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             Value="{Binding Windevolutiongain}"
@@ -662,7 +662,7 @@
             Grid.Column="7" 
             Content="Rules" 
             HorizontalAlignment="Left" 
-            Margin="10,10,0,0" 
+            Margin="10,130,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             FontWeight="Bold"
@@ -672,7 +672,7 @@
             Grid.Column="7" 
             Content="OCS drag gain" 
             HorizontalAlignment="Left" 
-            Margin="10,40,0,0" 
+            Margin="10,160,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             >
@@ -681,7 +681,7 @@
             Grid.Column="7" 
             Content="Boundary drag" 
             HorizontalAlignment="Left" 
-            Margin="10,70,0,0" 
+            Margin="10,190,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             >
@@ -690,7 +690,7 @@
             Grid.Column="7" 
             Content="Penalty drag gain" 
             HorizontalAlignment="Left" 
-            Margin="10,100,0,0" 
+            Margin="10,220,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             >
@@ -699,7 +699,7 @@
             Grid.Column="7" 
             Content="Use collisions" 
             HorizontalAlignment="Left" 
-            Margin="10,130,0,0" 
+            Margin="10,250,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             >
@@ -708,7 +708,7 @@
             Grid.Column="7" 
             Content="Wind shadow scale" 
             HorizontalAlignment="Left" 
-            Margin="10,160,0,0" 
+            Margin="10,280,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             >
@@ -717,7 +717,7 @@
             x:Name="NmOcsDragGain"
             Grid.Column="8" 
             HorizontalAlignment="Center" 
-            Margin="0,40,0,0" 
+            Margin="0,160,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             Width="105"
@@ -730,7 +730,7 @@
             x:Name="NmBoundaryDrag"
             Grid.Column="8" 
             HorizontalAlignment="Center" 
-            Margin="0,70,0,0" 
+            Margin="0,190,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             Width="105"
@@ -743,7 +743,7 @@
             x:Name="NmPenaltyDragGain"
             Grid.Column="8" 
             HorizontalAlignment="Center" 
-            Margin="0,100,0,0" 
+            Margin="0,220,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             Width="105"
@@ -757,7 +757,7 @@
             Grid.Column="8" 
             Content="" 
             HorizontalAlignment="Left" 
-            Margin="10,130,0,0" 
+            Margin="10,250,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             Height="30"
@@ -769,7 +769,7 @@
             x:Name="NmWindShadowScale"
             Grid.Column="8" 
             HorizontalAlignment="Center" 
-            Margin="0,160,0,0" 
+            Margin="0,280,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             Width="105"
@@ -935,6 +935,44 @@
             FontWeight="Bold"
             >
         </Label>
+        <TextBlock 
+            x:Name="TbPenalties"
+            Grid.Column="4" 
+            HorizontalAlignment="Left" 
+            Margin="10,40,0,0" 
+            Grid.Row="2" 
+            TextWrapping="Wrap" 
+            Text="{Binding Penalties}" 
+            VerticalAlignment="Top" 
+            Grid.ColumnSpan="5" 
+            Height="90" 
+            Width="480"
+            Background="Black"
+            Foreground="Red"
+            >
+        </TextBlock>
+        <Label 
+            Grid.Column="4" 
+            Content="Penalties" 
+            HorizontalAlignment="Left" 
+            Margin="10,10,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top"
+            FontWeight="Bold"
+            >
+        </Label>
+        <!--<RichTextBox 
+            Grid.Column="7" 
+            Grid.Row="2" 
+            Margin="10,10,10,205"
+            Grid.ColumnSpan="2"
+            >
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="Penalties"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>-->
         <!--<TextBlock 
             Grid.Column="3" 
             HorizontalAlignment="Center" 
