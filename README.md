@@ -32,11 +32,11 @@
 
 Load an existing configuration from a file by opening the Menu *File* and selecting *Load configuration*.
 
-### Save a configuration to a file
+### Save configuration to a file
 
 You can save a configuration for later use by opening the Menu *File* and selecting *Save configuration as*.
 
-### Save a configuration without starting the server
+### Save configuration without starting the server
 
 Open *File* - *Save current configuration* saves the configuration to the default file `server_cfg.kl` without starting the server.
 
