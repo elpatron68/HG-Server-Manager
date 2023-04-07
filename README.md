@@ -24,6 +24,52 @@
 - Extract the archive to a directory of your choice
 - Start `HG-ServerUI.exe`
 
+## Usage
+
+*HG-Server-Manager* loads the active server configuration from the file `server_cfg.kl` at startup. You can modify the configuration according to your requirements. All settings are saved at the moment you click the *Start Server* button.
+
+### Load an existing configuration from a file
+
+Load an existing configuration from a file by opening the Menu *File* and selecting *Load configuration*.
+
+### Save a configuration to a file
+
+You can save a configuration for later use by opening the Menu *File* and selecting *Save configuration as*.
+
+### Save a configuration without starting the server
+
+Open *File* - *Save current configuration* saves the configuration to the default file `server_cfg.kl` without starting the server.
+
+### Manually edit configuration
+
+Open *File* - *Manually edit configuration* to edit `server_cfg.kl` in the *Notepad* text editor. Changes to the file will be loaded to the user interface after saving the file.
+
+### Open server log
+
+You can open the server log `log.log` in the *Notepad* text editor by opening *File* - *Open server log*.
+
+### Open Ntfy website
+
+The menu *Server launches* opens the Ntfy topic with the latest server launch events. For details, see section about Ntfy below.
+
+### Open Snaps
+
+The menu *Snaps* - *Open snaps* opens an Windows *Explorer* window in your *snaps* directory.
+
+### Status bar
+
+The status bar at the bottom of the window shows informations about the state of your server.
+
+### Protocol
+
+![image-20230407202414163](./assets/image-20230407202414163.png)
+
+The protocol text box informs you about events and problems. Have a look at it if something does not work as expected.
+
+### Penaties
+
+Occurring penalties are displayed in the *Penalties* text box. New penalties are signalized with a sound effect.
+
 ## Ntfy notifications
 
 Let your players be notified when you start your game server! *HG-Server-Manager* sends messages to the [Ntfy](https://ntfy.sh/) *topic* `Hydrofoil_Generation_Servermonitor` when you hit the launch button.
