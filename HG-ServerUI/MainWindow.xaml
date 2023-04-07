@@ -913,7 +913,7 @@
             VerticalAlignment="Top" 
             Width="480" 
             Stretch="None" 
-            Source="/placeholder_image6.jpg">
+            Source="/placeholder_image6.jpg" MouseLeftButtonDown="Image_MouseLeftButtonDown">
         </Image>
         <Label 
             Grid.Column="4" 

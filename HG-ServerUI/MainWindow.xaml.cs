@@ -248,7 +248,8 @@ namespace HG_ServerUI
 
         private void MnProjectOnGithub_Click(object sender, RoutedEventArgs e)
         {
-            _ = Process.Start("https://github.com/elpatron68/HG-ServerUI");
+            //_ = Process.Start("https://github.com/elpatron68/HG-ServerUI");
+            Process.Start(new ProcessStartInfo("https://github.com/elpatron68/HG-ServerUI") { UseShellExecute = true });
         }
 
         private void MnOpenLogfile_Click(object sender, RoutedEventArgs e)
@@ -401,6 +402,11 @@ namespace HG_ServerUI
                     Log.Information("Exiting cancelled");
                 }
             }
+        }
+
+        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start("https://github.com/elpatron68/HG-Server-Manager");
         }
     }
 }
