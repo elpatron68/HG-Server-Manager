@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "HG-ServerUI": {
+      "commandName": "Project",
+      "remoteDebugEnabled": false,
+      "remoteDebugMachine": ""
+    },
+    "Remote": {
+      "commandName": "Project",
+      "remoteDebugEnabled": true,
+      "remoteDebugMachine": "192.168.177.133:4026"
+    }
+  }
+}

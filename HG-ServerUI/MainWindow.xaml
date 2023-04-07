@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        xmlns:local="clr-namespace:HG_ServerUI" 
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:local="clr-namespace:HG_ServerUI" 
         Title="HG Server Manager" 
         Height="620" 
         Width="1000" 
@@ -155,7 +155,7 @@
                 <Label
                     x:Name="LbServerReachable"
                     Content="{Binding Serverreachable}"
-                    ContentStringFormat="Server reachable: {0}"
+                    ContentStringFormat="Server publicly available: {0}"
                     VerticalAlignment="Center"
                     >
                 </Label>

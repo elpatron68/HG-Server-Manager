@@ -106,9 +106,14 @@ namespace HG_ServerUI
 
         private void PreFlightCheck()
         {
-            if (settingsModel.Exepath == "" ^ !File.Exists(settingsModel.Exepath))
+            if (!File.Exists(settingsModel.Exepath))
             {
+                Log.Error("Critical error:");
                 Log.Warning("HG server executable not found!");
+                settingsModel.Exepath= "HG server executable not found!";
+                BtnStartServer.Content = "Error";
+                BtnStartServer.IsEnabled=false;
+                return;
             }
             else
             {
@@ -117,6 +122,7 @@ namespace HG_ServerUI
             if (!Directory.Exists(settingsModel.Configfiledirectory))
             {
                 Log.Warning("HG server config dir not found!");
+                return;
             }
             else
             {

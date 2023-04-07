@@ -372,6 +372,9 @@ namespace HG_ServerUI
             Externalip = string.Empty; ;
             Configfiledirectory=string.Empty;
             Serverprocessrunning = false;
+            Courses = Array.Empty<string>();
+            Locations = Array.Empty<string>();
+            Boats= Array.Empty<string>();
         }
 
         private static string GetCfgFilenameFromExepath(string _exepath)
@@ -383,37 +386,40 @@ namespace HG_ServerUI
         {
             int _count = 0;
             model.Exepath = DiscoverPath.FindGameDirectoryFromSteam();
-            model.Configfilepath = GetCfgFilenameFromExepath(model.Exepath);
-            model.Configfiledirectory = Path.GetDirectoryName(model.Configfilepath);
-            string _contentdirectory= Path.GetDirectoryName(model.Exepath) + @"\content";
-            model.Boats = Directory.GetDirectories(_contentdirectory + @"\boats");
-            _count = 0;
-            foreach (var item in model.Boats)
+            if(File.Exists(model.Exepath))
             {
-                model.Boats[_count] = item.Split(@"\").Last();
-                _count++;
-            }
-            model.Courses = Directory.GetFiles(_contentdirectory + @"\courses","*.kl");
+                model.Configfilepath = GetCfgFilenameFromExepath(model.Exepath);
+                model.Configfiledirectory = Path.GetDirectoryName(model.Configfilepath);
+                string _contentdirectory = Path.GetDirectoryName(model.Exepath) + @"\content";
+                model.Boats = Directory.GetDirectories(_contentdirectory + @"\boats");
+                _count = 0;
+                foreach (var item in model.Boats)
+                {
+                    model.Boats[_count] = item.Split(@"\").Last();
+                    _count++;
+                }
+                model.Courses = Directory.GetFiles(_contentdirectory + @"\courses", "*.kl");
 
-            _count = 0;
-            foreach(var item in model.Courses)
-            {
-                model.Courses[_count] = item.Split(".")[0].Split(@"\").Last();
-                _count++;
+                _count = 0;
+                foreach (var item in model.Courses)
+                {
+                    model.Courses[_count] = item.Split(".")[0].Split(@"\").Last();
+                    _count++;
+                }
+                model.Locations = Directory.GetDirectories(_contentdirectory + @"\locations");
+                _count = 0;
+                foreach (var item in model.Locations)
+                {
+                    model.Locations[_count] = item.Split(@"\").Last();
+                    _count++;
+                }
+                model.Exepathtext = model.Exepath.Replace(@"\steamapps\common\", @"\[...]\");
+                model.Externalip = Network.GetExternalIpaddress();
+                model.Logfilepath = Path.GetDirectoryName(model.Exepath) + @"\log.log";
+                model.Btnservercontent = "_Start server";
+                model.Btnserverenabled = true;
+                model.Serverreachable = false;
             }
-            model.Locations= Directory.GetDirectories(_contentdirectory + @"\locations");
-            _count = 0;
-            foreach(var item in model.Locations)
-            {
-                model.Locations[_count] = item.Split(@"\").Last();
-                _count++;
-            }
-            model.Exepathtext = model.Exepath.Replace(@"\steamapps\common\", @"\[...]\");
-            model.Externalip = Network.GetExternalIpaddress();
-            model.Logfilepath= Path.GetDirectoryName(model.Exepath) + @"\log.log";
-            model.Btnservercontent = "_Start server";
-            model.Btnserverenabled = true;
-            model.Serverreachable = false;
             return model;
         }
     }
