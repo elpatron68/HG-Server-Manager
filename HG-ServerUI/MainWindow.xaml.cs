@@ -203,7 +203,8 @@ namespace HG_ServerUI
                 Message = $"Server name: {settingsModel.Servername}\n" +
                 $"Location: {settingsModel.Location}\n" +
                 $"Course: {settingsModel.Course}\n" +
-                $"Wind: Min {settingsModel.Windminspeed}, max {settingsModel.Windmaxspeed}\n" +
+                $"Wind: Min {settingsModel.Windminspeed.ToString("0.#", CultureInfo.InvariantCulture)} kt, " +
+                $"max {settingsModel.Windmaxspeed.ToString("0.#", CultureInfo.InvariantCulture)} kt\n" +
                 $"{_passtext}",
                 Tags = new[]
                 {
@@ -282,10 +283,12 @@ namespace HG_ServerUI
             if (resultTcpClient != null)
             {
                 settingsModel.Serverreachable = true;
+                Log.Information("Server is accessible to the public");
             }
             else
             {
                 settingsModel.Serverreachable = false;
+                Log.Information("LAN-only server");
             }
         }
 
@@ -295,7 +298,7 @@ namespace HG_ServerUI
         /// <param name="title"></param>
         /// <param name="message"></param>
         /// <returns></returns>
-        private async Task<bool> MetroMessage(string title, string message)
+        private async Task<MessageDialogResult> MetroMessage(string title, string message)
         {
             MetroDialogSettings dialogSettings = new MetroDialogSettings();
             //dialogSettings.AffirmativeButtonText = answers[rInt] + " [OK]";
@@ -304,25 +307,26 @@ namespace HG_ServerUI
                 message,
                 MessageDialogStyle.Affirmative, dialogSettings);
 
-            return dialogResult == MessageDialogResult.Affirmative;
+            return dialogResult;
         }
 
         private void MetroWindow_Closing(object sender, CancelEventArgs e)
         {
-            if (settingsModel.Serverprocessrunning)
+            if(settingsModel.Serverprocessrunning)
             {
-                var answer = MessageBox.Show("The server process is still runnning.\n\n" +
-                                            "Kill server process and exit?", "Attention!", MessageBoxButton.OKCancel);
-                if (answer == MessageBoxResult.OK)
+                Log.Information("Exiting application");
+                var result = MessageBox.Show("Attention!",
+                    "The server process is still runnning.\nKill server process and proceed?", MessageBoxButton.OKCancel);
+                if (result == MessageBoxResult.OK)
                 {
                     KillServerProcess();
                 }
                 else
                 {
                     e.Cancel = true;
+                    Log.Information("Exiting cancelled");
                 }
             }
-
         }
     }
 }
