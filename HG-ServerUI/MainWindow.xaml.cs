@@ -38,6 +38,7 @@ namespace HG_ServerUI
     {
         SettingsModel settingsModel = new();
         private readonly DispatcherTimer checkServerRunningTimer = new DispatcherTimer();
+        private readonly FileSystemWatcher _cfgFileSystemWatcher;
 
         public MainWindow()
         {
@@ -56,6 +57,11 @@ namespace HG_ServerUI
             Log.Information("Settings loaded");
 
             PreFlightCheck();
+            _cfgFileSystemWatcher = new FileSystemWatcher(settingsModel.Configfiledirectory);
+            _cfgFileSystemWatcher.Filter = $"{System.IO.Path.GetFileName(settingsModel.Configfilepath)}";
+            _cfgFileSystemWatcher.NotifyFilter = NotifyFilters.LastWrite;
+            _cfgFileSystemWatcher.Changed += HandleChanged;
+            _cfgFileSystemWatcher.EnableRaisingEvents = true;
 
             checkServerRunningTimer.Interval = TimeSpan.FromSeconds(5);
             checkServerRunningTimer.Tick += checkServerRunningTimer_Tick;
@@ -162,7 +168,9 @@ namespace HG_ServerUI
         private async void RunProcess()
         {
             Log.Information("Starting HG server");
+            _cfgFileSystemWatcher.EnableRaisingEvents = false;
             SettingsFile.WriteConfigfile(settingsModel);
+            _cfgFileSystemWatcher.EnableRaisingEvents = true;
             Process server = new Process();
             server.StartInfo.UseShellExecute = false;
             server.StartInfo.CreateNoWindow = true;
@@ -301,7 +309,9 @@ namespace HG_ServerUI
 
         private void MnSave_Click(object sender, RoutedEventArgs e)
         {
+            _cfgFileSystemWatcher.EnableRaisingEvents = false;
             SettingsFile.WriteConfigfile(settingsModel);
+            _cfgFileSystemWatcher.EnableRaisingEvents = true;
             string filename = System.IO.Path.GetFileName(settingsModel.Configfilepath);
             Log.Information($"Saved configuration as {filename}");
         }
@@ -316,7 +326,9 @@ namespace HG_ServerUI
             };
             if (ofd.ShowDialog() == true)
             {
+                _cfgFileSystemWatcher.EnableRaisingEvents = false;
                 SettingsFile.WriteConfigfile(settingsModel, ofd.FileName);
+                _cfgFileSystemWatcher.EnableRaisingEvents = true;
                 Log.Information($"Saved configuration as {ofd.FileName}");
             }
         }
@@ -406,6 +418,21 @@ namespace HG_ServerUI
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             _ = Process.Start(new ProcessStartInfo("https://github.com/elpatron68/HG-Server-Manager") { UseShellExecute = true });
+        }
+
+        private void MnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("notepad.exe", $"{settingsModel.Configfilepath}");
+        }
+
+        private void HandleChanged(object sender, FileSystemEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show($"The configuration file {settingsModel.Configfilepath} has been modified outside the application.\n\nLoad changes?",
+                    "Warning", MessageBoxButton.OKCancel);
+            if (result == MessageBoxResult.OK)
+            {
+                SettingsFile.ReadConfigfile(settingsModel);
+            }
         }
     }
 }

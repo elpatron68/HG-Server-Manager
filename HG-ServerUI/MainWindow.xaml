@@ -59,6 +59,14 @@
                         <iconPacks:PackIconUnicons Kind="FileExport" />
                     </MenuItem.Icon>
                 </MenuItem>
+                <MenuItem x:Name="MnEdit"
+                          Header="Manually _edit configuration" 
+                          Click="MnEdit_Click"
+                          >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconUnicons Kind="Edit" />
+                    </MenuItem.Icon>
+                </MenuItem>
                 <MenuItem x:Name="MnOpenLogfile"
                           Header="_Open log file" Click="MnOpenLogfile_Click"
                           >
