@@ -178,6 +178,15 @@ namespace HG_ServerUI
 
         private async Task SendNtfyAsync()
         {
+            string _passtext=string.Empty;
+            if (settingsModel.Password != "")
+            {
+                _passtext = "Private server, password protected";
+            }
+            else
+            {
+                _passtext = "Open server, no password set";
+            }
             // Create a new ntfy client
             var topic = "Hydrofoil_Generation_Servermonitor";
             var client = new Client("https://ntfy.sh");
@@ -187,7 +196,12 @@ namespace HG_ServerUI
                 Message = $"Server name: {settingsModel.Servername}\n" +
                 $"Location: {settingsModel.Location}\n" +
                 $"Course: {settingsModel.Course}\n" +
-                $"Wind: Min {settingsModel.Windminspeed}, max {settingsModel.Windmaxspeed}"
+                $"Wind: Min {settingsModel.Windminspeed}, max {settingsModel.Windmaxspeed}\n" +
+                $"{_passtext}",
+                Tags = new[]
+                {
+                    "rocket", "boat"
+                }
             };
             try
             {
