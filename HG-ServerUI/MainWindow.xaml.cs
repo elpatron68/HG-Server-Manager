@@ -20,6 +20,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Win32;
@@ -36,6 +37,7 @@ namespace HG_ServerUI
     public partial class MainWindow : MetroWindow
     {
         SettingsModel settingsModel = new();
+        private readonly DispatcherTimer checkServerRunningTimer = new DispatcherTimer();
 
         public MainWindow()
         {
@@ -54,6 +56,9 @@ namespace HG_ServerUI
             Log.Information("Settings loaded");
 
             PreFlightCheck();
+
+            checkServerRunningTimer.Interval = TimeSpan.FromSeconds(5);
+            checkServerRunningTimer.Tick += checkServerRunningTimer_Tick;
 
             TxExePath.DataContext = settingsModel;
             TxServerName.DataContext = settingsModel;
@@ -91,6 +96,11 @@ namespace HG_ServerUI
             LbServerStatus.DataContext = settingsModel;
             LbServerReachable.DataContext = settingsModel;
             BtnStartServer.DataContext = settingsModel;            
+        }
+
+        private void checkServerRunningTimer_Tick(object? sender, EventArgs e)
+        {
+            settingsModel.Serverprocessrunning = IsServerRunning();
         }
 
         private void PreFlightCheck()
