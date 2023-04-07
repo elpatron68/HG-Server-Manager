@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -340,6 +341,13 @@ namespace HG_ServerUI
             set { _penatltiespath = value; OnPropertyChanged(); }
         }
 
+        private string _ntfytopic;
+        public string Ntfytopic
+        {
+            get { return _ntfytopic ?? string.Empty; }
+            set { _ntfytopic = value; OnPropertyChanged(); }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
@@ -391,6 +399,7 @@ namespace HG_ServerUI
             Boats = Array.Empty<string>();
             Penalties = string.Empty;
             Penatltiespath= string.Empty;
+            Ntfytopic=string.Empty;
         }
 
         private static string GetCfgFilenameFromExepath(string _exepath)
@@ -436,6 +445,19 @@ namespace HG_ServerUI
                 model.Btnservercontent = "_Start server";
                 model.Btnserverenabled = true;
                 model.Serverreachable = false;
+
+                try
+                {
+                    var _files = Directory.GetFiles(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "*.ntfy");
+                    if (_files.Length > 0)
+                    {
+                        model.Ntfytopic = Path.GetFileNameWithoutExtension(_files[0]);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.Message);
+                }
             }
             return model;
         }

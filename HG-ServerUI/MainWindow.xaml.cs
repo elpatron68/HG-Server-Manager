@@ -118,7 +118,7 @@ namespace HG_ServerUI
                     string _boatname = _filename.Split("_on_")[1].Split("_")[0].Trim();
                     string _offence = _filename.Split("_-_")[1].Split('_')[1].Trim();
                     string _timestamp = $"[{DateTime.Now.ToString("HH:mm:ss")}]";
-                    settingsModel.Penalties += $"\n{_timestamp} {_offence}: {_username} on {_boatname}";
+                    settingsModel.Penalties += $"{_timestamp} {_offence}: {_username} on {_boatname}\n";
                     SoundPlayer player = new(Properties.Resources.beep_sound);
                     player.Play();
                 }
@@ -207,8 +207,12 @@ namespace HG_ServerUI
             settingsModel.Processid = server.Id;
             settingsModel.Serverprocessrunning = true;
             settingsModel.Btnservercontent = "_Stop server";
-            Log.Information("Sending message to Ntfy channel 📫");
-            await SendNtfyAsync();
+            
+            if (settingsModel.Ntfytopic != string.Empty)
+            {
+                Log.Information("Sending message to Ntfy channel 📫");
+                await SendNtfyAsync();
+            }
         }
 
         private void BtnStartServer_Click(object sender, RoutedEventArgs e)
