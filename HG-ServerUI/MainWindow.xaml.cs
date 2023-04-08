@@ -576,7 +576,7 @@ namespace HG_ServerUI
 
         private async void LoadSlot(int slotnumber)
         {
-            string _filename = $"slot{slotnumber.ToString()}.kl";
+            string _filename = settingsModel.Configfiledirectory + $@"\slot{slotnumber.ToString()}.kl";
             if(File.Exists(_filename))
             {
                 if (settingsModel.Serverprocessrunning)
@@ -585,7 +585,24 @@ namespace HG_ServerUI
                 }
                 SettingsFile.ReadConfigfile(settingsModel, $"slot{slotnumber.ToString()}.kl");
                 RunProcess();
-                await this.ShowMessageAsync("Hot slot loaded", $"Hot slot #{slotnumber.ToString()} loaded, server (re)started.");
+                Log.Information($"Slot {slotnumber} loaded, server (re)started");
+                await this.ShowMessageAsync("Hot slot loaded", $"Hot slot #{slotnumber.ToString()} loaded, " +
+                    $"server (re)started.");
+            }
+            else
+            {
+                try
+                {
+                    File.Copy(settingsModel.Configfilepath, settingsModel.Configfiledirectory + $@"\slot{slotnumber.ToString()}.kl");
+                    SettingsFile.ReadConfigfile(settingsModel, $"slot{slotnumber.ToString()}.kl");
+                    await this.ShowMessageAsync("New hot slot created", $"Hot slot #{slotnumber.ToString()} did not exist, " +
+                        $"a new configuration based on the 'server_cfg.kl' has been created and loaded.\n" +
+                        $"Adjust the settings to your needs and save it as 'slot{slotnumber.ToString()}.kl'.\n");
+                }
+                catch
+                {
+                    Log.Warning($"Failed to copy {Path.GetFileName(settingsModel.Configfilepath)} to slot{slotnumber.ToString()}.kl");
+                }
             }
         }
     }
