@@ -11,6 +11,49 @@
         Width="1000" 
         ResizeMode="NoResize" Closing="MetroWindow_Closing"
         >
+    <Window.CommandBindings>
+        <CommandBinding 
+            Command="{x:Static local:MainWindow.cmdSlotZero}" 
+            Executed="SlotZeroCommandBinding_Executed">
+        </CommandBinding>
+        <CommandBinding 
+            Command="{x:Static local:MainWindow.cmdSlotOne}" 
+            Executed="SlotOneCommandBinding_Executed">
+        </CommandBinding>
+        <CommandBinding 
+            Command="{x:Static local:MainWindow.cmdSlotTwo}" 
+            Executed="SlotTwoCommandBinding_Executed">
+        </CommandBinding>
+        <CommandBinding 
+            Command="{x:Static local:MainWindow.cmdSlotThree}" 
+            Executed="SlotThreeCommandBinding_Executed">
+        </CommandBinding>
+        <CommandBinding 
+            Command="{x:Static local:MainWindow.cmdSlotFour}" 
+            Executed="SlotFourCommandBinding_Executed">
+        </CommandBinding>
+        <CommandBinding 
+            Command="{x:Static local:MainWindow.cmdSlotSix}" 
+            Executed="SlotSixCommandBinding_Executed">
+        </CommandBinding>
+        <CommandBinding 
+            Command="{x:Static local:MainWindow.cmdSlotSeven}" 
+            Executed="SlotSevenCommandBinding_Executed">
+        </CommandBinding>
+        <CommandBinding 
+            Command="{x:Static local:MainWindow.cmdSlotEight}" 
+            Executed="SlotEightCommandBinding_Executed">
+        </CommandBinding>
+        <CommandBinding 
+            Command="{x:Static local:MainWindow.cmdSlotNine}" 
+            Executed="SlotNineCommandBinding_Executed">
+        </CommandBinding>
+        <CommandBinding 
+            Command="{x:Static local:MainWindow.cmdRunServer}" 
+            Executed="RunServerCommandBinding_Executed">
+        </CommandBinding>
+    </Window.CommandBindings>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="25*"/>
@@ -93,9 +136,112 @@
                 </MenuItem>
 
             </MenuItem>
+            <MenuItem Header="H_ot slots">
+                <MenuItem
+                    x:Name="MnSlot"
+                    Header="Activate slot _0"
+                    InputGestureText="Ctrl+0"
+                    Click="MnSlot0_Click"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="Numeric0Box" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="MnSlot1"
+                    Header="Activate slot _1"
+                    InputGestureText="Ctrl+1" 
+                    Click="MnSlot1_Click"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="Numeric1Box" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="MnSlot2"
+                    Header="Activate slot _2"
+                    InputGestureText="Ctrl+2"
+                    Click="MnSlot2_Click"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="Numeric2Box" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="MnSlot3"
+                    Header="Activate slot _3"
+                    InputGestureText="Ctrl+3"
+                    Click="MnSlot3_Click"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="Numeric3Box" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="MnSlot4"
+                    Header="Activate slot _4"
+                    InputGestureText="Ctrl+4"
+                    Click="MnSlot4_Click"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="Numeric4Box" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="MnSlot5"
+                    Header="Activate slot _5"
+                    InputGestureText="Ctrl+5"
+                    Click="MnSlot5_Click"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="Numeric5Box" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="MnSlot6"
+                    Header="Activate slot _6"
+                    InputGestureText="Ctrl+6"
+                    Click="MnSlot6_Click"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="Numeric6Box" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="MnSlot7"
+                    Header="Activate slot _7"
+                    InputGestureText="Ctrl+7"
+                    Click="MnSlot7_Click"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="Numeric7Box" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="MnSlot8"
+                    Header="Activate slot _8"
+                    InputGestureText="Ctrl+8"
+                    Click="MnSlot8_Click"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="Numeric8Box" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="MnSlot9"
+                    Header="Activate slot _9"
+                    InputGestureText="Ctrl+9"
+                    Click="MnSlot9_Click"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="Numeric9Box" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
             <MenuItem Header="_Snaps">
                 <MenuItem x:Name="MnOpenSnaps"
-                          Header="_Open snaps" Click="MnOpenSnaps_Click"
+                          Header="_Open snaps" 
+                          Click="MnOpenSnaps_Click"
                           >
                     <MenuItem.Icon>
                         <iconPacks:PackIconMaterialLight Kind="Folder" />
@@ -253,42 +399,36 @@
         <TextBox 
             x:Name="TxPortTcp"
             Grid.Column="1" 
-            Grid.ColumnSpan="2" 
-            HorizontalAlignment="Left" 
-            Margin="10,100,0,0" 
+            HorizontalAlignment="Center" 
+            Margin="0,100,0,0" 
             Grid.Row="1" 
             TextWrapping="Wrap" 
             Text="{Binding Tcpport}" 
             VerticalAlignment="Top" 
-            Width="230"
-            >
-        </TextBox>
+            Width="105"
+            />
         <TextBox 
             x:Name="TxPortUdp"
             Grid.Column="1" 
-            Grid.ColumnSpan="2" 
-            HorizontalAlignment="Left" 
-            Margin="10,130,0,0" 
+            HorizontalAlignment="Center" 
+            Margin="0,130,0,0" 
             Grid.Row="1" 
             TextWrapping="Wrap" 
             Text="{Binding Udpport}" 
             VerticalAlignment="Top" 
-            Width="230"
-            >
-        </TextBox>
+            Width="105"
+            />
         <TextBox 
             x:Name="TxPortSteam"
             Grid.Column="1" 
-            Grid.ColumnSpan="2" 
-            HorizontalAlignment="Left" 
-            Margin="10,160,0,0" 
+            HorizontalAlignment="Center" 
+            Margin="0,160,0,0" 
             Grid.Row="1" 
             TextWrapping="Wrap" 
             Text="{Binding Steamport}" 
             VerticalAlignment="Top" 
-            Width="230"
-            >
-        </TextBox>
+            Width="105"
+            />
         <Button 
             x:Name="BtnStartServer"
             Grid.Column="3" 
@@ -909,9 +1049,9 @@
         </mah:NumericUpDown>
         <RichTextBox 
             x:Name="RtbLogMessages"
-            Grid.Column="4" 
+            Grid.Column="6" 
             Grid.Row="1" 
-            Grid.ColumnSpan="5" 
+            Grid.ColumnSpan="3" 
             Margin="10,40,10,10" 
             FontFamily="Cascadia Mono, Consolas, Courier New, monospace"
             Background="Black"
@@ -933,10 +1073,10 @@
             Source="/placeholder_image6.jpg" MouseLeftButtonDown="Image_MouseLeftButtonDown">
         </Image>-->
         <Label 
-            Grid.Column="4" 
+            Grid.Column="6" 
             Content="Protocol" 
-            HorizontalAlignment="Left" 
-            Margin="10,10,0,0" 
+            HorizontalAlignment="Center" 
+            Margin="0,5,0,0" 
             Grid.Row="1" 
             VerticalAlignment="Top" 
             Height="26" 
@@ -970,30 +1110,63 @@
             FontWeight="Bold"
             >
         </Label>
-        <!--<RichTextBox 
-            Grid.Column="7" 
-            Grid.Row="2" 
-            Margin="10,10,10,205"
-            Grid.ColumnSpan="2"
-            >
-            <FlowDocument>
-                <Paragraph>
-                    <Run Text="Penalties"/>
-                </Paragraph>
-            </FlowDocument>
-        </RichTextBox>-->
-        <!--<TextBlock 
-            Grid.Column="3" 
-            HorizontalAlignment="Center" 
-            Margin="0,165,0,0" 
+        <Label 
+            Grid.Column="2" 
+            Content="Ntfy race topic" 
+            HorizontalAlignment="Left" 
+            Margin="10,100,0,0" 
             Grid.Row="1" 
-            TextWrapping="Wrap" 
             VerticalAlignment="Top">
-            <Hyperlink
-                NavigateUri="https://portforward.com/"
+        </Label>
+        <Label 
+            Grid.Column="2" 
+            Content="Ntfy penalty topic" 
+            HorizontalAlignment="Left" 
+            Margin="10,130,0,0" 
+            Grid.Row="1" 
+            VerticalAlignment="Top"
             >
-            Port forwarding help
-            </Hyperlink>
-        </TextBlock>-->
+        </Label>
+        <TextBlock
+            Grid.Column="3"
+            Grid.Row="1" 
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Top"
+            Margin="0,170,0,0" 
+            Width="210" 
+            Height="20"
+            TextAlignment="Left" FontSize="14"
+            >
+            <Hyperlink
+                NavigateUri="https://github.com/elpatron68/HG-Server-Manager/tree/master#how-notifications-work"
+                RequestNavigate="NtfyHelp_RequestNavigate"
+            >
+            ℹ️ How notifications work
+        </Hyperlink>
+        </TextBlock>
+        <TextBox 
+            x:Name="TbNtfyRaceTopic"
+            Grid.Column="3"
+            Grid.Row="1" 
+            Margin="10,100,10,0" 
+            TextWrapping="NoWrap" 
+            Text="{Binding Ntfyracectopic}" 
+            VerticalAlignment="Top" 
+            Grid.ColumnSpan="2"
+            />
+        <TextBox 
+            x:Name="TbNtfyPenaltyTopic"
+            Grid.Column="3" 
+            HorizontalAlignment="Left" 
+            Margin="10,130,0,0" 
+            Grid.Row="1" 
+            Grid.ColumnSpan="2"
+            TextWrapping="NoWrap" 
+            Text="{Binding Ntfypenaltytopic}"
+            VerticalAlignment="Top" 
+            Width="210"
+            >
+        </TextBox>
     </Grid>
 </mah:MetroWindow>

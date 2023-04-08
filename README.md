@@ -1,18 +1,19 @@
-# HG-Server-Manager
+# HG Server-Manager
 
 *HG Server Manager* is a .NET Windows application that eases the management of the [Hydrofoil Generation](https://store.steampowered.com/app/1448820/Hydrofoil_Generation/) game server.
 
 ## Features
 
-- Clean and nice looking user interface
-- All server parameters editable
-- Control your server:
-  - Start/stop game server
-  - Get notified of the occurrence of penalties
-  - See if your server is publicly reachable
-- Notify players of your server launches
-- Load and save an unlimited number of different configurations
-- Open game server log file and *snaps* directory directly from the app
+- 🦋 Clean and beautiful user interface
+- ⚙️All server parameters editable 
+- 🛠️ Control your server:
+  - 🚀 Start/stop game server
+  - ⚠️ Get notified of the occurrence of penalties
+  - 👨‍👩‍👧‍👦 See if your server is publicly reachable
+- 📬 Notify players of your server launches
+- ♾️ Load and save an unlimited number of different configurations
+- ⛵ Instantly switch between up to 10 user-defined presets by hot key
+- 📃 Open game server log file and *snaps* directory directly from the application
 
 ![image-20230407193824206](./assets/image-20230407193824206.png)
 
@@ -70,16 +71,56 @@ The protocol text box informs you about events and problems. Have a look at it i
 
 Occurring penalties are displayed in the *Penalties* text box. New penalties are signalized with a sound effect.
 
-## Ntfy notifications
+### Hot slots
 
-Let your players be notified when you start your game server! *HG-Server-Manager* sends messages to the [Ntfy](https://ntfy.sh/) *topic* `Hydrofoil_Generation_Servermonitor` when you hit the launch button.
+*HG Server-Manager* supports up to ten *hot slots* to quickly change between different configurations. Every *hot slot* represents a different server configuration.
 
-Let your players never miss one of your races by letting them subscribe to the *topic*! Open [this](https://ntfy.sh/Hydrofoil_Generation_Servermonitor) web browser tab and let it opened. Or - way better! - install the [Ntfy app](https://ntfy.sh/#subscribe-phone) on your mobile and subscribe to the *topic*. The Ntfy app is available for iOS and Android.
+#### Activate a hot slot
 
-### Modify Ntfy topic
+The keyboard hot keys `Crtl+1` to  `Crtl+0` activate a corresponding *hot slot*. The game server will immediately launch. **A previously started server is terminated beforehand.**
 
-The default topic `Hydrofoil_Generation_Servermonitor` can be changed to an individual one by renaming the file `Hydrofoil_Generation_Servermonitor.ntfy` in the application directory. Just change the file name to a topic name of your choice. Note, that Ntfy topics are public for everyone who knows the topic name! If you want to have some privacy, give it a random alpha-numeric name like `qPd5AbhVfwv5FJFQtYRY4xCf`
+#### Assigning a configuration to a hot slot
+
+- Load (or edit) a configuration and adjust it to your needs.
+- Save this configuration with the file name `slot<Number>.kl`. E.g. for `Crtl+3` the file name should be `slot3>.kl`.
+
+## How notifications work
+
+There are two use cases for notifications:
+
+- You want to inform your player community about your game server launces.
+- You (or your players) want to be informed if your game server detects any penalties.
+
+**Let your players never miss one of your races by letting them subscribe to your messages!**
+
+*HG Server-Manager* uses the free service [*Ntfy*](https://ntfy.sh/) to send notifications to subscribed clients. To setup *Ntfy* notifications as game host, you have to
+
+- Select a *topic* for race notices and enter it in the corresponding field
+- Select a *topic* for penalty notices and enter it in the corresponding field
+
+![image-20230408175840258](./assets/image-20230408175840258.png)
+
+A Ntfy *topic* is sort of a channel, users can subscribe to. You can enter any alphanumeric topic name you want. But be aware of the fact, that every topic is public and everyone can read the messages if the name of the topic is known. So, if you want to have some privacy, give your topic(s) a random alpha-numeric name like `qPd5AbhVfwv5FJFQtYRY4xCf`.
+
+![image-20230408182649932](./assets/image-20230408182649932.png) 
+
+Example notification (web browser)
+
+<img src="./assets/image-20230408182840712.png" alt="image-20230408182840712" style="zoom:33%;" />
+
+Example notifications (Android app)
+
+As player, who wants to be informed about starting races of their favorite host, you can subscribe the Ntfy topic: Ask the game host for the topic(s) to subscribe to (if the default values were changed).
+
+- Open the web site `https://ntfy.sh/<topic>` in your browser or
+- install the [Ntfy app](https://ntfy.sh/#subscribe-phone) on your mobile and add to the *topic*.
+
+If you have not configured own *topics*, *HG Server-Manager* sends notifications to the *topics* [`Hydrofoil_Generation_Servermonitor`](https://ntfy.sh/Hydrofoil_Generation_Servermonitor) (game server start events) and [`Hydrofoil_Generation_Penaltymonitor`](https://ntfy.sh/Hydrofoil_Generation_Penaltymonitor). Click on the links to open the default topics in your web browser.
+
+> Tip: If you use own topics, inform your player community about them.
+
+> Tip: Ntfy topics are saved to the game server configuration file(s), so you can use different topics in different server configurations.
 
 ### Disable Ntfy notifications
 
-To disable all Ntfy notifications, delete all files with the extension `*.ntfy` in the app´s directory.
+Leave one or both *topic* fields empty to disable Ntfy notifications.
