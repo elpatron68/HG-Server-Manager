@@ -160,6 +160,14 @@ namespace HG_ServerUI
                     {
                         model.Blackflaglegs = int.Parse(line.Split("=")[1].Trim());
                     }
+                    if (line.Contains("ntfyracetopic"))
+                    {
+                        model.Ntfyracectopic = line.Split("=")[1].Trim();
+                    }
+                    if (line.Contains("ntfypenaltytopic"))
+                    {
+                        model.Ntfypenaltytopic = line.Split("=")[1].Trim();
+                    }
                 }
             }
             return model; 
@@ -171,6 +179,11 @@ namespace HG_ServerUI
                 filename = model.Configfilepath;
             }
             string content = """
+# Meta information from HG Server-Manager
+# Should be harmless, may be deleted if any problems occur
+# See https://github.com/elpatron68/HG-Server-Manager/tree/master#ntfy-notifications if you want to learn more about Ntfy
+# ntfyracetopic=<ntfyracetopic>
+# ntfypenaltytopic=<ntfypenaltytopic>
 
 name=<servername>
 ports
@@ -250,6 +263,8 @@ penalties
                 .Replace("<penaltyduration>", model.Penaltyduration.ToString())
                 .Replace("<blackflagduration>", model.Blackflagduration.ToString())
                 .Replace("<blackflaglegs>", model.Blackflaglegs.ToString())
+                .Replace("<ntfyracetopic>", model.Ntfyracectopic)
+                .Replace("<ntfypenaltytopic>", model.Ntfypenaltytopic)
                 ;
             File.WriteAllText(filename, content);
         }

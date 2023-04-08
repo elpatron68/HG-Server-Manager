@@ -54,7 +54,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Hydrofoil_Generation_Servermonitor.ntfy">
+    <None Update="Hydrofoil_Generation_Servermonitor.public.ntfy">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

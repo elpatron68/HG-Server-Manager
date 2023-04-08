@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using System.Windows.Threading;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
@@ -84,7 +85,7 @@ namespace HG_ServerUI
             _penaltiesFileSystemWatcher.NotifyFilter = NotifyFilters.LastAccess | 
                 NotifyFilters.LastWrite | 
                 NotifyFilters.FileName;
-            _penaltiesFileSystemWatcher.Created += PenHandleChanged;
+            _penaltiesFileSystemWatcher.Created += PenaltyHandleChanged;
             _penaltiesFileSystemWatcher.EnableRaisingEvents=true;
             checkServerRunningTimer.Interval = TimeSpan.FromSeconds(5);
             checkServerRunningTimer.Tick += checkServerRunningTimer_Tick;
@@ -127,12 +128,14 @@ namespace HG_ServerUI
             LbServerReachable.DataContext = settingsModel;
             BtnStartServer.DataContext = settingsModel;
             TbPenalties.DataContext = settingsModel;
+            TbNtfyRaceTopic.DataContext = settingsModel;
+            TbNtfyPenaltyTopic.DataContext = settingsModel;
         }
 
         // New penalty?
-        private void PenHandleChanged(object sender, FileSystemEventArgs e)
+        private async void PenaltyHandleChanged(object sender, FileSystemEventArgs e)
         {
-            Log.Information("New penalty");
+            Log.Information("New penalty detected");
             string? _filename = e.Name;
             if (_filename != null)
             {
@@ -145,10 +148,14 @@ namespace HG_ServerUI
                     settingsModel.Penalties += $"{_timestamp} {_offence}: {_username} on {_boatname}\n";
                     SoundPlayer player = new(Properties.Resources.beep_sound);
                     player.Play();
+                    if (settingsModel.Ntfyracectopic != string.Empty)
+                    {
+                        await SendNtfyPenaltyAnnouncement($"New penalty ({_offence}) by {_username} on boat {_boatname} in race {settingsModel.Servername}.");
+                    }
                 }
                 catch 
                 {
-                    Log.Warning($"Unable to parse penalty file name: {_filename}");
+                    Log.Warning($"Failed parsing penalty file name: {_filename}");
                 }
             }
         }
@@ -322,7 +329,7 @@ namespace HG_ServerUI
             _ = Process.Start("notepad.exe", settingsModel.Logfilepath);
         }
 
-        private async Task SendNtfyAsync()
+        private async Task SendNtfyRaceAnnouncement()
         {
             string _passtext=string.Empty;
             if (settingsModel.Password != "")
@@ -334,7 +341,7 @@ namespace HG_ServerUI
                 _passtext = "Open server, no password set";
             }
             // Create a new ntfy client
-            var topic = "Hydrofoil_Generation_Servermonitor";
+            var topic = settingsModel.Ntfyracectopic;
             var client = new Client("https://ntfy.sh");
             var message = new SendingMessage
             {
@@ -359,6 +366,31 @@ namespace HG_ServerUI
                 Debug.WriteLine(ex.Message);
             }
         }
+
+        private async Task SendNtfyPenaltyAnnouncement(string text)
+        {
+            // Create a new ntfy client
+            var topic = settingsModel.Ntfypenaltytopic;
+            var client = new Client("https://ntfy.sh");
+            var message = new SendingMessage
+            {
+                Title = "A penalty occurred!",
+                Message = $"Server name: {settingsModel.Servername}\n" + text,
+                Tags = new[]
+                {
+                    "loudspeaker", "rotating_light"
+                }
+            };
+            try
+            {
+                await client.Publish(topic, message);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
 
         private void MnOpenNtfy_Click(object sender, RoutedEventArgs e)
         {
@@ -406,7 +438,6 @@ namespace HG_ServerUI
             }
         }
 
-
         public async void TestPortAsync()
         {
             Thread.Sleep(4000);
@@ -436,24 +467,6 @@ namespace HG_ServerUI
             }
         }
 
-        /// <summary>
-        /// Display message dialog
-        /// </summary>
-        /// <param name="title"></param>
-        /// <param name="message"></param>
-        /// <returns></returns>
-        private async Task<MessageDialogResult> MetroMessage(string title, string message)
-        {
-            MetroDialogSettings dialogSettings = new MetroDialogSettings();
-            //dialogSettings.AffirmativeButtonText = answers[rInt] + " [OK]";
-
-            MessageDialogResult dialogResult = await this.ShowMessageAsync(title,
-                message,
-                MessageDialogStyle.Affirmative, dialogSettings);
-
-            return dialogResult;
-        }
-
         private void MetroWindow_Closing(object sender, CancelEventArgs e)
         {
             if(settingsModel.Serverprocessrunning)
@@ -476,11 +489,13 @@ namespace HG_ServerUI
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             _ = Process.Start(new ProcessStartInfo("https://github.com/elpatron68/HG-Server-Manager") { UseShellExecute = true });
+            e.Handled = true;
         }
 
         private void MnEdit_Click(object sender, RoutedEventArgs e)
         {
             Process.Start("notepad.exe", $"{settingsModel.Configfilepath}");
+            e.Handled = true;
         }
 
         private void CfgHandleChanged(object sender, FileSystemEventArgs e)
@@ -491,6 +506,12 @@ namespace HG_ServerUI
             {
                 SettingsFile.ReadConfigfile(settingsModel);
             }
+        }
+
+        private void NtfyHelp_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            _= Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
+            e.Handled = true;
         }
 
         private void MnOpenSnaps_Click(object sender, RoutedEventArgs e)

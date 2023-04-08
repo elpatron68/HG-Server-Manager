@@ -341,11 +341,18 @@ namespace HG_ServerUI
             set { _penatltiespath = value; OnPropertyChanged(); }
         }
 
-        private string _ntfytopic;
-        public string Ntfytopic
+        private string _ntfypublictopic;
+        public string Ntfyracectopic
         {
-            get { return _ntfytopic ?? string.Empty; }
-            set { _ntfytopic = value; OnPropertyChanged(); }
+            get { return _ntfypublictopic ?? string.Empty; }
+            set { _ntfypublictopic = value; OnPropertyChanged(); }
+        }
+
+        private string _ntfyprivatetopic;
+        public string Ntfypenaltytopic
+        {
+            get { return _ntfyprivatetopic ?? string.Empty; }
+            set { _ntfyprivatetopic = value; OnPropertyChanged(); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -399,7 +406,8 @@ namespace HG_ServerUI
             Boats = Array.Empty<string>();
             Penalties = string.Empty;
             Penatltiespath= string.Empty;
-            Ntfytopic=string.Empty;
+            Ntfyracectopic = string.Empty;
+            Ntfypenaltytopic = string.Empty;
             Btnservercontent = "_Start [Crtl+s]";
         }
 
@@ -447,18 +455,29 @@ namespace HG_ServerUI
                 model.Btnserverenabled = true;
                 model.Serverreachable = false;
 
-                try
-                {
-                    var _files = Directory.GetFiles(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "*.ntfy");
-                    if (_files.Length > 0)
-                    {
-                        model.Ntfytopic = Path.GetFileNameWithoutExtension(_files[0]);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Debug.Write(ex.Message);
-                }
+                //try
+                //{
+                //    var _files = Directory.GetFiles(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "*.ntfy");
+                //    if (_files.Length > 0)
+                //    {
+                //        foreach (var f in _files)
+                //        {
+                //            if (f.EndsWith(".public.ntfy"))
+                //            {
+                //                model.Ntfyracectopic = Path.GetFileNameWithoutExtension(_files[0]);
+                //            }
+                //            if (f.EndsWith(".private.ntfy"))
+                //            {
+                //                model.Ntfypenaltytopic = Path.GetFileNameWithoutExtension(_files[0]);
+                //            }
+                //        }
+                        
+                //    }
+                //}
+                //catch (Exception ex)
+                //{
+                //    Debug.Write(ex.Message);
+                //}
             }
             return model;
         }
