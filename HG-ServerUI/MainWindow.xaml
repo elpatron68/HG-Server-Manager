@@ -1049,9 +1049,9 @@
         </mah:NumericUpDown>
         <RichTextBox 
             x:Name="RtbLogMessages"
-            Grid.Column="6" 
+            Grid.Column="5" 
             Grid.Row="1" 
-            Grid.ColumnSpan="3" 
+            Grid.ColumnSpan="4" 
             Margin="10,40,10,10" 
             FontFamily="Cascadia Mono, Consolas, Courier New, monospace"
             Background="Black"
@@ -1073,41 +1073,41 @@
             Source="/placeholder_image6.jpg" MouseLeftButtonDown="Image_MouseLeftButtonDown">
         </Image>-->
         <Label 
-            Grid.Column="6" 
+            Grid.Column="5" 
             Content="Protocol" 
-            HorizontalAlignment="Center" 
-            Margin="0,5,0,0" 
+            HorizontalAlignment="Left" 
+            Margin="10,5,0,0" 
             Grid.Row="1" 
             VerticalAlignment="Top" 
             Height="26" 
             Width="105"
-            FontWeight="Bold"
+            FontWeight="Bold" Grid.ColumnSpan="2"
             >
         </Label>
         <TextBlock 
             x:Name="TbPenalties"
-            Grid.Column="4" 
+            Grid.Column="5" 
             HorizontalAlignment="Left" 
             Margin="10,40,0,0" 
             Grid.Row="2" 
             TextWrapping="Wrap" 
             Text="{Binding Penalties}" 
             VerticalAlignment="Top" 
-            Grid.ColumnSpan="5" 
+            Grid.ColumnSpan="4" 
             Height="90" 
-            Width="480"
+            Width="375"
             Background="Black"
             Foreground="Red"
             >
         </TextBlock>
         <Label 
-            Grid.Column="4" 
+            Grid.Column="5" 
             Content="Penalties" 
             HorizontalAlignment="Left" 
             Margin="10,10,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
-            FontWeight="Bold"
+            FontWeight="Bold" Grid.ColumnSpan="2"
             >
         </Label>
         <Label 
