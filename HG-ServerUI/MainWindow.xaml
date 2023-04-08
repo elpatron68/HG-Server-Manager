@@ -1139,7 +1139,7 @@
             TextAlignment="Left" FontSize="14"
             >
             <Hyperlink
-                NavigateUri="https://github.com/elpatron68/HG-Server-Manager/tree/master#how-notifications-work"
+                NavigateUri="https://github.com/elpatron68/HG-Server-Manager#how-notifications-work"
                 RequestNavigate="NtfyHelp_RequestNavigate"
             >
             ℹ️ How notifications work
