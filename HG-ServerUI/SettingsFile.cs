@@ -22,6 +22,16 @@ namespace HG_ServerUI
             if(File.Exists(filename))
             {
                 string readText = File.ReadAllText(filename);
+                
+                // Set default Ntfy topics
+                if (!readText.Contains("ntfyracetopic="))
+                {
+                    readText= "# ntfyracetopic=Hydrofoil_Generation_Servermonitor\n" + readText;
+                }
+                if (!readText.Contains("ntfypenaltytopic="))
+                {
+                    readText = "# ntfypenaltytopic=Hydrofoil_Generation_Penaltymonitor\n" + readText;
+                }
 
                 foreach (string line in readText.Split())
                 {
@@ -160,14 +170,22 @@ namespace HG_ServerUI
                     {
                         model.Blackflaglegs = int.Parse(line.Split("=")[1].Trim());
                     }
-                    if (line.Contains("ntfyracetopic"))
+                    if (line.Contains("ntfyracetopic="))
                     {
                         model.Ntfyracectopic = line.Split("=")[1].Trim();
                     }
-                    if (line.Contains("ntfypenaltytopic"))
+                    //if (model.Ntfyracectopic == "")
+                    //{
+                    //    model.Ntfyracectopic = "Hydrofoil_Generation_Servermonitor";
+                    //}
+                    if (line.Contains("ntfypenaltytopic="))
                     {
                         model.Ntfypenaltytopic = line.Split("=")[1].Trim();
                     }
+                    //if (model.Ntfypenaltytopic == "")
+                    //{
+                    //    model.Ntfypenaltytopic = "Hydrofoil_Generation_Penaltymonitor";
+                    //}
                 }
             }
             return model; 

@@ -1049,9 +1049,9 @@
         </mah:NumericUpDown>
         <RichTextBox 
             x:Name="RtbLogMessages"
-            Grid.Column="4" 
+            Grid.Column="6" 
             Grid.Row="1" 
-            Grid.ColumnSpan="5" 
+            Grid.ColumnSpan="3" 
             Margin="10,40,10,10" 
             FontFamily="Cascadia Mono, Consolas, Courier New, monospace"
             Background="Black"
@@ -1073,10 +1073,10 @@
             Source="/placeholder_image6.jpg" MouseLeftButtonDown="Image_MouseLeftButtonDown">
         </Image>-->
         <Label 
-            Grid.Column="4" 
+            Grid.Column="6" 
             Content="Protocol" 
-            HorizontalAlignment="Left" 
-            Margin="10,10,0,0" 
+            HorizontalAlignment="Center" 
+            Margin="0,5,0,0" 
             Grid.Row="1" 
             VerticalAlignment="Top" 
             Height="26" 
@@ -1128,45 +1128,44 @@
             >
         </Label>
         <TextBlock
-            Grid.Column="2"
+            Grid.Column="3"
             Grid.Row="1" 
-            HorizontalAlignment="Left" 
-            VerticalAlignment="Center"
-            Margin="10,160,0,0" 
-            Grid.ColumnSpan="2" 
-            Width="230" 
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Top"
+            Margin="0,170,0,0" 
+            Width="210" 
             Height="20"
-            TextAlignment="Center"
+            TextAlignment="Left" FontSize="14"
             >
             <Hyperlink
                 NavigateUri="https://github.com/elpatron68/HG-Server-Manager/tree/master#ntfy-notifications"
                 RequestNavigate="NtfyHelp_RequestNavigate"
             >
-            Help: How notifications work
+            ℹ️ How notifications work
         </Hyperlink>
         </TextBlock>
         <TextBox 
             x:Name="TbNtfyRaceTopic"
-            Grid.Column="3" 
-            HorizontalAlignment="Center" 
-            Margin="0,100,0,0" 
+            Grid.Column="3"
             Grid.Row="1" 
+            Margin="10,100,10,0" 
             TextWrapping="NoWrap" 
             Text="{Binding Ntfyracectopic}" 
             VerticalAlignment="Top" 
-            Width="105"
-            >
-        </TextBox>
+            Grid.ColumnSpan="2"
+            />
         <TextBox 
             x:Name="TbNtfyPenaltyTopic"
             Grid.Column="3" 
-            HorizontalAlignment="Center" 
-            Margin="0,130,0,0" 
+            HorizontalAlignment="Left" 
+            Margin="10,130,0,0" 
             Grid.Row="1" 
+            Grid.ColumnSpan="2"
             TextWrapping="NoWrap" 
             Text="{Binding Ntfypenaltytopic}"
             VerticalAlignment="Top" 
-            Width="105"
+            Width="210"
             >
         </TextBox>
     </Grid>
