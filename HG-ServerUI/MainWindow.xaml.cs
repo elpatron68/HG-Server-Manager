@@ -86,10 +86,10 @@ namespace HG_ServerUI
                 NotifyFilters.FileName;
             _penaltiesFileSystemWatcher.Created += PenHandleChanged;
             _penaltiesFileSystemWatcher.EnableRaisingEvents=true;
-
             checkServerRunningTimer.Interval = TimeSpan.FromSeconds(5);
             checkServerRunningTimer.Tick += checkServerRunningTimer_Tick;
 
+            // Set bindings
             TxExePath.DataContext = settingsModel;
             TxServerName.DataContext = settingsModel;
             TxPortTcp.DataContext = settingsModel;
@@ -129,6 +129,7 @@ namespace HG_ServerUI
             TbPenalties.DataContext = settingsModel;
         }
 
+        // New penalty?
         private void PenHandleChanged(object sender, FileSystemEventArgs e)
         {
             Log.Information("New penalty");
@@ -147,16 +148,16 @@ namespace HG_ServerUI
                 }
                 catch 
                 {
-                    Log.Warning($"Unable to parse file name: {_filename}");
+                    Log.Warning($"Unable to parse penalty file name: {_filename}");
                 }
             }
         }
 
+        // Check if server is running
         private void checkServerRunningTimer_Tick(object? sender, EventArgs e)
         {
             settingsModel.Serverprocessrunning = IsServerRunning();
             Log.Debug($"ServerRunning: {settingsModel.Serverprocessrunning}");
-            //TestPortAsync();
         }
 
         private void PreFlightCheck()
@@ -213,7 +214,7 @@ namespace HG_ServerUI
             Close();
         }
 
-        private async void RunProcess()
+        private void RunServerProcess()
         {
             Log.Information("Starting HG server");
             _cfgFileSystemWatcher.EnableRaisingEvents = false;
@@ -229,20 +230,23 @@ namespace HG_ServerUI
             server.Start();
             settingsModel.Processid = server.Id;
             settingsModel.Serverprocessrunning = true;
-            settingsModel.Btnservercontent = "_Stop server";
-            
+            settingsModel.Btnservercontent = "_Stop [crtl+s]";
+
+#if !DEBUG
             if (settingsModel.Ntfytopic != string.Empty)
             {
                 Log.Information("Sending message to Ntfy channel 📫");
                 await SendNtfyAsync();
             }
+#endif
         }
+
 
         private void BtnStartServer_Click(object sender, RoutedEventArgs e)
         {
             if (!settingsModel.Serverprocessrunning)
             {
-                RunProcess();
+                RunServerProcess();
                 //Thread.Sleep(4000);
                 TestPortAsync();
             }
@@ -275,7 +279,6 @@ namespace HG_ServerUI
                     //string d = dauer.ToString(@"hh\:mm\:ss", null);
                     //SendMsg(r.TargetId, $"Die Remote-Spiegelsitzung von {r.SourceUserName} wurde beendet.");
                     //Log.Information($"{_localUsername}::Session (process id {r.ProcessId}) terminated by exiting the application. Duration: {d}");
-                    break;
                 }
             }
         }
@@ -541,7 +544,11 @@ namespace HG_ServerUI
         {
             if (!settingsModel.Serverprocessrunning)
             {
-                RunProcess();
+                RunServerProcess();
+            }
+            else
+            {
+                KillServerProcess();
             }
         }
         private void MnSlot0_Click(object sender, RoutedEventArgs e)
@@ -595,8 +602,11 @@ namespace HG_ServerUI
                 {
                     KillServerProcess();
                 }
-                SettingsFile.ReadConfigfile(settingsModel, $"slot{slotnumber.ToString()}.kl");
-                RunProcess();
+                //settingsModel = new();
+                SettingsFile.ReadConfigfile(settingsModel, $@"{settingsModel.Configfiledirectory}\slot{slotnumber.ToString()}.kl");
+//#if !DEBUG
+                RunServerProcess();
+//#endif
                 Log.Information($"Slot {slotnumber} loaded, server (re)started");
                 await this.ShowMessageAsync("Hot slot loaded", $"Hot slot #{slotnumber.ToString()} loaded, " +
                     $"server (re)started.");
@@ -606,7 +616,7 @@ namespace HG_ServerUI
                 try
                 {
                     File.Copy(settingsModel.Configfilepath, settingsModel.Configfiledirectory + $@"\slot{slotnumber.ToString()}.kl");
-                    SettingsFile.ReadConfigfile(settingsModel, $"slot{slotnumber.ToString()}.kl");
+                    SettingsFile.ReadConfigfile(settingsModel, $@"{settingsModel.Configfiledirectory}\slot{slotnumber.ToString()}.kl");
                     await this.ShowMessageAsync("New hot slot created", $"Hot slot #{slotnumber.ToString()} did not exist, " +
                         $"a new configuration based on the 'server_cfg.kl' has been created and loaded.\n" +
                         $"Adjust the settings to your needs and save it as 'slot{slotnumber.ToString()}.kl'.\n");

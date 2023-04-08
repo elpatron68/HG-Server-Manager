@@ -12,7 +12,7 @@
   - 👨‍👩‍👧‍👦 See if your server is publicly reachable
 - 📬 Notify players of your server launches
 - ♾️ Load and save an unlimited number of different configurations
-- ⛵ Instantly switch between 10 user-defined presets by hot key
+- ⛵ Instantly switch between up to 10 user-defined presets by hot key
 - 📃 Open game server log file and *snaps* directory directly from the application
 
 ![image-20230407193824206](./assets/image-20230407193824206.png)
