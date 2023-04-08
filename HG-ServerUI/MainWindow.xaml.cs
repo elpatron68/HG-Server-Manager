@@ -221,7 +221,7 @@ namespace HG_ServerUI
             Close();
         }
 
-        private void RunServerProcess()
+        private async void RunServerProcess()
         {
             Log.Information("Starting HG server");
             _cfgFileSystemWatcher.EnableRaisingEvents = false;
@@ -240,10 +240,10 @@ namespace HG_ServerUI
             settingsModel.Btnservercontent = "_Stop [crtl+s]";
 
 #if !DEBUG
-            if (settingsModel.Ntfytopic != string.Empty)
+            if (settingsModel.Ntfyracectopic != string.Empty)
             {
                 Log.Information("Sending message to Ntfy channel 📫");
-                await SendNtfyAsync();
+                await SendNtfyRaceAnnouncement();
             }
 #endif
         }
