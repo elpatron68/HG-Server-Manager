@@ -71,14 +71,27 @@ The protocol text box informs you about events and problems. Have a look at it i
 
 Occurring penalties are displayed in the *Penalties* text box. New penalties are signalized with a sound effect.
 
+### Hot slots
+
+*HG Server-Manager* supports up to ten *hot slots* to quickly change between different configurations. Every *hot slot* represents a different server configuration.
+
+#### Activate a hot slot
+
+The keyboard hot keys `Crtl+1` to  `Crtl+0` activate a corresponding *hot slot*. The game server will immediately launch. **A previously started server is terminated beforehand.**
+
+#### Assigning a configuration to a hot slot
+
+- Load (or edit) a configuration and adjust it to your needs.
+- Save this configuration with the file name `slot<Number>.kl`. E.g. for `Crtl+3` the file name should be `slot3>.kl`.
+
 ## How notifications work
 
 There are two use cases for notifications:
 
-- You want to inform your player community that you have launched your game server
-- You (or your players) want to be informed if your game server detects any penalties
+- You want to inform your player community about your game server launces.
+- You (or your players) want to be informed if your game server detects any penalties.
 
-Let your players never miss one of your races by letting them subscribe to your messages!
+**Let your players never miss one of your races by letting them subscribe to your messages!**
 
 *HG Server-Manager* uses the free service [*Ntfy*](https://ntfy.sh/) to send notifications to subscribed clients. To setup *Ntfy* notifications as game host, you have to
 
@@ -87,7 +100,7 @@ Let your players never miss one of your races by letting them subscribe to your 
 
 ![image-20230408175840258](./assets/image-20230408175840258.png)
 
-A Ntfy *topic* is sort of a channel, users can subscribe to. You can enter any alphanumeric topic name you want. But be aware of the fact, that every topic is public and everyone can subscribe to it if the name of the topic is known. So, if you want to have some privacy, give your topic(s) a random alpha-numeric name like `qPd5AbhVfwv5FJFQtYRY4xCf`.
+A Ntfy *topic* is sort of a channel, users can subscribe to. You can enter any alphanumeric topic name you want. But be aware of the fact, that every topic is public and everyone can read the messages if the name of the topic is known. So, if you want to have some privacy, give your topic(s) a random alpha-numeric name like `qPd5AbhVfwv5FJFQtYRY4xCf`.
 
 ![image-20230408182649932](./assets/image-20230408182649932.png) 
 
@@ -97,14 +110,16 @@ Example notification (web browser)
 
 Example notifications (Android app)
 
-As player, who wants to be informed about starting races of their favorite host, you can subscribe the Ntfy topic by
+As player, who wants to be informed about starting races of their favorite host, you can subscribe the Ntfy topic: Ask the game host for the topic(s) to subscribe to (if the default values were changed).
 
-- Ask the game host for the topic(s) to subscribe to (if the default values were changed). Open the web site `https://ntfy.sh/<topic>` in your browser or
+- Open the web site `https://ntfy.sh/<topic>` in your browser or
 - install the [Ntfy app](https://ntfy.sh/#subscribe-phone) on your mobile and add to the *topic*.
 
-If you have not configured own *topics*, *HG Server-Manager* sends notifications to the *topics* [`Hydrofoil_Generation_Servermonitor`](https://ntfy.sh/Hydrofoil_Generation_Servermonitor) (start game events) and [`Hydrofoil_Generation_Penaltymonitor`](https://ntfy.sh/Hydrofoil_Generation_Penaltymonitor). Click on the links to open the default topics in your web browser.
+If you have not configured own *topics*, *HG Server-Manager* sends notifications to the *topics* [`Hydrofoil_Generation_Servermonitor`](https://ntfy.sh/Hydrofoil_Generation_Servermonitor) (game server start events) and [`Hydrofoil_Generation_Penaltymonitor`](https://ntfy.sh/Hydrofoil_Generation_Penaltymonitor). Click on the links to open the default topics in your web browser.
 
 > Tip: If you use own topics, inform your player community about them.
+
+> Tip: Ntfy topics are saved to the game server configuration file(s), so you can use different topics in different server configurations.
 
 ### Disable Ntfy notifications
 
