@@ -11,6 +11,45 @@
         Width="1000" 
         ResizeMode="NoResize" Closing="MetroWindow_Closing"
         >
+    <Window.CommandBindings>
+        <CommandBinding 
+            Command="{x:Static local:MainWindow.SlotZero}" 
+            Executed="SlotZeroCommandBinding_Executed">
+        </CommandBinding>
+        <CommandBinding 
+            Command="{x:Static local:MainWindow.SlotOne}" 
+            Executed="SlotOneCommandBinding_Executed">
+        </CommandBinding>
+        <CommandBinding 
+            Command="{x:Static local:MainWindow.SlotTwo}" 
+            Executed="SlotTwoCommandBinding_Executed">
+        </CommandBinding>
+        <CommandBinding 
+            Command="{x:Static local:MainWindow.SlotThree}" 
+            Executed="SlotThreeCommandBinding_Executed">
+        </CommandBinding>
+        <CommandBinding 
+            Command="{x:Static local:MainWindow.SlotFour}" 
+            Executed="SlotFourCommandBinding_Executed">
+        </CommandBinding>
+        <CommandBinding 
+            Command="{x:Static local:MainWindow.SlotSix}" 
+            Executed="SlotSixCommandBinding_Executed">
+        </CommandBinding>
+        <CommandBinding 
+            Command="{x:Static local:MainWindow.SlotSeven}" 
+            Executed="SlotSevenCommandBinding_Executed">
+        </CommandBinding>
+        <CommandBinding 
+            Command="{x:Static local:MainWindow.SlotEight}" 
+            Executed="SlotEightCommandBinding_Executed">
+        </CommandBinding>
+        <CommandBinding 
+            Command="{x:Static local:MainWindow.SlotNine}" 
+            Executed="SlotNineCommandBinding_Executed">
+        </CommandBinding>
+    </Window.CommandBindings>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="25*"/>
@@ -93,9 +132,112 @@
                 </MenuItem>
 
             </MenuItem>
+            <MenuItem Header="H_ot slots">
+                <MenuItem
+                    x:Name="MnSlot"
+                    Header="Activate slot _0"
+                    InputGestureText="Ctrl+0"
+                    Click="MnSlot0_Click"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="Numeric0Box" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="MnSlot1"
+                    Header="Activate slot _1"
+                    InputGestureText="Ctrl+1" 
+                    Click="MnSlot1_Click"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="Numeric1Box" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="MnSlot2"
+                    Header="Activate slot _2"
+                    InputGestureText="Ctrl+2"
+                    Click="MnSlot2_Click"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="Numeric2Box" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="MnSlot3"
+                    Header="Activate slot _3"
+                    InputGestureText="Ctrl+3"
+                    Click="MnSlot3_Click"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="Numeric3Box" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="MnSlot4"
+                    Header="Activate slot _4"
+                    InputGestureText="Ctrl+4"
+                    Click="MnSlot4_Click"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="Numeric4Box" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="MnSlot5"
+                    Header="Activate slot _5"
+                    InputGestureText="Ctrl+5"
+                    Click="MnSlot5_Click"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="Numeric5Box" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="MnSlot6"
+                    Header="Activate slot _6"
+                    InputGestureText="Ctrl+6"
+                    Click="MnSlot6_Click"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="Numeric6Box" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="MnSlot7"
+                    Header="Activate slot _7"
+                    InputGestureText="Ctrl+7"
+                    Click="MnSlot7_Click"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="Numeric7Box" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="MnSlot8"
+                    Header="Activate slot _8"
+                    InputGestureText="Ctrl+8"
+                    Click="MnSlot8_Click"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="Numeric8Box" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="MnSlot9"
+                    Header="Activate slot _9"
+                    InputGestureText="Ctrl+9"
+                    Click="MnSlot9_Click"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="Numeric9Box" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
             <MenuItem Header="_Snaps">
                 <MenuItem x:Name="MnOpenSnaps"
-                          Header="_Open snaps" Click="MnOpenSnaps_Click"
+                          Header="_Open snaps" 
+                          Click="MnOpenSnaps_Click"
                           >
                     <MenuItem.Icon>
                         <iconPacks:PackIconMaterialLight Kind="Folder" />

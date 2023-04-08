@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Data.Common;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -29,6 +30,16 @@ namespace HG_ServerUI
         private readonly DispatcherTimer checkServerRunningTimer = new DispatcherTimer();
         private readonly FileSystemWatcher _cfgFileSystemWatcher;
         private readonly FileSystemWatcher _penaltiesFileSystemWatcher;
+        public static RoutedCommand SlotZero = new RoutedCommand();
+        public static RoutedCommand SlotOne = new RoutedCommand();
+        public static RoutedCommand SlotTwo = new RoutedCommand();
+        public static RoutedCommand SlotThree = new RoutedCommand();
+        public static RoutedCommand SlotFour = new RoutedCommand();
+        public static RoutedCommand SlotFive = new RoutedCommand();
+        public static RoutedCommand SlotSix = new RoutedCommand();
+        public static RoutedCommand SlotSeven = new RoutedCommand();
+        public static RoutedCommand SlotEight = new RoutedCommand();
+        public static RoutedCommand SlotNine = new RoutedCommand();
 
         public MainWindow()
         {
@@ -45,8 +56,18 @@ namespace HG_ServerUI
             settingsModel = SettingsModel.AddPaths(settingsModel);
             settingsModel = SettingsFile.ReadConfigfile(settingsModel);
             Log.Information("Settings loaded");
-
             PreFlightCheck();
+
+            SlotOne.InputGestures.Add(new KeyGesture(Key.D0, ModifierKeys.Control));
+            SlotOne.InputGestures.Add(new KeyGesture(Key.D1, ModifierKeys.Control));
+            SlotOne.InputGestures.Add(new KeyGesture(Key.D2, ModifierKeys.Control));
+            SlotOne.InputGestures.Add(new KeyGesture(Key.D3, ModifierKeys.Control));
+            SlotOne.InputGestures.Add(new KeyGesture(Key.D4, ModifierKeys.Control));
+            SlotOne.InputGestures.Add(new KeyGesture(Key.D5, ModifierKeys.Control));
+            SlotOne.InputGestures.Add(new KeyGesture(Key.D6, ModifierKeys.Control));
+            SlotOne.InputGestures.Add(new KeyGesture(Key.D7, ModifierKeys.Control));
+            SlotOne.InputGestures.Add(new KeyGesture(Key.D8, ModifierKeys.Control));
+            SlotOne.InputGestures.Add(new KeyGesture(Key.D9, ModifierKeys.Control));
 
             // Initialize file system watschers
             _cfgFileSystemWatcher = new FileSystemWatcher(settingsModel.Configfiledirectory);
@@ -467,6 +488,105 @@ namespace HG_ServerUI
         private void MnOpenSnaps_Click(object sender, RoutedEventArgs e)
         {
             _ = Process.Start("explorer.exe", settingsModel.Penatltiespath);
+        }
+
+        private void SlotZeroCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            LoadSlot(0);
+        }
+
+        private void SlotOneCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            LoadSlot(1);
+        }
+
+        private void SlotTwoCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            LoadSlot(2);
+        }
+        private void SlotThreeCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            LoadSlot(3);
+        }
+        private void SlotFourCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            LoadSlot(4);
+        }
+        private void SlotFiveCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            LoadSlot(5);
+        }
+        private void SlotSixCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            LoadSlot(6);
+        }
+        private void SlotSevenCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            LoadSlot(7);
+        }
+        private void SlotEightCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            LoadSlot(8);
+        }
+        private void SlotNineCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            LoadSlot(9);
+        }
+        private void MnSlot0_Click(object sender, RoutedEventArgs e)
+        {
+            LoadSlot(0);
+        }
+
+        private void MnSlot1_Click(object sender, RoutedEventArgs e)
+        {
+            LoadSlot(1);
+        }
+        private void MnSlot2_Click(object sender, RoutedEventArgs e)
+        {
+            LoadSlot(2);
+        }
+        private void MnSlot3_Click(object sender, RoutedEventArgs e)
+        {
+            LoadSlot(3);
+        }
+        private void MnSlot4_Click(object sender, RoutedEventArgs e)
+        {
+            LoadSlot(4);
+        }
+        private void MnSlot5_Click(object sender, RoutedEventArgs e)
+        {
+            LoadSlot(5);
+        }
+        private void MnSlot6_Click(object sender, RoutedEventArgs e)
+        {
+            LoadSlot(6);
+        }
+        private void MnSlot7_Click(object sender, RoutedEventArgs e)
+        {
+            LoadSlot(7);
+        }
+        private void MnSlot8_Click(object sender, RoutedEventArgs e)
+        {
+            LoadSlot(8);
+        }
+        private void MnSlot9_Click(object sender, RoutedEventArgs e)
+        {
+            LoadSlot(9);
+        }
+
+        private async void LoadSlot(int slotnumber)
+        {
+            string _filename = $"slot{slotnumber.ToString()}.kl";
+            if(File.Exists(_filename))
+            {
+                if (settingsModel.Serverprocessrunning)
+                {
+                    KillServerProcess();
+                }
+                SettingsFile.ReadConfigfile(settingsModel, $"slot{slotnumber.ToString()}.kl");
+                RunProcess();
+                await this.ShowMessageAsync("Hot slot loaded", $"Hot slot #{slotnumber.ToString()} loaded, server (re)started.");
+            }
         }
     }
 }
