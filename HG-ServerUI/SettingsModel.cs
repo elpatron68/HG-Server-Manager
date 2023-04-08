@@ -400,6 +400,7 @@ namespace HG_ServerUI
             Penalties = string.Empty;
             Penatltiespath= string.Empty;
             Ntfytopic=string.Empty;
+            Btnservercontent = "_Start [Crtl+s]";
         }
 
         private static string GetCfgFilenameFromExepath(string _exepath)
@@ -442,7 +443,7 @@ namespace HG_ServerUI
                 model.Externalip = Network.GetExternalIpaddress();
                 model.Logfilepath = Path.GetDirectoryName(model.Exepath) + @"\log.log";
                 model.Penatltiespath = Path.GetDirectoryName(model.Exepath) + @"\snaps";
-                model.Btnservercontent = "_Start server";
+                model.Btnservercontent = "_Start [Crtl+s]";
                 model.Btnserverenabled = true;
                 model.Serverreachable = false;
 

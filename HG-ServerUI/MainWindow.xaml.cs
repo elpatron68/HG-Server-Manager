@@ -264,10 +264,13 @@ namespace HG_ServerUI
                         p.Kill();
                         settingsModel.Serverprocessrunning = false;
                         settingsModel.Serverreachable = false;
-                        settingsModel.Btnservercontent = "_Start server [Crtl+s]";
+                        settingsModel.Btnservercontent = "_Start [Crtl+s]";
                         Log.Information("HG server stopped");
                     }
-                    catch { }
+                    catch (Exception ex)
+                    {
+                        Log.Warning($"Failed to stop server: {ex.Message}");
+                    }
                     //TimeSpan dauer = r.EndTime - r.StartTime;
                     //string d = dauer.ToString(@"hh\:mm\:ss", null);
                     //SendMsg(r.TargetId, $"Die Remote-Spiegelsitzung von {r.SourceUserName} wurde beendet.");
@@ -292,7 +295,7 @@ namespace HG_ServerUI
 
         private void ProcessExited(object sender, EventArgs e)
         {
-            settingsModel.Btnservercontent = "_Start server [Crtl+s]";
+            settingsModel.Btnservercontent = "_Start [Crtl+s]";
             settingsModel.Serverprocessrunning = false;
         }
 
