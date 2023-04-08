@@ -75,28 +75,36 @@ Occurring penalties are displayed in the *Penalties* text box. New penalties are
 
 There are two use cases for notifications:
 
-- You want to inform players that you have launched your game server
-- You want to be informed if your game server detects any penalties
+- You want to inform your player community that you have launched your game server
+- You (or your players) want to be informed if your game server detects any penalties
 
-Let your players never miss one of your races by letting them subscribe your messages!
+Let your players never miss one of your races by letting them subscribe to your messages!
 
-*HG Server-Manager* uses the free service [*Ntfy*](https://ntfy.sh/) to send notifications to subscribed clients. To setup Ntfy notifications as game host, you have to
+*HG Server-Manager* uses the free service [*Ntfy*](https://ntfy.sh/) to send notifications to subscribed clients. To setup *Ntfy* notifications as game host, you have to
 
 - Select a *topic* for race notices and enter it in the corresponding field
 - Select a *topic* for penalty notices and enter it in the corresponding field
 
 ![image-20230408175840258](./assets/image-20230408175840258.png)
 
-A Ntfy *topic* is a sort of channel, users can subscribe to. You can enter any topic name you want. But be aware of the fact, that every topic is public and everyone can subscribe to it if the name of the topic is known. So, if you want to have some privacy, give your topic(s) a random alpha-numeric name like `qPd5AbhVfwv5FJFQtYRY4xCf`.
+A Ntfy *topic* is sort of a channel, users can subscribe to. You can enter any alphanumeric topic name you want. But be aware of the fact, that every topic is public and everyone can subscribe to it if the name of the topic is known. So, if you want to have some privacy, give your topic(s) a random alpha-numeric name like `qPd5AbhVfwv5FJFQtYRY4xCf`.
+
+![image-20230408182649932](./assets/image-20230408182649932.png) 
+
+Example notification (web browser)
+
+<img src="./assets/image-20230408182840712.png" alt="image-20230408182840712" style="zoom:33%;" />
+
+Example notifications (Android app)
 
 As player, who wants to be informed about starting races of their favorite host, you can subscribe the Ntfy topic by
 
-- Opening the web site `https://ntfy.sh/<topic>` in your browser or
+- Ask the game host for the topic(s) to subscribe to (if the default values were changed). Open the web site `https://ntfy.sh/<topic>` in your browser or
 - install the [Ntfy app](https://ntfy.sh/#subscribe-phone) on your mobile and add to the *topic*.
 
-If you have not configured own *topics*, *HG Server-Manager* sends notifications to the *topics* [`Hydrofoil_Generation_Servermonitor`](https://ntfy.sh/Hydrofoil_Generation_Servermonitor) (start game events) and [`Hydrofoil_Generation_Penaltymonitor`](https://ntfy.sh/Hydrofoil_Generation_Penaltymonitor). Click on the links to open the default topics.
+If you have not configured own *topics*, *HG Server-Manager* sends notifications to the *topics* [`Hydrofoil_Generation_Servermonitor`](https://ntfy.sh/Hydrofoil_Generation_Servermonitor) (start game events) and [`Hydrofoil_Generation_Penaltymonitor`](https://ntfy.sh/Hydrofoil_Generation_Penaltymonitor). Click on the links to open the default topics in your web browser.
 
-If you use own topics, inform your player community about them.
+> Tip: If you use own topics, inform your player community about them.
 
 ### Disable Ntfy notifications
 
