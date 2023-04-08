@@ -4,15 +4,16 @@
 
 ## Features
 
-- Clean and nice looking user interface
-- All server parameters editable
-- Control your server:
-  - Start/stop game server
-  - Get notified of the occurrence of penalties
-  - See if your server is publicly reachable
-- Notify players of your server launches
-- Load and save an unlimited number of different configurations
-- Open game server log file and *snaps* directory directly from the app
+- 🦋 Clean and beautiful user interface
+- ⚙️All server parameters editable 
+- 🛠️ Control your server:
+  - 🚀 Start/stop game server
+  - ⚠️ Get notified of the occurrence of penalties
+  - 👨‍👩‍👧‍👦 See if your server is publicly reachable
+- 📬 Notify players of your server launches
+- ♾️ Load and save an unlimited number of different configurations
+- ⛵ Instantly switch between 10 user-defined presets by hot key
+- 📃 Open game server log file and *snaps* directory directly from the application
 
 ![image-20230407193824206](./assets/image-20230407193824206.png)
 

@@ -13,40 +13,44 @@
         >
     <Window.CommandBindings>
         <CommandBinding 
-            Command="{x:Static local:MainWindow.SlotZero}" 
+            Command="{x:Static local:MainWindow.cmdSlotZero}" 
             Executed="SlotZeroCommandBinding_Executed">
         </CommandBinding>
         <CommandBinding 
-            Command="{x:Static local:MainWindow.SlotOne}" 
+            Command="{x:Static local:MainWindow.cmdSlotOne}" 
             Executed="SlotOneCommandBinding_Executed">
         </CommandBinding>
         <CommandBinding 
-            Command="{x:Static local:MainWindow.SlotTwo}" 
+            Command="{x:Static local:MainWindow.cmdSlotTwo}" 
             Executed="SlotTwoCommandBinding_Executed">
         </CommandBinding>
         <CommandBinding 
-            Command="{x:Static local:MainWindow.SlotThree}" 
+            Command="{x:Static local:MainWindow.cmdSlotThree}" 
             Executed="SlotThreeCommandBinding_Executed">
         </CommandBinding>
         <CommandBinding 
-            Command="{x:Static local:MainWindow.SlotFour}" 
+            Command="{x:Static local:MainWindow.cmdSlotFour}" 
             Executed="SlotFourCommandBinding_Executed">
         </CommandBinding>
         <CommandBinding 
-            Command="{x:Static local:MainWindow.SlotSix}" 
+            Command="{x:Static local:MainWindow.cmdSlotSix}" 
             Executed="SlotSixCommandBinding_Executed">
         </CommandBinding>
         <CommandBinding 
-            Command="{x:Static local:MainWindow.SlotSeven}" 
+            Command="{x:Static local:MainWindow.cmdSlotSeven}" 
             Executed="SlotSevenCommandBinding_Executed">
         </CommandBinding>
         <CommandBinding 
-            Command="{x:Static local:MainWindow.SlotEight}" 
+            Command="{x:Static local:MainWindow.cmdSlotEight}" 
             Executed="SlotEightCommandBinding_Executed">
         </CommandBinding>
         <CommandBinding 
-            Command="{x:Static local:MainWindow.SlotNine}" 
+            Command="{x:Static local:MainWindow.cmdSlotNine}" 
             Executed="SlotNineCommandBinding_Executed">
+        </CommandBinding>
+        <CommandBinding 
+            Command="{x:Static local:MainWindow.cmdRunServer}" 
+            Executed="RunServerCommandBinding_Executed">
         </CommandBinding>
     </Window.CommandBindings>
     

@@ -30,16 +30,17 @@ namespace HG_ServerUI
         private readonly DispatcherTimer checkServerRunningTimer = new DispatcherTimer();
         private readonly FileSystemWatcher _cfgFileSystemWatcher;
         private readonly FileSystemWatcher _penaltiesFileSystemWatcher;
-        public static RoutedCommand SlotZero = new RoutedCommand();
-        public static RoutedCommand SlotOne = new RoutedCommand();
-        public static RoutedCommand SlotTwo = new RoutedCommand();
-        public static RoutedCommand SlotThree = new RoutedCommand();
-        public static RoutedCommand SlotFour = new RoutedCommand();
-        public static RoutedCommand SlotFive = new RoutedCommand();
-        public static RoutedCommand SlotSix = new RoutedCommand();
-        public static RoutedCommand SlotSeven = new RoutedCommand();
-        public static RoutedCommand SlotEight = new RoutedCommand();
-        public static RoutedCommand SlotNine = new RoutedCommand();
+        public static RoutedCommand cmdSlotZero = new RoutedCommand();
+        public static RoutedCommand cmdSlotOne = new RoutedCommand();
+        public static RoutedCommand cmdSlotTwo = new RoutedCommand();
+        public static RoutedCommand cmdSlotThree = new RoutedCommand();
+        public static RoutedCommand cmdSlotFour = new RoutedCommand();
+        public static RoutedCommand cmdSlotFive = new RoutedCommand();
+        public static RoutedCommand cmdSlotSix = new RoutedCommand();
+        public static RoutedCommand cmdSlotSeven = new RoutedCommand();
+        public static RoutedCommand cmdSlotEight = new RoutedCommand();
+        public static RoutedCommand cmdSlotNine = new RoutedCommand();
+        public static RoutedCommand cmdRunServer = new RoutedCommand();
 
         public MainWindow()
         {
@@ -58,16 +59,17 @@ namespace HG_ServerUI
             Log.Information("Settings loaded");
             PreFlightCheck();
 
-            SlotOne.InputGestures.Add(new KeyGesture(Key.D0, ModifierKeys.Control));
-            SlotOne.InputGestures.Add(new KeyGesture(Key.D1, ModifierKeys.Control));
-            SlotOne.InputGestures.Add(new KeyGesture(Key.D2, ModifierKeys.Control));
-            SlotOne.InputGestures.Add(new KeyGesture(Key.D3, ModifierKeys.Control));
-            SlotOne.InputGestures.Add(new KeyGesture(Key.D4, ModifierKeys.Control));
-            SlotOne.InputGestures.Add(new KeyGesture(Key.D5, ModifierKeys.Control));
-            SlotOne.InputGestures.Add(new KeyGesture(Key.D6, ModifierKeys.Control));
-            SlotOne.InputGestures.Add(new KeyGesture(Key.D7, ModifierKeys.Control));
-            SlotOne.InputGestures.Add(new KeyGesture(Key.D8, ModifierKeys.Control));
-            SlotOne.InputGestures.Add(new KeyGesture(Key.D9, ModifierKeys.Control));
+            cmdSlotZero.InputGestures.Add(new KeyGesture(Key.D0, ModifierKeys.Control));
+            cmdSlotOne.InputGestures.Add(new KeyGesture(Key.D1, ModifierKeys.Control));
+            cmdSlotTwo.InputGestures.Add(new KeyGesture(Key.D2, ModifierKeys.Control));
+            cmdSlotThree.InputGestures.Add(new KeyGesture(Key.D3, ModifierKeys.Control));
+            cmdSlotFour.InputGestures.Add(new KeyGesture(Key.D4, ModifierKeys.Control));
+            cmdSlotFive.InputGestures.Add(new KeyGesture(Key.D5, ModifierKeys.Control));
+            cmdSlotSix.InputGestures.Add(new KeyGesture(Key.D6, ModifierKeys.Control));
+            cmdSlotSeven.InputGestures.Add(new KeyGesture(Key.D7, ModifierKeys.Control));
+            cmdSlotEight.InputGestures.Add(new KeyGesture(Key.D8, ModifierKeys.Control));
+            cmdSlotNine.InputGestures.Add(new KeyGesture(Key.D9, ModifierKeys.Control));
+            cmdRunServer.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Control));
 
             // Initialize file system watschers
             _cfgFileSystemWatcher = new FileSystemWatcher(settingsModel.Configfiledirectory);
@@ -262,7 +264,7 @@ namespace HG_ServerUI
                         p.Kill();
                         settingsModel.Serverprocessrunning = false;
                         settingsModel.Serverreachable = false;
-                        settingsModel.Btnservercontent = "_Start server";
+                        settingsModel.Btnservercontent = "_Start server [Crtl+s]";
                         Log.Information("HG server stopped");
                     }
                     catch { }
@@ -290,7 +292,7 @@ namespace HG_ServerUI
 
         private void ProcessExited(object sender, EventArgs e)
         {
-            settingsModel.Btnservercontent = "_Start server";
+            settingsModel.Btnservercontent = "_Start server [Crtl+s]";
             settingsModel.Serverprocessrunning = false;
         }
 
@@ -531,6 +533,13 @@ namespace HG_ServerUI
         private void SlotNineCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             LoadSlot(9);
+        }
+        private void RunServerCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (!settingsModel.Serverprocessrunning)
+            {
+                RunProcess();
+            }
         }
         private void MnSlot0_Click(object sender, RoutedEventArgs e)
         {
