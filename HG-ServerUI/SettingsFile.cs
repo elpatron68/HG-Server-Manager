@@ -68,7 +68,7 @@ namespace HG_ServerUI
                     {
                         model.Minplayers = int.Parse(line.Split("=")[1].Trim());
                     }
-                    if (line.StartsWith("password="))
+                    if (line.Contains("password=") && !line.Contains("admin"))
                     {
                         model.Password = line.Split("=")[1].Trim();
                     }
