@@ -942,16 +942,6 @@
             StringFormat="N1"
             >
         </mah:NumericUpDown>
-        <!--<Image 
-            Grid.Column="4" 
-            HorizontalAlignment="Left" 
-            Height="180" 
-            Margin="10,0,0,0" 
-            Grid.Row="1" 
-            VerticalAlignment="Center" 
-            Width="230" 
-            Grid.ColumnSpan="3" Source="/placeholder_image4.jpg" Stretch="UniformToFill">
-        </Image>-->
         <Label 
             Grid.Column="2" 
             Content="Penalties" 
@@ -1075,18 +1065,6 @@
             FontSize="10"
             >
         </RichTextBox>
-        <!--<Image 
-            Grid.Column="4" 
-            Grid.ColumnSpan="5" 
-            HorizontalAlignment="Left" 
-            Height="125" 
-            Margin="10,190,0,0" 
-            Grid.Row="2" 
-            VerticalAlignment="Top" 
-            Width="480" 
-            Stretch="None" 
-            Source="/placeholder_image6.jpg" MouseLeftButtonDown="Image_MouseLeftButtonDown">
-        </Image>-->
         <Label 
             Grid.Column="5" 
             Content="Protocol" 
