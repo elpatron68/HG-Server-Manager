@@ -2,6 +2,11 @@
 
 ## v1.0.2
 - Rearrange controls
+- Add link to Ntfy Penality topic
+- Fix problems concerning unsaved values
+- Fix password problems
+- Fix penalty detection
+- Add cleanup snaps directory
 
 
 ## v1.0.1
