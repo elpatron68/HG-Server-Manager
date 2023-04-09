@@ -245,8 +245,11 @@ namespace HG_ServerUI
             server.StartInfo.FileName = settingsModel.Exepath;
             server.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(settingsModel.Exepath);
             server.EnableRaisingEvents = true;
+            server.StartInfo.RedirectStandardOutput = true;
+            server.OutputDataReceived += ConsoleOutputHandler;
             server.Exited += new EventHandler(ProcessExited);
             server.Start();
+            server.BeginOutputReadLine();
             settingsModel.Processid = server.Id;
             settingsModel.Serverprocessrunning = true;
             settingsModel.Btnservercontent = "_Stop [crtl+s]";
@@ -259,13 +262,17 @@ namespace HG_ServerUI
             TestPortAsync();
         }
 
+        private void ConsoleOutputHandler(object sendingProcess,
+            DataReceivedEventArgs outLine)
+        {
+            Debug.WriteLine(outLine.Data);
+        }
 
         private void BtnStartServer_Click(object sender, RoutedEventArgs e)
         {
             if (!settingsModel.Serverprocessrunning)
             {
                 RunServerProcess();
-                //Thread.Sleep(4000);
                 TestPortAsync();
             }
             else
