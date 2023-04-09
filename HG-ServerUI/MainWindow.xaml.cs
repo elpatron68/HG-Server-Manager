@@ -249,13 +249,11 @@ namespace HG_ServerUI
             settingsModel.Serverprocessrunning = true;
             settingsModel.Btnservercontent = "_Stop [crtl+s]";
 
-#if !DEBUG
             if (settingsModel.Ntfyracectopic != string.Empty)
             {
                 Log.Information("Sending message to Ntfy channel 📫");
                 await SendNtfyRaceAnnouncement();
             }
-#endif
         }
 
 
@@ -342,7 +340,7 @@ namespace HG_ServerUI
         private async Task SendNtfyRaceAnnouncement()
         {
             string _passtext=string.Empty;
-            if (settingsModel.Password != "")
+            if (settingsModel.Password.Length>0)
             {
                 _passtext = "Private server, password protected";
             }
