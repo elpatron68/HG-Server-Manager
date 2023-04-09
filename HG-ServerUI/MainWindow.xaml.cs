@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Data.Common;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -16,7 +15,6 @@ using System.Windows.Threading;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Win32;
-using Microsoft.Xaml.Behaviors.Media;
 using ntfy;
 using Serilog;
 using Serilog.Sinks.RichTextBox.Themes;
@@ -143,9 +141,6 @@ namespace HG_ServerUI
                 Thread.Sleep(100);
                 try
                 {
-                    //string _username = _filename.Split("_on_")[0].Trim();
-                    //string _boatname = _filename.Split("_on_")[1].Split("_")[0].Trim();
-                    //string _offence = _filename.Split("_-_")[1].Split('_')[1].Trim();
                     string _timestamp = $"[{DateTime.Now.ToString("HH:mm:ss")}]";
                     string _filecontent=File.ReadAllText(_filename);
                     string _username =string.Empty;
@@ -239,7 +234,7 @@ namespace HG_ServerUI
         {
             Log.Information("Starting HG server");
             _cfgFileSystemWatcher.EnableRaisingEvents = false;
-            
+            SendTab();
             SettingsFile.WriteConfigfile(settingsModel);
             _cfgFileSystemWatcher.EnableRaisingEvents = true;
             Process server = new Process();
@@ -415,6 +410,7 @@ namespace HG_ServerUI
         private void MnSave_Click(object sender, RoutedEventArgs e)
         {
             _cfgFileSystemWatcher.EnableRaisingEvents = false;
+            SendTab();
             SettingsFile.WriteConfigfile(settingsModel);
             _cfgFileSystemWatcher.EnableRaisingEvents = true;
             string filename = System.IO.Path.GetFileName(settingsModel.Configfilepath);
@@ -432,6 +428,7 @@ namespace HG_ServerUI
             if (ofd.ShowDialog() == true)
             {
                 _cfgFileSystemWatcher.EnableRaisingEvents = false;
+                SendTab();
                 SettingsFile.WriteConfigfile(settingsModel, ofd.FileName);
                 _cfgFileSystemWatcher.EnableRaisingEvents = true;
                 Log.Information($"Saved configuration as {ofd.FileName}");
@@ -686,6 +683,14 @@ namespace HG_ServerUI
                 }
                 Log.Information($"{_count} files deleted.");
             }
+        }
+
+        private void SendTab()
+        {
+            KeyEventArgs args = new KeyEventArgs(Keyboard.PrimaryDevice,
+                Keyboard.PrimaryDevice.ActiveSource, 0, Key.Tab);
+            args.RoutedEvent = Keyboard.KeyDownEvent;
+            InputManager.Current.ProcessInput(args);
         }
     }
 }
