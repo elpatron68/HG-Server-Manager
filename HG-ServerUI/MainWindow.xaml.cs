@@ -666,21 +666,25 @@ namespace HG_ServerUI
 
         private async void MnDeleteSnaps_Click(object sender, RoutedEventArgs e)
         {
-            MessageDialogResult result = await this.ShowMessageAsync("Delete?", $"Delete all svg files in {settingsModel.Snapsdirectory}?");
+            MessageDialogResult result = await this.ShowMessageAsync("Are you sure?", 
+                $"Delete all svg files in \"{settingsModel.Snapsdirectory}\"?", MessageDialogStyle.AffirmativeAndNegative);
             if (result == MessageDialogResult.Affirmative)
             {
                 Log.Information("Cleaning up snaps directory");
-                foreach (var _filename in Directory.GetFiles(settingsModel.Snapsdirectory, "*.svg"))
+                int _count = 0;
+                foreach (string _filename in Directory.GetFiles(settingsModel.Snapsdirectory, "*.svg"))
                 {
                     try
                     {
                         File.Delete(_filename);
+                        _count += 1;
                     }
                     catch (Exception ex)
                     {
-                        Log.Warning($"Failed to delete {_filename}");
+                        Log.Warning($"Failed to delete {_filename}: {ex.Message}");
                     }
                 }
+                Log.Information($"{_count} files deleted.");
             }
         }
     }
