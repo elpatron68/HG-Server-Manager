@@ -126,15 +126,23 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="_Server launches">
-                <MenuItem x:Name="MnOpenNtfy"
+            <MenuItem Header="_Ntfy">
+                <MenuItem x:Name="MnOpenNtfyRace"
                           Header="_Open Ntfy launch events (web browser)" 
-                          Click="MnOpenNtfy_Click">
+                          Click="MnOpenNtfyRace_Click"
+                          >
                     <MenuItem.Icon>
                         <iconPacks:PackIconMaterialLight Kind="Bell" />
                     </MenuItem.Icon>
                 </MenuItem>
-
+                <MenuItem x:Name="MnOpenNtfyPenalty"
+                          Header="Open Ntfy _penalty events (web browser)" 
+                          Click="MnOpenNtfyPenalty_Click"
+                          >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterialLight Kind="Bell" />
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="H_ot slots">
                 <MenuItem
@@ -292,7 +300,7 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
-
+        
         <StatusBar Name="sbar" 
             VerticalAlignment="Center"
             Grid.Column="0"

@@ -399,10 +399,16 @@ namespace HG_ServerUI
             }
         }
 
-
-        private void MnOpenNtfy_Click(object sender, RoutedEventArgs e)
+        private void MnOpenNtfyRace_Click(object sender, RoutedEventArgs e)
         {
-            _ = Process.Start(new ProcessStartInfo("https://ntfy.sh/Hydrofoil_Generation_Servermonitor") { UseShellExecute = true });
+            _ = Process.Start(new ProcessStartInfo($"https://ntfy.sh/{settingsModel.Ntfyracectopic}")
+                { UseShellExecute = true });
+        }
+
+        private void MnOpenNtfyPenalty_Click(object sender, RoutedEventArgs e)
+        {
+            _ = Process.Start(new ProcessStartInfo($"https://ntfy.sh/{settingsModel.Ntfypenaltytopic}")
+                { UseShellExecute = true });
         }
 
         private void MnSave_Click(object sender, RoutedEventArgs e)
@@ -521,7 +527,6 @@ namespace HG_ServerUI
         private void NtfyHelp_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             _= Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
-            e.Handled = true;
         }
 
         private void MnOpenSnaps_Click(object sender, RoutedEventArgs e)
@@ -633,11 +638,8 @@ namespace HG_ServerUI
                 {
                     KillServerProcess();
                 }
-                //settingsModel = new();
                 SettingsFile.ReadConfigfile(settingsModel, $@"{settingsModel.Configfiledirectory}\slot{slotnumber.ToString()}.kl");
-//#if !DEBUG
                 RunServerProcess();
-//#endif
                 Log.Information($"Slot {slotnumber} loaded, server (re)started");
                 await this.ShowMessageAsync("Hot slot loaded", $"Hot slot #{slotnumber.ToString()} loaded, " +
                     $"server (re)started.");
@@ -685,10 +687,10 @@ namespace HG_ServerUI
 
         private void SendTab()
         {
-            KeyEventArgs args = new KeyEventArgs(Keyboard.PrimaryDevice,
+            KeyEventArgs _tab = new KeyEventArgs(Keyboard.PrimaryDevice,
                 Keyboard.PrimaryDevice.ActiveSource, 0, Key.Tab);
-            args.RoutedEvent = Keyboard.KeyDownEvent;
-            InputManager.Current.ProcessInput(args);
+            _tab.RoutedEvent = Keyboard.KeyDownEvent;
+            InputManager.Current.ProcessInput(_tab);
         }
     }
 }
