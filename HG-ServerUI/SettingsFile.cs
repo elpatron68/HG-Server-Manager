@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 using System.IO;
-using System.IO.Enumeration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Shapes;
 
 namespace HG_ServerUI
 {
@@ -75,7 +68,7 @@ namespace HG_ServerUI
                     {
                         model.Minplayers = int.Parse(line.Split("=")[1].Trim());
                     }
-                    if (line.Contains("password="))
+                    if (line.Contains("password=") && !line.Split('=')[0].Contains("admin"))
                     {
                         model.Password = line.Split("=")[1].Trim();
                     }
@@ -174,18 +167,10 @@ namespace HG_ServerUI
                     {
                         model.Ntfyracectopic = line.Split("=")[1].Trim();
                     }
-                    //if (model.Ntfyracectopic == "")
-                    //{
-                    //    model.Ntfyracectopic = "Hydrofoil_Generation_Servermonitor";
-                    //}
                     if (line.Contains("ntfypenaltytopic="))
                     {
                         model.Ntfypenaltytopic = line.Split("=")[1].Trim();
                     }
-                    //if (model.Ntfypenaltytopic == "")
-                    //{
-                    //    model.Ntfypenaltytopic = "Hydrofoil_Generation_Penaltymonitor";
-                    //}
                 }
             }
             return model; 

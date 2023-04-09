@@ -132,6 +132,9 @@ csharp_style_var_when_type_is_apparent = false:silent
 csharp_style_var_for_built_in_types = false:silent
 csharp_style_var_elsewhere = false:silent
 
+# CS8612: Die NULL-Zulässigkeit von Verweistypen im Typ entspricht nicht dem implizit implementierten Member.
+dotnet_diagnostic.CS8612.severity = silent
+
 [*.vb]
 #### Benennungsstile ####
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Data.Common;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -57,6 +56,7 @@ namespace HG_ServerUI
 
             settingsModel = SettingsModel.AddPaths(settingsModel);
             settingsModel = SettingsFile.ReadConfigfile(settingsModel);
+            Log.Information($"App version: {settingsModel.Appversion}");
             Log.Information("Settings loaded");
             PreFlightCheck();
 
@@ -80,7 +80,7 @@ namespace HG_ServerUI
                 NotifyFilters.FileName;
             _cfgFileSystemWatcher.Changed += CfgHandleChanged;
             _cfgFileSystemWatcher.EnableRaisingEvents = true;
-            _penaltiesFileSystemWatcher = new FileSystemWatcher(settingsModel.Penatltiespath);
+            _penaltiesFileSystemWatcher = new FileSystemWatcher(settingsModel.Snapsdirectory);
             _penaltiesFileSystemWatcher.Filter = "*.svg";
             _penaltiesFileSystemWatcher.NotifyFilter = NotifyFilters.LastAccess | 
                 NotifyFilters.LastWrite | 
@@ -130,27 +130,38 @@ namespace HG_ServerUI
             TbPenalties.DataContext = settingsModel;
             TbNtfyRaceTopic.DataContext = settingsModel;
             TbNtfyPenaltyTopic.DataContext = settingsModel;
+            WinHGSM.DataContext = settingsModel;
         }
 
         // New penalty?
         private async void PenaltyHandleChanged(object sender, FileSystemEventArgs e)
         {
             Log.Information("New penalty detected");
-            string? _filename = e.Name;
+            string? _filename = e.FullPath;
             if (_filename != null)
             {
+                Thread.Sleep(100);
                 try
                 {
-                    string _username = _filename.Split("_on_")[0].Trim();
-                    string _boatname = _filename.Split("_on_")[1].Split("_")[0].Trim();
-                    string _offence = _filename.Split("_-_")[1].Split('_')[1].Trim();
                     string _timestamp = $"[{DateTime.Now.ToString("HH:mm:ss")}]";
-                    settingsModel.Penalties += $"{_timestamp} {_offence}: {_username} on {_boatname}\n";
+                    string _filecontent=File.ReadAllText(_filename);
+                    string _username =string.Empty;
+                    string _offence = string.Empty;
+                    foreach (string line in _filecontent.Split("\n"))
+                    {
+                        if (line.Contains("font-size='40'"))
+                        {
+                            _username = line.Split('>')[1].Split('|')[0].Trim();
+                            _offence = line.Split('|')[1].Split('<')[0].Trim();
+                        }
+                    }
+                    settingsModel.Penalties += $"{_timestamp} {_username}: {_offence}\n";
+
                     SoundPlayer player = new(Properties.Resources.beep_sound);
                     player.Play();
                     if (settingsModel.Ntfyracectopic != string.Empty)
                     {
-                        await SendNtfyPenaltyAnnouncement($"New penalty ({_offence}) by {_username} on boat {_boatname} in race {settingsModel.Servername}.");
+                        await SendNtfyPenaltyAnnouncement($"New penalty ({_offence}) by {_username} in race {settingsModel.Servername}.");
                     }
                 }
                 catch 
@@ -225,6 +236,7 @@ namespace HG_ServerUI
         {
             Log.Information("Starting HG server");
             _cfgFileSystemWatcher.EnableRaisingEvents = false;
+            SendTab();
             SettingsFile.WriteConfigfile(settingsModel);
             _cfgFileSystemWatcher.EnableRaisingEvents = true;
             Process server = new Process();
@@ -239,13 +251,12 @@ namespace HG_ServerUI
             settingsModel.Serverprocessrunning = true;
             settingsModel.Btnservercontent = "_Stop [crtl+s]";
 
-#if !DEBUG
             if (settingsModel.Ntfyracectopic != string.Empty)
             {
                 Log.Information("Sending message to Ntfy channel 📫");
                 await SendNtfyRaceAnnouncement();
             }
-#endif
+            TestPortAsync();
         }
 
 
@@ -332,7 +343,7 @@ namespace HG_ServerUI
         private async Task SendNtfyRaceAnnouncement()
         {
             string _passtext=string.Empty;
-            if (settingsModel.Password != "")
+            if (settingsModel.Password.Length>0)
             {
                 _passtext = "Private server, password protected";
             }
@@ -391,15 +402,22 @@ namespace HG_ServerUI
             }
         }
 
-
-        private void MnOpenNtfy_Click(object sender, RoutedEventArgs e)
+        private void MnOpenNtfyRace_Click(object sender, RoutedEventArgs e)
         {
-            _ = Process.Start(new ProcessStartInfo("https://ntfy.sh/Hydrofoil_Generation_Servermonitor") { UseShellExecute = true });
+            _ = Process.Start(new ProcessStartInfo($"https://ntfy.sh/{settingsModel.Ntfyracectopic}")
+                { UseShellExecute = true });
+        }
+
+        private void MnOpenNtfyPenalty_Click(object sender, RoutedEventArgs e)
+        {
+            _ = Process.Start(new ProcessStartInfo($"https://ntfy.sh/{settingsModel.Ntfypenaltytopic}")
+                { UseShellExecute = true });
         }
 
         private void MnSave_Click(object sender, RoutedEventArgs e)
         {
             _cfgFileSystemWatcher.EnableRaisingEvents = false;
+            SendTab();
             SettingsFile.WriteConfigfile(settingsModel);
             _cfgFileSystemWatcher.EnableRaisingEvents = true;
             string filename = System.IO.Path.GetFileName(settingsModel.Configfilepath);
@@ -417,6 +435,7 @@ namespace HG_ServerUI
             if (ofd.ShowDialog() == true)
             {
                 _cfgFileSystemWatcher.EnableRaisingEvents = false;
+                SendTab();
                 SettingsFile.WriteConfigfile(settingsModel, ofd.FileName);
                 _cfgFileSystemWatcher.EnableRaisingEvents = true;
                 Log.Information($"Saved configuration as {ofd.FileName}");
@@ -440,7 +459,7 @@ namespace HG_ServerUI
 
         public async void TestPortAsync()
         {
-            Thread.Sleep(4000);
+            Thread.Sleep(2000);
             string address = settingsModel.Externalip;
             int port = int.Parse(settingsModel.Tcpport);
             int connectTimeoutMilliseconds = 1000;
@@ -455,7 +474,7 @@ namespace HG_ServerUI
             var resultTask = Task.WhenAny(connectionTask, timeoutTask).Unwrap();
             var resultTcpClient = await resultTask.ConfigureAwait(false);
 
-            if (resultTcpClient != null)
+            if (resultTcpClient.Connected == true)
             {
                 settingsModel.Serverreachable = true;
                 Log.Information("Server is accessible to the public");
@@ -511,12 +530,11 @@ namespace HG_ServerUI
         private void NtfyHelp_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             _= Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
-            e.Handled = true;
         }
 
         private void MnOpenSnaps_Click(object sender, RoutedEventArgs e)
         {
-            _ = Process.Start("explorer.exe", settingsModel.Penatltiespath);
+            _ = Process.Start("explorer.exe", settingsModel.Snapsdirectory);
         }
 
         private void SlotZeroCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -623,11 +641,8 @@ namespace HG_ServerUI
                 {
                     KillServerProcess();
                 }
-                //settingsModel = new();
                 SettingsFile.ReadConfigfile(settingsModel, $@"{settingsModel.Configfiledirectory}\slot{slotnumber.ToString()}.kl");
-//#if !DEBUG
                 RunServerProcess();
-//#endif
                 Log.Information($"Slot {slotnumber} loaded, server (re)started");
                 await this.ShowMessageAsync("Hot slot loaded", $"Hot slot #{slotnumber.ToString()} loaded, " +
                     $"server (re)started.");
@@ -647,6 +662,38 @@ namespace HG_ServerUI
                     Log.Warning($"Failed to copy {Path.GetFileName(settingsModel.Configfilepath)} to slot{slotnumber.ToString()}.kl");
                 }
             }
+        }
+
+        private async void MnDeleteSnaps_Click(object sender, RoutedEventArgs e)
+        {
+            MessageDialogResult result = await this.ShowMessageAsync("Are you sure?", 
+                $"Delete all svg files in \"{settingsModel.Snapsdirectory}\"?", MessageDialogStyle.AffirmativeAndNegative);
+            if (result == MessageDialogResult.Affirmative)
+            {
+                Log.Information("Cleaning up snaps directory");
+                int _count = 0;
+                foreach (string _filename in Directory.GetFiles(settingsModel.Snapsdirectory, "*.svg"))
+                {
+                    try
+                    {
+                        File.Delete(_filename);
+                        _count += 1;
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Warning($"Failed to delete {_filename}: {ex.Message}");
+                    }
+                }
+                Log.Information($"{_count} files deleted.");
+            }
+        }
+
+        private void SendTab()
+        {
+            KeyEventArgs _tab = new KeyEventArgs(Keyboard.PrimaryDevice,
+                Keyboard.PrimaryDevice.ActiveSource, 0, Key.Tab);
+            _tab.RoutedEvent = Keyboard.KeyDownEvent;
+            InputManager.Current.ProcessInput(_tab);
         }
     }
 }

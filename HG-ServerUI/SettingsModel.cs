@@ -1,17 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HG_ServerUI
 {
     public class SettingsModel : INotifyPropertyChanged
     {
+        private string _appversiontitle;
+        public string Appversiontitle
+        {
+            get { return _appversiontitle; }
+            set { _appversiontitle = value; OnPropertyChanged(); }
+        }
+
+        private string _appversion;
+        public string Appversion
+        {
+            get { return _appversion; }
+            set { _appversion = value; OnPropertyChanged(); }
+        }
+
         private string _exepath;
         public string Exepath
         {
@@ -335,7 +345,7 @@ namespace HG_ServerUI
         }
 
         private string _penatltiespath;
-        public string Penatltiespath
+        public string Snapsdirectory
         {
             get { return _penatltiespath ?? string.Empty; }
             set { _penatltiespath = value; OnPropertyChanged(); }
@@ -405,7 +415,7 @@ namespace HG_ServerUI
             Locations = Array.Empty<string>();
             Boats = Array.Empty<string>();
             Penalties = string.Empty;
-            Penatltiespath= string.Empty;
+            Snapsdirectory= string.Empty;
             Ntfyracectopic = string.Empty;
             Ntfypenaltytopic = string.Empty;
             Btnservercontent = "_Start [Crtl+s]";
@@ -450,36 +460,16 @@ namespace HG_ServerUI
                 model.Exepathtext = model.Exepath.Replace(@"\steamapps\common\", @"\[...]\");
                 model.Externalip = Network.GetExternalIpaddress();
                 model.Logfilepath = Path.GetDirectoryName(model.Exepath) + @"\log.log";
-                model.Penatltiespath = Path.GetDirectoryName(model.Exepath) + @"\snaps";
+                model.Snapsdirectory = Path.GetDirectoryName(model.Exepath) + @"\snaps";
                 model.Btnservercontent = "_Start [Crtl+s]";
                 model.Btnserverenabled = true;
                 model.Serverreachable = false;
-
-                //try
-                //{
-                //    var _files = Directory.GetFiles(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "*.ntfy");
-                //    if (_files.Length > 0)
-                //    {
-                //        foreach (var f in _files)
-                //        {
-                //            if (f.EndsWith(".public.ntfy"))
-                //            {
-                //                model.Ntfyracectopic = Path.GetFileNameWithoutExtension(_files[0]);
-                //            }
-                //            if (f.EndsWith(".private.ntfy"))
-                //            {
-                //                model.Ntfypenaltytopic = Path.GetFileNameWithoutExtension(_files[0]);
-                //            }
-                //        }
-                        
-                //    }
-                //}
-                //catch (Exception ex)
-                //{
-                //    Debug.Write(ex.Message);
-                //}
+                model.Appversion = Getversion();
+                model.Appversiontitle = $"HG Server Manager v{model.Appversion}";
             }
             return model;
         }
+        
+        private static string Getversion() => System.Reflection.Assembly.GetEntryAssembly().GetName().Version.ToString();
     }
 }
