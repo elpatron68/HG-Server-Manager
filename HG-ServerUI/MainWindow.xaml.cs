@@ -256,6 +256,7 @@ namespace HG_ServerUI
                 Log.Information("Sending message to Ntfy channel 📫");
                 await SendNtfyRaceAnnouncement();
             }
+            TestPortAsync();
         }
 
 
@@ -458,7 +459,7 @@ namespace HG_ServerUI
 
         public async void TestPortAsync()
         {
-            Thread.Sleep(4000);
+            Thread.Sleep(2000);
             string address = settingsModel.Externalip;
             int port = int.Parse(settingsModel.Tcpport);
             int connectTimeoutMilliseconds = 1000;
@@ -473,7 +474,7 @@ namespace HG_ServerUI
             var resultTask = Task.WhenAny(connectionTask, timeoutTask).Unwrap();
             var resultTcpClient = await resultTask.ConfigureAwait(false);
 
-            if (resultTcpClient != null)
+            if (resultTcpClient.Connected == true)
             {
                 settingsModel.Serverreachable = true;
                 Log.Information("Server is accessible to the public");
