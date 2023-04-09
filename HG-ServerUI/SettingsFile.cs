@@ -167,18 +167,10 @@ namespace HG_ServerUI
                     {
                         model.Ntfyracectopic = line.Split("=")[1].Trim();
                     }
-                    //if (model.Ntfyracectopic == "")
-                    //{
-                    //    model.Ntfyracectopic = "Hydrofoil_Generation_Servermonitor";
-                    //}
                     if (line.Contains("ntfypenaltytopic="))
                     {
                         model.Ntfypenaltytopic = line.Split("=")[1].Trim();
                     }
-                    //if (model.Ntfypenaltytopic == "")
-                    //{
-                    //    model.Ntfypenaltytopic = "Hydrofoil_Generation_Penaltymonitor";
-                    //}
                 }
             }
             return model; 

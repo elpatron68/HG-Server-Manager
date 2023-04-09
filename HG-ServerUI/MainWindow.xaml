@@ -7,7 +7,7 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:HG_ServerUI" 
-        Title="{Binding Appversion}" 
+        Title="{Binding Appversiontitle}" 
         Height="620" 
         Width="1000" 
         ResizeMode="NoResize" 

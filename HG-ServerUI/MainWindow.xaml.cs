@@ -53,10 +53,10 @@ namespace HG_ServerUI
                 )
                 .CreateLogger();
             Log.Information("HG Server Manager started");
-            Log.Information($"App version: {settingsModel.Appversion}");
 
             settingsModel = SettingsModel.AddPaths(settingsModel);
             settingsModel = SettingsFile.ReadConfigfile(settingsModel);
+            Log.Information($"App version: {settingsModel.Appversion}");
             Log.Information("Settings loaded");
             PreFlightCheck();
 

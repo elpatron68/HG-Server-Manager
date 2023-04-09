@@ -8,6 +8,13 @@ namespace HG_ServerUI
 {
     public class SettingsModel : INotifyPropertyChanged
     {
+        private string _appversiontitle;
+        public string Appversiontitle
+        {
+            get { return _appversiontitle; }
+            set { _appversiontitle = value; OnPropertyChanged(); }
+        }
+
         private string _appversion;
         public string Appversion
         {
@@ -457,7 +464,8 @@ namespace HG_ServerUI
                 model.Btnservercontent = "_Start [Crtl+s]";
                 model.Btnserverenabled = true;
                 model.Serverreachable = false;
-                model.Appversion = $"HG Server Manager {Getversion()}";
+                model.Appversion = Getversion();
+                model.Appversiontitle = $"HG Server Manager v{model.Appversion}";
             }
             return model;
         }
