@@ -53,6 +53,7 @@ namespace HG_ServerUI
                 )
                 .CreateLogger();
             Log.Information("HG Server Manager started");
+            Log.Information($"App version: {settingsModel.Appversion}");
 
             settingsModel = SettingsModel.AddPaths(settingsModel);
             settingsModel = SettingsFile.ReadConfigfile(settingsModel);
@@ -129,6 +130,7 @@ namespace HG_ServerUI
             TbPenalties.DataContext = settingsModel;
             TbNtfyRaceTopic.DataContext = settingsModel;
             TbNtfyPenaltyTopic.DataContext = settingsModel;
+            WinHGSM.DataContext = settingsModel;
         }
 
         // New penalty?

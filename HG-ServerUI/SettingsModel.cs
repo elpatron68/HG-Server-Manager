@@ -8,6 +8,13 @@ namespace HG_ServerUI
 {
     public class SettingsModel : INotifyPropertyChanged
     {
+        private string _appversion;
+        public string Appversion
+        {
+            get { return _appversion; }
+            set { _appversion = value; OnPropertyChanged(); }
+        }
+
         private string _exepath;
         public string Exepath
         {
@@ -450,9 +457,11 @@ namespace HG_ServerUI
                 model.Btnservercontent = "_Start [Crtl+s]";
                 model.Btnserverenabled = true;
                 model.Serverreachable = false;
-
+                model.Appversion = $"HG Server Manager {Getversion()}";
             }
             return model;
         }
+        
+        private static string Getversion() => System.Reflection.Assembly.GetEntryAssembly().GetName().Version.ToString();
     }
 }
