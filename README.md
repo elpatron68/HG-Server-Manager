@@ -49,17 +49,21 @@ Open *File* - *Manually edit configuration* to edit `server_cfg.kl` in the *Note
 
 You can open the server log `log.log` in the *Notepad* text editor by opening *File* - *Open server log*.
 
-### Open Ntfy website
+### Ntfy
 
-The menu *Server launches* opens the Ntfy topic with the latest server launch events. For details, see section about Ntfy below.
+The menu *Ntfy* lets you open the Ntfy game- and penalty topics in your web browser. For details, see section about *Ntfy* section below.
 
-### Open Snaps
+### Snaps
 
-The menu *Snaps* - *Open snaps* opens an Windows *Explorer* window in your *snaps* directory.
+The menu *Snaps* - *Open snaps* opens an Windows *Explorer* window in your *snaps* directory. You can delete all snap files by selecting *Snaps* - *Delete all files in snaps directory*.
 
 ### Status bar
 
 The status bar at the bottom of the window shows informations about the state of your server.
+
+![image-20230409144104972](./assets/image-20230409144104972.png)
+
+After launching a server process, *HG Server-Manager* tries to connect to the specified *TCP* Port via your **external** IP-address to determine if you are able to host a public race (marked green). If the value is *true*, you probably have set up your port forwardings correctly. If it´s *false*, you host a *LAN* game, not visible to the public.
 
 ### Protocol
 
@@ -70,6 +74,8 @@ The protocol text box informs you about events and problems. Have a look at it i
 ### Penalties
 
 Occurring penalties are displayed in the *Penalties* text box. New penalties are signalized with a sound effect.
+
+![image-20230409112031213](./assets/image-20230409112031213.png)
 
 ### Hot slots
 
@@ -103,6 +109,8 @@ There are two use cases for notifications:
 A Ntfy *topic* is sort of a channel, users can subscribe to. You can enter any alphanumeric topic name you want. But be aware of the fact, that every topic is public and everyone can read the messages if the name of the topic is known. So, if you want to have some privacy, give your topic(s) a random alpha-numeric name like `qPd5AbhVfwv5FJFQtYRY4xCf`.
 
 ![image-20230408182649932](./assets/image-20230408182649932.png) 
+
+![image-20230409112013166](./assets/image-20230409112013166.png)
 
 Example notification (web browser)
 
