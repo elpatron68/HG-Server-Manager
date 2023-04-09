@@ -81,7 +81,7 @@ namespace HG_ServerUI
                 NotifyFilters.FileName;
             _cfgFileSystemWatcher.Changed += CfgHandleChanged;
             _cfgFileSystemWatcher.EnableRaisingEvents = true;
-            _penaltiesFileSystemWatcher = new FileSystemWatcher(settingsModel.Penatltiespath);
+            _penaltiesFileSystemWatcher = new FileSystemWatcher(settingsModel.Snapsdirectory);
             _penaltiesFileSystemWatcher.Filter = "*.svg";
             _penaltiesFileSystemWatcher.NotifyFilter = NotifyFilters.LastAccess | 
                 NotifyFilters.LastWrite | 
@@ -531,7 +531,7 @@ namespace HG_ServerUI
 
         private void MnOpenSnaps_Click(object sender, RoutedEventArgs e)
         {
-            _ = Process.Start("explorer.exe", settingsModel.Penatltiespath);
+            _ = Process.Start("explorer.exe", settingsModel.Snapsdirectory);
         }
 
         private void SlotZeroCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -660,6 +660,26 @@ namespace HG_ServerUI
                 catch
                 {
                     Log.Warning($"Failed to copy {Path.GetFileName(settingsModel.Configfilepath)} to slot{slotnumber.ToString()}.kl");
+                }
+            }
+        }
+
+        private async void MnDeleteSnaps_Click(object sender, RoutedEventArgs e)
+        {
+            MessageDialogResult result = await this.ShowMessageAsync("Delete?", $"Delete all svg files in {settingsModel.Snapsdirectory}?");
+            if (result == MessageDialogResult.Affirmative)
+            {
+                Log.Information("Cleaning up snaps directory");
+                foreach (var _filename in Directory.GetFiles(settingsModel.Snapsdirectory, "*.svg"))
+                {
+                    try
+                    {
+                        File.Delete(_filename);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Warning($"Failed to delete {_filename}");
+                    }
                 }
             }
         }

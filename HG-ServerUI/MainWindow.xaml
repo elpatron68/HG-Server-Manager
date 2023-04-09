@@ -248,6 +248,13 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
+            <MenuItem x:Name="MnDeleteSnaps"
+                      Header="_Delete all files in snaps directory" Click="MnDeleteSnaps_Click"
+                      >
+                <MenuItem.Icon>
+                    <iconPacks:PackIconMaterialLight Kind="Delete" />
+                </MenuItem.Icon>
+            </MenuItem>
             <MenuItem Header="_Help">
                 <MenuItem 
                     x:Name="MnAbout"
