@@ -1084,22 +1084,33 @@
             FontWeight="Bold" Grid.ColumnSpan="2"
             >
         </Label>
-        <TextBlock 
-            x:Name="TbPenalties"
+        <ScrollViewer 
+            Name="PenaltiesScrollViewer"
+            Grid.Row="2"
             Grid.Column="5" 
-            HorizontalAlignment="Left" 
-            Margin="10,40,0,0" 
-            Grid.Row="2" 
-            TextWrapping="Wrap" 
-            Text="{Binding Penalties}" 
-            VerticalAlignment="Top" 
             Grid.ColumnSpan="4" 
             Height="90" 
             Width="375"
-            Background="Black"
-            Foreground="Red"
+            Margin="10,40,0,200" 
             >
-        </TextBlock>
+                <TextBlock 
+                    x:Name="TbPenalties"
+                    Grid.Column="5" 
+                    HorizontalAlignment="Left" 
+                    Margin="0,0,0,0" 
+                    Grid.Row="2" 
+                    TextWrapping="Wrap" 
+                    Text="{Binding Penalties}" 
+                    VerticalAlignment="Top" 
+                    Grid.ColumnSpan="4" 
+                    Height="90" 
+                    Width="375"
+                    Background="Black"
+                    Foreground="Red" 
+                    ScrollViewer.VerticalScrollBarVisibility="Auto"
+                    >
+                </TextBlock>
+        </ScrollViewer>
         <Label 
             Grid.Column="5" 
             Content="Penalties" 

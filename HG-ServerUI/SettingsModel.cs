@@ -455,29 +455,6 @@ namespace HG_ServerUI
                 model.Btnserverenabled = true;
                 model.Serverreachable = false;
 
-                //try
-                //{
-                //    var _files = Directory.GetFiles(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "*.ntfy");
-                //    if (_files.Length > 0)
-                //    {
-                //        foreach (var f in _files)
-                //        {
-                //            if (f.EndsWith(".public.ntfy"))
-                //            {
-                //                model.Ntfyracectopic = Path.GetFileNameWithoutExtension(_files[0]);
-                //            }
-                //            if (f.EndsWith(".private.ntfy"))
-                //            {
-                //                model.Ntfypenaltytopic = Path.GetFileNameWithoutExtension(_files[0]);
-                //            }
-                //        }
-                        
-                //    }
-                //}
-                //catch (Exception ex)
-                //{
-                //    Debug.Write(ex.Message);
-                //}
             }
             return model;
         }

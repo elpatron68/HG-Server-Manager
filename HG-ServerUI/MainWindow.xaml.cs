@@ -16,6 +16,7 @@ using System.Windows.Threading;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Win32;
+using Microsoft.Xaml.Behaviors.Media;
 using ntfy;
 using Serilog;
 using Serilog.Sinks.RichTextBox.Themes;
@@ -136,21 +137,34 @@ namespace HG_ServerUI
         private async void PenaltyHandleChanged(object sender, FileSystemEventArgs e)
         {
             Log.Information("New penalty detected");
-            string? _filename = e.Name;
+            string? _filename = e.FullPath;
             if (_filename != null)
             {
+                Thread.Sleep(100);
                 try
                 {
-                    string _username = _filename.Split("_on_")[0].Trim();
-                    string _boatname = _filename.Split("_on_")[1].Split("_")[0].Trim();
-                    string _offence = _filename.Split("_-_")[1].Split('_')[1].Trim();
+                    //string _username = _filename.Split("_on_")[0].Trim();
+                    //string _boatname = _filename.Split("_on_")[1].Split("_")[0].Trim();
+                    //string _offence = _filename.Split("_-_")[1].Split('_')[1].Trim();
                     string _timestamp = $"[{DateTime.Now.ToString("HH:mm:ss")}]";
-                    settingsModel.Penalties += $"{_timestamp} {_offence}: {_username} on {_boatname}\n";
+                    string _filecontent=File.ReadAllText(_filename);
+                    string _username =string.Empty;
+                    string _offence = string.Empty;
+                    foreach (string line in _filecontent.Split("\n"))
+                    {
+                        if (line.Contains("font-size='40'"))
+                        {
+                            _username = line.Split('>')[1].Split('|')[0].Trim();
+                            _offence = line.Split('|')[1].Split('<')[0].Trim();
+                        }
+                    }
+                    settingsModel.Penalties += $"{_timestamp} {_username}: {_offence}\n";
+
                     SoundPlayer player = new(Properties.Resources.beep_sound);
                     player.Play();
                     if (settingsModel.Ntfyracectopic != string.Empty)
                     {
-                        await SendNtfyPenaltyAnnouncement($"New penalty ({_offence}) by {_username} on boat {_boatname} in race {settingsModel.Servername}.");
+                        await SendNtfyPenaltyAnnouncement($"New penalty ({_offence}) by {_username} in race {settingsModel.Servername}.");
                     }
                 }
                 catch 
@@ -225,6 +239,7 @@ namespace HG_ServerUI
         {
             Log.Information("Starting HG server");
             _cfgFileSystemWatcher.EnableRaisingEvents = false;
+            
             SettingsFile.WriteConfigfile(settingsModel);
             _cfgFileSystemWatcher.EnableRaisingEvents = true;
             Process server = new Process();
