@@ -372,6 +372,13 @@ namespace HG_ServerUI
             set { _boatsinrace = value; OnPropertyChanged(); }
         }
 
+        private string _racestate;
+        public string Racestate
+        {
+            get { return _racestate ?? string.Empty; }
+            set { _racestate = value; OnPropertyChanged(); }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
@@ -427,6 +434,7 @@ namespace HG_ServerUI
             Ntfypenaltytopic = string.Empty;
             Btnservercontent = "_Start [Crtl+s]";
             Boatsinrace = "0";
+            Racestate = "Inactive";
         }
 
         private static string GetCfgFilenameFromExepath(string _exepath)

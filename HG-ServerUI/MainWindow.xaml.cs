@@ -278,12 +278,32 @@ namespace HG_ServerUI
                 {
                     try
                     {
-                        foreach (string _line in outLine.Data.Split('\n'))
+                        if (outLine.Data.Contains("Boat count"))
                         {
-                            if (_line.Contains("Boat count"))
-                            {
-                                settingsModel.Boatsinrace = _line.Split(':')[2].Trim();
-                            }
+                            settingsModel.Boatsinrace = outLine.Data.Split(':')[2].Trim();
+                        }
+                    }
+                    catch { }
+                }
+                if (outLine.Data.Contains("We now have"))
+                {
+                    try
+                    {
+                        if (outLine.Data.Contains("We now have"))
+                        {
+                            settingsModel.Boatsinrace = outLine.Data.Split("and")[1].Split(' ')[0].Trim();
+                        }
+                    }
+                    catch { }
+                }
+
+                if (outLine.Data.Contains("RaceState"))
+                {
+                    try
+                    {
+                        if (outLine.Data.Contains("RaceState"))
+                        {
+                            settingsModel.Racestate = $"{outLine.Data.Split(':')[1].Split('(')[0].Trim()}";
                         }
                     }
                     catch { }

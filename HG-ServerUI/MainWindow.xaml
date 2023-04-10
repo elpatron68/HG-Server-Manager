@@ -1179,9 +1179,26 @@
             Margin="10,40,0,0" 
             Grid.Row="1" 
             VerticalAlignment="Top" 
-            Height="116" 
-            Width="116" 
+            Height="110" 
+            Width="110" 
             FontSize="48">
         </mah:Tile>
+        <mah:Tile 
+            x:Name="TiRacestate"
+            Grid.Column="8" 
+            Grid.RowSpan="2"
+            Title="State"
+            VerticalTitleAlignment="Top"
+            Count="{Binding Racestate}"
+            CountFontSize="18"
+            HorizontalAlignment="Left" 
+            Margin="10,160,0,0" 
+            Grid.Row="1" 
+            VerticalAlignment="Top" 
+            Height="110" 
+            Width="110" 
+            FontSize="48">
+        </mah:Tile>
+
     </Grid>
 </mah:MetroWindow>
