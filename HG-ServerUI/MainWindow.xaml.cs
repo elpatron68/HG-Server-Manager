@@ -257,7 +257,7 @@ namespace HG_ServerUI
             settingsModel.Processid = server.Id;
             settingsModel.Serverprocessrunning = true;
             settingsModel.Btnservercontent = "_Stop [crtl+s]";
-            ToggleControls(false);
+            //ToggleControls(false);
 
             if (settingsModel.Ntfyracectopic != string.Empty)
             {
@@ -300,7 +300,7 @@ namespace HG_ServerUI
                         settingsModel.Serverreachable = false;
                         settingsModel.Btnservercontent = "_Start [Crtl+s]";
                         Log.Information("HG server stopped");
-                        ToggleControls(true);
+                        //ToggleControls(true);
                     }
                     catch (Exception ex)
                     {
@@ -753,18 +753,25 @@ namespace HG_ServerUI
         private void LbCourse_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Clipboard.SetText($"/set_course {CbCourse.Text}");
-            Log.Information($"Cmd /set_course copied to clipboard");
+            Log.Information($"Cmd '/set_course {CbCourse.Text}' copied to clipboard");
         }
 
         private void LbWindMax_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Clipboard.SetText($"/set_wind {NmWindMaxSpeed.Value.ToString()}");
-            Log.Information($"Cmd /set_wind copied to clipboard");
+            Clipboard.SetText($"/set_wind {NmWindMaxSpeed.Value}");
+            Log.Information($"Cmd '/set_wind {NmWindMaxSpeed.Value}' copied to clipboard");
+        }
+
+        private void LbAdminPassword_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Clipboard.SetText($"/admin {settingsModel.Adminpassword}");
+            Log.Information($"Cmd '/admin {settingsModel.Adminpassword}' copied to clipboard");
         }
 
         private void RtbLogMessages_TextChanged(object sender, TextChangedEventArgs e)
         {
             RtbLogMessages.ScrollToEnd();
         }
+
     }
 }

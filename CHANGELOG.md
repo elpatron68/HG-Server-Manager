@@ -1,4 +1,9 @@
-# Changelog
+﻿# Changelog
+
+## v1.0.2
+- Add new penalties at the top of the list
+- Auto scroll Protocol text to the end
+- Copy `/admin <password>`, `/set_course` and `/set_wind` admin commands to clipboard (double-click on the label left to the value, marked with 📃)
 
 ## v1.0.2
 - Rearrange controls

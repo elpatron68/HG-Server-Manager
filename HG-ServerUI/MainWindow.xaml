@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:HG_ServerUI" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
                   Title="{Binding Appversiontitle}" 
         Height="620" 
-        Width="1000" 
+        Width="1200" 
         ResizeMode="NoResize" 
         Closing="MetroWindow_Closing"
         >
@@ -60,8 +60,8 @@
             <ColumnDefinition Width="25*"/>
             <ColumnDefinition Width="25*"/>
             <ColumnDefinition Width="25*"/>
-            <ColumnDefinition Width="21*"/>
-            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="25*"/>
             <ColumnDefinition Width="25*"/>
             <ColumnDefinition Width="25*"/>
             <ColumnDefinition Width="25*"/>
@@ -300,7 +300,7 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
-        
+
         <StatusBar Name="sbar" 
             VerticalAlignment="Center"
             Grid.Column="0"
@@ -387,28 +387,28 @@
         <TextBox 
             x:Name="TxExePath"
             Grid.Column="1" 
-            Grid.ColumnSpan="3" 
-            HorizontalAlignment="Center" 
-            Margin="0,40,0,0" 
-            Grid.Row="1" 
+            HorizontalAlignment="Right" 
+            Margin="0,40,10,0" 
+            Grid.Row="1"
             Text="{Binding Exepathtext}" 
             VerticalAlignment="Top" 
-            Width="355"
+            Width="375"
             ToolTip="{Binding Exepath}"
             TextWrapping="NoWrap" 
-            IsReadOnly="True"
+            IsReadOnly="True" 
+            Grid.ColumnSpan="3"
             />
         <TextBox 
             x:Name="TxServerName"
             Grid.Column="1" 
             Grid.ColumnSpan="2" 
             HorizontalAlignment="Left" 
-            Margin="10,70,0,0" 
+            Margin="15,70,0,0" 
             Grid.Row="1" 
             TextWrapping="Wrap" 
             Text="{Binding Servername}" 
             VerticalAlignment="Top" 
-            Width="230"
+            Width="225"
             >
         </TextBox>
         <TextBox 
@@ -481,13 +481,13 @@
             />
         <Label 
             x:Name="LbCourse"
-            Content="Course" 
+            Content="Course 📃" 
             HorizontalAlignment="Left" 
             Margin="10,100,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top" 
-            FontStyle="Italic" MouseDoubleClick="LbCourse_MouseDoubleClick" 
-            
+            FontStyle="Italic" 
+            MouseDoubleClick="LbCourse_MouseDoubleClick" 
             />
         <Label 
             Content="Maximum clients" 
@@ -511,11 +511,14 @@
             VerticalAlignment="Top"
             />
         <Label 
-            Content="Admin password" 
+            x:Name="LbAdminPassword"
+            Content="Admin password 📃" 
             HorizontalAlignment="Left" 
             Margin="10,220,0,0" 
             Grid.Row="2" 
-            VerticalAlignment="Top"
+            VerticalAlignment="Top" 
+            FontStyle="Italic" 
+            MouseDoubleClick="LbAdminPassword_MouseDoubleClick"
             />
         <Label 
             Content="Max race time" 
@@ -727,13 +730,13 @@
         <Label 
             x:Name="LbWindMax"
             Grid.Column="4" 
-            Content="Max speed" 
+            Content="Max speed 📃" 
             HorizontalAlignment="Left" 
             Margin="10,190,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top" 
-            FontStyle="Italic" MouseDoubleClick="LbWindMax_MouseDoubleClick" 
-            
+            FontStyle="Italic" 
+            MouseDoubleClick="LbWindMax_MouseDoubleClick" 
             >
         </Label>
         <Label 
@@ -757,17 +760,17 @@
         <Label 
             Grid.Column="4" 
             Content="Evolution gain" 
-            HorizontalAlignment="Center" 
-            Margin="0,280,0,0" 
+            HorizontalAlignment="Left" 
+            Margin="10,280,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top" 
             >
         </Label>
         <mah:NumericUpDown 
             x:Name="NmWindMinSpeed"
-            Grid.Column="6" 
-            HorizontalAlignment="Center" 
-            Margin="0,160,0,0" 
+            Grid.Column="5" 
+            HorizontalAlignment="Left" 
+            Margin="10,160,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             Value="{Binding Windminspeed}"
@@ -779,9 +782,9 @@
         </mah:NumericUpDown>
         <mah:NumericUpDown 
             x:Name="NmWindMaxSpeed"
-            Grid.Column="6" 
-            HorizontalAlignment="Center" 
-            Margin="0,190,0,0" 
+            Grid.Column="5" 
+            HorizontalAlignment="Left" 
+            Margin="10,191,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             Value="{Binding Windmaxspeed}"
@@ -793,9 +796,9 @@
         </mah:NumericUpDown>
         <mah:NumericUpDown 
             x:Name="NmWindHeading"
-            Grid.Column="6" 
-            HorizontalAlignment="Center" 
-            Margin="0,220,0,0" 
+            Grid.Column="5" 
+            HorizontalAlignment="Left" 
+            Margin="10,220,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             Value="{Binding Windheading}"
@@ -806,9 +809,9 @@
         </mah:NumericUpDown>
         <mah:NumericUpDown 
             x:Name="NmWindVariation"
-            Grid.Column="6" 
-            HorizontalAlignment="Center" 
-            Margin="0,250,0,0" 
+            Grid.Column="5" 
+            HorizontalAlignment="Left" 
+            Margin="10,250,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             Value="{Binding Windvariation}"
@@ -819,9 +822,9 @@
         </mah:NumericUpDown>
         <mah:NumericUpDown 
             x:Name="NmWindEvolutionGain"
-            Grid.Column="6" 
-            HorizontalAlignment="Center" 
-            Margin="0,280,0,0" 
+            Grid.Column="5" 
+            HorizontalAlignment="Left" 
+            Margin="10,280,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             Value="{Binding Windevolutiongain}"
@@ -832,7 +835,7 @@
             >
         </mah:NumericUpDown>
         <Label 
-            Grid.Column="7" 
+            Grid.Column="6" 
             Content="Rules" 
             HorizontalAlignment="Left" 
             Margin="10,130,0,0" 
@@ -842,7 +845,7 @@
             >
         </Label>
         <Label 
-            Grid.Column="7" 
+            Grid.Column="6" 
             Content="OCS drag gain" 
             HorizontalAlignment="Left" 
             Margin="10,160,0,0" 
@@ -851,7 +854,7 @@
             >
         </Label>
         <Label 
-            Grid.Column="7" 
+            Grid.Column="6" 
             Content="Boundary drag" 
             HorizontalAlignment="Left" 
             Margin="10,190,0,0" 
@@ -860,7 +863,7 @@
             >
         </Label>
         <Label 
-            Grid.Column="7" 
+            Grid.Column="6" 
             Content="Penalty drag gain" 
             HorizontalAlignment="Left" 
             Margin="10,220,0,0" 
@@ -869,7 +872,7 @@
             >
         </Label>
         <Label 
-            Grid.Column="7" 
+            Grid.Column="6" 
             Content="Use collisions" 
             HorizontalAlignment="Left" 
             Margin="10,250,0,0" 
@@ -878,7 +881,7 @@
             >
         </Label>
         <Label 
-            Grid.Column="7" 
+            Grid.Column="6" 
             Content="Wind shadow scale" 
             HorizontalAlignment="Left" 
             Margin="10,280,0,0" 
@@ -888,7 +891,7 @@
         </Label>
         <mah:NumericUpDown 
             x:Name="NmOcsDragGain"
-            Grid.Column="8" 
+            Grid.Column="7" 
             HorizontalAlignment="Center" 
             Margin="0,160,0,0" 
             Grid.Row="2" 
@@ -901,7 +904,7 @@
         </mah:NumericUpDown>
         <mah:NumericUpDown 
             x:Name="NmBoundaryDrag"
-            Grid.Column="8" 
+            Grid.Column="7" 
             HorizontalAlignment="Center" 
             Margin="0,190,0,0" 
             Grid.Row="2" 
@@ -914,7 +917,7 @@
         </mah:NumericUpDown>
         <mah:NumericUpDown 
             x:Name="NmPenaltyDragGain"
-            Grid.Column="8" 
+            Grid.Column="7" 
             HorizontalAlignment="Center" 
             Margin="0,220,0,0" 
             Grid.Row="2" 
@@ -927,10 +930,10 @@
         </mah:NumericUpDown>
         <CheckBox 
             x:Name="CheckUseCollisions"
-            Grid.Column="8" 
+            Grid.Column="7" 
             Content="" 
             HorizontalAlignment="Left" 
-            Margin="10,250,0,0" 
+            Margin="15,250,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
             Height="30"
@@ -940,7 +943,7 @@
         </CheckBox>
         <mah:NumericUpDown 
             x:Name="NmWindShadowScale"
-            Grid.Column="8" 
+            Grid.Column="7" 
             HorizontalAlignment="Center" 
             Margin="0,280,0,0" 
             Grid.Row="2" 
@@ -1065,8 +1068,8 @@
             x:Name="RtbLogMessages"
             Grid.Column="5" 
             Grid.Row="1" 
-            Grid.ColumnSpan="4" 
-            Margin="10,40,10,10" 
+            Grid.ColumnSpan="3" 
+            Margin="10,40,12,10" 
             FontFamily="Cascadia Mono, Consolas, Courier New, monospace"
             Background="Black"
             Foreground="LightGreen"
@@ -1086,43 +1089,27 @@
             FontWeight="Bold" Grid.ColumnSpan="2"
             >
         </Label>
-        <ScrollViewer 
-            Name="PenaltiesScrollViewer"
-            Grid.Row="2"
+        <TextBlock 
+            x:Name="TbPenalties"
             Grid.Column="5" 
-            Grid.ColumnSpan="4" 
-            Height="90" 
-            Width="375"
-            Margin="10,40,0,200" 
-            >
-                <TextBlock 
-                    x:Name="TbPenalties"
-                    Grid.Column="5" 
-                    HorizontalAlignment="Left" 
-                    Margin="0,0,0,0" 
-                    Grid.Row="2" 
-                    TextWrapping="Wrap" 
-                    Text="{Binding Penalties}" 
-                    VerticalAlignment="Top" 
-                    Grid.ColumnSpan="4" 
-                    Height="90" 
-                    Width="375"
-                    Background="Black"
-                    Foreground="Red" 
-                    ScrollViewer.VerticalScrollBarVisibility="Auto"
-                    >
-                </TextBlock>
-        </ScrollViewer>
+            Margin="10,35,12,209" 
+            Grid.Row="2" 
+            TextWrapping="Wrap" 
+            Text="{Binding Penalties}" 
+            Grid.ColumnSpan="3" 
+            Height="90"
+            Background="Black"
+            Foreground="Red" 
+            ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         <Label 
             Grid.Column="5" 
             Content="Penalties" 
             HorizontalAlignment="Left" 
-            Margin="10,10,0,0" 
+            Margin="10,5,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top"
-            FontWeight="Bold" Grid.ColumnSpan="2"
-            >
-        </Label>
+            FontWeight="Bold"
+            />
         <Label 
             Grid.Column="2" 
             Content="Ntfy race topic" 
@@ -1162,7 +1149,7 @@
             x:Name="TbNtfyRaceTopic"
             Grid.Column="3"
             Grid.Row="1" 
-            Margin="10,100,10,0" 
+            Margin="14,100,6,0" 
             TextWrapping="NoWrap" 
             Text="{Binding Ntfyracectopic}" 
             VerticalAlignment="Top" 
@@ -1172,14 +1159,29 @@
             x:Name="TbNtfyPenaltyTopic"
             Grid.Column="3" 
             HorizontalAlignment="Left" 
-            Margin="10,130,0,0" 
+            Margin="14,130,0,0" 
             Grid.Row="1" 
             Grid.ColumnSpan="2"
             TextWrapping="NoWrap" 
             Text="{Binding Ntfypenaltytopic}"
             VerticalAlignment="Top" 
-            Width="210"
+            Width="243"
             >
         </TextBox>
+        <mah:Tile 
+            x:Name="TiBoats"
+            Grid.Column="8" 
+            Title="Boats"
+            VerticalTitleAlignment="Top"
+            Count="4"
+            CountFontSize="48"
+            HorizontalAlignment="Left" 
+            Margin="10,40,0,0" 
+            Grid.Row="1" 
+            VerticalAlignment="Top" 
+            Height="116" 
+            Width="116" 
+            FontSize="48">
+        </mah:Tile>
     </Grid>
 </mah:MetroWindow>
