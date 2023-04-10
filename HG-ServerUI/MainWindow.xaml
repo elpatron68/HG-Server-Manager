@@ -538,6 +538,7 @@
             Width="105"
             ItemsSource="{Binding Boats}"
             Text="{Binding Boat}"
+            IsEditable="False"
             >
         </ComboBox>
         <ComboBox 
@@ -550,6 +551,7 @@
             Width="105"
             SelectedValue="{Binding Location}"
             ItemsSource="{Binding Locations}"
+            IsEditable="False"
             >
         </ComboBox>
         <ComboBox 
@@ -562,6 +564,7 @@
             Width="105"
             SelectedValue="{Binding Course}"
             ItemsSource="{Binding Courses}"
+            IsEditable="False"
             >
         </ComboBox>
         <mah:NumericUpDown 

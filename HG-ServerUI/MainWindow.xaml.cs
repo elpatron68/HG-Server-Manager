@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -9,7 +11,9 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Navigation;
 using System.Windows.Threading;
 using MahApps.Metro.Controls;
@@ -186,7 +190,7 @@ namespace HG_ServerUI
                 Log.Warning("HG server executable not found! ⚠️");
                 settingsModel.Exepath= "HG server executable not found!";
                 BtnStartServer.Content = "Error ⚠️";
-                BtnStartServer.IsEnabled=false;
+                BtnStartServer.IsEnabled = false;
                 return;
             }
             else
@@ -253,6 +257,7 @@ namespace HG_ServerUI
             settingsModel.Processid = server.Id;
             settingsModel.Serverprocessrunning = true;
             settingsModel.Btnservercontent = "_Stop [crtl+s]";
+            ToggleControls(false);
 
             if (settingsModel.Ntfyracectopic != string.Empty)
             {
@@ -295,6 +300,7 @@ namespace HG_ServerUI
                         settingsModel.Serverreachable = false;
                         settingsModel.Btnservercontent = "_Start [Crtl+s]";
                         Log.Information("HG server stopped");
+                        ToggleControls(true);
                     }
                     catch (Exception ex)
                     {
@@ -701,6 +707,47 @@ namespace HG_ServerUI
                 Keyboard.PrimaryDevice.ActiveSource, 0, Key.Tab);
             _tab.RoutedEvent = Keyboard.KeyDownEvent;
             InputManager.Current.ProcessInput(_tab);
+        }
+
+        private void ToggleControls(bool enabled)
+        {
+            List<Control> _controls = new();
+            _controls.AddRange(new Control[] { TxServerName,
+                TxPortTcp,
+                TxPortUdp,
+                TxPortSteam,
+                CbBoat,
+                CbLocation,
+                NmMaxClients,
+                NmMinPlayers,
+                TxPassword,
+                TxAdminPassword,
+                NmMaxRaceTime,
+                NmMaxSpectators,
+                NmSessiontimePrestart,
+                NmSessiontimePostrace,
+                NmSessiontimeSetup,
+                NmWindMinSpeed,
+                NmWindMaxSpeed,
+                NmWindHeading,
+                NmWindEvolutionGain,
+                NmOcsDragGain,
+                NmBoundaryDrag,
+                NmPenaltyDragGain,
+                CheckUseCollisions,
+                NmWindShadowScale,
+                NmGapToClear,
+                NmClientSlowdown,
+                NmPenaltyDuration,
+                NmBlackFlagDuration,
+                NmBlackFlagLegs,
+            });
+
+            foreach (Control c in _controls)
+            {
+
+                c.IsEnabled = enabled;
+            }
         }
     }
 }

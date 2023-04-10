@@ -5,7 +5,7 @@
 ## Features
 
 - 🦋 Clean and beautiful user interface
-- ⚙️All server parameters editable 
+- ⚙️ All server parameters editable 
 - 🛠️ Control your server:
   - 🚀 Start/stop game server
   - ⚠️ Get notified of the occurrence of penalties
