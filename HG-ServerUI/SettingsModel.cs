@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows.Documents;
 
 namespace HG_ServerUI
 {
@@ -379,6 +380,13 @@ namespace HG_ServerUI
             set { _racestate = value; OnPropertyChanged(); }
         }
 
+        private string _activecourse;
+        public string Activecourse
+        {
+            get { return _activecourse ?? string.Empty; }
+            set { _activecourse = value; OnPropertyChanged(); }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
@@ -435,6 +443,7 @@ namespace HG_ServerUI
             Btnservercontent = "_Start [Crtl+s]";
             Boatsinrace = "0";
             Racestate = "Inactive";
+            Activecourse = "n/a";
         }
 
         private static string GetCfgFilenameFromExepath(string _exepath)

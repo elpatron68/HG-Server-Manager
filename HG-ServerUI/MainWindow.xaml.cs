@@ -136,6 +136,7 @@ namespace HG_ServerUI
             TbNtfyPenaltyTopic.DataContext = settingsModel;
             WinHGSM.DataContext = settingsModel;
             TiBoats.DataContext = settingsModel;
+            TiActiveCourse.DataContext = settingsModel;
         }
 
         // New penalty?
@@ -306,6 +307,14 @@ namespace HG_ServerUI
                     {
                         string _peer = outLine.Data.Split("peer")[1].Split(' ')[1].Split(':')[0].Trim();
                         Log.Information($"New connection from {_peer}");
+                    }
+                    catch { }
+                }
+                if (outLine.Data.Contains("Course changed to"))
+                {
+                    try
+                    {
+                        settingsModel.Activecourse = outLine.Data.Split(' ')[5].Trim();
                     }
                     catch { }
                 }

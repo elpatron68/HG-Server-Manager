@@ -1199,6 +1199,31 @@
             Width="110" 
             FontSize="48">
         </mah:Tile>
-
+        <mah:Tile 
+            x:Name="TiActiveCourse"
+            Grid.Column="8" 
+            Grid.RowSpan="2"
+            Title="Course"
+            VerticalTitleAlignment="Top"
+            Count="{Binding Activecourse}"
+            CountFontSize="18"
+            HorizontalAlignment="Left" 
+            Margin="10,280,0,0" 
+            Grid.Row="1" 
+            VerticalAlignment="Top" 
+            Height="110" 
+            Width="110" 
+            FontSize="48">
+        </mah:Tile>
+        <Label 
+            Grid.Column="8" 
+            Content="Server states" 
+            HorizontalAlignment="Left" 
+            Margin="10,10,0,0" 
+            Grid.Row="1" 
+            VerticalAlignment="Top"
+            FontWeight="Bold"
+            >
+        </Label>
     </Grid>
 </mah:MetroWindow>
