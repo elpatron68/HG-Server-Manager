@@ -1173,7 +1173,7 @@
             Grid.Column="8" 
             Title="Boats"
             VerticalTitleAlignment="Top"
-            Count="4"
+            Count="{Binding Boatsinrace}"
             CountFontSize="48"
             HorizontalAlignment="Left" 
             Margin="10,40,0,0" 

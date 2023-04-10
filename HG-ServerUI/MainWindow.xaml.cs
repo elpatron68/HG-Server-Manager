@@ -135,6 +135,7 @@ namespace HG_ServerUI
             TbNtfyRaceTopic.DataContext = settingsModel;
             TbNtfyPenaltyTopic.DataContext = settingsModel;
             WinHGSM.DataContext = settingsModel;
+            TiBoats.DataContext = settingsModel;
         }
 
         // New penalty?
@@ -271,6 +272,23 @@ namespace HG_ServerUI
             DataReceivedEventArgs outLine)
         {
             Debug.WriteLine(outLine.Data);
+            if(outLine.Data != null)
+            {
+                if (outLine.Data.Contains("Boat count"))
+                {
+                    try
+                    {
+                        foreach (string _line in outLine.Data.Split('\n'))
+                        {
+                            if (_line.Contains("Boat count"))
+                            {
+                                settingsModel.Boatsinrace = _line.Split(':')[2].Trim();
+                            }
+                        }
+                    }
+                    catch { }
+                }
+            }
         }
 
         private void BtnStartServer_Click(object sender, RoutedEventArgs e)

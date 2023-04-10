@@ -365,6 +365,13 @@ namespace HG_ServerUI
             set { _ntfyprivatetopic = value; OnPropertyChanged(); }
         }
 
+        private string _boatsinrace;
+        public string Boatsinrace
+        {
+            get { return (_boatsinrace ?? string.Empty); }
+            set { _boatsinrace = value; OnPropertyChanged(); }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
@@ -419,6 +426,7 @@ namespace HG_ServerUI
             Ntfyracectopic = string.Empty;
             Ntfypenaltytopic = string.Empty;
             Btnservercontent = "_Start [Crtl+s]";
+            Boatsinrace = "0";
         }
 
         private static string GetCfgFilenameFromExepath(string _exepath)
