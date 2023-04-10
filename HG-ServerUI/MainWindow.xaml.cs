@@ -749,5 +749,22 @@ namespace HG_ServerUI
                 c.IsEnabled = enabled;
             }
         }
+
+        private void LbCourse_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Clipboard.SetText($"/set_course {CbCourse.Text}");
+            Log.Information($"Cmd /set_course copied to clipboard");
+        }
+
+        private void LbWindMax_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Clipboard.SetText($"/set_wind {NmWindMaxSpeed.Value.ToString()}");
+            Log.Information($"Cmd /set_wind copied to clipboard");
+        }
+
+        private void RtbLogMessages_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            RtbLogMessages.ScrollToEnd();
+        }
     }
 }

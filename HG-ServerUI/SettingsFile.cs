@@ -19,11 +19,11 @@ namespace HG_ServerUI
                 // Set default Ntfy topics
                 if (!readText.Contains("ntfyracetopic="))
                 {
-                    readText= "# ntfyracetopic=Hydrofoil_Generation_Servermonitor\n" + readText;
+                    readText= "// ntfyracetopic=Hydrofoil_Generation_Servermonitor\n" + readText;
                 }
                 if (!readText.Contains("ntfypenaltytopic="))
                 {
-                    readText = "# ntfypenaltytopic=Hydrofoil_Generation_Penaltymonitor\n" + readText;
+                    readText = "// ntfypenaltytopic=Hydrofoil_Generation_Penaltymonitor\n" + readText;
                 }
 
                 foreach (string line in readText.Split())
@@ -182,11 +182,10 @@ namespace HG_ServerUI
                 filename = model.Configfilepath;
             }
             string content = """
-# Meta information from HG Server-Manager
-# Should be harmless, may be deleted if any problems occur
-# See https://github.com/elpatron68/HG-Server-Manager/tree/master#ntfy-notifications if you want to learn more about Ntfy
-# ntfyracetopic=<ntfyracetopic>
-# ntfypenaltytopic=<ntfypenaltytopic>
+// Meta information from HG Server-Manager
+// See https://github.com/elpatron68/HG-Server-Manager/tree/master#ntfy-notifications if you want to learn more about Ntfy
+// ntfyracetopic=<ntfyracetopic>
+// ntfypenaltytopic=<ntfypenaltytopic>
 
 name=<servername>
 ports
