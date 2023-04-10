@@ -155,7 +155,7 @@ namespace HG_ServerUI
                             _offence = line.Split('|')[1].Split('<')[0].Trim();
                         }
                     }
-                    settingsModel.Penalties += $"{_timestamp} {_username}: {_offence}\n";
+                    settingsModel.Penalties = $"{_timestamp} {_username}: {_offence}\n" + settingsModel.Penalties;
 
                     SoundPlayer player = new(Properties.Resources.beep_sound);
                     player.Play();
