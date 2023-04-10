@@ -278,10 +278,7 @@ namespace HG_ServerUI
                 {
                     try
                     {
-                        if (outLine.Data.Contains("Boat count"))
-                        {
-                            settingsModel.Boatsinrace = outLine.Data.Split(':')[2].Trim();
-                        }
+                        settingsModel.Boatsinrace = outLine.Data.Split(':')[2].Trim();
                     }
                     catch { }
                 }
@@ -289,22 +286,26 @@ namespace HG_ServerUI
                 {
                     try
                     {
-                        if (outLine.Data.Contains("We now have"))
-                        {
-                            settingsModel.Boatsinrace = outLine.Data.Split("and")[1].Split(' ')[0].Trim();
-                        }
+                        
+                        settingsModel.Boatsinrace = outLine.Data.Split("and")[1].Split(' ')[0].Trim();
+
                     }
                     catch { }
                 }
-
                 if (outLine.Data.Contains("RaceState"))
                 {
                     try
                     {
-                        if (outLine.Data.Contains("RaceState"))
-                        {
-                            settingsModel.Racestate = $"{outLine.Data.Split(':')[1].Split('(')[0].Trim()}";
-                        }
+                        settingsModel.Racestate = $"{outLine.Data.Split(':')[1].Split('(')[0].Trim()}";
+                    }
+                    catch { }
+                }
+                if (outLine.Data.Contains("New connection from") && outLine.Data.Contains("is_connected: true"))
+                {
+                    try
+                    {
+                        string _peer = outLine.Data.Split("peer")[1].Split(' ')[1].Split(':')[0].Trim();
+                        Log.Information($"New connection from {_peer}");
                     }
                     catch { }
                 }
