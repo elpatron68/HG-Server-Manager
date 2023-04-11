@@ -26,105 +26,105 @@ namespace HG_ServerUI
                     readText = "// ntfypenaltytopic=Hydrofoil_Generation_Penaltymonitor\n" + readText;
                 }
 
-                foreach (string line in readText.Split())
+                foreach (string line in readText.Split('\n'))
                 {
                     if (line.Contains("name="))
                     {
-                        model.Servername = line.Split("=")[1].Trim();
+                        model.Servername = line.Split('=')[1].Trim();
                     }
                     if (line.Contains("tcp="))
                     {
-                        model.Tcpport = line.Split("=")[1].Trim();
+                        model.Tcpport = line.Split('=')[1].Trim();
                     }
                     if (line.Contains("udp="))
                     {
-                        model.Udpport = line.Split("=")[1].Trim();
+                        model.Udpport = line.Split('=')[1].Trim();
                     }
                     if (line.Contains("steam="))
                     {
-                        model.Steamport = line.Split("=")[1].Trim();
+                        model.Steamport = line.Split('=')[1].Trim();
                     }
                     if (line.Contains("boat="))
                     {
-                        model.Boat = line.Split("=")[1].Trim();
+                        model.Boat = line.Split('=')[1].Trim();
                     }
                     if (line.Contains("location="))
                     {
-                        model.Location = line.Split("=")[1].Trim();
+                        model.Location = line.Split('=')[1].Trim();
                     }
                     if (line.Contains("course="))
                     {
-                        model.Course = line.Split("=")[1].Trim();
+                        model.Course = line.Split('=')[1].Trim();
                     }
                     if (line.Contains("max_clients="))
                     {
-                        model.Maxclients = int.Parse(line.Split("=")[1].Trim());
+                        model.Maxclients = int.Parse(line.Split('=')[1].Trim());
                     }
                     if (line.Contains("max_spectators="))
                     {
-                        model.Maxspectators = int.Parse(line.Split("=")[1].Trim());
+                        model.Maxspectators = int.Parse(line.Split('=')[1].Trim());
                     }
                     if (line.Contains("minimum_player_count="))
                     {
-                        model.Minplayers = int.Parse(line.Split("=")[1].Trim());
+                        model.Minplayers = int.Parse(line.Split('=')[1].Trim());
                     }
                     if (line.Contains("password=") && !line.Split('=')[0].Contains("admin"))
                     {
-                        model.Password = line.Split("=")[1].Trim();
+                        model.Password = line.Split('=')[1].Trim();
                     }
                     if (line.Contains("admin_password="))
                     {
-                        model.Adminpassword = line.Split("=")[1].Trim();
+                        model.Adminpassword = line.Split('=')[1].Trim();
                     }
                     if (line.Contains("max_race_time_minutes="))
                     {
-                        model.Maxracetime = int.Parse(line.Split("=")[1].Trim());
+                        model.Maxracetime = int.Parse(line.Split('=')[1].Trim());
                     }
                     if (line.Contains("setup="))
                     {
-                        model.Sessiontimesetup = int.Parse(line.Split("=")[1].Trim());
+                        model.Sessiontimesetup = int.Parse(line.Split('=')[1].Trim());
                     }
                     if (line.Contains("pre_start="))
                     {
-                        model.Sessiontimeprestart = int.Parse(line.Split("=")[1].Trim());
+                        model.Sessiontimeprestart = int.Parse(line.Split('=')[1].Trim());
                     }
                     if (line.Contains("post_race="))
                     {
-                        model.Sessiontimepostrace = int.Parse(line.Split("=")[1].Trim());
+                        model.Sessiontimepostrace = int.Parse(line.Split('=')[1].Trim());
                     }
                     if (line.Contains("min_speed="))
                     {
-                        model.Windminspeed = float.Parse(line.Split("=")[1].Trim(),
+                        model.Windminspeed = float.Parse(line.Split('=')[1].Trim(),
                             CultureInfo.InvariantCulture.NumberFormat);
                     }
                     if (line.Contains("max_speed="))
                     {
-                        model.Windmaxspeed = float.Parse(line.Split("=")[1].Trim(),
+                        model.Windmaxspeed = float.Parse(line.Split('=')[1].Trim(),
                             CultureInfo.InvariantCulture.NumberFormat);
                     }
                     if (line.Contains("hdg_variation="))
                     {
-                        model.Windheading = int.Parse(line.Split("=")[1].Trim().Split(",")[0]);
-                        model.Windvariation = int.Parse(line.Split("=")[1].Trim().Split(",")[1]);
+                        model.Windheading = int.Parse(line.Split('=')[1].Trim().Split(",")[0]);
+                        model.Windvariation = int.Parse(line.Split('=')[1].Trim().Split(",")[1]);
                     }
                     if (line.Contains("evolution_gain="))
                     {
-                        model.Windevolutiongain = float.Parse(line.Split("=")[1].Trim(),
+                        model.Windevolutiongain = float.Parse(line.Split('=')[1].Trim(),
                             CultureInfo.InvariantCulture.NumberFormat);
                     }
                     if (line.Contains("ocs_drag_gain="))
                     {
-                        model.Ocsdraggain = float.Parse(line.Split("=")[1].Trim(),
+                        model.Ocsdraggain = float.Parse(line.Split('=')[1].Trim(),
                             CultureInfo.InvariantCulture.NumberFormat);
                     }
                     if (line.Contains("boundary_drag="))
                     {
-                        model.Boundarydrag = float.Parse(line.Split("=")[1].Trim(),
+                        model.Boundarydrag = float.Parse(line.Split('=')[1].Trim(),
                             CultureInfo.InvariantCulture.NumberFormat);
                     }
                     if (line.Contains("penalty_drag_gain="))
                     {
-                        model.Penaltydraggain = float.Parse(line.Split("=")[1].Trim(),
+                        model.Penaltydraggain = float.Parse(line.Split('=')[1].Trim(),
                             CultureInfo.InvariantCulture.NumberFormat);
                     }
                     if (line.Contains("use_collisions="))
@@ -140,36 +140,36 @@ namespace HG_ServerUI
                     }
                     if (line.Contains("wind_shadows_scale="))
                     {
-                        model.Windshadowscale = float.Parse(line.Split("=")[1].Trim(),
+                        model.Windshadowscale = float.Parse(line.Split('=')[1].Trim(),
                             CultureInfo.InvariantCulture.NumberFormat);
                     }
                     if (line.Contains("gap_to_clear="))
                     {
-                        model.Gaptoclear = int.Parse(line.Split("=")[1].Trim());
+                        model.Gaptoclear = int.Parse(line.Split('=')[1].Trim());
                     }
                     if (line.Contains("client_slowdown="))
                     {
-                        model.Clientslowdown = int.Parse(line.Split("=")[1].Trim());
+                        model.Clientslowdown = int.Parse(line.Split('=')[1].Trim());
                     }
                     if (line.Contains("penalty_duration="))
                     {
-                        model.Penaltyduration = int.Parse(line.Split("=")[1].Trim());
+                        model.Penaltyduration = int.Parse(line.Split('=')[1].Trim());
                     }
                     if (line.Contains("time="))
                     {
-                        model.Blackflagduration = int.Parse(line.Split("=")[1].Trim());
+                        model.Blackflagduration = int.Parse(line.Split('=')[1].Trim());
                     }
                     if (line.Contains("legs="))
                     {
-                        model.Blackflaglegs = int.Parse(line.Split("=")[1].Trim());
+                        model.Blackflaglegs = int.Parse(line.Split('=')[1].Trim());
                     }
                     if (line.Contains("ntfyracetopic="))
                     {
-                        model.Ntfyracectopic = line.Split("=")[1].Trim();
+                        model.Ntfyracectopic = line.Split('=')[1].Trim();
                     }
                     if (line.Contains("ntfypenaltytopic="))
                     {
-                        model.Ntfypenaltytopic = line.Split("=")[1].Trim();
+                        model.Ntfypenaltytopic = line.Split('=')[1].Trim();
                     }
                 }
             }
