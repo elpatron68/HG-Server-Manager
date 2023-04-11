@@ -337,7 +337,15 @@ namespace HG_ServerUI
                     }
                     catch { }
                 }
-
+                // [WARN] Umpire::on_timeline_crossed
+                if (outLine.Data.Contains("Umpire::"))
+                {
+                    try
+                    {
+                        Log.Information($"Umpire: {outLine.Data.Split("::")[1].Trim()}");
+                    }
+                    catch { }
+                }
             }
         }
 
