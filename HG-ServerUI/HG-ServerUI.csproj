@@ -8,11 +8,11 @@
     <UseWPF>true</UseWPF>
     <AssemblyVersion>1.0.2.0</AssemblyVersion>
     <FileVersion>1.0.2.0</FileVersion>
-    <ApplicationIcon>00027-569200952.ico</ApplicationIcon>
+    <ApplicationIcon>00042-1879107711.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="00027-569200952.ico" />
+    <Content Include="00042-1879107711.ico" />
   </ItemGroup>
 
   <ItemGroup>
