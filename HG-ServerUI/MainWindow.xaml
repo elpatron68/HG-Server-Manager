@@ -481,13 +481,11 @@
             />
         <Label 
             x:Name="LbCourse"
-            Content="Course 📃" 
+            Content="Course" 
             HorizontalAlignment="Left" 
             Margin="10,100,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top" 
-            FontStyle="Italic" 
-            MouseDoubleClick="LbCourse_MouseDoubleClick" 
             />
         <Label 
             Content="Maximum clients" 
@@ -512,13 +510,11 @@
             />
         <Label 
             x:Name="LbAdminPassword"
-            Content="Admin password 📃" 
+            Content="Admin password" 
             HorizontalAlignment="Left" 
             Margin="10,220,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top" 
-            FontStyle="Italic" 
-            MouseDoubleClick="LbAdminPassword_MouseDoubleClick"
             />
         <Label 
             Content="Max race time" 
@@ -730,13 +726,11 @@
         <Label 
             x:Name="LbWindMax"
             Grid.Column="4" 
-            Content="Max speed 📃" 
+            Content="Max speed" 
             HorizontalAlignment="Left" 
             Margin="10,190,0,0" 
             Grid.Row="2" 
             VerticalAlignment="Top" 
-            FontStyle="Italic" 
-            MouseDoubleClick="LbWindMax_MouseDoubleClick" 
             >
         </Label>
         <Label 
