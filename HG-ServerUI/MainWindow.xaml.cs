@@ -326,6 +326,18 @@ namespace HG_ServerUI
                     }
                     catch { }
                 }
+                // 16:11:23 [INFO] ServerLogic: ServerGameMessage::Connect received: SGMConnect { protocol_version: 32, password: None, boat_name: "elpatron", boat_model: "jx50", nation: "GER", skin: Skin("red white")
+                if (outLine.Data.Contains("ServerGameMessage") && outLine.Data.Contains("Connect received"))
+                {
+                    try
+                    {
+                        string _boatname = outLine.Data.Split("boat_name:")[1].Split(',')[0].Replace("\"", "").Trim();
+                        string _nation = outLine.Data.Split("nation:")[1].Split(',')[0].Replace("\"", "").Trim();
+                        Log.Information($"{_boatname} from {_nation} joined the race");
+                    }
+                    catch { }
+                }
+
             }
         }
 
