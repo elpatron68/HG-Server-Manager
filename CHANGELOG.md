@@ -1,5 +1,8 @@
 ﻿# Changelog
 
+## v1.0.4
+- Fix reading server name with blanks
+
 ## v1.0.3
 - Add new penalties to the top of the list
 - Auto scroll Protocol text to the end
