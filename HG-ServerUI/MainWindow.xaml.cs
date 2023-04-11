@@ -287,9 +287,8 @@ namespace HG_ServerUI
                 {
                     try
                     {
-                        
-                        settingsModel.Boatsinrace = outLine.Data.Split("and")[1].Split(' ')[0].Trim();
-
+                        // "[INFO] We now have 1 conns and 1 boats"
+                        settingsModel.Boatsinrace = outLine.Data.Split(' ')[7].Trim();
                     }
                     catch { }
                 }
@@ -314,7 +313,16 @@ namespace HG_ServerUI
                 {
                     try
                     {
-                        settingsModel.Activecourse = outLine.Data.Split(' ')[5].Trim();
+                        settingsModel.Activecourse = outLine.Data.Split(' ')[4].Trim();
+                    }
+                    catch { }
+                }
+                // [INFO] Spectator SGMConnectSpectator { protocol_version: 32, password: None, token: [20, 0, 0, 0, 104, 47, 8, 47, 216, 197, 223, 30, 17, 197, 223, 3, 1, 0, 16, 1, 151, 244, 52, 100, 24, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 193, 41, 251, 7, 234, 41, 36, 141, 159, 188, 235, 7, 13, 0, 0, 0, 178, 0, 0, 0, 50, 0, 0, 0, 4, 0, 0, 0, 17, 197, 223, 3, 1, 0, 16, 1, 116, 27, 22, 0, 238, 151, 151, 87, 57, 177, 168, 192, 0, 0, 0, 0, 220, 222, 51, 100, 92, 142, 79, 100, 1, 0, 242, 198, 7, 0, 0, 0, 0, 0, 222, 113, 114, 196, 249, 77, 50, 81, 177, 136, 18, 71, 56, 52, 5, 78, 65, 245, 50, 75, 37, 240, 207, 118, 175, 232, 106, 15, 34, 129, 189, 12, 167, 136, 251, 41, 192, 213, 46, 47, 143, 47, 234, 246, 138, 237, 38, 159, 171, 224, 160, 71, 154, 153, 36, 47, 124, 236, 255, 10, 188, 71, 254, 102, 17, 116, 80, 119, 100, 35, 72, 128, 163, 205, 140, 221, 193, 184, 174, 176, 173, 206, 29, 206, 176, 160, 146, 21, 84, 195, 211, 28, 249, 198, 106, 134, 179, 248, 153, 4, 253, 168, 1, 104, 50, 211, 211, 17, 177, 209, 89, 114, 235, 2, 157, 236, 163, 119, 229, 112, 5, 65, 47, 254, 112, 11, 130, 138], hash: 76561198025262353 }            connected
+                if (outLine.Data.Contains("SGMConnectSpectator") && outLine.Data.Contains("connected"))
+                {
+                    try
+                    {
+                        Log.Information($"New spectator connected");
                     }
                     catch { }
                 }

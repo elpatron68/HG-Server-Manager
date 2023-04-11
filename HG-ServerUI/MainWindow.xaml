@@ -1200,7 +1200,7 @@
             Title="Course"
             VerticalTitleAlignment="Top"
             Count="{Binding Activecourse}"
-            CountFontSize="18"
+            CountFontSize="12"
             HorizontalAlignment="Left" 
             Margin="10,280,0,0" 
             Grid.Row="1" 
