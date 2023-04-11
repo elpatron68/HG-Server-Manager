@@ -833,5 +833,9 @@ namespace HG_ServerUI
             RtbLogMessages.ScrollToEnd();
         }
 
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            _ = Process.Start(new ProcessStartInfo("https://github.com/elpatron68/HG-Server-Manager") { UseShellExecute = true });
+        }
     }
 }

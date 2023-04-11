@@ -12,6 +12,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="00042-1879107711_100.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="00042-1879107711.ico" />
   </ItemGroup>
 
@@ -31,6 +35,10 @@
     <PackageReference Include="ntfy" Version="0.3.0" />
     <PackageReference Include="Serilog" Version="2.12.0" />
     <PackageReference Include="Serilog.Sinks.RichTextBox.Wpf" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="00042-1879107711_100.png" />
   </ItemGroup>
 
   <ItemGroup>

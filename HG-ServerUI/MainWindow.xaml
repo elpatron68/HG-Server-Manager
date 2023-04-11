@@ -1219,5 +1219,16 @@
             FontWeight="Bold"
             >
         </Label>
+        <Image 
+            Grid.Column="8" 
+            HorizontalAlignment="Left" 
+            Height="110" 
+            Margin="10,200,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top" 
+            Width="110" 
+            Source="/00042-1879107711_100.png" MouseDown="Image_MouseDown"
+            >
+        </Image>
     </Grid>
 </mah:MetroWindow>
