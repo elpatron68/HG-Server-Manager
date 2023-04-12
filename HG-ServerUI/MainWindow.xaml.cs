@@ -514,7 +514,7 @@ namespace HG_ServerUI
                 if (settingsModel.DiscordracenotificationEnabled)
                 {
 #if !DEBUG
-                    await AnnounceRaceToDiscord(_message);
+                    await AnnounceRaceToDiscord();
 #endif
                 }
             }
@@ -808,9 +808,8 @@ namespace HG_ServerUI
             _ = Process.Start(new ProcessStartInfo("https://github.com/elpatron68/HG-Server-Manager") { UseShellExecute = true });
         }
 
-        public async Task AnnounceRaceToDiscord(string text) // 1
+        public async Task AnnounceRaceToDiscord()
         {
-            Log.Information("Sending discord announcement");
             string _passwordprotected = string.Empty;
             if (settingsModel.Password.Length > 0)
             {
@@ -833,11 +832,16 @@ namespace HG_ServerUI
                 MessageDialogStyle.AffirmativeAndNegative);
             if(result==MessageDialogResult.Affirmative)
             {
+                Log.Information("Sending discord announcement");
                 var client = new DiscordSocketClient();
                 await client.LoginAsync(TokenType.Bot, _discordRacebot.DiscordbotToken);
                 await client.StartAsync();
                 var channel = await client.GetChannelAsync(_discordRacebot.Discordchannelid) as IMessageChannel;
-                await channel!.SendMessageAsync(text);
+                await channel!.SendMessageAsync(_message);
+            }
+            else
+            {
+                Log.Information("Discord announcement canceled");
             }
         }
     }
