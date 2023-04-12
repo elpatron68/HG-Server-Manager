@@ -2,6 +2,9 @@
 
 ## v1.0.4
 - Fix reading server name with blanks
+- Add chat textbox
+- Replace Ntfy by Discord
+- Add more messages from `hg_server.exe` to the *Protocol` textbox
 
 ## v1.0.3
 - Add new penalties to the top of the list

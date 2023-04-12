@@ -10,7 +10,7 @@
   - 🚀 Start/stop game server
   - ⚠️ Get notified of the occurrence of penalties
   - 👨‍👩‍👧‍👦 See if your server is publicly reachable
-- 📬 Notify players of your server launches
+- 📬 Notify players of your server launches via *Discord*
 - ♾️ Load and save an unlimited number of different configurations
 - ⛵ Instantly switch between up to 10 user-defined presets by hot key
 - 📃 Open game server log file and *snaps* directory directly from the application
@@ -45,19 +45,15 @@ Open *File* - *Save current configuration* saves the configuration to the defaul
 
 Open *File* - *Manually edit configuration* to edit `server_cfg.kl` in the *Notepad* text editor. Changes to the file will be loaded to the user interface after saving the file.
 
-### Open server log
+### Open Server Log
 
 You can open the server log `log.log` in the *Notepad* text editor by opening *File* - *Open server log*.
-
-### Ntfy
-
-The menu *Ntfy* lets you open the Ntfy game- and penalty topics in your web browser. For details, see section about *Ntfy* section below.
 
 ### Snaps
 
 The menu *Snaps* - *Open snaps* opens an Windows *Explorer* window in your *snaps* directory. You can delete all snap files by selecting *Snaps* - *Delete all files in snaps directory*.
 
-### Status bar
+### Status Bar
 
 The status bar at the bottom of the window shows informations about the state of your server.
 
@@ -77,7 +73,7 @@ Occurring penalties are displayed in the *Penalties* text box. New penalties are
 
 ![image-20230409112031213](./assets/image-20230409112031213.png)
 
-### Hot slots
+### Hot Slots
 
 *HG Server-Manager* supports up to ten *hot slots* to quickly change between different configurations. Every *hot slot* represents a different server configuration.
 
@@ -90,45 +86,12 @@ The keyboard hot keys `Crtl+1` to  `Crtl+0` activate a corresponding *hot slot*.
 - Load (or edit) a configuration and adjust it to your needs.
 - Save this configuration with the file name `slot<Number>.kl`. E.g. for `Crtl+3` the file name should be `slot3>.kl`.
 
-## How notifications work
+### Discord announcements
 
-There are two use cases for notifications:
+*HG Server-Manager* can announce the start of your server by Discord message. Check the corresponding *Switch* to enable Discord messages. The messages are sent to the channel `#hydrofoil-gerneration-race-annoncements` on the author´s server. You can follow the channel to add the messages to your own server by clicking this [link](https://discord.gg/6VbyhrZ9UG) and selecting *Follow*.
 
-- You want to inform your player community about your game server launces.
-- You (or your players) want to be informed if your game server detects any penalties.
+![image-20230412160522765](./assets/image-20230412160522765.png)
 
-**Let your players never miss one of your races by letting them subscribe to your messages!**
+### Start Server
 
-*HG Server-Manager* uses the free service [*Ntfy*](https://ntfy.sh/) to send notifications to subscribed clients. To setup *Ntfy* notifications as game host, you have to
-
-- Select a *topic* for race notices and enter it in the corresponding field
-- Select a *topic* for penalty notices and enter it in the corresponding field
-
-![image-20230408175840258](./assets/image-20230408175840258.png)
-
-A Ntfy *topic* is sort of a channel, users can subscribe to. You can enter any alphanumeric topic name you want. But be aware of the fact, that every topic is public and everyone can read the messages if the name of the topic is known. So, if you want to have some privacy, give your topic(s) a random alpha-numeric name like `qPd5AbhVfwv5FJFQtYRY4xCf`.
-
-![image-20230408182649932](./assets/image-20230408182649932.png) 
-
-![image-20230409112013166](./assets/image-20230409112013166.png)
-
-Example notification (web browser)
-
-<img src="./assets/image-20230408182840712.png" alt="image-20230408182840712" style="zoom:33%;" />
-
-Example notifications (Android app)
-
-As player, who wants to be informed about starting races of their favorite host, you can subscribe the Ntfy topic: Ask the game host for the topic(s) to subscribe to (if the default values were changed).
-
-- Open the web site `https://ntfy.sh/<topic>` in your browser or
-- install the [Ntfy app](https://ntfy.sh/#subscribe-phone) on your mobile and add to the *topic*.
-
-If you have not configured own *topics*, *HG Server-Manager* sends notifications to the *topics* [`Hydrofoil_Generation_Servermonitor`](https://ntfy.sh/Hydrofoil_Generation_Servermonitor) (game server start events) and [`Hydrofoil_Generation_Penaltymonitor`](https://ntfy.sh/Hydrofoil_Generation_Penaltymonitor). Click on the links to open the default topics in your web browser.
-
-> Tip: If you use own topics, inform your player community about them.
-
-> Tip: Ntfy topics are saved to the game server configuration file(s), so you can use different topics in different server configurations.
-
-### Disable Ntfy notifications
-
-Leave one or both *topic* fields empty to disable Ntfy notifications.
+Click on the button *Start [Crtl+s]* or use the hotkey `Crtl+s`to start the server process. The game server process `hg_server.exe` will be launched and after that, *HG Server-Manager* tries to establish a TCP connection to the game server´s *TCP Port* to determine, if your server is publicly reachable. The result of this check is shown in the *Status Bar*. Note: If this check fails, no Discord message will be sent, even if the option is activated!
