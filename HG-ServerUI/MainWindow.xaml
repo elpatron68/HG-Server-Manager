@@ -1158,6 +1158,7 @@
             >
         </Image>
         <TextBlock 
+            x:Name="TbChat"
             Grid.Column="6" 
             HorizontalAlignment="Left" 
             Margin="60,40,0,0" 
@@ -1173,5 +1174,15 @@
 
             >
         </TextBlock>
+        <Label 
+            Grid.Column="6" 
+            Content="Chat" 
+            HorizontalAlignment="Left" 
+            Margin="66,10,0,0" 
+            Grid.Row="1" 
+            VerticalAlignment="Top"
+            FontWeight="Bold"
+            >
+        </Label>
     </Grid>
 </mah:MetroWindow>

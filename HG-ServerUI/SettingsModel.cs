@@ -373,6 +373,13 @@ namespace HG_ServerUI
             set { _activecourse = value; OnPropertyChanged(); }
         }
 
+        private string _chat;
+        public string Chat
+        {
+            get { return _chat ?? string.Empty; }
+            set { _chat = value; OnPropertyChanged(); }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")

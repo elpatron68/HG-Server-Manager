@@ -135,6 +135,7 @@ namespace HG_ServerUI
             WinHGSM.DataContext = settingsModel;
             TiBoats.DataContext = settingsModel;
             TiActiveCourse.DataContext = settingsModel;
+            TbChat.DataContext = settingsModel;
         }
 
         // New penalty?
@@ -264,6 +265,7 @@ namespace HG_ServerUI
             Debug.WriteLine(outLine.Data);
             if(outLine.Data != null)
             {
+                string _timestamp = $"[{DateTime.Now.ToString("HH:mm:ss")}]";
                 if (outLine.Data.Contains("Boat count"))
                 {
                     try
@@ -346,6 +348,17 @@ namespace HG_ServerUI
                     }
                     catch { }
                 }
+                // 09:11:16[INFO] CHAT: ChatMessage { origin: Boat(0), message: "Hallo Welt" }
+                if (outLine.Data.Contains("CHAT:"))
+                {
+                    try
+                    {
+                        string _message = outLine.Data.Split("message:")[1].Split("\"")[1].Trim() + "\n";
+                        settingsModel.Chat = $"{_timestamp} {_message}{settingsModel.Chat}"; // _timestamp + _message + settingsModel.Chat;
+                    }
+                    catch { }
+                }
+
             }
         }
 
