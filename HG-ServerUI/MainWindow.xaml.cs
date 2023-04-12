@@ -820,12 +820,12 @@ namespace HG_ServerUI
                 _passwordprotected = "Open race";
             }
             string _message = $"**A New HG User Race Has Started :rocket:**\n" +
-                $":trophy: _Race name:_ {settingsModel.Servername}\n" +
-                $":world_map: _Course:_ {settingsModel.Course}\n" +
-                $":earth_africa: _Location:_ {settingsModel.Location}\n" +
-                $":sailboat: _Boat:_ {settingsModel.Boat}\n" +
-                $":wind_blowing_face: _Max wind:_ {settingsModel.Windmaxspeed} kt\n" +
-                $":white_sun_small_cloud: _Min wind:_ {settingsModel.Windminspeed} kt\n"; // +
+                $":trophy: Race name: *{settingsModel.Servername}*\n" +
+                $":world_map: Course: *{settingsModel.Course}*\n" +
+                $":earth_africa: Location: *{settingsModel.Location}*\n" +
+                $":sailboat: Boat: *{settingsModel.Boat}*\n" +
+                $":wind_blowing_face: Max wind: *{settingsModel.Windmaxspeed}* kt\n" +
+                $":white_sun_small_cloud: Min wind: *{settingsModel.Windminspeed}* kt\n"; // +
             MessageDialogResult _post2Discord = await this.ShowMessageAsync("Discord notification", 
                 "Discord regatta notification is activated. Do you really want to announce this race publicly on Discord?", 
                 MessageDialogStyle.AffirmativeAndNegative);
