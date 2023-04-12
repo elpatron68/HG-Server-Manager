@@ -132,8 +132,6 @@ namespace HG_ServerUI
             LbServerReachable.DataContext = settingsModel;
             BtnStartServer.DataContext = settingsModel;
             TbPenalties.DataContext = settingsModel;
-            TbNtfyRaceTopic.DataContext = settingsModel;
-            TbNtfyPenaltyTopic.DataContext = settingsModel;
             WinHGSM.DataContext = settingsModel;
             TiBoats.DataContext = settingsModel;
             TiActiveCourse.DataContext = settingsModel;
@@ -165,10 +163,6 @@ namespace HG_ServerUI
 
                     SoundPlayer player = new(Properties.Resources.beep_sound);
                     player.Play();
-                    if (settingsModel.Ntfyracectopic != string.Empty)
-                    {
-                        await SendNtfyPenaltyAnnouncement($"New penalty ({_offence}) by {_username} in race {settingsModel.Servername}.");
-                    }
                 }
                 catch 
                 {
@@ -261,11 +255,6 @@ namespace HG_ServerUI
             settingsModel.Btnservercontent = "_Stop [crtl+s]";
             //ToggleControls(false);
 
-            if (settingsModel.Ntfyracectopic != string.Empty)
-            {
-                Log.Information("Sending message to Ntfy channel 📫");
-                await SendNtfyRaceAnnouncement();
-            }
             TestPortAsync();
         }
 
@@ -442,80 +431,6 @@ namespace HG_ServerUI
         private void MnOpenLogfile_Click(object sender, RoutedEventArgs e)
         {
             _ = Process.Start("notepad.exe", settingsModel.Logfilepath);
-        }
-
-        private async Task SendNtfyRaceAnnouncement()
-        {
-            string _passtext=string.Empty;
-            if (settingsModel.Password.Length>0)
-            {
-                _passtext = "Private server, password protected";
-            }
-            else
-            {
-                _passtext = "Open server, no password set";
-            }
-            // Create a new ntfy client
-            var topic = settingsModel.Ntfyracectopic;
-            var client = new Client("https://ntfy.sh");
-            var message = new SendingMessage
-            {
-                Title = "A new Hydrofoil Generation server started!",
-                Message = $"Server name: {settingsModel.Servername}\n" +
-                $"Location: {settingsModel.Location}\n" +
-                $"Course: {settingsModel.Course}\n" +
-                $"Wind: Min {settingsModel.Windminspeed.ToString("0.#", CultureInfo.InvariantCulture)} kt, " +
-                $"max {settingsModel.Windmaxspeed.ToString("0.#", CultureInfo.InvariantCulture)} kt\n" +
-                $"{_passtext}",
-                Tags = new[]
-                {
-                    "rocket", "boat"
-                }
-            };
-            try
-            {
-                await client.Publish(topic, message);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-        }
-
-        private async Task SendNtfyPenaltyAnnouncement(string text)
-        {
-            // Create a new ntfy client
-            var topic = settingsModel.Ntfypenaltytopic;
-            var client = new Client("https://ntfy.sh");
-            var message = new SendingMessage
-            {
-                Title = "A penalty occurred!",
-                Message = $"Server name: {settingsModel.Servername}\n" + text,
-                Tags = new[]
-                {
-                    "loudspeaker", "rotating_light"
-                }
-            };
-            try
-            {
-                await client.Publish(topic, message);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-        }
-
-        private void MnOpenNtfyRace_Click(object sender, RoutedEventArgs e)
-        {
-            _ = Process.Start(new ProcessStartInfo($"https://ntfy.sh/{settingsModel.Ntfyracectopic}")
-                { UseShellExecute = true });
-        }
-
-        private void MnOpenNtfyPenalty_Click(object sender, RoutedEventArgs e)
-        {
-            _ = Process.Start(new ProcessStartInfo($"https://ntfy.sh/{settingsModel.Ntfypenaltytopic}")
-                { UseShellExecute = true });
         }
 
         private void MnSave_Click(object sender, RoutedEventArgs e)

@@ -126,24 +126,6 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="_Ntfy">
-                <MenuItem x:Name="MnOpenNtfyRace"
-                          Header="_Open Ntfy launch events (web browser)" 
-                          Click="MnOpenNtfyRace_Click"
-                          >
-                    <MenuItem.Icon>
-                        <iconPacks:PackIconMaterialLight Kind="Bell" />
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem x:Name="MnOpenNtfyPenalty"
-                          Header="Open Ntfy _penalty events (web browser)" 
-                          Click="MnOpenNtfyPenalty_Click"
-                          >
-                    <MenuItem.Icon>
-                        <iconPacks:PackIconMaterialLight Kind="Bell" />
-                    </MenuItem.Icon>
-                </MenuItem>
-            </MenuItem>
             <MenuItem Header="H_ot slots">
                 <MenuItem
                     x:Name="MnSlot"
@@ -1060,19 +1042,21 @@
         </mah:NumericUpDown>
         <RichTextBox 
             x:Name="RtbLogMessages"
-            Grid.Column="5" 
+            Grid.Column="4" 
             Grid.Row="1" 
             Grid.ColumnSpan="3" 
-            Margin="10,40,12,10" 
+            Margin="10,40,80,10" 
             FontFamily="Cascadia Mono, Consolas, Courier New, monospace"
             Background="Black"
             Foreground="LightGreen"
             VerticalScrollBarVisibility="Auto" 
-            FontSize="10" TextChanged="RtbLogMessages_TextChanged"
+            FontSize="10"
+            Height="150"
+            TextChanged="RtbLogMessages_TextChanged"
             >
         </RichTextBox>
         <Label 
-            Grid.Column="5" 
+            Grid.Column="4" 
             Content="Protocol" 
             HorizontalAlignment="Left" 
             Margin="10,5,0,0" 
@@ -1086,7 +1070,7 @@
         <TextBlock 
             x:Name="TbPenalties"
             Grid.Column="5" 
-            Margin="10,35,12,209" 
+            Margin="10,30,10,210" 
             Grid.Row="2" 
             TextWrapping="Wrap" 
             Text="{Binding Penalties}" 
@@ -1104,64 +1088,6 @@
             VerticalAlignment="Top"
             FontWeight="Bold"
             />
-        <Label 
-            Grid.Column="2" 
-            Content="Ntfy race topic" 
-            HorizontalAlignment="Left" 
-            Margin="10,100,0,0" 
-            Grid.Row="1" 
-            VerticalAlignment="Top">
-        </Label>
-        <Label 
-            Grid.Column="2" 
-            Content="Ntfy penalty topic" 
-            HorizontalAlignment="Left" 
-            Margin="10,130,0,0" 
-            Grid.Row="1" 
-            VerticalAlignment="Top"
-            >
-        </Label>
-        <TextBlock
-            Grid.Column="3"
-            Grid.Row="1" 
-            Grid.ColumnSpan="2"
-            HorizontalAlignment="Center" 
-            VerticalAlignment="Top"
-            Margin="0,170,0,0" 
-            Width="210" 
-            Height="20"
-            TextAlignment="Left" FontSize="14"
-            >
-            <Hyperlink
-                NavigateUri="https://github.com/elpatron68/HG-Server-Manager#how-notifications-work"
-                RequestNavigate="NtfyHelp_RequestNavigate"
-            >
-            ℹ️ How notifications work
-        </Hyperlink>
-        </TextBlock>
-        <TextBox 
-            x:Name="TbNtfyRaceTopic"
-            Grid.Column="3"
-            Grid.Row="1" 
-            Margin="14,100,6,0" 
-            TextWrapping="NoWrap" 
-            Text="{Binding Ntfyracectopic}" 
-            VerticalAlignment="Top" 
-            Grid.ColumnSpan="2"
-            />
-        <TextBox 
-            x:Name="TbNtfyPenaltyTopic"
-            Grid.Column="3" 
-            HorizontalAlignment="Left" 
-            Margin="14,130,0,0" 
-            Grid.Row="1" 
-            Grid.ColumnSpan="2"
-            TextWrapping="NoWrap" 
-            Text="{Binding Ntfypenaltytopic}"
-            VerticalAlignment="Top" 
-            Width="243"
-            >
-        </TextBox>
         <mah:Tile 
             x:Name="TiBoats"
             Grid.Column="8" 
@@ -1231,5 +1157,21 @@
             MouseDown="Image_MouseDown"
             >
         </Image>
+        <TextBlock 
+            Grid.Column="6" 
+            HorizontalAlignment="Left" 
+            Margin="60,40,0,0" 
+            Grid.Row="1" 
+            TextWrapping="Wrap" 
+            Text="{Binding Chat}" 
+            VerticalAlignment="Top" 
+            Grid.ColumnSpan="2" 
+            Width="200" 
+            Height="150"
+            Background="Black"
+            Foreground="Yellow" 
+
+            >
+        </TextBlock>
     </Grid>
 </mah:MetroWindow>

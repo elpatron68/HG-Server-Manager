@@ -352,20 +352,6 @@ namespace HG_ServerUI
             set { _penatltiespath = value; OnPropertyChanged(); }
         }
 
-        private string _ntfypublictopic;
-        public string Ntfyracectopic
-        {
-            get { return _ntfypublictopic ?? string.Empty; }
-            set { _ntfypublictopic = value; OnPropertyChanged(); }
-        }
-
-        private string _ntfyprivatetopic;
-        public string Ntfypenaltytopic
-        {
-            get { return _ntfyprivatetopic ?? string.Empty; }
-            set { _ntfyprivatetopic = value; OnPropertyChanged(); }
-        }
-
         private string _boatsinrace;
         public string Boatsinrace
         {
@@ -438,8 +424,6 @@ namespace HG_ServerUI
             Boats = Array.Empty<string>();
             Penalties = string.Empty;
             Snapsdirectory= string.Empty;
-            Ntfyracectopic = string.Empty;
-            Ntfypenaltytopic = string.Empty;
             Btnservercontent = "_Start [Crtl+s]";
             Boatsinrace = "0";
             Racestate = "Inactive";
