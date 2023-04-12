@@ -825,13 +825,26 @@ namespace HG_ServerUI
                 $"_Location:_ {settingsModel.Location}\n" +
                 $"_Boat:_ {settingsModel.Boat}\n" +
                 $"_Max wind:_ {settingsModel.Windmaxspeed} kt\n" +
-                $"_Min wind:_ {settingsModel.Windminspeed} kt\n" +
-                $"_Password protection:_ {_passwordprotected}\n";
-            MessageDialogResult result = await this.ShowMessageAsync("Discord notification", 
+                $"_Min wind:_ {settingsModel.Windminspeed} kt\n"; // +
+            MessageDialogResult _post2Discord = await this.ShowMessageAsync("Discord notification", 
                 "Discord race notification is activated. Do you really want to announce this race publicly on Discord?", 
                 MessageDialogStyle.AffirmativeAndNegative);
-            if(result==MessageDialogResult.Affirmative)
+            if(_post2Discord==MessageDialogResult.Affirmative)
             {
+                if (settingsModel.Password.Length > 0)
+                {
+                    MessageDialogResult _postPrivaterace = await this.ShowMessageAsync("Private ragatta",
+                        "You have set a password. Do you want to announce the password on Discord?",
+                        MessageDialogStyle.AffirmativeAndNegative);
+                    if (_postPrivaterace == MessageDialogResult.Affirmative)
+                    {
+                        _message += $"_Password:_ {settingsModel.Password}";
+                    }
+                    else
+                    {
+                        _message += $"_Password protection:_ {_passwordprotected}\n";
+                    }
+                }
                 Log.Information("Sending discord announcement");
                 var client = new DiscordSocketClient();
                 await client.LoginAsync(TokenType.Bot, _discordRacebot.DiscordbotToken);
