@@ -346,6 +346,17 @@ namespace HG_ServerUI
                     }
                     catch { }
                 }
+                // 16:36:50 [INFO] Removing SrvBoat: BoatDef { boat_name: "elpatron", boat_model: "jx50", skin: Skin("red white"
+                if (outLine.Data.Contains("Removing SrvBoat:"))
+                {
+                    try
+                    {
+                        Log.Information($"Boat left server: {outLine.Data.Split("boat_name:")[1]
+                            .Split(',')[0]
+                            .Replace("\"", "").Trim()}");
+                    }
+                    catch { }
+                }
             }
         }
 
