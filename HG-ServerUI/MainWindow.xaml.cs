@@ -827,7 +827,7 @@ namespace HG_ServerUI
                 $"_Max wind:_ {settingsModel.Windmaxspeed} kt\n" +
                 $"_Min wind:_ {settingsModel.Windminspeed} kt\n"; // +
             MessageDialogResult _post2Discord = await this.ShowMessageAsync("Discord notification", 
-                "Discord race notification is activated. Do you really want to announce this race publicly on Discord?", 
+                "Discord regatta notification is activated. Do you really want to announce this race publicly on Discord?", 
                 MessageDialogStyle.AffirmativeAndNegative);
             if(_post2Discord==MessageDialogResult.Affirmative)
             {
