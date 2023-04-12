@@ -275,7 +275,7 @@ namespace HG_ServerUI
                     {
                         _passwordprotected = "Open race";
                     }
-                    string _message = $"**A New HG User Race Has Started :rocket:**\n" +
+                    string _message = $"**A New HG Regatta Has Started :rocket:**\n" +
                         $":trophy: Race name: *{settingsModel.Servername}*\n" +
                         $":world_map: Course: *{settingsModel.Course}*\n" +
                         $":earth_africa: Location: *{settingsModel.Location}*\n" +
