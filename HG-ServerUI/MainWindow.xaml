@@ -1069,8 +1069,8 @@
         </Label>
         <TextBlock 
             x:Name="TbPenalties"
-            Grid.Column="5" 
-            Margin="10,30,10,210" 
+            Grid.Column="4" 
+            Margin="10,30,80,210" 
             Grid.Row="2" 
             TextWrapping="Wrap" 
             Text="{Binding Penalties}" 
@@ -1080,7 +1080,7 @@
             Foreground="Red" 
             ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         <Label 
-            Grid.Column="5" 
+            Grid.Column="4" 
             Content="Penalties" 
             HorizontalAlignment="Left" 
             Margin="10,5,0,0" 
