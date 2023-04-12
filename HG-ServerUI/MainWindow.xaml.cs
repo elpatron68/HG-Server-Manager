@@ -833,7 +833,7 @@ namespace HG_ServerUI
             {
                 if (settingsModel.Password.Length > 0)
                 {
-                    MessageDialogResult _postPrivaterace = await this.ShowMessageAsync("Private ragatta",
+                    MessageDialogResult _postPrivaterace = await this.ShowMessageAsync("Private regatta",
                         "You have set a password. Do you want to announce the password on Discord?",
                         MessageDialogStyle.AffirmativeAndNegative);
                     if (_postPrivaterace == MessageDialogResult.Affirmative)
