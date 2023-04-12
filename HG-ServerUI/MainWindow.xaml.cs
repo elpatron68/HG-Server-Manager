@@ -169,7 +169,7 @@ namespace HG_ServerUI
                 }
                 catch
                 {
-                    Log.Warning($"Failed parsing penalty file name: {_filename}");
+                    Log.Warning($"Failed parsing penalty file name: {Path.GetFileName(_filename)}");
                 }
             }
         }
