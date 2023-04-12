@@ -235,7 +235,7 @@ namespace HG_ServerUI
             Close();
         }
 
-        private void RunServerProcess()
+        private async void RunServerProcess()
         {
             Log.Information("Starting HG server");
             _cfgFileSystemWatcher.EnableRaisingEvents = false;
@@ -258,6 +258,55 @@ namespace HG_ServerUI
             settingsModel.Btnservercontent = "_Stop [crtl+s]";
             //ToggleControls(false);
             TestPortAsync();
+            Thread.Sleep(1000);
+            if (settingsModel.Serverreachable && settingsModel.DiscordracenotificationEnabled)
+            {
+                MessageDialogResult _post2Discord = await this.ShowMessageAsync("Discord notification",
+                    "Discord regatta notification is activated. Do you really want to announce this race publicly on Discord?",
+                    MessageDialogStyle.AffirmativeAndNegative);
+                if (_post2Discord == MessageDialogResult.Affirmative)
+                {
+                    string _passwordprotected = string.Empty;
+                    if (settingsModel.Password.Length > 0)
+                    {
+                        _passwordprotected = "Private race";
+                    }
+                    else
+                    {
+                        _passwordprotected = "Open race";
+                    }
+                    string _message = $"**A New HG User Race Has Started :rocket:**\n" +
+                        $":trophy: Race name: *{settingsModel.Servername}*\n" +
+                        $":world_map: Course: *{settingsModel.Course}*\n" +
+                        $":earth_africa: Location: *{settingsModel.Location}*\n" +
+                        $":sailboat: Boat: *{settingsModel.Boat}*\n" +
+                        $":wind_blowing_face: Max wind: *{settingsModel.Windmaxspeed} kt*\n" +
+                        $":white_sun_small_cloud: Min wind: *{settingsModel.Windminspeed} kt*\n"; // +
+                    if (settingsModel.Password.Length > 0)
+                    {
+                        MessageDialogResult _postPrivaterace = await this.ShowMessageAsync("Private regatta",
+                            "You have set a password. Do you want to announce the password on Discord?",
+                            MessageDialogStyle.AffirmativeAndNegative);
+                        if (_postPrivaterace == MessageDialogResult.Affirmative)
+                        {
+                            _message += $"_Password:_ {settingsModel.Password}";
+                        }
+                        else
+                        {
+                            _message += $"_Password protection:_ {_passwordprotected}\n";
+                        }
+                    }
+                    await AnnounceRaceToDiscord(_message);
+                }
+                else
+                {
+                    Log.Information("Discord announcement canceled");
+                }
+                if (!settingsModel.Serverreachable && settingsModel.DiscordracenotificationEnabled)
+                {
+                    Log.Information("No Discord message sent - server is LAN-only");
+                }
+            }
         }
 
         private void ConsoleOutputHandler(object sendingProcess,
@@ -510,22 +559,11 @@ namespace HG_ServerUI
             {
                 settingsModel.Serverreachable = true;
                 Log.Information("Server is accessible to the public");
-                // Discord announcement if server is public and DiscordracenotificationEnabled==true
-                if (settingsModel.DiscordracenotificationEnabled)
-                {
-//#if !DEBUG
-                    await AnnounceRaceToDiscord();
-//#endif
-                }
             }
-                else
+            else
             {
                 settingsModel.Serverreachable = false;
                 Log.Information("External port check failed: LAN-only server");
-                if(settingsModel.DiscordracenotificationEnabled)
-                {
-                    Log.Information("No Discord message sent - server is LAN-only");
-                }
             }
         }
 
@@ -808,54 +846,14 @@ namespace HG_ServerUI
             _ = Process.Start(new ProcessStartInfo("https://github.com/elpatron68/HG-Server-Manager") { UseShellExecute = true });
         }
 
-        public async Task AnnounceRaceToDiscord()
+        public async Task AnnounceRaceToDiscord(string _message)
         {
-            string _passwordprotected = string.Empty;
-            if (settingsModel.Password.Length > 0)
-            {
-                _passwordprotected = "Private race";
-            }
-            else
-            {
-                _passwordprotected = "Open race";
-            }
-            MessageDialogResult _post2Discord = await this.ShowMessageAsync("Discord notification", 
-                "Discord regatta notification is activated. Do you really want to announce this race publicly on Discord?", 
-                MessageDialogStyle.AffirmativeAndNegative);
-            if(_post2Discord==MessageDialogResult.Affirmative)
-            {
-                string _message = $"**A New HG User Race Has Started :rocket:**\n" +
-                    $":trophy: Race name: *{settingsModel.Servername}*\n" +
-                    $":world_map: Course: *{settingsModel.Course}*\n" +
-                    $":earth_africa: Location: *{settingsModel.Location}*\n" +
-                    $":sailboat: Boat: *{settingsModel.Boat}*\n" +
-                    $":wind_blowing_face: Max wind: *{settingsModel.Windmaxspeed}* kt\n" +
-                    $":white_sun_small_cloud: Min wind: *{settingsModel.Windminspeed}* kt\n"; // +
-                if (settingsModel.Password.Length > 0)
-                {
-                    MessageDialogResult _postPrivaterace = await this.ShowMessageAsync("Private regatta",
-                        "You have set a password. Do you want to announce the password on Discord?",
-                        MessageDialogStyle.AffirmativeAndNegative);
-                    if (_postPrivaterace == MessageDialogResult.Affirmative)
-                    {
-                        _message += $"_Password:_ {settingsModel.Password}";
-                    }
-                    else
-                    {
-                        _message += $"_Password protection:_ {_passwordprotected}\n";
-                    }
-                }
                 Log.Information("Sending discord announcement");
                 var client = new DiscordSocketClient();
                 await client.LoginAsync(TokenType.Bot, _discordRacebot.DiscordbotToken);
                 await client.StartAsync();
                 var channel = await client.GetChannelAsync(_discordRacebot.Discordchannelid) as IMessageChannel;
                 await channel!.SendMessageAsync(_message);
-            }
-            else
-            {
-                Log.Information("Discord announcement canceled");
-            }
         }
     }
 }
