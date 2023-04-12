@@ -513,9 +513,9 @@ namespace HG_ServerUI
                 // Discord announcement if server is public and DiscordracenotificationEnabled==true
                 if (settingsModel.DiscordracenotificationEnabled)
                 {
-#if !DEBUG
+//#if !DEBUG
                     await AnnounceRaceToDiscord();
-#endif
+//#endif
                 }
             }
                 else
@@ -819,13 +819,13 @@ namespace HG_ServerUI
             {
                 _passwordprotected = "Open race";
             }
-            string _message = $"**A New User Race Started**\n" +
-                $"_Race name:_ {settingsModel.Servername}\n" +
-                $"_Course:_ {settingsModel.Course}\n" +
-                $"_Location:_ {settingsModel.Location}\n" +
-                $"_Boat:_ {settingsModel.Boat}\n" +
-                $"_Max wind:_ {settingsModel.Windmaxspeed} kt\n" +
-                $"_Min wind:_ {settingsModel.Windminspeed} kt\n"; // +
+            string _message = $"**A New HG User Race Has Started :rocket:**\n" +
+                $":trophy: _Race name:_ {settingsModel.Servername}\n" +
+                $":world_map: _Course:_ {settingsModel.Course}\n" +
+                $":earth_africa: _Location:_ {settingsModel.Location}\n" +
+                $":sailboat: _Boat:_ {settingsModel.Boat}\n" +
+                $":wind_blowing_face: _Max wind:_ {settingsModel.Windmaxspeed} kt\n" +
+                $":white_sun_small_cloud: _Min wind:_ {settingsModel.Windminspeed} kt\n"; // +
             MessageDialogResult _post2Discord = await this.ShowMessageAsync("Discord notification", 
                 "Discord regatta notification is activated. Do you really want to announce this race publicly on Discord?", 
                 MessageDialogStyle.AffirmativeAndNegative);
