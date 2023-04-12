@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Discord.WebSocket;
+using Discord;
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows.Documents;
 
 namespace HG_ServerUI
@@ -352,20 +355,6 @@ namespace HG_ServerUI
             set { _penatltiespath = value; OnPropertyChanged(); }
         }
 
-        private string _ntfypublictopic;
-        public string Ntfyracectopic
-        {
-            get { return _ntfypublictopic ?? string.Empty; }
-            set { _ntfypublictopic = value; OnPropertyChanged(); }
-        }
-
-        private string _ntfyprivatetopic;
-        public string Ntfypenaltytopic
-        {
-            get { return _ntfyprivatetopic ?? string.Empty; }
-            set { _ntfyprivatetopic = value; OnPropertyChanged(); }
-        }
-
         private string _boatsinrace;
         public string Boatsinrace
         {
@@ -385,6 +374,27 @@ namespace HG_ServerUI
         {
             get { return _activecourse ?? string.Empty; }
             set { _activecourse = value; OnPropertyChanged(); }
+        }
+
+        private string _chat;
+        public string Chat
+        {
+            get { return _chat ?? string.Empty; }
+            set { _chat = value; OnPropertyChanged(); }
+        }
+
+        private bool _discordracenotificationEnabled;
+        public bool DiscordracenotificationEnabled
+        {
+            get { return _discordracenotificationEnabled; }
+            set { _discordracenotificationEnabled = value; OnPropertyChanged(); }
+        }
+
+        private string _discordracenotificationsText;
+        public string DiscordracenotificationsText
+        {
+            get { return _discordracenotificationsText ?? string.Empty; }
+            set { _discordracenotificationsText = value; OnPropertyChanged(); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -438,12 +448,11 @@ namespace HG_ServerUI
             Boats = Array.Empty<string>();
             Penalties = string.Empty;
             Snapsdirectory= string.Empty;
-            Ntfyracectopic = string.Empty;
-            Ntfypenaltytopic = string.Empty;
             Btnservercontent = "_Start [Crtl+s]";
             Boatsinrace = "0";
             Racestate = "Inactive";
             Activecourse = "n/a";
+            DiscordracenotificationEnabled = true;
         }
 
         private static string GetCfgFilenameFromExepath(string _exepath)

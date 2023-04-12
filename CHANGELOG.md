@@ -1,9 +1,12 @@
 ﻿# Changelog
 
+## v1.0.4
+- Fix reading server name with blanks
+
 ## v1.0.3
 - Add new penalties to the top of the list
 - Auto scroll Protocol text to the end
-- ~~Copy `/admin <password>`, `/set_course` and `/set_wind` admin commands to clipboard (double-click on the label left to the value, marked with 📃)~~ HG seems not to support pasting text from the clipboard to the chat.
+- ~~Copy `/admin <password>`, `/set_course` and `/set_wind` admin commands to clipboard (double-click on the label left to the value)~~ HG seems not to support pasting text from the clipboard to the chat.
 - Rearrange controls, widen window size add tiles
 - Parse `hg_server.exe` output, extract and display values (numer of players, server status, selected course) in new tiles
 - AI generated icon added (created with [Stable-Diffusion](https://github.com/AUTOMATIC1111/stable-diffusion-webui))

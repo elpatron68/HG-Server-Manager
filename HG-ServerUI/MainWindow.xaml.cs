@@ -16,10 +16,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Navigation;
 using System.Windows.Threading;
+using Discord.WebSocket;
+using Discord;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Win32;
-using ntfy;
 using Serilog;
 using Serilog.Sinks.RichTextBox.Themes;
 
@@ -45,6 +46,7 @@ namespace HG_ServerUI
         public static RoutedCommand cmdSlotEight = new RoutedCommand();
         public static RoutedCommand cmdSlotNine = new RoutedCommand();
         public static RoutedCommand cmdRunServer = new RoutedCommand();
+        private Discordbot _discordRacebot=new();
 
         public MainWindow()
         {
@@ -63,7 +65,6 @@ namespace HG_ServerUI
             Log.Information($"App version: {settingsModel.Appversion}");
             Log.Information("Settings loaded");
             PreFlightCheck();
-
             cmdSlotZero.InputGestures.Add(new KeyGesture(Key.D0, ModifierKeys.Control));
             cmdSlotOne.InputGestures.Add(new KeyGesture(Key.D1, ModifierKeys.Control));
             cmdSlotTwo.InputGestures.Add(new KeyGesture(Key.D2, ModifierKeys.Control));
@@ -132,15 +133,15 @@ namespace HG_ServerUI
             LbServerReachable.DataContext = settingsModel;
             BtnStartServer.DataContext = settingsModel;
             TbPenalties.DataContext = settingsModel;
-            TbNtfyRaceTopic.DataContext = settingsModel;
-            TbNtfyPenaltyTopic.DataContext = settingsModel;
             WinHGSM.DataContext = settingsModel;
             TiBoats.DataContext = settingsModel;
             TiActiveCourse.DataContext = settingsModel;
+            TbChat.DataContext = settingsModel;
+            CbDiscordRace.DataContext = settingsModel;
         }
 
         // New penalty?
-        private async void PenaltyHandleChanged(object sender, FileSystemEventArgs e)
+        private void PenaltyHandleChanged(object sender, FileSystemEventArgs e)
         {
             Log.Information("New penalty detected");
             string? _filename = e.FullPath;
@@ -150,8 +151,8 @@ namespace HG_ServerUI
                 try
                 {
                     string _timestamp = $"[{DateTime.Now.ToString("HH:mm:ss")}]";
-                    string _filecontent=File.ReadAllText(_filename);
-                    string _username =string.Empty;
+                    string _filecontent = File.ReadAllText(_filename);
+                    string _username = string.Empty;
                     string _offence = string.Empty;
                     foreach (string line in _filecontent.Split("\n"))
                     {
@@ -165,12 +166,8 @@ namespace HG_ServerUI
 
                     SoundPlayer player = new(Properties.Resources.beep_sound);
                     player.Play();
-                    if (settingsModel.Ntfyracectopic != string.Empty)
-                    {
-                        await SendNtfyPenaltyAnnouncement($"New penalty ({_offence}) by {_username} in race {settingsModel.Servername}.");
-                    }
                 }
-                catch 
+                catch
                 {
                     Log.Warning($"Failed parsing penalty file name: {_filename}");
                 }
@@ -260,13 +257,56 @@ namespace HG_ServerUI
             settingsModel.Serverprocessrunning = true;
             settingsModel.Btnservercontent = "_Stop [crtl+s]";
             //ToggleControls(false);
-
-            if (settingsModel.Ntfyracectopic != string.Empty)
-            {
-                Log.Information("Sending message to Ntfy channel 📫");
-                await SendNtfyRaceAnnouncement();
-            }
             TestPortAsync();
+            Thread.Sleep(1000);
+            if (settingsModel.Serverreachable && settingsModel.DiscordracenotificationEnabled)
+            {
+                MessageDialogResult _post2Discord = await this.ShowMessageAsync("Discord notification",
+                    "Discord regatta notification is activated. Do you really want to announce this race publicly on Discord?",
+                    MessageDialogStyle.AffirmativeAndNegative);
+                if (_post2Discord == MessageDialogResult.Affirmative)
+                {
+                    string _passwordprotected = string.Empty;
+                    if (settingsModel.Password.Length > 0)
+                    {
+                        _passwordprotected = "Private race";
+                    }
+                    else
+                    {
+                        _passwordprotected = "Open race";
+                    }
+                    string _message = $"**A New HG Regatta Has Started :rocket:**\n" +
+                        $":trophy: Race name: *{settingsModel.Servername}*\n" +
+                        $":world_map: Course: *{settingsModel.Course}*\n" +
+                        $":earth_africa: Location: *{settingsModel.Location}*\n" +
+                        $":sailboat: Boat: *{settingsModel.Boat}*\n" +
+                        $":wind_blowing_face: Max wind: *{settingsModel.Windmaxspeed} kt*\n" +
+                        $":white_sun_small_cloud: Min wind: *{settingsModel.Windminspeed} kt*\n"; // +
+                    if (settingsModel.Password.Length > 0)
+                    {
+                        MessageDialogResult _postPrivaterace = await this.ShowMessageAsync("Private regatta",
+                            "You have set a password. Do you want to announce the password on Discord?",
+                            MessageDialogStyle.AffirmativeAndNegative);
+                        if (_postPrivaterace == MessageDialogResult.Affirmative)
+                        {
+                            _message += $"_Password:_ {settingsModel.Password}";
+                        }
+                        else
+                        {
+                            _message += $"_Password protection:_ {_passwordprotected}\n";
+                        }
+                    }
+                    await AnnounceRaceToDiscord(_message);
+                }
+                else
+                {
+                    Log.Information("Discord announcement canceled");
+                }
+                if (!settingsModel.Serverreachable && settingsModel.DiscordracenotificationEnabled)
+                {
+                    Log.Information("No Discord message sent - server is LAN-only");
+                }
+            }
         }
 
         private void ConsoleOutputHandler(object sendingProcess,
@@ -275,6 +315,7 @@ namespace HG_ServerUI
             Debug.WriteLine(outLine.Data);
             if(outLine.Data != null)
             {
+                string _timestamp = $"[{DateTime.Now.ToString("HH:mm:ss")}]";
                 if (outLine.Data.Contains("Boat count"))
                 {
                     try
@@ -326,6 +367,48 @@ namespace HG_ServerUI
                     }
                     catch { }
                 }
+                // 16:11:23 [INFO] ServerLogic: ServerGameMessage::Connect received: SGMConnect { protocol_version: 32, password: None, boat_name: "elpatron", boat_model: "jx50", nation: "GER", skin: Skin("red white")
+                if (outLine.Data.Contains("ServerGameMessage") && outLine.Data.Contains("Connect received"))
+                {
+                    try
+                    {
+                        string _boatname = outLine.Data.Split("boat_name:")[1].Split(',')[0].Replace("\"", "").Trim();
+                        string _nation = outLine.Data.Split("nation:")[1].Split(',')[0].Replace("\"", "").Trim();
+                        Log.Information($"{_boatname} from {_nation} joined the race");
+                    }
+                    catch { }
+                }
+                // [WARN] Umpire::on_timeline_crossed
+                if (outLine.Data.Contains("Umpire::"))
+                {
+                    try
+                    {
+                        Log.Information($"Umpire: {outLine.Data.Split("::")[1].Trim()}");
+                    }
+                    catch { }
+                }
+                // 16:36:50 [INFO] Removing SrvBoat: BoatDef { boat_name: "elpatron", boat_model: "jx50", skin: Skin("red white"
+                if (outLine.Data.Contains("Removing SrvBoat:"))
+                {
+                    try
+                    {
+                        Log.Information($"Boat left server: {outLine.Data.Split("boat_name:")[1]
+                            .Split(',')[0]
+                            .Replace("\"", "").Trim()}");
+                    }
+                    catch { }
+                }
+                // 09:11:16[INFO] CHAT: ChatMessage { origin: Boat(0), message: "Hallo Welt" }
+                if (outLine.Data.Contains("CHAT:"))
+                {
+                    try
+                    {
+                        string _message = outLine.Data.Split("message:")[1].Split("\"")[1].Trim();
+                        settingsModel.Chat = $"{_timestamp} {_message}\n{settingsModel.Chat}"; // _timestamp + _message + settingsModel.Chat;
+                    }
+                    catch { }
+                }
+
             }
         }
 
@@ -334,7 +417,6 @@ namespace HG_ServerUI
             if (!settingsModel.Serverprocessrunning)
             {
                 RunServerProcess();
-                TestPortAsync();
             }
             else
             {
@@ -413,80 +495,6 @@ namespace HG_ServerUI
             _ = Process.Start("notepad.exe", settingsModel.Logfilepath);
         }
 
-        private async Task SendNtfyRaceAnnouncement()
-        {
-            string _passtext=string.Empty;
-            if (settingsModel.Password.Length>0)
-            {
-                _passtext = "Private server, password protected";
-            }
-            else
-            {
-                _passtext = "Open server, no password set";
-            }
-            // Create a new ntfy client
-            var topic = settingsModel.Ntfyracectopic;
-            var client = new Client("https://ntfy.sh");
-            var message = new SendingMessage
-            {
-                Title = "A new Hydrofoil Generation server started!",
-                Message = $"Server name: {settingsModel.Servername}\n" +
-                $"Location: {settingsModel.Location}\n" +
-                $"Course: {settingsModel.Course}\n" +
-                $"Wind: Min {settingsModel.Windminspeed.ToString("0.#", CultureInfo.InvariantCulture)} kt, " +
-                $"max {settingsModel.Windmaxspeed.ToString("0.#", CultureInfo.InvariantCulture)} kt\n" +
-                $"{_passtext}",
-                Tags = new[]
-                {
-                    "rocket", "boat"
-                }
-            };
-            try
-            {
-                await client.Publish(topic, message);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-        }
-
-        private async Task SendNtfyPenaltyAnnouncement(string text)
-        {
-            // Create a new ntfy client
-            var topic = settingsModel.Ntfypenaltytopic;
-            var client = new Client("https://ntfy.sh");
-            var message = new SendingMessage
-            {
-                Title = "A penalty occurred!",
-                Message = $"Server name: {settingsModel.Servername}\n" + text,
-                Tags = new[]
-                {
-                    "loudspeaker", "rotating_light"
-                }
-            };
-            try
-            {
-                await client.Publish(topic, message);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-        }
-
-        private void MnOpenNtfyRace_Click(object sender, RoutedEventArgs e)
-        {
-            _ = Process.Start(new ProcessStartInfo($"https://ntfy.sh/{settingsModel.Ntfyracectopic}")
-                { UseShellExecute = true });
-        }
-
-        private void MnOpenNtfyPenalty_Click(object sender, RoutedEventArgs e)
-        {
-            _ = Process.Start(new ProcessStartInfo($"https://ntfy.sh/{settingsModel.Ntfypenaltytopic}")
-                { UseShellExecute = true });
-        }
-
         private void MnSave_Click(object sender, RoutedEventArgs e)
         {
             _cfgFileSystemWatcher.EnableRaisingEvents = false;
@@ -547,7 +555,7 @@ namespace HG_ServerUI
             var resultTask = Task.WhenAny(connectionTask, timeoutTask).Unwrap();
             var resultTcpClient = await resultTask.ConfigureAwait(false);
 
-            if (resultTcpClient.Connected == true)
+            if (resultTcpClient.Connected)
             {
                 settingsModel.Serverreachable = true;
                 Log.Information("Server is accessible to the public");
@@ -555,7 +563,7 @@ namespace HG_ServerUI
             else
             {
                 settingsModel.Serverreachable = false;
-                Log.Information("LAN-only server");
+                Log.Information("External port check failed: LAN-only server");
             }
         }
 
@@ -836,6 +844,16 @@ namespace HG_ServerUI
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
             _ = Process.Start(new ProcessStartInfo("https://github.com/elpatron68/HG-Server-Manager") { UseShellExecute = true });
+        }
+
+        public async Task AnnounceRaceToDiscord(string _message)
+        {
+                Log.Information("Sending discord announcement");
+                var client = new DiscordSocketClient();
+                await client.LoginAsync(TokenType.Bot, _discordRacebot.DiscordbotToken);
+                await client.StartAsync();
+                var channel = await client.GetChannelAsync(_discordRacebot.Discordchannelid) as IMessageChannel;
+                await channel!.SendMessageAsync(_message);
         }
     }
 }
