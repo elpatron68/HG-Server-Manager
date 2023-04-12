@@ -142,6 +142,15 @@ dotnet_diagnostic.CS8620.severity = silent
 dotnet_diagnostic.CS8603.severity = silent
 dotnet_diagnostic.CS8622.severity = silent
 
+# CS8601: Mögliche Nullverweiszuweisung.
+dotnet_diagnostic.CS8601.severity = silent
+
+# IDE0022: Blocktextkörper für Methode verwenden
+dotnet_diagnostic.IDE0022.severity = silent
+
+# CS8602: Dereferenzierung eines möglichen Nullverweises.
+dotnet_diagnostic.CS8602.severity = silent
+
 [*.vb]
 #### Benennungsstile ####
 

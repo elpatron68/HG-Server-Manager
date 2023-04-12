@@ -153,6 +153,10 @@ namespace HG_ServerUI
                     {
                         model.Blackflaglegs = int.Parse(line.Split('=')[1].Trim());
                     }
+                    if (line.Contains("discordracenotifications="))
+                    {
+                        model.DiscordracenotificationEnabled = bool.Parse(line.Split('=')[1].Trim());
+                    }
                 }
             }
             return model; 
@@ -164,6 +168,8 @@ namespace HG_ServerUI
                 filename = model.Configfilepath;
             }
             string content = """
+// Meta information from HG Server-Manager
+// discordracenotifications=<discordracenotifications>
 name=<servername>
 ports
     tcp=<tcpport>
@@ -242,6 +248,7 @@ penalties
                 .Replace("<penaltyduration>", model.Penaltyduration.ToString())
                 .Replace("<blackflagduration>", model.Blackflagduration.ToString())
                 .Replace("<blackflaglegs>", model.Blackflaglegs.ToString())
+                .Replace("<discordracenotifications>", model.DiscordracenotificationEnabled.ToString())
                 ;
             File.WriteAllText(filename, content);
         }

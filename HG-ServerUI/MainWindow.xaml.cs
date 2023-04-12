@@ -16,10 +16,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Navigation;
 using System.Windows.Threading;
+using Discord.WebSocket;
+using Discord;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Win32;
-using ntfy;
 using Serilog;
 using Serilog.Sinks.RichTextBox.Themes;
 
@@ -45,6 +46,7 @@ namespace HG_ServerUI
         public static RoutedCommand cmdSlotEight = new RoutedCommand();
         public static RoutedCommand cmdSlotNine = new RoutedCommand();
         public static RoutedCommand cmdRunServer = new RoutedCommand();
+        private Discordbot _discordRacebot=new();
 
         public MainWindow()
         {
@@ -63,7 +65,6 @@ namespace HG_ServerUI
             Log.Information($"App version: {settingsModel.Appversion}");
             Log.Information("Settings loaded");
             PreFlightCheck();
-
             cmdSlotZero.InputGestures.Add(new KeyGesture(Key.D0, ModifierKeys.Control));
             cmdSlotOne.InputGestures.Add(new KeyGesture(Key.D1, ModifierKeys.Control));
             cmdSlotTwo.InputGestures.Add(new KeyGesture(Key.D2, ModifierKeys.Control));
@@ -136,10 +137,11 @@ namespace HG_ServerUI
             TiBoats.DataContext = settingsModel;
             TiActiveCourse.DataContext = settingsModel;
             TbChat.DataContext = settingsModel;
+            CbDiscordRace.DataContext = settingsModel;
         }
 
         // New penalty?
-        private async void PenaltyHandleChanged(object sender, FileSystemEventArgs e)
+        private void PenaltyHandleChanged(object sender, FileSystemEventArgs e)
         {
             Log.Information("New penalty detected");
             string? _filename = e.FullPath;
@@ -149,8 +151,8 @@ namespace HG_ServerUI
                 try
                 {
                     string _timestamp = $"[{DateTime.Now.ToString("HH:mm:ss")}]";
-                    string _filecontent=File.ReadAllText(_filename);
-                    string _username =string.Empty;
+                    string _filecontent = File.ReadAllText(_filename);
+                    string _username = string.Empty;
                     string _offence = string.Empty;
                     foreach (string line in _filecontent.Split("\n"))
                     {
@@ -165,7 +167,7 @@ namespace HG_ServerUI
                     SoundPlayer player = new(Properties.Resources.beep_sound);
                     player.Play();
                 }
-                catch 
+                catch
                 {
                     Log.Warning($"Failed parsing penalty file name: {_filename}");
                 }
@@ -254,8 +256,28 @@ namespace HG_ServerUI
             settingsModel.Processid = server.Id;
             settingsModel.Serverprocessrunning = true;
             settingsModel.Btnservercontent = "_Stop [crtl+s]";
+            if(settingsModel.DiscordracenotificationEnabled)
+            {
+                string _passwordprotected=string.Empty;
+                if(settingsModel.Password.Length > 0)
+                {
+                    _passwordprotected = "Private race";
+                }
+                else
+                {
+                    _passwordprotected = "Open race";
+                }
+                string _message = $"**A New User Race Started**\n" + 
+                    $"_Race name:_ {settingsModel.Servername}\n" + 
+                    $"_Course:_ {settingsModel.Course}\n" +
+                    $"_Location:_ {settingsModel.Location}\n" +
+                    $"_Boat:_ {settingsModel.Boat}\n" +
+                    $"_Max wind:_ {settingsModel.Windmaxspeed} kt\n" +
+                    $"_Min wind:_ {settingsModel.Windminspeed} kt\n" +
+                    $"_Password protection:_ {_passwordprotected}\n";
+                await AnnounceRaceToDiscord(_message);
+            }
             //ToggleControls(false);
-
             TestPortAsync();
         }
 
@@ -353,8 +375,8 @@ namespace HG_ServerUI
                 {
                     try
                     {
-                        string _message = outLine.Data.Split("message:")[1].Split("\"")[1].Trim() + "\n";
-                        settingsModel.Chat = $"{_timestamp} {_message}{settingsModel.Chat}"; // _timestamp + _message + settingsModel.Chat;
+                        string _message = outLine.Data.Split("message:")[1].Split("\"")[1].Trim();
+                        settingsModel.Chat = $"{_timestamp} {_message}\n{settingsModel.Chat}"; // _timestamp + _message + settingsModel.Chat;
                     }
                     catch { }
                 }
@@ -795,6 +817,15 @@ namespace HG_ServerUI
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
             _ = Process.Start(new ProcessStartInfo("https://github.com/elpatron68/HG-Server-Manager") { UseShellExecute = true });
+        }
+
+        public async Task AnnounceRaceToDiscord(string text) // 1
+        {
+            var client = new DiscordSocketClient();
+            await client.LoginAsync(TokenType.Bot, _discordRacebot.DiscordbotToken);
+            await client.StartAsync();
+            var channel = await client.GetChannelAsync(_discordRacebot.Discordchannelid) as IMessageChannel;
+            await channel!.SendMessageAsync(text);
         }
     }
 }

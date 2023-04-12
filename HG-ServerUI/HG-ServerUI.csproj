@@ -12,6 +12,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Discordbot_sample.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="00042-1879107711_100.png" />
   </ItemGroup>
 
@@ -27,9 +31,11 @@
     <None Include="..\README.md" Link="README.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Discordbot_sample.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Discord.Net" Version="3.10.0" />
     <PackageReference Include="MahApps.Metro" Version="2.4.9" />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
     <PackageReference Include="ntfy" Version="0.3.0" />

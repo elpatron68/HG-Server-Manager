@@ -1170,7 +1170,7 @@
             Width="200" 
             Height="150"
             Background="Black"
-            Foreground="Yellow" 
+            Foreground="Yellow" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" 
 
             >
         </TextBlock>
@@ -1184,5 +1184,19 @@
             FontWeight="Bold"
             >
         </Label>
+        <CheckBox 
+            x:Name="CbDiscordRace"
+            Grid.Column="2" 
+            Grid.ColumnSpan="2"
+            Content="Send Notice Of Race to Discord" 
+            HorizontalAlignment="Center" 
+            Margin="0,100,0,0" 
+            Grid.Row="1" 
+            VerticalAlignment="Top" 
+            Width="230"
+            Height="30"
+            IsChecked="{Binding DiscordracenotificationEnabled}"
+            >
+        </CheckBox>
     </Grid>
 </mah:MetroWindow>

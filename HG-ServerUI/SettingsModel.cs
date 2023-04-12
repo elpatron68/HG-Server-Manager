@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Discord.WebSocket;
+using Discord;
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows.Documents;
 
 namespace HG_ServerUI
@@ -380,6 +383,20 @@ namespace HG_ServerUI
             set { _chat = value; OnPropertyChanged(); }
         }
 
+        private bool _discordracenotificationEnabled;
+        public bool DiscordracenotificationEnabled
+        {
+            get { return _discordracenotificationEnabled; }
+            set { _discordracenotificationEnabled = value; OnPropertyChanged(); }
+        }
+
+        private string _discordracenotificationsText;
+        public string DiscordracenotificationsText
+        {
+            get { return _discordracenotificationsText ?? string.Empty; }
+            set { _discordracenotificationsText = value; OnPropertyChanged(); }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
@@ -435,6 +452,7 @@ namespace HG_ServerUI
             Boatsinrace = "0";
             Racestate = "Inactive";
             Activecourse = "n/a";
+            DiscordracenotificationEnabled = true;
         }
 
         private static string GetCfgFilenameFromExepath(string _exepath)
