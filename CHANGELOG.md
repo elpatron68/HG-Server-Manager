@@ -1,5 +1,10 @@
 ﻿# Changelog
 
+## v1.0.5.1
+
+- Make Penalties textbox scrollable
+- Make Chat textbox scrollable
+
 ## v1.0.5
 
 - Add regatta results viewer (*File* => *View results*)
