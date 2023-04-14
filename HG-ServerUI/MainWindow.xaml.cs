@@ -66,8 +66,6 @@ namespace HG_ServerUI
             Log.Information("Settings loaded");
 
             PreFlightCheck();
-            settingsModel.Penalties = "Line\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\n";
-            settingsModel.Chat= "Line\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\nLine\n";
 
             cmdSlotZero.InputGestures.Add(new KeyGesture(Key.D0, ModifierKeys.Control));
             cmdSlotOne.InputGestures.Add(new KeyGesture(Key.D1, ModifierKeys.Control));
