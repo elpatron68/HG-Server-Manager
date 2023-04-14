@@ -1,6 +1,11 @@
 ﻿# Changelog
 
+## v1.0.5
+
+- Add regatta results viewer (*File* => *View results*)
+
 ## v1.0.4
+
 - Fix reading server name with blanks
 - Add chat textbox
 - Replace Ntfy by Discord

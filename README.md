@@ -14,6 +14,7 @@
 - ♾️ Load and save an unlimited number of different configurations
 - ⛵ Instantly switch between up to 10 user-defined presets by hot key
 - 📃 Open game server log file and *snaps* directory directly from the application
+- View regatta results in a formatted table
 
 ![image-20230407193824206](./assets/image-20230407193824206.png)
 
@@ -51,7 +52,15 @@ You can open the server log `log.log` in the *Notepad* text editor by opening *F
 
 ### Snaps
 
-The menu *Snaps* - *Open snaps* opens an Windows *Explorer* window in your *snaps* directory. You can delete all snap files by selecting *Snaps* - *Delete all files in snaps directory*.
+The menu *File* - *Snaps* - *Open snaps* opens an Windows *Explorer* window in your *snaps* directory. You can delete all snap files by selecting *File* - *Snaps* - *Delete all files in snaps directory*.
+
+### View results
+
+View the results of all your regattas by selecting *File* - *View results*:
+
+![image-20230414150238636](./assets/image-20230414150238636.png)
+
+Select a result file name to be displayed.
 
 ### Status Bar
 
