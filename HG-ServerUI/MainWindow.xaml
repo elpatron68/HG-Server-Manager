@@ -117,7 +117,39 @@
                         <iconPacks:PackIconJamIcons Kind="Document" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem x:Name="MnExit"
+                <MenuItem 
+                    Header="_Snaps"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="Camera" />
+                    </MenuItem.Icon>
+                    <MenuItem x:Name="MnOpenSnaps"
+                          Header="_Open snaps" 
+                          Click="MnOpenSnaps_Click"
+                          >
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterialLight Kind="Folder" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="MnDeleteSnaps"
+                      Header="_Delete all files in snaps directory" Click="MnDeleteSnaps_Click"
+                      >
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterialLight Kind="Delete" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem 
+                    x:Name="MnResults"
+                    Header="_View results" Click="MnResults_Click"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="FlagCheckered" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                    
+                    
+                    <MenuItem x:Name="MnExit"
                           Header="_Exit" 
                           Click="MnExit_Click" 
                           >
@@ -225,23 +257,6 @@
                     >
                     <MenuItem.Icon>
                         <iconPacks:PackIconMaterial Kind="Numeric9Box" />
-                    </MenuItem.Icon>
-                </MenuItem>
-            </MenuItem>
-            <MenuItem Header="_Snaps">
-                <MenuItem x:Name="MnOpenSnaps"
-                          Header="_Open snaps" 
-                          Click="MnOpenSnaps_Click"
-                          >
-                    <MenuItem.Icon>
-                        <iconPacks:PackIconMaterialLight Kind="Folder" />
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem x:Name="MnDeleteSnaps"
-                      Header="_Delete all files in snaps directory" Click="MnDeleteSnaps_Click"
-                      >
-                    <MenuItem.Icon>
-                        <iconPacks:PackIconMaterialLight Kind="Delete" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>

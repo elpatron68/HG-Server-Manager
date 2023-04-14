@@ -64,7 +64,9 @@ namespace HG_ServerUI
             settingsModel = SettingsFile.ReadConfigfile(settingsModel);
             Log.Information($"App version: {settingsModel.Appversion}");
             Log.Information("Settings loaded");
+
             PreFlightCheck();
+
             cmdSlotZero.InputGestures.Add(new KeyGesture(Key.D0, ModifierKeys.Control));
             cmdSlotOne.InputGestures.Add(new KeyGesture(Key.D1, ModifierKeys.Control));
             cmdSlotTwo.InputGestures.Add(new KeyGesture(Key.D2, ModifierKeys.Control));
@@ -854,6 +856,12 @@ namespace HG_ServerUI
                 await client.StartAsync();
                 var channel = await client.GetChannelAsync(_discordRacebot.Discordchannelid) as IMessageChannel;
                 await channel!.SendMessageAsync(_message);
+        }
+
+        private void MnResults_Click(object sender, RoutedEventArgs e)
+        {
+            ResultsView rv = new(settingsModel);
+            rv.Show();
         }
     }
 }

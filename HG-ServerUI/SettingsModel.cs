@@ -348,12 +348,20 @@ namespace HG_ServerUI
             set { _penalties = value; OnPropertyChanged(); }
         }
 
-        private string _penatltiespath;
+        private string _snapsdirectory;
         public string Snapsdirectory
         {
-            get { return _penatltiespath ?? string.Empty; }
-            set { _penatltiespath = value; OnPropertyChanged(); }
+            get { return _snapsdirectory ?? string.Empty; }
+            set { _snapsdirectory = value; OnPropertyChanged(); }
         }
+
+        private string _resultsdirectory;
+        public string Resultsdirectory
+        {
+            get { return _resultsdirectory ?? string.Empty; }
+            set { _resultsdirectory = value; OnPropertyChanged(); }
+        }
+
 
         private string _boatsinrace;
         public string Boatsinrace
@@ -500,6 +508,7 @@ namespace HG_ServerUI
                 model.Serverreachable = false;
                 model.Appversion = Getversion();
                 model.Appversiontitle = $"HG Server Manager v{model.Appversion}";
+                model.Resultsdirectory = System.IO.Path.GetDirectoryName(model.Exepath) + @"\results\json";
             }
             return model;
         }

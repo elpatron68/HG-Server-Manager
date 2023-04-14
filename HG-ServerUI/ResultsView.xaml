@@ -1,0 +1,35 @@
+﻿<mah:MetroWindow  x:Class="HG_ServerUI.ResultsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HG_ServerUI"
+        mc:Ignorable="d"
+        Title="Results Viewer" 
+        Height="300" 
+        Width="600"
+        >
+    <Grid>
+        <StackPanel>
+            <ComboBox 
+                x:Name="CbResultfiles"
+                HorizontalAlignment="Center" 
+                Margin="0,10,0,0" 
+                VerticalAlignment="Top" 
+                Width="580" 
+                SelectionChanged="CbResultfiles_SelectionChanged"
+                >
+            </ComboBox>
+            <DataGrid 
+                x:Name="DgResults"
+                Height="268" 
+                Margin="10,20,10,0"
+                d:ItemsSource="{d:SampleData ItemCount=5}"
+                >
+            </DataGrid>
+        </StackPanel>
+
+
+    </Grid>
+</mah:MetroWindow>
