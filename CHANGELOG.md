@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## v1.0.5.2
+
+- Remove dummy text
+
 ## v1.0.5.1
 
 - Make Penalties textbox scrollable
