@@ -1093,7 +1093,10 @@
             Height="90"
             Background="Black"
             Foreground="Red" 
-            ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            >
+        </TextBlock>
         <Label 
             Grid.Column="4" 
             Content="Penalties" 
@@ -1172,23 +1175,28 @@
             MouseDown="Image_MouseDown"
             >
         </Image>
-        <TextBlock 
-            x:Name="TbChat"
-            Grid.Column="6" 
-            HorizontalAlignment="Left" 
-            Margin="60,40,0,0" 
+        <ScrollViewer 
+            HorizontalScrollBarVisibility="Disabled" 
+            VerticalScrollBarVisibility="Visible"
             Grid.Row="1" 
-            TextWrapping="Wrap" 
-            Text="{Binding Chat}" 
-            VerticalAlignment="Top" 
+            Grid.Column="6" 
             Grid.ColumnSpan="2" 
-            Width="200" 
             Height="150"
-            Background="Black"
-            Foreground="Yellow" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" 
-
+            Margin="60,30,0,0"
             >
-        </TextBlock>
+            <TextBlock x:Name="TbChat"
+                Margin="3"
+                FontStyle="Italic" 
+                Text="{Binding Chat}" 
+                TextWrapping="Wrap"
+                TextAlignment="Justify" 
+                Width="180" 
+                AllowDrop="False" 
+                Foreground="Yellow" 
+                Background="Black"
+                >
+            </TextBlock>
+        </ScrollViewer>
         <Label 
             Grid.Column="6" 
             Content="Chat" 
