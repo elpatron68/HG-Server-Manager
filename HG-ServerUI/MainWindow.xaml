@@ -147,9 +147,9 @@
                         <iconPacks:PackIconMaterial Kind="FlagCheckered" />
                     </MenuItem.Icon>
                 </MenuItem>
-                    
-                    
-                    <MenuItem x:Name="MnExit"
+
+
+                <MenuItem x:Name="MnExit"
                           Header="_Exit" 
                           Click="MnExit_Click" 
                           >
@@ -1082,21 +1082,27 @@
             FontWeight="Bold" Grid.ColumnSpan="2"
             >
         </Label>
-        <TextBlock 
-            x:Name="TbPenalties"
-            Grid.Column="4" 
-            Margin="10,30,80,210" 
+        <ScrollViewer 
+            HorizontalScrollBarVisibility="Disabled" 
+            VerticalScrollBarVisibility="Visible"
             Grid.Row="2" 
-            TextWrapping="Wrap" 
-            Text="{Binding Penalties}" 
-            Grid.ColumnSpan="3" 
-            Height="90"
-            Background="Black"
-            Foreground="Red" 
-            ScrollViewer.HorizontalScrollBarVisibility="Auto" 
-            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            Grid.Column="4" 
+            Grid.ColumnSpan="3"
+            Margin="10,30,66,210"
             >
-        </TextBlock>
+            <TextBlock 
+                x:Name="TbPenalties"
+                Margin="3"
+                Text="{Binding Penalties}" 
+                TextWrapping="Wrap" 
+                TextAlignment="Justify" 
+                Width="308" 
+                AllowDrop="False" 
+                Foreground="Red" 
+                Background="Black"
+                >
+            </TextBlock>
+        </ScrollViewer>
         <Label 
             Grid.Column="4" 
             Content="Penalties" 
