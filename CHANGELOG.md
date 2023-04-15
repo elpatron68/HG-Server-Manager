@@ -1,5 +1,10 @@
 ﻿# Changelog
 
+## v1.0.6
+
+- Send results to Discord
+
+
 ## v1.0.5.2
 
 - Remove dummy text

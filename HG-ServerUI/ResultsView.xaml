@@ -30,7 +30,9 @@
             </DataGrid>
             <Button
                 x:Name="BtSavePng"
-                Content="_Save" Click="BtSavePng_Click">
+                Content="_Save" Click="BtSavePng_Click" 
+                
+                >
             </Button>
         </StackPanel>
 
