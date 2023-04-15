@@ -25,10 +25,10 @@ namespace HG_ServerUI
         {
             InitializeComponent();
             _settingsModel = settingsModel;
-            List<string> _resulfiles = GetResultFiles(_settingsModel.Resultsdirectory);
-            if(_resulfiles.Count > 0 )
+            List<string> _resultfiles = GetResultFiles(_settingsModel.Resultsdirectory);
+            if(_resultfiles.Count > 0 )
             {
-                CbResultfiles.ItemsSource = _resulfiles;
+                CbResultfiles.ItemsSource = _resultfiles;
             }
             else
             {

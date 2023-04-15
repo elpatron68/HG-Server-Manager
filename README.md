@@ -13,7 +13,7 @@
 - 📬 Notify players of your server launches via *Discord*
 - ♾️ Load and save an unlimited number of different configurations
 - ⛵ Instantly switch between up to 10 user-defined presets by hot key
-- 📃 Open game server log file and *snaps* directory directly from the application
+- 📃 Open game server log file and `snaps` directory directly from the application
 - :checkered_flag: View regatta results in a formatted table and send them to discord
 - :broom: Clean up  `races` directory and start a new series (to be exactly: *archive all files to a zip file*)
 
@@ -23,7 +23,7 @@
 
 ## Installation
 
-- Download latest release from https://github.com/elpatron68/HG-Server-Manager/releases (zip file)
+- Download the file `HG_Server-Manager.zip` from [Releases](https://github.com/elpatron68/HG-Server-Manager/releases/latest)
 - Extract the archive to a directory of your choice
 - Start `HG-ServerUI.exe`
 
