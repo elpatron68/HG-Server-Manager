@@ -14,7 +14,8 @@
 - ♾️ Load and save an unlimited number of different configurations
 - ⛵ Instantly switch between up to 10 user-defined presets by hot key
 - 📃 Open game server log file and *snaps* directory directly from the application
-- View regatta results in a formatted table
+- :checkered_flag: View regatta results in a formatted table and send them to discord
+- :broom: Clean up  `races` directory and start a new series (to be exactly: *archive all files to a zip file*)
 
 ![image-20230407193824206](./assets/image-20230407193824206.png)
 
