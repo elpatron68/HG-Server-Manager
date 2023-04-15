@@ -10,7 +10,7 @@
   - 🚀 Start/stop game server
   - ⚠️ Get notified of the occurrence of penalties
   - 👨‍👩‍👧‍👦 See if your server is publicly reachable
-  - :speech_balloon: Follow the chat the in game chat
+  - :speech_balloon: Follow the in game chat from the user interface
 - 📬 Notify players of your server launches via *Discord*
 - ♾️ Load and save an unlimited number of different configurations
 - ⛵ Instantly switch between up to 10 user-defined presets by hot key
