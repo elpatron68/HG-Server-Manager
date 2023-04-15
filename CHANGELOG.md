@@ -2,7 +2,10 @@
 
 ## v1.0.6
 
+- Add results window (menu *Regattas - View results*)
 - Send results to Discord
+- Move menu "Snaps" to menu *Regattas*
+- Option to archive old regatta results (menu *Regattas - archive old results*)
 
 
 ## v1.0.5.2
