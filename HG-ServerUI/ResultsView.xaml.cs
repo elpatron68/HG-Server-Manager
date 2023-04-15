@@ -211,12 +211,7 @@ namespace HG_ServerUI
                 int _width = Convert.ToInt32(DgResults.ActualWidth);
                 int _heigth = Convert.ToInt32(DgResults.ActualHeight) + 40;
                 Dg2Bitmap(_width, _heigth);
-                SendResult2Discord();
             }
-        }
-
-        private async void SendResult2Discord()
-        {
         }
 
         public class RaceEntry
