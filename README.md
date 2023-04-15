@@ -77,7 +77,7 @@ The status bar at the bottom of the window shows informations about the state of
 
 ![image-20230409144104972](./assets/image-20230409144104972.png)
 
-After launching a server process, *HG Server-Manager* tries to connect to the specified *TCP* Port via your **external** IP-address to determine if you are able to host a public race (marked green). If the value is *true*, you probably have set up your port forwardings correctly. If it´s *false*, you host a *LAN* game, not visible to the public.
+After launching a server process, *HG Server-Manager* tries to connect to the specified *TCP* Port via your **external** IP-address to determine if you are able to host a public race (marked green). If the value is *true*, you probably have set up your port forwardings correctly. If it´s *false*, you host a *LAN* game, not visible to the public. Note, that the result is updated as soon as the server process is launched. So after starting *HG Server-Manager*, it´s always `False`.
 
 ### Protocol
 
