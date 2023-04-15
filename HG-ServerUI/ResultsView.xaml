@@ -18,7 +18,7 @@
             <ComboBox 
                 x:Name="CbResultfiles"
                 HorizontalAlignment="Center" 
-                Margin="10" 
+                Margin="20" 
                 VerticalAlignment="Top" 
                 Width="480" 
                 SelectionChanged="CbResultfiles_SelectionChanged"
@@ -26,7 +26,7 @@
             </ComboBox>
             <DataGrid 
                 x:Name="DgResults"
-                Margin="10,20,10,10"
+                Margin="20"
                 d:ItemsSource="{d:SampleData ItemCount=5}"
                 >
             </DataGrid>

@@ -117,6 +117,17 @@
                         <iconPacks:PackIconJamIcons Kind="Document" />
                     </MenuItem.Icon>
                 </MenuItem>
+                <MenuItem x:Name="MnExit"
+                          Header="_Exit" 
+                          Click="MnExit_Click" 
+                          >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="ExitRun" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            
+            <MenuItem Header="_Regattas">
                 <MenuItem 
                     Header="_Snaps"
                     >
@@ -147,17 +158,8 @@
                         <iconPacks:PackIconMaterial Kind="FlagCheckered" />
                     </MenuItem.Icon>
                 </MenuItem>
-
-
-                <MenuItem x:Name="MnExit"
-                          Header="_Exit" 
-                          Click="MnExit_Click" 
-                          >
-                    <MenuItem.Icon>
-                        <iconPacks:PackIconMaterial Kind="ExitRun" />
-                    </MenuItem.Icon>
-                </MenuItem>
             </MenuItem>
+            
             <MenuItem Header="H_ot slots">
                 <MenuItem
                     x:Name="MnSlot"
