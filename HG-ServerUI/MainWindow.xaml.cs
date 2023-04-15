@@ -898,16 +898,15 @@ namespace HG_ServerUI
             if (Directory.GetFiles(startPath).Length > 0)
             {
                 MessageDialogResult result = await this.ShowMessageAsync("Are you sure?",
-                    $"Do you want to archive and delete all regatta results in \"{startPath}\"?\n\n" +
-                    $"All files will be archived into a zip file in {_archiveDirectory} and can be restored by extracting the archive.", MessageDialogStyle.AffirmativeAndNegative);
+                    $"Do you want to archive and delete all regatta results in '{startPath}'?\n\n" +
+                    $"All files will be archived into a zip file in '{_archiveDirectory}' and can " +
+                    $"be restored by extracting the archive.", MessageDialogStyle.AffirmativeAndNegative);
                 if (result == MessageDialogResult.Affirmative)
                 {
                     ZipFile.CreateFromDirectory(startPath, zipFile);
                     // Move Zip file to archive directory in AppContext.BaseDirectory
                     try
                     {
-                        
-
                         if (!Directory.Exists(_archiveDirectory))
                         {
                             Directory.CreateDirectory(_archiveDirectory);
