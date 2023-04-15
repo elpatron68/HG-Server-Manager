@@ -23,7 +23,7 @@
 
 ## Installation
 
-- Download the file `HG_Server-Manager.zip` from [Releases](https://github.com/elpatron68/HG-Server-Manager/releases/latest)
+- Download the file `HG_Server-Manager.zip` from [latest releases](https://github.com/elpatron68/HG-Server-Manager/releases/latest)
 - Extract the archive to a directory of your choice
 - Start `HG-ServerUI.exe`
 
