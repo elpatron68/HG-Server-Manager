@@ -891,22 +891,21 @@ namespace HG_ServerUI
         private async void MnArchive_Click(object sender, RoutedEventArgs e)
         {
             // Copy all results (*.kl and *.json) to a Zip archive
-            string startPath = Directory.GetParent(settingsModel.Resultsdirectory).ToString();
-            string zipPath = Path.GetTempPath();
-            string zipFile = zipPath + $"results_archive_{DateTime.Now:yy-MM-dd HH-mm-ss}.zip";
-            //string _archiveDirectory = Path.GetDirectoryName(AppContext.BaseDirectory) + @$"\archive\";
+            string _startPath = Directory.GetParent(settingsModel.Resultsdirectory).ToString();
+            string _zipPath = Path.GetTempPath();
+            string _zipFile = _zipPath + $"results_archive_{DateTime.Now:yy-MM-dd HH-mm-ss}.zip";
             string _archiveDirectory = Path.GetDirectoryName(settingsModel.Exepath) + @"\archive\";
             int _filescount=0 ;
 
-            if (Directory.GetFiles(startPath).Length > 0)
+            if (Directory.GetFiles(_startPath).Length > 0)
             {
-                MessageDialogResult result = await this.ShowMessageAsync("Are you sure?",
-                    $"Do you want to archive and delete all regatta results in '{startPath}' and start a new series?\n\n" +
+                MessageDialogResult _result = await this.ShowMessageAsync("Are you sure?",
+                    $"Do you want to archive and delete all regatta results in '{_startPath}' and start a new series?\n\n" +
                     $"All files will be archived into a zip file in '{_archiveDirectory}' and can " +
                     $"be restored by extracting the archive to it´s original location.", MessageDialogStyle.AffirmativeAndNegative);
-                if (result == MessageDialogResult.Affirmative)
+                if (_result == MessageDialogResult.Affirmative)
                 {
-                    ZipFile.CreateFromDirectory(startPath, zipFile);
+                    ZipFile.CreateFromDirectory(_startPath, _zipFile);
                     // Move Zip file to archive directory in AppContext.BaseDirectory
                     try
                     {
@@ -914,16 +913,16 @@ namespace HG_ServerUI
                         {
                             Directory.CreateDirectory(_archiveDirectory);
                         }
-                        File.Move(zipFile, Path.Combine(_archiveDirectory, Path.GetFileName(zipFile)));                            
+                        File.Move(_zipFile, Path.Combine(_archiveDirectory, Path.GetFileName(_zipFile)));                            
                     }
                     catch(Exception ex)
                     { 
-                        Log.Warning($"Failed to move {zipFile}: {ex.Message}"); 
+                        Log.Warning($"Failed to move {_zipFile}: {ex.Message}"); 
                     }
 
                     // Cleanup results directory
                     // Delete *.kl files
-                    string[] _klfiles = Directory.GetFiles(startPath);
+                    string[] _klfiles = Directory.GetFiles(_startPath);
                     foreach (string _klfile in _klfiles)
                     {
                         try
