@@ -893,7 +893,7 @@ namespace HG_ServerUI
             // Copy all results (*.kl and *.json) to a Zip archive
             string startPath = Directory.GetParent(settingsModel.Resultsdirectory).ToString();
             string zipPath = Path.GetTempPath();
-            string zipFile = zipPath + @$"results_archive_{DateTime.Now:yy-MM-dd HH-mm-ss}.zip";
+            string zipFile = zipPath + $"results_archive_{DateTime.Now:yy-MM-dd HH-mm-ss}.zip";
             string _archiveDirectory = Path.GetDirectoryName(AppContext.BaseDirectory) + @$"\archive\";
             int _filescount=0 ;
 
@@ -948,11 +948,11 @@ namespace HG_ServerUI
                         {
                             Log.Warning($"Failed to delete {_jsonfile}: {ex.Message}"); }
                         }
-                    Log.Information($"{_filescount} files archived.");
+                    Log.Information($"{_filescount} files moved to archive.");
                 }
                 else
                 {
-                    Log.Information($"Deleting result files cancelled.");
+                    Log.Information($"Deleting result files cancelled by user.");
                 }
             }
             else
