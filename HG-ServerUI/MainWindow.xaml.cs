@@ -900,7 +900,7 @@ namespace HG_ServerUI
                 MessageDialogResult result = await this.ShowMessageAsync("Are you sure?",
                     $"Do you want to archive and delete all regatta results in '{startPath}'?\n\n" +
                     $"All files will be archived into a zip file in '{_archiveDirectory}' and can " +
-                    $"be restored by extracting the archive.", MessageDialogStyle.AffirmativeAndNegative);
+                    $"be restored by extracting the archive to ist original location.", MessageDialogStyle.AffirmativeAndNegative);
                 if (result == MessageDialogResult.Affirmative)
                 {
                     ZipFile.CreateFromDirectory(startPath, zipFile);
