@@ -10,11 +10,12 @@
   - 🚀 Start/stop game server
   - ⚠️ Get notified of the occurrence of penalties
   - 👨‍👩‍👧‍👦 See if your server is publicly reachable
+  - :speech_balloon: Follow the chat the in game chat
 - 📬 Notify players of your server launches via *Discord*
 - ♾️ Load and save an unlimited number of different configurations
 - ⛵ Instantly switch between up to 10 user-defined presets by hot key
 - 📃 Open game server log file and `snaps` directory directly from the application
-- :checkered_flag: View regatta results in a formatted table and send them to discord
+- :checkered_flag: View regatta results and series points in formatted tables and send them to discord
 - :broom: Clean up  `races` directory and start a new series (to be exactly: *archive all files to a zip file*)
 
 ![image-20230407193824206](./assets/image-20230407193824206.png)
@@ -69,7 +70,7 @@ The view starts with cumulated values from all boats in all races. Select a resu
 
 ### Archive Results
 
-Select *Regattas* - *Archive old regattas* to move all files of your server´s `results` Directory to a Zip file. The Zip file will be stored in the subdirectory `archive` of the directory, where *HG Server* is located. You can restore it by extracting the contents of a Zip archive file to it´s original directory.
+Select *Regattas* - *Start new regatta series* to move all files of your server´s `results` Directory to a Zip file. The Zip file will be stored in the subdirectory `archive` of the directory, where *HG Server* is located. You can restore it by extracting the contents of a Zip archive file to it´s original directory. Afterwards, all boats and points are reset for a new series of races.
 
 ### Status Bar
 
