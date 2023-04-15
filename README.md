@@ -5,6 +5,7 @@
 ## Features
 
 - 🦋 Clean and beautiful user interface
+- :mage: Zero configuration: Download and run the app, everything is detected „automagically“
 - ⚙️ All server parameters editable 
 - 🛠️ Control your server:
   - 🚀 Start/stop game server
