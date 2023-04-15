@@ -141,10 +141,25 @@ namespace HG_ServerUI
         }
 
 
-        public void Dg2Bitmap(int width, int heigth)
+        public async void Dg2Bitmap(int width, int heigth)
         {
-            string _filename = System.IO.Path.GetDirectoryName(CbResultfiles.Text) + @"\" +
-                    System.IO.Path.GetFileNameWithoutExtension(CbResultfiles.Text) + ".png";
+            string _filename = Path.GetDirectoryName(CbResultfiles.Text) + @"\" +
+                    Path.GetFileNameWithoutExtension(CbResultfiles.Text) + ".png";
+            bool _isCumulative = false;
+
+            if (CbResultfiles.SelectedItem == null)
+            {
+                _filename = Path.Combine(_settingsModel.Resultsdirectory, "series_results.png");
+                _isCumulative = true;
+            }
+            else
+            {
+                if(CbResultfiles.SelectedItem.ToString() == "Cumulated series results")
+                {
+                    _filename = Path.Combine(_settingsModel.Resultsdirectory, "series_results.png");
+                    _isCumulative = true;
+                }
+            }
 
             RenderTargetBitmap renderTargetBitmap =
                 new RenderTargetBitmap(width, heigth, 96, 96, PixelFormats.Pbgra32);
@@ -155,6 +170,38 @@ namespace HG_ServerUI
             {
                 pngImage.Save(fileStream);
             }
+
+            var client = new DiscordSocketClient();
+            await client.LoginAsync(TokenType.Bot, _discordRacebot.DiscordbotToken);
+            await client.StartAsync();
+
+            DateTime fileCreatedDate = File.GetCreationTimeUtc(_filename);
+            string _timestamp = fileCreatedDate.ToString("yyyy.MM.dd HH:mm:ss");
+            string _text = string.Empty;
+            if (_isCumulative)
+            {
+                _text = $"**Cumulative race series results for {_settingsModel.Servername}** :checkered_flag:\n";
+            }
+            else
+            {
+                _text = $"**Race results for {_settingsModel.Servername}** :checkered_flag:\n" +
+                $"Race ended at {_timestamp} UTC";
+            }
+            
+            var embed = new EmbedBuilder()
+                .WithImageUrl($"attachment://{_filename}")
+                .WithDescription(_text)
+                .Build();
+
+            var channel = await client.GetChannelAsync(_discordRacebot.Discordchannelid) as IMessageChannel;
+
+            MemoryStream memoryStream = new MemoryStream();
+            using (FileStream file = new FileStream(_filename, FileMode.Open, FileAccess.Read))
+                file.CopyTo(memoryStream);
+
+            var result = await client.GetChannelAsync(_discordRacebot.Discordchannelid) as IMessageChannel;
+            await result!.SendFileAsync(stream: memoryStream, filename: _filename, embed: embed);
+            //try { File.Delete("results.png"); } catch (Exception) { }
         }
 
         private void BtSavePng_Click(object sender, RoutedEventArgs e)
@@ -170,32 +217,6 @@ namespace HG_ServerUI
 
         private async void SendResult2Discord()
         {
-            var client = new DiscordSocketClient();
-            await client.LoginAsync(TokenType.Bot, _discordRacebot.DiscordbotToken);
-            await client.StartAsync();
-
-            string _filename = System.IO.Path.GetDirectoryName(CbResultfiles.Text) + @"\" + 
-                System.IO.Path.GetFileNameWithoutExtension(CbResultfiles.Text) + ".png";
-
-            DateTime fileCreatedDate = File.GetCreationTimeUtc(_filename);
-            string _timestamp = fileCreatedDate.ToString("yyyy.MM.dd HH:mm:ss");
-
-            string _text = $"**Race results for {_settingsModel.Servername}** :checkered_flag:\n" +
-                $"Race ended at {_timestamp} UTC";
-            var embed = new EmbedBuilder()
-                .WithImageUrl($"attachment://{_filename}")
-                .WithDescription(_text)
-                .Build();
-
-            var channel = await client.GetChannelAsync(_discordRacebot.Discordchannelid) as IMessageChannel;
-
-            MemoryStream memoryStream = new MemoryStream();
-            using (FileStream file = new FileStream(_filename, FileMode.Open, FileAccess.Read))
-                file.CopyTo(memoryStream);
-
-            var result = await client.GetChannelAsync(_discordRacebot.Discordchannelid) as IMessageChannel;
-            await result!.SendFileAsync(stream: memoryStream, filename: _filename, embed: embed);
-            //try { File.Delete("results.png"); } catch (Exception) { }
         }
 
         public class RaceEntry
