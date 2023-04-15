@@ -35,6 +35,7 @@ namespace HG_ServerUI
         private readonly DispatcherTimer checkServerRunningTimer = new DispatcherTimer();
         private readonly FileSystemWatcher _cfgFileSystemWatcher;
         private readonly FileSystemWatcher _penaltiesFileSystemWatcher;
+        private readonly FileSystemWatcher _resultsFileSystemWatcher;
         public static RoutedCommand cmdSlotZero = new RoutedCommand();
         public static RoutedCommand cmdSlotOne = new RoutedCommand();
         public static RoutedCommand cmdSlotTwo = new RoutedCommand();
@@ -80,20 +81,36 @@ namespace HG_ServerUI
             cmdRunServer.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Control));
 
             // Initialize file system watschers
-            _cfgFileSystemWatcher = new FileSystemWatcher(settingsModel.Configfiledirectory);
-            _cfgFileSystemWatcher.Filter = $"{System.IO.Path.GetFileName(settingsModel.Configfilepath)}";
-            _cfgFileSystemWatcher.NotifyFilter = NotifyFilters.LastAccess | 
-                NotifyFilters.LastWrite | 
-                NotifyFilters.FileName;
+            _cfgFileSystemWatcher = new FileSystemWatcher(settingsModel.Configfiledirectory)
+            {
+                Filter = $"{System.IO.Path.GetFileName(settingsModel.Configfilepath)}",
+                NotifyFilter = NotifyFilters.LastAccess |
+                NotifyFilters.LastWrite |
+                NotifyFilters.FileName
+            };
             _cfgFileSystemWatcher.Changed += CfgHandleChanged;
             _cfgFileSystemWatcher.EnableRaisingEvents = true;
-            _penaltiesFileSystemWatcher = new FileSystemWatcher(settingsModel.Snapsdirectory);
-            _penaltiesFileSystemWatcher.Filter = "*.svg";
-            _penaltiesFileSystemWatcher.NotifyFilter = NotifyFilters.LastAccess | 
-                NotifyFilters.LastWrite | 
-                NotifyFilters.FileName;
+
+            _penaltiesFileSystemWatcher = new FileSystemWatcher(settingsModel.Snapsdirectory)
+            {
+                Filter = "*.svg",
+                NotifyFilter = NotifyFilters.LastAccess |
+                NotifyFilters.LastWrite |
+                NotifyFilters.FileName
+            };
             _penaltiesFileSystemWatcher.Created += PenaltyHandleChanged;
             _penaltiesFileSystemWatcher.EnableRaisingEvents=true;
+
+            _resultsFileSystemWatcher = new FileSystemWatcher(settingsModel.Resultsdirectory)
+            {
+                Filter = "*.json",
+                NotifyFilter = NotifyFilters.LastAccess |
+                NotifyFilters.LastWrite |
+                NotifyFilters.FileName
+            };
+            _resultsFileSystemWatcher.Created += ResultsHandleChanged;
+            _resultsFileSystemWatcher.EnableRaisingEvents = true;
+
             checkServerRunningTimer.Interval = TimeSpan.FromSeconds(5);
             checkServerRunningTimer.Tick += checkServerRunningTimer_Tick;
 
@@ -142,7 +159,13 @@ namespace HG_ServerUI
             CbDiscordRace.DataContext = settingsModel;
         }
 
-        // New penalty?
+        // New regatta results
+        private void ResultsHandleChanged(object sender, FileSystemEventArgs e)
+        {
+            Log.Information($"New race results: {e.Name}");
+        }
+
+        // New penalty
         private void PenaltyHandleChanged(object sender, FileSystemEventArgs e)
         {
             Log.Information("New penalty detected");

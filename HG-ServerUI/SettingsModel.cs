@@ -508,7 +508,7 @@ namespace HG_ServerUI
                 model.Serverreachable = false;
                 model.Appversion = Getversion();
                 model.Appversiontitle = $"HG Server Manager v{model.Appversion}";
-                model.Resultsdirectory = System.IO.Path.GetDirectoryName(model.Exepath) + @"\results\json";
+                model.Resultsdirectory = Path.GetDirectoryName(model.Exepath) + @"\results\json";
             }
             return model;
         }
