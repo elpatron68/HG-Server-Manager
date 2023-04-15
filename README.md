@@ -69,7 +69,7 @@ The view starts with cumulated values from all boats in all races. Select a resu
 
 ### Archive Results
 
-Select *Regattas* - *Archive old regattas* to move all files of your server´s `results` Directory to a Zip file. The Zip file will be stored in the subdirectory `archive` of the directory, where *HG Server-Manager* is installed. You can restore it by extracting the contents of an Zip archive file to it´s original directory.
+Select *Regattas* - *Archive old regattas* to move all files of your server´s `results` Directory to a Zip file. The Zip file will be stored in the subdirectory `archive` of the directory, where *HG Server* is located. You can restore it by extracting the contents of a Zip archive file to it´s original directory.
 
 ### Status Bar
 

@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## v1.0.6.1
+
+- Change archive path to `<HG Server Directory>\archive`
+
 ## v1.0.6
 
 - Add results window (menu *Regattas - View results*)
