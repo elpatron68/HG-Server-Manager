@@ -159,7 +159,7 @@
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem x:Name="MnArchive"
-                          Header="_Archive old regattas" 
+                          Header="_Start new regatta series" 
                           Click="MnArchive_Click"
                     >
                     <MenuItem.Icon>

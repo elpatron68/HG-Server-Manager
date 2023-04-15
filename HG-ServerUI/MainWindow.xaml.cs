@@ -894,15 +894,16 @@ namespace HG_ServerUI
             string startPath = Directory.GetParent(settingsModel.Resultsdirectory).ToString();
             string zipPath = Path.GetTempPath();
             string zipFile = zipPath + $"results_archive_{DateTime.Now:yy-MM-dd HH-mm-ss}.zip";
-            string _archiveDirectory = Path.GetDirectoryName(AppContext.BaseDirectory) + @$"\archive\";
+            //string _archiveDirectory = Path.GetDirectoryName(AppContext.BaseDirectory) + @$"\archive\";
+            string _archiveDirectory = Path.GetDirectoryName(settingsModel.Exepath) + @"\archive\";
             int _filescount=0 ;
 
             if (Directory.GetFiles(startPath).Length > 0)
             {
                 MessageDialogResult result = await this.ShowMessageAsync("Are you sure?",
-                    $"Do you want to archive and delete all regatta results in '{startPath}'?\n\n" +
+                    $"Do you want to archive and delete all regatta results in '{startPath}' and start a new series?\n\n" +
                     $"All files will be archived into a zip file in '{_archiveDirectory}' and can " +
-                    $"be restored by extracting the archive to ist original location.", MessageDialogStyle.AffirmativeAndNegative);
+                    $"be restored by extracting the archive to it´s original location.", MessageDialogStyle.AffirmativeAndNegative);
                 if (result == MessageDialogResult.Affirmative)
                 {
                     ZipFile.CreateFromDirectory(startPath, zipFile);
