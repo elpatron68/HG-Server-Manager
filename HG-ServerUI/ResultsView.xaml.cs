@@ -36,6 +36,10 @@ namespace HG_ServerUI
             InitializeComponent();
             _settingsModel = settingsModel;
             CbResultfiles.ItemsSource = GetResultFiles(_settingsModel.Resultsdirectory);
+            if(CbResultfiles.Items.Count > 0 )
+            {
+                CbResultfiles.Text = "No regatta results found.";
+            }
         }
 
         private List<string> GetResultFiles(string _path)
