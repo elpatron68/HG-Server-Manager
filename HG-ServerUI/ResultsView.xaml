@@ -20,7 +20,7 @@
                 HorizontalAlignment="Center" 
                 Margin="10" 
                 VerticalAlignment="Top" 
-                Width="580" 
+                Width="480" 
                 SelectionChanged="CbResultfiles_SelectionChanged"
                 >
             </ComboBox>
