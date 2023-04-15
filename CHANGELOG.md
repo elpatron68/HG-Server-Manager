@@ -3,6 +3,7 @@
 ## v1.0.6.1
 
 - Change archive directory to `<HG Server Directory>\archive`
+- Update README.md
 
 ## v1.0.6
 
