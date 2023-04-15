@@ -19,6 +19,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 using System.Net.Http;
+using Newtonsoft.Json.Linq;
 
 namespace HG_ServerUI
 {
@@ -56,8 +57,34 @@ namespace HG_ServerUI
 
         private List<RaceEntry> GetResultsfromfile(string _filename)
         {
-            Root? myDeserializedClass = JsonConvert.DeserializeObject<Root>(File.ReadAllText(_filename));
-            return myDeserializedClass.entries;
+            Root? RaceResults = JsonConvert.DeserializeObject<Root>(File.ReadAllText(_filename));
+            int _rank = 1;
+            int _numboats = 0;
+            foreach(var entry in RaceResults.entries)
+            {
+                if (entry.race_time > 0)
+                {
+                    entry.rank = _rank;
+                    entry.race_time = Math.Round(entry.race_time, 2, MidpointRounding.AwayFromZero);
+                    _numboats++;
+                    _rank++;
+                }
+                else
+                {
+                    entry.points = 0;
+                    entry.rank = 99;
+                }
+            }
+            foreach (var entry in RaceResults.entries)
+            {
+                if (entry.race_time > 0)
+                {
+                    entry.points = _numboats;
+                    _numboats--;
+                }
+            }
+
+            return RaceResults.entries;
         }
 
 
@@ -120,11 +147,13 @@ namespace HG_ServerUI
 
         public class RaceEntry
         {
+            public int rank { get; set; }
             public string? name { get; set; }
             public string? boat_model { get; set; }
-            public object id { get; set; }
+            //public object id { get; set; }
             public double race_time { get; set; }
             public double flight_time { get; set; }
+            public int points { get; set; }
         }
 
         public class Regatta

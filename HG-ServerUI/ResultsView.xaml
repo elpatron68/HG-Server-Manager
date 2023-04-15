@@ -18,7 +18,7 @@
             <ComboBox 
                 x:Name="CbResultfiles"
                 HorizontalAlignment="Center" 
-                Margin="0,10,0,0" 
+                Margin="10" 
                 VerticalAlignment="Top" 
                 Width="580" 
                 SelectionChanged="CbResultfiles_SelectionChanged"
