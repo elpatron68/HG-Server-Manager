@@ -1,4 +1,6 @@
-﻿using MahApps.Metro.Controls;
+﻿using Discord.WebSocket;
+using Discord;
+using MahApps.Metro.Controls;
 using Newtonsoft.Json;
 using System;
 using System.Collections;
@@ -14,7 +16,9 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
+using System.Net.Http;
 
 namespace HG_ServerUI
 {
@@ -23,6 +27,7 @@ namespace HG_ServerUI
     /// </summary>
     public partial class ResultsView : MetroWindow
     {
+        private Discordbot _discordRacebot = new();
         public ResultsView(SettingsModel settingsModel)
         {
             InitializeComponent();
@@ -52,7 +57,51 @@ namespace HG_ServerUI
             return myDeserializedClass.entries;
         }
 
-        // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
+
+        public void Dg2Bitmap(int width, int heigth)
+        {
+            RenderTargetBitmap renderTargetBitmap =
+                new RenderTargetBitmap(width, heigth, 96, 96, PixelFormats.Pbgra32);
+            renderTargetBitmap.Render(DgResults);
+            PngBitmapEncoder pngImage = new PngBitmapEncoder();
+            pngImage.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
+            using (Stream fileStream = File.Create("results.png"))
+            {
+                pngImage.Save(fileStream);
+            }
+        }
+
+        private void BtSavePng_Click(object sender, RoutedEventArgs e)
+        {
+            int _width = Convert.ToInt32(DgResults.ActualWidth);
+            int _heigth = Convert.ToInt32(DgResults.ActualHeight) + 20;
+            Dg2Bitmap(_width, _heigth);
+            SendResult2Discord();
+        }
+
+        private async void SendResult2Discord()
+        {
+            var client = new DiscordSocketClient();
+            await client.LoginAsync(TokenType.Bot, _discordRacebot.DiscordbotToken);
+            await client.StartAsync();
+
+            const string fileName = "results.png";
+            var embed = new EmbedBuilder()
+                .WithImageUrl($"attachment://{fileName}")
+                .WithDescription("Race results")
+                .Build();
+
+            var channel = await client.GetChannelAsync(_discordRacebot.Discordchannelid) as IMessageChannel;
+
+            MemoryStream memoryStream = new MemoryStream();
+            using (FileStream file = new FileStream("results.png", FileMode.Open, FileAccess.Read))
+                file.CopyTo(memoryStream);
+
+            var result = await client.GetChannelAsync(_discordRacebot.Discordchannelid) as IMessageChannel;
+            await result!.SendFileAsync(stream: memoryStream, filename: fileName, embed: embed);
+            try { File.Delete("results.png"); } catch (Exception) { }
+        }
+
         public class RaceEntry
         {
             public string? name { get; set; }
