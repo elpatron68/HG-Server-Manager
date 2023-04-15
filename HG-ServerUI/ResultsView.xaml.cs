@@ -219,7 +219,6 @@ namespace HG_ServerUI
             public int rank { get; set; }
             public string? name { get; set; }
             public string? boat_model { get; set; }
-            //public object id { get; set; }
             public double race_time { get; set; }
             public double flight_time { get; set; }
             public int points { get; set; }
