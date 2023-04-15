@@ -3,6 +3,7 @@
 ## v1.0.6
 
 - Add results window (menu *Regattas - View results*)
+  - Add cumulative results from all races (regatta series)
 - Send results to Discord
 - Move menu "Snaps" to menu *Regattas*
 - Option to archive old regatta results (menu *Regattas - archive old results*)
