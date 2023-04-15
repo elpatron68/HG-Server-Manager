@@ -79,10 +79,13 @@ namespace HG_ServerUI
 
         private void BtSavePng_Click(object sender, RoutedEventArgs e)
         {
-            int _width = Convert.ToInt32(DgResults.ActualWidth);
-            int _heigth = Convert.ToInt32(DgResults.ActualHeight) + 40;
-            Dg2Bitmap(_width, _heigth);
-            SendResult2Discord();
+            if(DgResults.Items.Count>0)
+            {
+                int _width = Convert.ToInt32(DgResults.ActualWidth);
+                int _heigth = Convert.ToInt32(DgResults.ActualHeight) + 40;
+                Dg2Bitmap(_width, _heigth);
+                SendResult2Discord();
+            }
         }
 
         private async void SendResult2Discord()
