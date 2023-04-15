@@ -28,10 +28,13 @@ namespace HG_ServerUI
     public partial class ResultsView : MetroWindow
     {
         private Discordbot _discordRacebot = new();
+        private SettingsModel _settingsModel = new SettingsModel();
+
         public ResultsView(SettingsModel settingsModel)
         {
             InitializeComponent();
-            CbResultfiles.ItemsSource = GetResultFiles(settingsModel.Resultsdirectory);
+            _settingsModel = settingsModel;
+            CbResultfiles.ItemsSource = GetResultFiles(_settingsModel.Resultsdirectory);
         }
 
         private List<string> GetResultFiles(string _path)
@@ -60,12 +63,15 @@ namespace HG_ServerUI
 
         public void Dg2Bitmap(int width, int heigth)
         {
+            string _filename = System.IO.Path.GetDirectoryName(CbResultfiles.Text) + @"\" +
+                    System.IO.Path.GetFileNameWithoutExtension(CbResultfiles.Text) + ".png";
+
             RenderTargetBitmap renderTargetBitmap =
                 new RenderTargetBitmap(width, heigth, 96, 96, PixelFormats.Pbgra32);
             renderTargetBitmap.Render(DgResults);
             PngBitmapEncoder pngImage = new PngBitmapEncoder();
             pngImage.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
-            using (Stream fileStream = File.Create("results.png"))
+            using (Stream fileStream = File.Create(_filename))
             {
                 pngImage.Save(fileStream);
             }
@@ -74,7 +80,7 @@ namespace HG_ServerUI
         private void BtSavePng_Click(object sender, RoutedEventArgs e)
         {
             int _width = Convert.ToInt32(DgResults.ActualWidth);
-            int _heigth = Convert.ToInt32(DgResults.ActualHeight) + 20;
+            int _heigth = Convert.ToInt32(DgResults.ActualHeight) + 40;
             Dg2Bitmap(_width, _heigth);
             SendResult2Discord();
         }
@@ -85,21 +91,28 @@ namespace HG_ServerUI
             await client.LoginAsync(TokenType.Bot, _discordRacebot.DiscordbotToken);
             await client.StartAsync();
 
-            const string fileName = "results.png";
+            string _filename = System.IO.Path.GetDirectoryName(CbResultfiles.Text) + @"\" + 
+                System.IO.Path.GetFileNameWithoutExtension(CbResultfiles.Text) + ".png";
+
+            DateTime fileCreatedDate = File.GetCreationTimeUtc(_filename);
+            string _timestamp = fileCreatedDate.ToString("yyyy.MM.dd HH:mm:ss");
+
+            string _text = $"**Race results for {_settingsModel.Servername}** :checkered_flag:\n" +
+                $"Race ended at {_timestamp} UTC";
             var embed = new EmbedBuilder()
-                .WithImageUrl($"attachment://{fileName}")
-                .WithDescription("Race results")
+                .WithImageUrl($"attachment://{_filename}")
+                .WithDescription(_text)
                 .Build();
 
             var channel = await client.GetChannelAsync(_discordRacebot.Discordchannelid) as IMessageChannel;
 
             MemoryStream memoryStream = new MemoryStream();
-            using (FileStream file = new FileStream("results.png", FileMode.Open, FileAccess.Read))
+            using (FileStream file = new FileStream(_filename, FileMode.Open, FileAccess.Read))
                 file.CopyTo(memoryStream);
 
             var result = await client.GetChannelAsync(_discordRacebot.Discordchannelid) as IMessageChannel;
-            await result!.SendFileAsync(stream: memoryStream, filename: fileName, embed: embed);
-            try { File.Delete("results.png"); } catch (Exception) { }
+            await result!.SendFileAsync(stream: memoryStream, filename: _filename, embed: embed);
+            //try { File.Delete("results.png"); } catch (Exception) { }
         }
 
         public class RaceEntry
