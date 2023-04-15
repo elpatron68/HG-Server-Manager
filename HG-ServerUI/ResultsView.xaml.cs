@@ -20,21 +20,61 @@ namespace HG_ServerUI
     {
         private Discordbot _discordRacebot = new();
         private SettingsModel _settingsModel = new SettingsModel();
+        private List<string> _resultFiles = new();
 
         public ResultsView(SettingsModel settingsModel)
         {
             InitializeComponent();
             _settingsModel = settingsModel;
-            List<string> _resultfiles = GetResultFiles(_settingsModel.Resultsdirectory);
-            if(_resultfiles.Count > 0 )
+            _resultFiles = GetResultFiles(_settingsModel.Resultsdirectory);
+
+            if (_resultFiles.Count > 0)
             {
-                CbResultfiles.ItemsSource = _resultfiles;
+                _resultFiles.Add("Cumulated series results");
+                CalculateRaceSeries(_resultFiles);
+                CbResultfiles.ItemsSource = _resultFiles;
             }
             else
             {
                 CbResultfiles.Items.Add("No regatta results found.");
                 CbResultfiles.SelectedIndex = 0;
             }
+        }
+
+        private void CalculateRaceSeries(List<string> _resultfiles)
+        {
+            List<Boatpoints> bp = new List<Boatpoints>();
+
+            foreach (string resultfile in _resultfiles)
+            {
+                List<RaceEntry> results = GetResultsfromfile(resultfile);
+                foreach (RaceEntry r in results)
+                {
+                    bool _match = false;
+                    foreach (Boatpoints _bp in bp)
+                    {
+                        // Existing boat name
+                        if (r.name == _bp.boatname)
+                        {
+                            _bp.points += r.points;
+                            _bp.races += 1;
+                            _match= true;
+                            break;
+                        }
+                    }
+                    if(!_match)
+                    {
+                        // New boat name?
+                        var b = new Boatpoints();
+                        b.boatname = r.name;
+                        b.points += r.points;
+                        b.races += 1;
+                        bp.Add(b);
+                    }
+                }
+            }
+            DgResults.ItemsSource=bp;
+            LbDgname.Content = "Cumulated regatta series points";
         }
 
         private List<string> GetResultFiles(string _path)
@@ -47,43 +87,57 @@ namespace HG_ServerUI
         private void CbResultfiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string? _filename = CbResultfiles.SelectedItem.ToString();
-            if (File.Exists(_filename))
+            if (_filename == "Cumulated series results")
             {
-                DgResults.ItemsSource = (IEnumerable)GetResultsfromfile(_filename);
+                CalculateRaceSeries(_resultFiles);
+            }
+            else
+            {
+                if (File.Exists(_filename))
+                {
+                    DgResults.ItemsSource = (IEnumerable)GetResultsfromfile(_filename);
+                    DateTime fileCreatedDate = File.GetCreationTimeUtc(_filename);
+                    string _timestamp = fileCreatedDate.ToString("yyyy.MM.dd HH:mm:ss");
+                    string _lbtext = $"Results from '{Path.GetFileName(_filename)}' ({_timestamp})";
+                    LbDgname.Content = _lbtext;
+                }
             }
         }
 
 
         private List<RaceEntry> GetResultsfromfile(string _filename)
         {
-            Root? RaceResults = JsonConvert.DeserializeObject<Root>(File.ReadAllText(_filename));
-            int _rank = 1;
-            int _numboats = 0;
-            foreach(var entry in RaceResults.entries)
+            if (File.Exists(_filename))
             {
-                if (entry.race_time > 0)
+                Root? RaceResults = JsonConvert.DeserializeObject<Root>(File.ReadAllText(_filename));
+                int _rank = 1;
+                int _numboats = 0;
+                foreach (var entry in RaceResults.entries)
                 {
-                    entry.rank = _rank;
-                    entry.race_time = Math.Round(entry.race_time, 2, MidpointRounding.AwayFromZero);
-                    _numboats++;
-                    _rank++;
+                    if (entry.race_time > 0)
+                    {
+                        entry.rank = _rank;
+                        entry.race_time = Math.Round(entry.race_time, 2, MidpointRounding.AwayFromZero);
+                        _numboats++;
+                        _rank++;
+                    }
+                    else
+                    {
+                        entry.points = 0;
+                        entry.rank = 99;
+                    }
                 }
-                else
+                foreach (var entry in RaceResults.entries)
                 {
-                    entry.points = 0;
-                    entry.rank = 99;
+                    if (entry.race_time > 0)
+                    {
+                        entry.points = _numboats;
+                        _numboats--;
+                    }
                 }
+                return RaceResults.entries;
             }
-            foreach (var entry in RaceResults.entries)
-            {
-                if (entry.race_time > 0)
-                {
-                    entry.points = _numboats;
-                    _numboats--;
-                }
-            }
-
-            return RaceResults.entries;
+            return new List<RaceEntry>();
         }
 
 

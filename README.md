@@ -59,9 +59,13 @@ The menu *Regattas* - *Snaps* - *Open snaps* opens an Windows *Explorer* window 
 
 View the results of all your regattas by selecting *Regattas* - *View results*:
 
+![image-20230415162146519](./assets/image-20230415162146519.png)
+
+The view starts with cumulated values from all boats in all races. Select a result file name to be displayed in the *ComboBox* at the top to display a concrete result:
+
 ![image-20230414150238636](./assets/image-20230414150238636.png)
 
-Select a result file name to be displayed in the *ComboBox* at the top.
+
 
 ### Archive Results
 

@@ -24,6 +24,11 @@
                 SelectionChanged="CbResultfiles_SelectionChanged"
                 >
             </ComboBox>
+            <Label x:Name="LbDgname"
+                   FontWeight="Bold" 
+                   HorizontalContentAlignment="Center"
+                   >
+            </Label>
             <DataGrid 
                 x:Name="DgResults"
                 Margin="20"
