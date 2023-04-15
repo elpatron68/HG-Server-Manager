@@ -35,10 +35,15 @@ namespace HG_ServerUI
         {
             InitializeComponent();
             _settingsModel = settingsModel;
-            CbResultfiles.ItemsSource = GetResultFiles(_settingsModel.Resultsdirectory);
-            if(CbResultfiles.Items.Count > 0 )
+            List<string> _resulfiles = GetResultFiles(_settingsModel.Resultsdirectory);
+            if(_resulfiles.Count > 0 )
             {
-                CbResultfiles.Text = "No regatta results found.";
+                CbResultfiles.ItemsSource = _resulfiles;
+            }
+            else
+            {
+                CbResultfiles.Items.Add("No regatta results found.");
+                CbResultfiles.SelectedIndex = 0;
             }
         }
 
