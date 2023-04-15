@@ -23,6 +23,7 @@ using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Win32;
 using Serilog;
 using Serilog.Sinks.RichTextBox.Themes;
+using System.IO.Compression;
 
 namespace HG_ServerUI
 {
@@ -885,6 +886,70 @@ namespace HG_ServerUI
         {
             ResultsView rv = new(settingsModel);
             rv.Show();
+        }
+
+        private async void MnArchive_Click(object sender, RoutedEventArgs e)
+        {
+            // Copy all results (*.kl and *.json) to a Zip archive
+            string startPath = Directory.GetParent(settingsModel.Resultsdirectory).ToString();
+            string zipPath = Path.GetTempPath();
+            string zipFile = zipPath + @$"results_archive_{DateTime.Now:yy-MM-dd hh-mm-ss}.zip";
+            if (Directory.GetFiles(startPath).Length > 0)
+            {
+                MessageDialogResult result = await this.ShowMessageAsync("Are you sure?",
+                    $"Delete all regatta results in \"{startPath}\"?", MessageDialogStyle.AffirmativeAndNegative);
+                if (result == MessageDialogResult.Affirmative)
+                {
+                    ZipFile.CreateFromDirectory(startPath, zipFile);
+                    if (!Directory.Exists(startPath + @"\archive\"))
+                    {
+                        Directory.CreateDirectory(startPath + @"\archive\");
+                    }
+                    // Move Zip file to archive directory
+                    try
+                    {
+                        File.Move(zipFile, startPath + @$"\archive\{Path.GetFileName(zipFile)}");
+                    }
+                    catch(Exception ex)
+                    { 
+                        Log.Warning($"Failed to move {zipFile}: {ex.Message}"); 
+                    }
+
+                    // Cleanup results directory
+                    string[] _klfiles = Directory.GetFiles(startPath);
+                    foreach (string _klfile in _klfiles)
+                    {
+                        try
+                        {
+                            File.Delete(_klfile);
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Warning($"Failed to delete {_klfile}: {ex.Message}");
+                        }
+                    }
+                    string[] _jsonfiles = Directory.GetFiles(settingsModel.Resultsdirectory);
+                    foreach (string _jsonfile in _jsonfiles)
+                    {
+                        try
+                        {
+                            File.Delete(_jsonfile);
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Warning($"Failed to delete {_jsonfile}: {ex.Message}"); }
+                        }
+                    Log.Information($"{Directory.GetFiles(startPath).Length} result files archived.");
+                }
+                else
+                {
+                    Log.Information($"Deleting result files cancelled.");
+                }
+            }
+            else
+            {
+                Log.Information($"No result files found.");
+            }
         }
     }
 }

@@ -158,6 +158,14 @@
                         <iconPacks:PackIconMaterial Kind="FlagCheckered" />
                     </MenuItem.Icon>
                 </MenuItem>
+                <MenuItem x:Name="MnArchive"
+                          Header="_Archive old regattas" 
+                          Click="MnArchive_Click"
+                    >
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconMaterial Kind="ArchiveOutline"/>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
             
             <MenuItem Header="H_ot slots">
