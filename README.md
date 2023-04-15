@@ -53,15 +53,19 @@ You can open the server log `log.log` in the *Notepad* text editor by opening *F
 
 ### Snaps
 
-The menu *File* - *Snaps* - *Open snaps* opens an Windows *Explorer* window in your *snaps* directory. You can delete all snap files by selecting *File* - *Snaps* - *Delete all files in snaps directory*.
+The menu *Regattas* - *Snaps* - *Open snaps* opens an Windows *Explorer* window in your *snaps* directory. You can delete all snap files by selecting *Regattas* - *Snaps* - *Delete all files in snaps directory*.
 
 ### View results
 
-View the results of all your regattas by selecting *File* - *View results*:
+View the results of all your regattas by selecting *Regattas* - *View results*:
 
 ![image-20230414150238636](./assets/image-20230414150238636.png)
 
-Select a result file name to be displayed.
+Select a result file name to be displayed in the *ComboBox* at the top.
+
+### Archive Results
+
+Select *Regattas* - *Archive old regattas* to move all files of your server´s `results` Directory to a Zip file. The Zip file will be stored in the subdirectory `archive` of the directory, where *HG Server-Manager* is installed. You can restore it by extracting the contents of an Zip archive file to it´s original directory.
 
 ### Status Bar
 
