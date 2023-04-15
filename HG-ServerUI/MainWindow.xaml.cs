@@ -894,21 +894,25 @@ namespace HG_ServerUI
             string startPath = Directory.GetParent(settingsModel.Resultsdirectory).ToString();
             string zipPath = Path.GetTempPath();
             string zipFile = zipPath + @$"results_archive_{DateTime.Now:yy-MM-dd hh-mm-ss}.zip";
+            string _archiveDirectory = Path.GetDirectoryName(AppContext.BaseDirectory) + @$"\archive\";
             if (Directory.GetFiles(startPath).Length > 0)
             {
                 MessageDialogResult result = await this.ShowMessageAsync("Are you sure?",
-                    $"Delete all regatta results in \"{startPath}\"?", MessageDialogStyle.AffirmativeAndNegative);
+                    $"Do you want to archive and delete all regatta results in \"{startPath}\"?\n\n" +
+                    $"All files will be archived into a zip file in {_archiveDirectory} and can be restored by extracting the archive.", MessageDialogStyle.AffirmativeAndNegative);
                 if (result == MessageDialogResult.Affirmative)
                 {
                     ZipFile.CreateFromDirectory(startPath, zipFile);
-                    if (!Directory.Exists(startPath + @"\archive\"))
-                    {
-                        Directory.CreateDirectory(startPath + @"\archive\");
-                    }
-                    // Move Zip file to archive directory
+                    // Move Zip file to archive directory in AppContext.BaseDirectory
                     try
                     {
-                        File.Move(zipFile, startPath + @$"\archive\{Path.GetFileName(zipFile)}");
+                        
+
+                        if (!Directory.Exists(_archiveDirectory))
+                        {
+                            Directory.CreateDirectory(_archiveDirectory);
+                        }
+                        File.Move(zipFile, Path.Combine(_archiveDirectory, Path.GetFileName(zipFile)));                            
                     }
                     catch(Exception ex)
                     { 
@@ -916,6 +920,7 @@ namespace HG_ServerUI
                     }
 
                     // Cleanup results directory
+                    // Delete *.kl files
                     string[] _klfiles = Directory.GetFiles(startPath);
                     foreach (string _klfile in _klfiles)
                     {
@@ -928,6 +933,7 @@ namespace HG_ServerUI
                             Log.Warning($"Failed to delete {_klfile}: {ex.Message}");
                         }
                     }
+                    // Delete *.json files
                     string[] _jsonfiles = Directory.GetFiles(settingsModel.Resultsdirectory);
                     foreach (string _jsonfile in _jsonfiles)
                     {
