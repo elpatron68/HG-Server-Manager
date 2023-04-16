@@ -236,15 +236,15 @@ namespace HG_ServerUI
             Log.Information($"{settingsModel.Locations.Count()} locations found");
             Log.Information($"{Directory.GetFiles(settingsModel.Configfiledirectory).Count()} " +
                 $"configuration files found");
-            if(Network.Testport("127.0.0.1", int.Parse(settingsModel.Tcpport), TimeSpan.FromMilliseconds(100)))
-            {
-                Log.Warning($"Port {settingsModel.Tcpport} is open, server already running? ⚠️");
-                BtnStartServer.IsEnabled = false;
-            }
-            else
-            {
-                Log.Information($"Server port {settingsModel.Tcpport} is free  ✅");
-            }
+            //if(Network.Testport("127.0.0.1", int.Parse(settingsModel.Tcpport), TimeSpan.FromMilliseconds(100)))
+            //{
+            //    Log.Warning($"Port {settingsModel.Tcpport} is open, server already running? ⚠️");
+            //    BtnStartServer.IsEnabled = false;
+            //}
+            //else
+            //{
+            //    Log.Information($"Server port {settingsModel.Tcpport} is free  ✅");
+            //}
             if (IsServerRunning())
             {
                 Log.Warning("Another server process is running! ⚠️");
