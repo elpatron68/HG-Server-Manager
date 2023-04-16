@@ -29,7 +29,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\README.md" Link="README.md">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="Discordbot_sample.cs" />
   </ItemGroup>
@@ -63,7 +63,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="if $(ConfigurationName) == Release (powershell Compress-Archive -Path '$(TargetDir)*.json', '$(TargetDir)de\*.dll', '$(TargetDir)*.exe', '$(TargetDir)*.dll', '$(TargetDir)*.pdb', '$(TargetDir)*.config', '$(TargetDir)*.md' -DestinationPath '$(SolutionDir)PublishOutput\HG_Server-Manager.zip' -Force)" />
+    <Exec Command="if $(ConfigurationName) == Release (powershell Compress-Archive -Path '$(TargetDir)*.pdf', '$(TargetDir)*.json', '$(TargetDir)de\*.dll', '$(TargetDir)*.exe', '$(TargetDir)*.dll', '$(TargetDir)*.pdb', '$(TargetDir)*.config', '$(TargetDir)*.md' -DestinationPath '$(SolutionDir)PublishOutput\HG_Server-Manager.zip' -Force)" />
   </Target>
 
 </Project>
