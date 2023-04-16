@@ -9,7 +9,7 @@
         Height="620" 
         Width="1200" 
         ResizeMode="NoResize" 
-        Closing="MetroWindow_Closing"
+        Closing="MetroWindow_Closing" 
         >
     <Window.CommandBindings>
         <CommandBinding 
@@ -126,7 +126,7 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
-            
+
             <MenuItem Header="_Regattas">
                 <MenuItem 
                     Header="_Snaps"
@@ -167,7 +167,7 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
-            
+
             <MenuItem Header="H_ot slots">
                 <MenuItem
                     x:Name="MnSlot"
@@ -929,7 +929,7 @@
             StringFormat="N2"
             >
         </mah:NumericUpDown>
-        <CheckBox 
+        <!--<CheckBox 
             x:Name="CheckUseCollisions"
             Grid.Column="7" 
             Content="" 
@@ -941,7 +941,7 @@
             Width="30"
             IsChecked="{Binding Usecollisions}"
             >
-        </CheckBox>
+        </CheckBox>-->
         <mah:NumericUpDown 
             x:Name="NmWindShadowScale"
             Grid.Column="7" 
@@ -1237,5 +1237,14 @@
             IsChecked="{Binding DiscordracenotificationEnabled}"
             >
         </CheckBox>
+        <mah:ToggleSwitch 
+            x:Name="CheckUseCollisions"
+            Grid.Column="7" 
+            Height="30" 
+            Margin="10,250,0,0" 
+            Grid.Row="2" 
+            VerticalAlignment="Top" 
+            IsOn="{Binding Usecollisions}"
+            />
     </Grid>
 </mah:MetroWindow>
