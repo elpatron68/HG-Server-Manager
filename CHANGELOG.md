@@ -2,9 +2,11 @@
 
 ## v1.0.6.2
 
-- Decrease app loading time by removing Network.Testport in PreFlightCheck
-- Fix image height
-- Minor refactorings
+- Significantly decrease app loading time by removing *Network.Testport* in PreFlightCheck, which was redundant
+- Increase Discord image height
+- Minor refactorings, add some comments in code
+- Replace WPF *CheckBoxes* by MahApps *ToogleSwitches*
+- Change mahapps theme to *Light.Orange*
 
 ## v1.0.6.1
 
