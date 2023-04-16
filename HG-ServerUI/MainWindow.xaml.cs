@@ -56,6 +56,8 @@ namespace HG_ServerUI
                 theme: RichTextBoxConsoleTheme.Grayscale,
                 outputTemplate: "[{Timestamp:HH:mm:ss}] {Message:lj}{NewLine}{Exception}"
                 )
+                .WriteTo.Console()
+                .WriteTo.File(@".\log\log-.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
             Log.Information("HG Server Manager started");
 
