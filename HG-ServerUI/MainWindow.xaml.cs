@@ -914,6 +914,19 @@ namespace HG_ServerUI
                             Log.Warning($"Failed to delete {_klfile}: {ex.Message}");
                         }
                     }
+                    // Delete *.png files
+                    string[] _pngfiles = Directory.GetFiles(settingsModel.Resultsdirectory);
+                    foreach (string _pngfile in _pngfiles)
+                    {
+                        try
+                        {
+                            File.Delete(_pngfile);
+                            _filescount++;
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Warning($"Failed to delete {_pngfile}: {ex.Message}"); }
+                        }
                     // Delete *.json files
                     string[] _jsonfiles = Directory.GetFiles(settingsModel.Resultsdirectory);
                     foreach (string _jsonfile in _jsonfiles)
@@ -925,8 +938,9 @@ namespace HG_ServerUI
                         }
                         catch (Exception ex)
                         {
-                            Log.Warning($"Failed to delete {_jsonfile}: {ex.Message}"); }
+                            Log.Warning($"Failed to delete {_jsonfile}: {ex.Message}");
                         }
+                    }
                     Log.Information($"{_filescount} files moved to archive.");
                 }
                 else
