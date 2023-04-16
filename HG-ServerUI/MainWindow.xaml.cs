@@ -458,6 +458,7 @@ namespace HG_ServerUI
             }
         }
 
+        // Start or kill server process
         private void BtnStartServer_Click(object sender, RoutedEventArgs e)
         {
             if (!settingsModel.Serverprocessrunning)
@@ -470,6 +471,7 @@ namespace HG_ServerUI
             }
         }
 
+        // Kill running process
         private void KillServerProcess()
         {
             Process[] process = Process.GetProcesses();
@@ -502,6 +504,7 @@ namespace HG_ServerUI
             }
         }
 
+        // Check if server process is running
         private bool IsServerRunning()
         {
             Process[] process = Process.GetProcesses();
@@ -654,16 +657,12 @@ namespace HG_ServerUI
             }
         }
 
-        private void NtfyHelp_RequestNavigate(object sender, RequestNavigateEventArgs e)
-        {
-            _= Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
-        }
-
         private void MnOpenSnaps_Click(object sender, RoutedEventArgs e)
         {
             _ = Process.Start("explorer.exe", settingsModel.Snapsdirectory);
         }
 
+        #region Hotkeys
         private void SlotZeroCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             LoadSlot(0);
@@ -706,6 +705,8 @@ namespace HG_ServerUI
         {
             LoadSlot(9);
         }
+        #endregion
+
         private void RunServerCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (!settingsModel.Serverprocessrunning)
@@ -717,6 +718,7 @@ namespace HG_ServerUI
                 KillServerProcess();
             }
         }
+        #region Hot slots
         private void MnSlot0_Click(object sender, RoutedEventArgs e)
         {
             LoadSlot(0);
@@ -758,6 +760,7 @@ namespace HG_ServerUI
         {
             LoadSlot(9);
         }
+        #endregion
 
         private async void LoadSlot(int slotnumber)
         {
@@ -815,6 +818,7 @@ namespace HG_ServerUI
             }
         }
 
+        // Bevor saving or starting the the server: Leave the focussed field
         private void SendTab()
         {
             KeyEventArgs _tab = new KeyEventArgs(Keyboard.PrimaryDevice,
