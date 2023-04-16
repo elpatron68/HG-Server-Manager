@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## v1.0.6.2
+
+- Decrease app loading time by removing Network.Testport in PreFlightCheck
+
 ## v1.0.6.1
 
 - Change archive directory to `<HG Server Directory>\archive`
