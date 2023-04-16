@@ -929,19 +929,16 @@
             StringFormat="N2"
             >
         </mah:NumericUpDown>
-        <!--<CheckBox 
+        <mah:ToggleSwitch 
             x:Name="CheckUseCollisions"
             Grid.Column="7" 
-            Content="" 
-            HorizontalAlignment="Left" 
-            Margin="15,250,0,0" 
+            Height="30" 
+            Margin="10,250,0,0" 
             Grid.Row="2" 
-            VerticalAlignment="Top"
-            Height="30"
-            Width="30"
-            IsChecked="{Binding Usecollisions}"
+            VerticalAlignment="Top" 
+            IsOn="{Binding Usecollisions}"
             >
-        </CheckBox>-->
+        </mah:ToggleSwitch>
         <mah:NumericUpDown 
             x:Name="NmWindShadowScale"
             Grid.Column="7" 
@@ -1223,28 +1220,17 @@
             FontWeight="Bold"
             >
         </Label>
-        <CheckBox 
+        <mah:ToggleSwitch 
             x:Name="CbDiscordRace"
+            Grid.Row="1" 
             Grid.Column="2" 
             Grid.ColumnSpan="2"
-            Content="Send Notice Of Race to Discord" 
-            HorizontalAlignment="Center" 
-            Margin="0,100,0,0" 
-            Grid.Row="1" 
+            Header="Send Notice Of Race to Discord"
+            Height="60" 
+            Margin="10,120,0,0"
             VerticalAlignment="Top" 
-            Width="230"
-            Height="30"
-            IsChecked="{Binding DiscordracenotificationEnabled}"
+            IsOn="{Binding DiscordracenotificationEnabled}"
             >
-        </CheckBox>
-        <mah:ToggleSwitch 
-            x:Name="CheckUseCollisions"
-            Grid.Column="7" 
-            Height="30" 
-            Margin="10,250,0,0" 
-            Grid.Row="2" 
-            VerticalAlignment="Top" 
-            IsOn="{Binding Usecollisions}"
-            />
+        </mah:ToggleSwitch>
     </Grid>
 </mah:MetroWindow>
