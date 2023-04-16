@@ -450,7 +450,11 @@ namespace HG_ServerUI
                     }
                     catch { }
                 }
-
+                // 08:06:09 [WARN] Boat 1 started after 44.5742s
+                if (outLine.Data.Contains(" started after "))
+                {
+                    Log.Information(outLine.Data.Split(' ')[2].Trim());
+                }
             }
         }
 
