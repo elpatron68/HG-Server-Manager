@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Drawing;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Media;
@@ -13,7 +11,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Navigation;
 using System.Windows.Threading;
 using Discord.WebSocket;
@@ -843,24 +840,6 @@ namespace HG_ServerUI
                 c.IsEnabled = enabled;
             }
         }
-
-        //private void LbCourse_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        //{
-        //    Clipboard.SetText($"/set_course {CbCourse.Text}");
-        //    Log.Information($"Cmd '/set_course {CbCourse.Text}' copied to clipboard");
-        //}
-
-        //private void LbWindMax_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        //{
-        //    Clipboard.SetText($"/set_wind {NmWindMaxSpeed.Value}");
-        //    Log.Information($"Cmd '/set_wind {NmWindMaxSpeed.Value}' copied to clipboard");
-        //}
-
-        //private void LbAdminPassword_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        //{
-        //    Clipboard.SetText($"/admin {settingsModel.Adminpassword}");
-        //    Log.Information($"Cmd '/admin {settingsModel.Adminpassword}' copied to clipboard");
-        //}
 
         private void RtbLogMessages_TextChanged(object sender, TextChangedEventArgs e)
         {
