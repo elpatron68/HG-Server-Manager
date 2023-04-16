@@ -209,7 +209,7 @@ namespace HG_ServerUI
             if(DgResults.Items.Count>0)
             {
                 int _width = Convert.ToInt32(DgResults.ActualWidth);
-                int _heigth = Convert.ToInt32(DgResults.ActualHeight) + 40;
+                int _heigth = Convert.ToInt32(DgResults.ActualHeight) + 90;
                 Dg2Bitmap(_width, _heigth);
             }
         }
