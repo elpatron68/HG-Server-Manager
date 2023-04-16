@@ -34,6 +34,12 @@
                 Margin="20"
                 d:ItemsSource="{d:SampleData ItemCount=5}"
                 >
+                <DataGrid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#3f3f3f"/>
+                        <GradientStop Color="#FFF45102" Offset="1"/>
+                    </LinearGradientBrush>
+                </DataGrid.Background>
             </DataGrid>
             <Button
                 x:Name="BtSavePng"

@@ -3,6 +3,8 @@
 ## v1.0.6.2
 
 - Decrease app loading time by removing Network.Testport in PreFlightCheck
+- Fix image height
+- Minor refactorings
 
 ## v1.0.6.1
 
