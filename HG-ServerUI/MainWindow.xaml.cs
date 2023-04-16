@@ -86,7 +86,7 @@ namespace HG_ServerUI
             // Initialize file system watchers
             fswCfg = new FileSystemWatcher(settingsModel.Configfiledirectory)
             {
-                Filter = $"{System.IO.Path.GetFileName(settingsModel.Configfilepath)}",
+                Filter = $"{Path.GetFileName(settingsModel.Configfilepath)}",
                 NotifyFilter = NotifyFilters.LastAccess |
                 NotifyFilters.LastWrite |
                 NotifyFilters.FileName
@@ -549,7 +549,7 @@ namespace HG_ServerUI
             SendTab();
             SettingsFile.WriteConfigfile(settingsModel);
             fswCfg.EnableRaisingEvents = true;
-            string filename = System.IO.Path.GetFileName(settingsModel.Configfilepath);
+            string filename = Path.GetFileName(settingsModel.Configfilepath);
             Log.Information($"Saved configuration as {filename}");
         }
 
