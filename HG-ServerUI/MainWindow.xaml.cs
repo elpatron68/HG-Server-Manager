@@ -21,6 +21,7 @@ using Microsoft.Win32;
 using Serilog;
 using Serilog.Sinks.RichTextBox.Themes;
 using System.IO.Compression;
+using Serilog.Events;
 
 namespace HG_ServerUI
 {
@@ -31,33 +32,35 @@ namespace HG_ServerUI
     {
         SettingsModel settingsModel = new();
         private readonly DispatcherTimer checkServerRunningTimer = new DispatcherTimer();
-        private readonly FileSystemWatcher _cfgFileSystemWatcher;
-        private readonly FileSystemWatcher _penaltiesFileSystemWatcher;
-        private readonly FileSystemWatcher _resultsFileSystemWatcher;
-        public static RoutedCommand cmdSlotZero = new RoutedCommand();
-        public static RoutedCommand cmdSlotOne = new RoutedCommand();
-        public static RoutedCommand cmdSlotTwo = new RoutedCommand();
-        public static RoutedCommand cmdSlotThree = new RoutedCommand();
-        public static RoutedCommand cmdSlotFour = new RoutedCommand();
-        public static RoutedCommand cmdSlotFive = new RoutedCommand();
-        public static RoutedCommand cmdSlotSix = new RoutedCommand();
-        public static RoutedCommand cmdSlotSeven = new RoutedCommand();
-        public static RoutedCommand cmdSlotEight = new RoutedCommand();
-        public static RoutedCommand cmdSlotNine = new RoutedCommand();
-        public static RoutedCommand cmdRunServer = new RoutedCommand();
-        private Discordbot _discordRacebot=new();
+        private readonly FileSystemWatcher fswCfg;
+        private readonly FileSystemWatcher fswPenalties;
+        private readonly FileSystemWatcher fswResults;
+        public static RoutedCommand cmdSlotZero = new();
+        public static RoutedCommand cmdSlotOne = new();
+        public static RoutedCommand cmdSlotTwo = new();
+        public static RoutedCommand cmdSlotThree = new();
+        public static RoutedCommand cmdSlotFour = new();
+        public static RoutedCommand cmdSlotFive = new();
+        public static RoutedCommand cmdSlotSix = new();
+        public static RoutedCommand cmdSlotSeven = new();
+        public static RoutedCommand cmdSlotEight = new();
+        public static RoutedCommand cmdSlotNine = new();
+        public static RoutedCommand cmdRunServer = new();
+        private Discordbot discordRacebot=new();
 
         public MainWindow()
         {
             InitializeComponent();
 
+            // Set up logging to RichTextBox, Console and File
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.RichTextBox(RtbLogMessages,
                 theme: RichTextBoxConsoleTheme.Grayscale,
                 outputTemplate: "[{Timestamp:HH:mm:ss}] {Message:lj}{NewLine}{Exception}"
                 )
-                .WriteTo.Console()
-                .WriteTo.File(@".\log\log-.txt", rollingInterval: RollingInterval.Day)
+                .WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Debug)
+                .WriteTo.File(@".\log\log-.txt", rollingInterval: RollingInterval.Day,
+                restrictedToMinimumLevel: LogEventLevel.Debug)
                 .CreateLogger();
             Log.Information("HG Server Manager started");
 
@@ -68,6 +71,7 @@ namespace HG_ServerUI
 
             PreFlightCheck();
 
+            // Hot slot hot keys
             cmdSlotZero.InputGestures.Add(new KeyGesture(Key.D0, ModifierKeys.Control));
             cmdSlotOne.InputGestures.Add(new KeyGesture(Key.D1, ModifierKeys.Control));
             cmdSlotTwo.InputGestures.Add(new KeyGesture(Key.D2, ModifierKeys.Control));
@@ -80,37 +84,38 @@ namespace HG_ServerUI
             cmdSlotNine.InputGestures.Add(new KeyGesture(Key.D9, ModifierKeys.Control));
             cmdRunServer.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Control));
 
-            // Initialize file system watschers
-            _cfgFileSystemWatcher = new FileSystemWatcher(settingsModel.Configfiledirectory)
+            // Initialize file system watchers
+            fswCfg = new FileSystemWatcher(settingsModel.Configfiledirectory)
             {
                 Filter = $"{System.IO.Path.GetFileName(settingsModel.Configfilepath)}",
                 NotifyFilter = NotifyFilters.LastAccess |
                 NotifyFilters.LastWrite |
                 NotifyFilters.FileName
             };
-            _cfgFileSystemWatcher.Changed += CfgHandleChanged;
-            _cfgFileSystemWatcher.EnableRaisingEvents = true;
+            fswCfg.Changed += CfgHandleChanged;
+            fswCfg.EnableRaisingEvents = true;
 
-            _penaltiesFileSystemWatcher = new FileSystemWatcher(settingsModel.Snapsdirectory)
+            fswPenalties = new FileSystemWatcher(settingsModel.Snapsdirectory)
             {
                 Filter = "*.svg",
                 NotifyFilter = NotifyFilters.LastAccess |
                 NotifyFilters.LastWrite |
                 NotifyFilters.FileName
             };
-            _penaltiesFileSystemWatcher.Created += PenaltyHandleChanged;
-            _penaltiesFileSystemWatcher.EnableRaisingEvents=true;
+            fswPenalties.Created += PenaltyHandleChanged;
+            fswPenalties.EnableRaisingEvents=true;
 
-            _resultsFileSystemWatcher = new FileSystemWatcher(settingsModel.Resultsdirectory)
+            fswResults = new FileSystemWatcher(settingsModel.Resultsdirectory)
             {
                 Filter = "*.json",
                 NotifyFilter = NotifyFilters.LastAccess |
                 NotifyFilters.LastWrite |
                 NotifyFilters.FileName
             };
-            _resultsFileSystemWatcher.Created += ResultsHandleChanged;
-            _resultsFileSystemWatcher.EnableRaisingEvents = true;
+            fswResults.Created += ResultsHandleChanged;
+            fswResults.EnableRaisingEvents = true;
 
+            // Check every 5 seconds if our server process is still running
             checkServerRunningTimer.Interval = TimeSpan.FromSeconds(5);
             checkServerRunningTimer.Tick += checkServerRunningTimer_Tick;
 
@@ -260,30 +265,38 @@ namespace HG_ServerUI
             Close();
         }
 
+        // Start HG_SERVER.EXE process
         private async void RunServerProcess()
         {
             Log.Information("Starting HG server");
-            _cfgFileSystemWatcher.EnableRaisingEvents = false;
+            fswCfg.EnableRaisingEvents = false;
             SendTab();
             SettingsFile.WriteConfigfile(settingsModel);
-            _cfgFileSystemWatcher.EnableRaisingEvents = true;
-            Process server = new Process();
-            server.StartInfo.UseShellExecute = false;
-            server.StartInfo.CreateNoWindow = true;
-            server.StartInfo.FileName = settingsModel.Exepath;
-            server.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(settingsModel.Exepath);
-            server.EnableRaisingEvents = true;
-            server.StartInfo.RedirectStandardOutput = true;
-            server.OutputDataReceived += ConsoleOutputHandler;
-            server.Exited += new EventHandler(ProcessExited);
-            server.Start();
-            server.BeginOutputReadLine();
-            settingsModel.Processid = server.Id;
+            fswCfg.EnableRaisingEvents = true;
+            using (Process server = new())
+            {
+                server.StartInfo.UseShellExecute = false;
+                server.StartInfo.CreateNoWindow = true;
+                server.StartInfo.FileName = settingsModel.Exepath;
+                server.StartInfo.WorkingDirectory = Path.GetDirectoryName(settingsModel.Exepath);
+                server.EnableRaisingEvents = true;
+                server.StartInfo.RedirectStandardOutput = true;
+                server.OutputDataReceived += ConsoleOutputHandler;
+                server.Exited += new EventHandler(ProcessExited);
+                server.Start();
+                server.BeginOutputReadLine();
+                settingsModel.Processid = server.Id;
+            }
+
             settingsModel.Serverprocessrunning = true;
             settingsModel.Btnservercontent = "_Stop [crtl+s]";
             //ToggleControls(false);
+            
+            // Server port externally reachable?
             TestPortAsync();
             Thread.Sleep(1000);
+
+            // Discord regatta start message
             if (settingsModel.Serverreachable && settingsModel.DiscordracenotificationEnabled)
             {
                 MessageDialogResult _post2Discord = await this.ShowMessageAsync("Discord notification",
@@ -334,6 +347,7 @@ namespace HG_ServerUI
             }
         }
 
+        // Read and parse output from HG_SERVER.EXE process
         private void ConsoleOutputHandler(object sendingProcess,
             DataReceivedEventArgs outLine)
         {
@@ -403,12 +417,14 @@ namespace HG_ServerUI
                     }
                     catch { }
                 }
-                // [WARN] Umpire::on_timeline_crossed
-                if (outLine.Data.Contains("Umpire::"))
+                // 08:05:45 [WARN] on_timeline_crossed 'BoatTimelineCrossed { id: 0, timeline_index: 0, crossing: NegativeSide, timestamp: 350.4982578773766 }
+                if (outLine.Data.Contains("BoatTimelineCrossed"))
                 {
                     try
                     {
-                        Log.Information($"Umpire: {outLine.Data.Split("::")[1].Trim()}");
+                        string _boatid = outLine.Data.Split("id:")[1].Split(',')[0].Trim();
+                        string _index = outLine.Data.Split("timeline_index:")[1].Split(',')[0].Trim();
+                        Log.Information($"Umpire: Boat {_boatid} crossed line #{_index}");
                     }
                     catch { }
                 }
@@ -522,10 +538,10 @@ namespace HG_ServerUI
 
         private void MnSave_Click(object sender, RoutedEventArgs e)
         {
-            _cfgFileSystemWatcher.EnableRaisingEvents = false;
+            fswCfg.EnableRaisingEvents = false;
             SendTab();
             SettingsFile.WriteConfigfile(settingsModel);
-            _cfgFileSystemWatcher.EnableRaisingEvents = true;
+            fswCfg.EnableRaisingEvents = true;
             string filename = System.IO.Path.GetFileName(settingsModel.Configfilepath);
             Log.Information($"Saved configuration as {filename}");
         }
@@ -540,10 +556,10 @@ namespace HG_ServerUI
             };
             if (ofd.ShowDialog() == true)
             {
-                _cfgFileSystemWatcher.EnableRaisingEvents = false;
+                fswCfg.EnableRaisingEvents = false;
                 SendTab();
                 SettingsFile.WriteConfigfile(settingsModel, ofd.FileName);
-                _cfgFileSystemWatcher.EnableRaisingEvents = true;
+                fswCfg.EnableRaisingEvents = true;
                 Log.Information($"Saved configuration as {ofd.FileName}");
             }
         }
@@ -857,9 +873,9 @@ namespace HG_ServerUI
         {
                 Log.Information("Sending discord announcement");
                 var client = new DiscordSocketClient();
-                await client.LoginAsync(TokenType.Bot, _discordRacebot.DiscordbotToken);
+                await client.LoginAsync(TokenType.Bot, discordRacebot.DiscordbotToken);
                 await client.StartAsync();
-                var channel = await client.GetChannelAsync(_discordRacebot.Discordchannelid) as IMessageChannel;
+                var channel = await client.GetChannelAsync(discordRacebot.Discordchannelid) as IMessageChannel;
                 await channel!.SendMessageAsync(_message);
         }
 
