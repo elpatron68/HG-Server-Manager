@@ -423,8 +423,8 @@ namespace HG_ServerUI
                     try
                     {
                         string _boatid = outLine.Data.Split("id:")[1].Split(',')[0].Trim();
-                        string _index = outLine.Data.Split("timeline_index:")[1].Split(',')[0].Trim();
-                        Log.Information($"Umpire: Boat {_boatid} crossed line #{_index}");
+                        //string _index = outLine.Data.Split("timeline_index:")[1].Split(',')[0].Trim();
+                        Log.Information($"Umpire: Boat #{_boatid} crossed line");
                     }
                     catch { }
                 }
@@ -444,8 +444,9 @@ namespace HG_ServerUI
                 {
                     try
                     {
+                        string _boat = outLine.Data.Split("origin:")[1].Split(',')[0].Trim();
                         string _message = outLine.Data.Split("message:")[1].Split("\"")[1].Trim();
-                        settingsModel.Chat = $"{_timestamp} {_message}\n{settingsModel.Chat}"; // _timestamp + _message + settingsModel.Chat;
+                        settingsModel.Chat = $"{_timestamp} {_boat} {_message}\n{settingsModel.Chat}"; // _timestamp + _message + settingsModel.Chat;
                     }
                     catch { }
                 }
