@@ -901,46 +901,11 @@ namespace HG_ServerUI
 
                     // Cleanup results directory
                     // Delete *.kl files
-                    string[] _klfiles = Directory.GetFiles(_startPath);
-                    foreach (string _klfile in _klfiles)
-                    {
-                        try
-                        {
-                            File.Delete(_klfile);
-                            _filescount++;
-                        }
-                        catch (Exception ex)
-                        {
-                            Log.Warning($"Failed to delete {_klfile}: {ex.Message}");
-                        }
-                    }
+                    _filescount += DeleteResultfiles(_startPath, "zip");
                     // Delete *.png files
-                    string[] _pngfiles = Directory.GetFiles(settingsModel.Resultsdirectory);
-                    foreach (string _pngfile in _pngfiles)
-                    {
-                        try
-                        {
-                            File.Delete(_pngfile);
-                            _filescount++;
-                        }
-                        catch (Exception ex)
-                        {
-                            Log.Warning($"Failed to delete {_pngfile}: {ex.Message}"); }
-                        }
+                    _filescount += DeleteResultfiles(_startPath, "png");
                     // Delete *.json files
-                    string[] _jsonfiles = Directory.GetFiles(settingsModel.Resultsdirectory);
-                    foreach (string _jsonfile in _jsonfiles)
-                    {
-                        try
-                        {
-                            File.Delete(_jsonfile);
-                            _filescount++;
-                        }
-                        catch (Exception ex)
-                        {
-                            Log.Warning($"Failed to delete {_jsonfile}: {ex.Message}");
-                        }
-                    }
+                    _filescount += DeleteResultfiles(_startPath, "json");
                     Log.Information($"{_filescount} files moved to archive.");
                 }
                 else
@@ -952,6 +917,25 @@ namespace HG_ServerUI
             {
                 Log.Information($"No result files found.");
             }
+        }
+
+        private int DeleteResultfiles(string path, string extension)
+        {
+            int _filescount = 0;
+            string[] _files = Directory.GetFiles(path, $"*.{extension}");
+            foreach (string _f in _files)
+            {
+                try
+                {
+                    File.Delete(_f);
+                    _filescount++;
+                }
+                catch (Exception ex)
+                {
+                    Log.Warning($"Failed to delete {_f}: {ex.Message}");
+                }
+            }
+            return _filescount;
         }
     }
 }
