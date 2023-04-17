@@ -65,6 +65,11 @@ namespace HG_ServerUI
 
             settingsModel = SettingsModel.AddPaths(settingsModel);
             settingsModel = SettingsFile.ReadConfigfile(settingsModel);
+
+            Penaltyviewer pv = new(settingsModel);
+            pv.Show();
+
+
             Log.Information($"App version: {settingsModel.Appversion}");
             Log.Information("Settings loaded");
 

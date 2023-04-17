@@ -151,6 +151,9 @@ dotnet_diagnostic.IDE0022.severity = silent
 # CS8602: Dereferenzierung eines möglichen Nullverweises.
 dotnet_diagnostic.CS8602.severity = silent
 
+# CS8604: Mögliches Nullverweisargument.
+dotnet_diagnostic.CS8604.severity = silent
+
 [*.vb]
 #### Benennungsstile ####
 
