@@ -7,13 +7,13 @@
         xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
         xmlns:local="clr-namespace:HG_ServerUI"  
         mc:Ignorable="d"
-        Title="Penaltyviewer" 
-        Height="800" 
-        Width="1400"
+        Title="Penalty Viewer" 
+        Height="680" 
+        Width="1024"
         >
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="32*"/>
             <ColumnDefinition Width="50*"/>
         </Grid.ColumnDefinitions>
         <DataGrid 
