@@ -129,13 +129,13 @@
 
             <MenuItem Header="_Regattas">
                 <MenuItem 
-                    Header="_Snaps"
+                    Header="_Penalties"
                     >
                     <MenuItem.Icon>
                         <iconPacks:PackIconMaterial Kind="Camera" />
                     </MenuItem.Icon>
                     <MenuItem x:Name="MnOpenSnaps"
-                          Header="_Open snaps" 
+                          Header="_Open penalties" 
                           Click="MnOpenSnaps_Click"
                           >
                         <MenuItem.Icon>
@@ -143,7 +143,8 @@
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem x:Name="MnDeleteSnaps"
-                      Header="_Delete all files in snaps directory" Click="MnDeleteSnaps_Click"
+                          Header="_Delete all penalties" 
+                          Click="MnDeleteSnaps_Click"
                       >
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterialLight Kind="Delete" />

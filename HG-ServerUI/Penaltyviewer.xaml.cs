@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using MahApps.Metro.Controls;
 using MahApps.Metro.Converters;
 using SkiaSharp;
 using Svg.Skia;
@@ -14,7 +15,7 @@ namespace HG_ServerUI
     /// <summary>
     /// Interaktionslogik für Penaltyviewer.xaml
     /// </summary>
-    public partial class Penaltyviewer : Window
+    public partial class Penaltyviewer : MetroWindow
     {
         private List<Penalty> penaltyList = new();
         public Penaltyviewer(SettingsModel settingsModel)
@@ -62,7 +63,7 @@ namespace HG_ServerUI
         private void DgPenalties_SelectedCellsChanged(object sender, System.Windows.Controls.SelectedCellsChangedEventArgs e)
         {
             var _index = DgPenalties.SelectedIndex;
-            ImgPenalty.Source = new BitmapImage(new Uri(penaltyList[_index].Fullpath));// penaltyList[_cell].Fullpath;
+            ImgPenalty.Source = new BitmapImage(new Uri(penaltyList[_index].Fullpath));
         }
     }
 }
