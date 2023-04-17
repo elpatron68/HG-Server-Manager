@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Windows;
 using System.Windows.Media.Imaging;
 using MahApps.Metro.Controls;
-using MahApps.Metro.Converters;
 using SkiaSharp;
 using Svg.Skia;
 
@@ -37,11 +34,15 @@ namespace HG_ServerUI
                     {
                         if (svg.Load(svgFile) is { })
                         {
-                            using (var stream = File.OpenWrite(pngfile))
+                            try
                             {
-                                SKColor _white = SKColor.Parse("ffffff");
-                                _ = svg.Save(stream, _white, SKEncodedImageFormat.Png, 100);
+                                using (var stream = File.OpenWrite(pngfile))
+                                {
+                                    SKColor _white = SKColor.Parse("ffffff");
+                                    _ = svg.Save(stream, _white, SKEncodedImageFormat.Png, 100);
+                                }
                             }
+                            catch { }
                         }
                     }
                 }
