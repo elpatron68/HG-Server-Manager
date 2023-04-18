@@ -65,6 +65,7 @@ namespace HG_ServerUI
 
             settingsModel = SettingsModel.AddPaths(settingsModel);
             settingsModel = SettingsFile.ReadConfigfile(settingsModel);
+
             Log.Information($"App version: {settingsModel.Appversion}");
             Log.Information("Settings loaded");
 
@@ -658,7 +659,9 @@ namespace HG_ServerUI
 
         private void MnOpenSnaps_Click(object sender, RoutedEventArgs e)
         {
-            _ = Process.Start("explorer.exe", settingsModel.Snapsdirectory);
+            //_ = Process.Start("explorer.exe", settingsModel.Snapsdirectory);
+            Penaltyviewer pv = new(settingsModel);
+            pv.ShowDialog();
         }
 
         #region Hotkeys
@@ -813,6 +816,18 @@ namespace HG_ServerUI
                         Log.Warning($"Failed to delete {_filename}: {ex.Message}");
                     }
                 }
+                foreach (string _filename in Directory.GetFiles(settingsModel.Snapsdirectory, "*.png"))
+                {
+                    try
+                    {
+                        File.Delete(_filename);
+                        _count += 1;
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Warning($"Failed to delete {_filename}: {ex.Message}");
+                    }
+                }
                 Log.Information($"{_count} files deleted.");
             }
         }
@@ -890,7 +905,7 @@ namespace HG_ServerUI
         private void MnResults_Click(object sender, RoutedEventArgs e)
         {
             ResultsView rv = new(settingsModel);
-            rv.Show();
+            rv.ShowDialog();
         }
 
         private async void MnArchive_Click(object sender, RoutedEventArgs e)

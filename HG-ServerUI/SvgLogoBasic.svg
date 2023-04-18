@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+    <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="1024" height="1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<circle cx='0' cy='0' r='2' fill='cyan'/><line x1='0' y1='0' x2='0' y2='-10' stroke='cyan' stroke-width='1' />
+<circle cx='100' cy='0' r='2' fill='cyan'/><line x1='100' y1='0' x2='100' y2='-10' stroke='cyan' stroke-width='1' />
+<circle cx='200' cy='0' r='2' fill='cyan'/><line x1='200' y1='0' x2='200' y2='-10' stroke='cyan' stroke-width='1' />
+<circle cx='300' cy='0' r='2' fill='cyan'/><line x1='300' y1='0' x2='300' y2='-10' stroke='cyan' stroke-width='1' />
+<circle cx='400' cy='0' r='2' fill='cyan'/><line x1='400' y1='0' x2='400' y2='-10' stroke='cyan' stroke-width='1' />
+<circle cx='500' cy='0' r='2' fill='cyan'/><line x1='500' y1='0' x2='500' y2='-10' stroke='cyan' stroke-width='1' />
+<circle cx='600' cy='0' r='2' fill='cyan'/><line x1='600' y1='0' x2='600' y2='-10' stroke='cyan' stroke-width='1' />
+<circle cx='700' cy='0' r='2' fill='cyan'/><line x1='700' y1='0' x2='700' y2='-10' stroke='cyan' stroke-width='1' />
+<circle cx='800' cy='0' r='2' fill='cyan'/><line x1='800' y1='0' x2='800' y2='-10' stroke='cyan' stroke-width='1' />
+<circle cx='900' cy='0' r='2' fill='cyan'/><line x1='900' y1='0' x2='900' y2='-10' stroke='cyan' stroke-width='1' />
+<circle cx='1000' cy='0' r='2' fill='cyan'/><line x1='1000' y1='0' x2='1000' y2='-10' stroke='cyan' stroke-width='1' />
+<circle cx='0' cy='100' r='2' fill='cyan'/><line x1='0' y1='100' x2='0' y2='90' stroke='cyan' stroke-width='1' />
+<circle cx='100' cy='100' r='2' fill='cyan'/><line x1='100' y1='100' x2='100' y2='90' stroke='cyan' stroke-width='1' />
+<circle cx='200' cy='100' r='2' fill='cyan'/><line x1='200' y1='100' x2='200' y2='90' stroke='cyan' stroke-width='1' />
+<circle cx='300' cy='100' r='2' fill='cyan'/><line x1='300' y1='100' x2='300' y2='90' stroke='cyan' stroke-width='1' />
+<circle cx='400' cy='100' r='2' fill='cyan'/><line x1='400' y1='100' x2='400' y2='90' stroke='cyan' stroke-width='1' />
+<circle cx='500' cy='100' r='2' fill='cyan'/><line x1='500' y1='100' x2='500' y2='90' stroke='cyan' stroke-width='1' />
+<circle cx='600' cy='100' r='2' fill='cyan'/><line x1='600' y1='100' x2='600' y2='90' stroke='cyan' stroke-width='1' />
+<circle cx='700' cy='100' r='2' fill='cyan'/><line x1='700' y1='100' x2='700' y2='90' stroke='cyan' stroke-width='1' />
+<circle cx='800' cy='100' r='2' fill='cyan'/><line x1='800' y1='100' x2='800' y2='90' stroke='cyan' stroke-width='1' />
+<circle cx='900' cy='100' r='2' fill='cyan'/><line x1='900' y1='100' x2='900' y2='90' stroke='cyan' stroke-width='1' />
+<circle cx='1000' cy='100' r='2' fill='cyan'/><line x1='1000' y1='100' x2='1000' y2='90' stroke='cyan' stroke-width='1' />
+<circle cx='0' cy='200' r='2' fill='cyan'/><line x1='0' y1='200' x2='0' y2='190' stroke='cyan' stroke-width='1' />
+<circle cx='100' cy='200' r='2' fill='cyan'/><line x1='100' y1='200' x2='100' y2='190' stroke='cyan' stroke-width='1' />
+<circle cx='200' cy='200' r='2' fill='cyan'/><line x1='200' y1='200' x2='200' y2='190' stroke='cyan' stroke-width='1' />
+<circle cx='300' cy='200' r='2' fill='cyan'/><line x1='300' y1='200' x2='300' y2='190' stroke='cyan' stroke-width='1' />
+<circle cx='400' cy='200' r='2' fill='cyan'/><line x1='400' y1='200' x2='400' y2='190' stroke='cyan' stroke-width='1' />
+<circle cx='500' cy='200' r='2' fill='cyan'/><line x1='500' y1='200' x2='500' y2='190' stroke='cyan' stroke-width='1' />
+<circle cx='600' cy='200' r='2' fill='cyan'/><line x1='600' y1='200' x2='600' y2='190' stroke='cyan' stroke-width='1' />
+<circle cx='700' cy='200' r='2' fill='cyan'/><line x1='700' y1='200' x2='700' y2='190' stroke='cyan' stroke-width='1' />
+<circle cx='800' cy='200' r='2' fill='cyan'/><line x1='800' y1='200' x2='800' y2='190' stroke='cyan' stroke-width='1' />
+<circle cx='900' cy='200' r='2' fill='cyan'/><line x1='900' y1='200' x2='900' y2='190' stroke='cyan' stroke-width='1' />
+<circle cx='1000' cy='200' r='2' fill='cyan'/><line x1='1000' y1='200' x2='1000' y2='190' stroke='cyan' stroke-width='1' />
+<circle cx='0' cy='300' r='2' fill='cyan'/><line x1='0' y1='300' x2='0' y2='290' stroke='cyan' stroke-width='1' />
+<circle cx='100' cy='300' r='2' fill='cyan'/><line x1='100' y1='300' x2='100' y2='290' stroke='cyan' stroke-width='1' />
+<circle cx='200' cy='300' r='2' fill='cyan'/><line x1='200' y1='300' x2='200' y2='290' stroke='cyan' stroke-width='1' />
+<circle cx='300' cy='300' r='2' fill='cyan'/><line x1='300' y1='300' x2='300' y2='290' stroke='cyan' stroke-width='1' />
+<circle cx='400' cy='300' r='2' fill='cyan'/><line x1='400' y1='300' x2='400' y2='290' stroke='cyan' stroke-width='1' />
+<circle cx='500' cy='300' r='2' fill='cyan'/><line x1='500' y1='300' x2='500' y2='290' stroke='cyan' stroke-width='1' />
+<circle cx='600' cy='300' r='2' fill='cyan'/><line x1='600' y1='300' x2='600' y2='290' stroke='cyan' stroke-width='1' />
+<circle cx='700' cy='300' r='2' fill='cyan'/><line x1='700' y1='300' x2='700' y2='290' stroke='cyan' stroke-width='1' />
+<circle cx='800' cy='300' r='2' fill='cyan'/><line x1='800' y1='300' x2='800' y2='290' stroke='cyan' stroke-width='1' />
+<circle cx='900' cy='300' r='2' fill='cyan'/><line x1='900' y1='300' x2='900' y2='290' stroke='cyan' stroke-width='1' />
+<circle cx='1000' cy='300' r='2' fill='cyan'/><line x1='1000' y1='300' x2='1000' y2='290' stroke='cyan' stroke-width='1' />
+<circle cx='0' cy='400' r='2' fill='cyan'/><line x1='0' y1='400' x2='0' y2='390' stroke='cyan' stroke-width='1' />
+<circle cx='100' cy='400' r='2' fill='cyan'/><line x1='100' y1='400' x2='100' y2='390' stroke='cyan' stroke-width='1' />
+<circle cx='200' cy='400' r='2' fill='cyan'/><line x1='200' y1='400' x2='200' y2='390' stroke='cyan' stroke-width='1' />
+<circle cx='300' cy='400' r='2' fill='cyan'/><line x1='300' y1='400' x2='300' y2='390' stroke='cyan' stroke-width='1' />
+<circle cx='400' cy='400' r='2' fill='cyan'/><line x1='400' y1='400' x2='400' y2='390' stroke='cyan' stroke-width='1' />
+<circle cx='500' cy='400' r='2' fill='cyan'/><line x1='500' y1='400' x2='500' y2='390' stroke='cyan' stroke-width='1' />
+<circle cx='600' cy='400' r='2' fill='cyan'/><line x1='600' y1='400' x2='600' y2='390' stroke='cyan' stroke-width='1' />
+<circle cx='700' cy='400' r='2' fill='cyan'/><line x1='700' y1='400' x2='700' y2='390' stroke='cyan' stroke-width='1' />
+<circle cx='800' cy='400' r='2' fill='cyan'/><line x1='800' y1='400' x2='800' y2='390' stroke='cyan' stroke-width='1' />
+<circle cx='900' cy='400' r='2' fill='cyan'/><line x1='900' y1='400' x2='900' y2='390' stroke='cyan' stroke-width='1' />
+<circle cx='1000' cy='400' r='2' fill='cyan'/><line x1='1000' y1='400' x2='1000' y2='390' stroke='cyan' stroke-width='1' />
+<circle cx='0' cy='500' r='2' fill='cyan'/><line x1='0' y1='500' x2='0' y2='490' stroke='cyan' stroke-width='1' />
+<circle cx='100' cy='500' r='2' fill='cyan'/><line x1='100' y1='500' x2='100' y2='490' stroke='cyan' stroke-width='1' />
+<circle cx='200' cy='500' r='2' fill='cyan'/><line x1='200' y1='500' x2='200' y2='490' stroke='cyan' stroke-width='1' />
+<circle cx='300' cy='500' r='2' fill='cyan'/><line x1='300' y1='500' x2='300' y2='490' stroke='cyan' stroke-width='1' />
+<circle cx='400' cy='500' r='2' fill='cyan'/><line x1='400' y1='500' x2='400' y2='490' stroke='cyan' stroke-width='1' />
+<circle cx='500' cy='500' r='2' fill='cyan'/><line x1='500' y1='500' x2='500' y2='490' stroke='cyan' stroke-width='1' />
+<circle cx='600' cy='500' r='2' fill='cyan'/><line x1='600' y1='500' x2='600' y2='490' stroke='cyan' stroke-width='1' />
+<circle cx='700' cy='500' r='2' fill='cyan'/><line x1='700' y1='500' x2='700' y2='490' stroke='cyan' stroke-width='1' />
+<circle cx='800' cy='500' r='2' fill='cyan'/><line x1='800' y1='500' x2='800' y2='490' stroke='cyan' stroke-width='1' />
+<circle cx='900' cy='500' r='2' fill='cyan'/><line x1='900' y1='500' x2='900' y2='490' stroke='cyan' stroke-width='1' />
+<circle cx='1000' cy='500' r='2' fill='cyan'/><line x1='1000' y1='500' x2='1000' y2='490' stroke='cyan' stroke-width='1' />
+<circle cx='0' cy='600' r='2' fill='cyan'/><line x1='0' y1='600' x2='0' y2='590' stroke='cyan' stroke-width='1' />
+<circle cx='100' cy='600' r='2' fill='cyan'/><line x1='100' y1='600' x2='100' y2='590' stroke='cyan' stroke-width='1' />
+<circle cx='200' cy='600' r='2' fill='cyan'/><line x1='200' y1='600' x2='200' y2='590' stroke='cyan' stroke-width='1' />
+<circle cx='300' cy='600' r='2' fill='cyan'/><line x1='300' y1='600' x2='300' y2='590' stroke='cyan' stroke-width='1' />
+<circle cx='400' cy='600' r='2' fill='cyan'/><line x1='400' y1='600' x2='400' y2='590' stroke='cyan' stroke-width='1' />
+<circle cx='500' cy='600' r='2' fill='cyan'/><line x1='500' y1='600' x2='500' y2='590' stroke='cyan' stroke-width='1' />
+<circle cx='600' cy='600' r='2' fill='cyan'/><line x1='600' y1='600' x2='600' y2='590' stroke='cyan' stroke-width='1' />
+<circle cx='700' cy='600' r='2' fill='cyan'/><line x1='700' y1='600' x2='700' y2='590' stroke='cyan' stroke-width='1' />
+<circle cx='800' cy='600' r='2' fill='cyan'/><line x1='800' y1='600' x2='800' y2='590' stroke='cyan' stroke-width='1' />
+<circle cx='900' cy='600' r='2' fill='cyan'/><line x1='900' y1='600' x2='900' y2='590' stroke='cyan' stroke-width='1' />
+<circle cx='1000' cy='600' r='2' fill='cyan'/><line x1='1000' y1='600' x2='1000' y2='590' stroke='cyan' stroke-width='1' />
+<circle cx='0' cy='700' r='2' fill='cyan'/><line x1='0' y1='700' x2='0' y2='690' stroke='cyan' stroke-width='1' />
+<circle cx='100' cy='700' r='2' fill='cyan'/><line x1='100' y1='700' x2='100' y2='690' stroke='cyan' stroke-width='1' />
+<circle cx='200' cy='700' r='2' fill='cyan'/><line x1='200' y1='700' x2='200' y2='690' stroke='cyan' stroke-width='1' />
+<circle cx='300' cy='700' r='2' fill='cyan'/><line x1='300' y1='700' x2='300' y2='690' stroke='cyan' stroke-width='1' />
+<circle cx='400' cy='700' r='2' fill='cyan'/><line x1='400' y1='700' x2='400' y2='690' stroke='cyan' stroke-width='1' />
+<circle cx='500' cy='700' r='2' fill='cyan'/><line x1='500' y1='700' x2='500' y2='690' stroke='cyan' stroke-width='1' />
+<circle cx='600' cy='700' r='2' fill='cyan'/><line x1='600' y1='700' x2='600' y2='690' stroke='cyan' stroke-width='1' />
+<circle cx='700' cy='700' r='2' fill='cyan'/><line x1='700' y1='700' x2='700' y2='690' stroke='cyan' stroke-width='1' />
+<circle cx='800' cy='700' r='2' fill='cyan'/><line x1='800' y1='700' x2='800' y2='690' stroke='cyan' stroke-width='1' />
+<circle cx='900' cy='700' r='2' fill='cyan'/><line x1='900' y1='700' x2='900' y2='690' stroke='cyan' stroke-width='1' />
+<circle cx='1000' cy='700' r='2' fill='cyan'/><line x1='1000' y1='700' x2='1000' y2='690' stroke='cyan' stroke-width='1' />
+<circle cx='0' cy='800' r='2' fill='cyan'/><line x1='0' y1='800' x2='0' y2='790' stroke='cyan' stroke-width='1' />
+<circle cx='100' cy='800' r='2' fill='cyan'/><line x1='100' y1='800' x2='100' y2='790' stroke='cyan' stroke-width='1' />
+<circle cx='200' cy='800' r='2' fill='cyan'/><line x1='200' y1='800' x2='200' y2='790' stroke='cyan' stroke-width='1' />
+<circle cx='300' cy='800' r='2' fill='cyan'/><line x1='300' y1='800' x2='300' y2='790' stroke='cyan' stroke-width='1' />
+<circle cx='400' cy='800' r='2' fill='cyan'/><line x1='400' y1='800' x2='400' y2='790' stroke='cyan' stroke-width='1' />
+<circle cx='500' cy='800' r='2' fill='cyan'/><line x1='500' y1='800' x2='500' y2='790' stroke='cyan' stroke-width='1' />
+<circle cx='600' cy='800' r='2' fill='cyan'/><line x1='600' y1='800' x2='600' y2='790' stroke='cyan' stroke-width='1' />
+<circle cx='700' cy='800' r='2' fill='cyan'/><line x1='700' y1='800' x2='700' y2='790' stroke='cyan' stroke-width='1' />
+<circle cx='800' cy='800' r='2' fill='cyan'/><line x1='800' y1='800' x2='800' y2='790' stroke='cyan' stroke-width='1' />
+<circle cx='900' cy='800' r='2' fill='cyan'/><line x1='900' y1='800' x2='900' y2='790' stroke='cyan' stroke-width='1' />
+<circle cx='1000' cy='800' r='2' fill='cyan'/><line x1='1000' y1='800' x2='1000' y2='790' stroke='cyan' stroke-width='1' />
+<circle cx='0' cy='900' r='2' fill='cyan'/><line x1='0' y1='900' x2='0' y2='890' stroke='cyan' stroke-width='1' />
+<circle cx='100' cy='900' r='2' fill='cyan'/><line x1='100' y1='900' x2='100' y2='890' stroke='cyan' stroke-width='1' />
+<circle cx='200' cy='900' r='2' fill='cyan'/><line x1='200' y1='900' x2='200' y2='890' stroke='cyan' stroke-width='1' />
+<circle cx='300' cy='900' r='2' fill='cyan'/><line x1='300' y1='900' x2='300' y2='890' stroke='cyan' stroke-width='1' />
+<circle cx='400' cy='900' r='2' fill='cyan'/><line x1='400' y1='900' x2='400' y2='890' stroke='cyan' stroke-width='1' />
+<circle cx='500' cy='900' r='2' fill='cyan'/><line x1='500' y1='900' x2='500' y2='890' stroke='cyan' stroke-width='1' />
+<circle cx='600' cy='900' r='2' fill='cyan'/><line x1='600' y1='900' x2='600' y2='890' stroke='cyan' stroke-width='1' />
+<circle cx='700' cy='900' r='2' fill='cyan'/><line x1='700' y1='900' x2='700' y2='890' stroke='cyan' stroke-width='1' />
+<circle cx='800' cy='900' r='2' fill='cyan'/><line x1='800' y1='900' x2='800' y2='890' stroke='cyan' stroke-width='1' />
+<circle cx='900' cy='900' r='2' fill='cyan'/><line x1='900' y1='900' x2='900' y2='890' stroke='cyan' stroke-width='1' />
+<circle cx='1000' cy='900' r='2' fill='cyan'/><line x1='1000' y1='900' x2='1000' y2='890' stroke='cyan' stroke-width='1' />
+<circle cx='0' cy='1000' r='2' fill='cyan'/><line x1='0' y1='1000' x2='0' y2='990' stroke='cyan' stroke-width='1' />
+<circle cx='100' cy='1000' r='2' fill='cyan'/><line x1='100' y1='1000' x2='100' y2='990' stroke='cyan' stroke-width='1' />
+<circle cx='200' cy='1000' r='2' fill='cyan'/><line x1='200' y1='1000' x2='200' y2='990' stroke='cyan' stroke-width='1' />
+<circle cx='300' cy='1000' r='2' fill='cyan'/><line x1='300' y1='1000' x2='300' y2='990' stroke='cyan' stroke-width='1' />
+<circle cx='400' cy='1000' r='2' fill='cyan'/><line x1='400' y1='1000' x2='400' y2='990' stroke='cyan' stroke-width='1' />
+<circle cx='500' cy='1000' r='2' fill='cyan'/><line x1='500' y1='1000' x2='500' y2='990' stroke='cyan' stroke-width='1' />
+<circle cx='600' cy='1000' r='2' fill='cyan'/><line x1='600' y1='1000' x2='600' y2='990' stroke='cyan' stroke-width='1' />
+<circle cx='700' cy='1000' r='2' fill='cyan'/><line x1='700' y1='1000' x2='700' y2='990' stroke='cyan' stroke-width='1' />
+<circle cx='800' cy='1000' r='2' fill='cyan'/><line x1='800' y1='1000' x2='800' y2='990' stroke='cyan' stroke-width='1' />
+<circle cx='900' cy='1000' r='2' fill='cyan'/><line x1='900' y1='1000' x2='900' y2='990' stroke='cyan' stroke-width='1' />
+<circle cx='1000' cy='1000' r='2' fill='cyan'/><line x1='1000' y1='1000' x2='1000' y2='990' stroke='cyan' stroke-width='1' />
+<g transform='translate(1650.4149 34.883057)'>
+<line x1='-551' y1='1365' x2='-551' y2='665' stroke='magenta' stroke-width='2' />
+<line x1='-651' y1='1465' x2='-551' y2='1365' stroke='magenta' stroke-width='2' />
+<line x1='-1051' y1='1465' x2='-651' y2='1465' stroke='magenta' stroke-width='2' />
+<line x1='-1151' y1='1365' x2='-1051' y2='1465' stroke='magenta' stroke-width='2' />
+<line x1='-1851' y1='1365' x2='-1151' y2='1365' stroke='magenta' stroke-width='2' />
+<line x1='-1851' y1='865' x2='-1851' y2='1365' stroke='magenta' stroke-width='2' />
+<line x1='-1151' y1='865' x2='-1851' y2='865' stroke='magenta' stroke-width='2' />
+<line x1='-1151' y1='-35' x2='-1151' y2='865' stroke='magenta' stroke-width='2' />
+<line x1='-1051' y1='-135' x2='-1151' y2='-35' stroke='magenta' stroke-width='2' />
+<line x1='-481' y1='-235' x2='-1051' y2='-135' stroke='magenta' stroke-width='2' />
+<line x1='-351' y1='-235' x2='-481' y2='-235' stroke='magenta' stroke-width='2' />
+<line x1='-351' y1='-85' x2='-351' y2='-235' stroke='magenta' stroke-width='2' />
+<line x1='-551' y1='15' x2='-351' y2='-85' stroke='magenta' stroke-width='2' />
+<line x1='-551' y1='665' x2='-551' y2='15' stroke='magenta' stroke-width='2' />
+<circle cx='-1401' cy='1015' r='2' fill='blue' />
+<circle cx='-1401' cy='1215' r='2' fill='blue' />
+<circle cx='-901' cy='1025' r='2' fill='blue' />
+<circle cx='-901' cy='1025' r='60' fill='none' stroke='green' />
+<circle cx='-851' cy='1665' r='2' fill='blue' />
+<circle cx='-911' cy='-35' r='2' fill='blue' />
+<circle cx='-911' cy='-35' r='60' fill='none' stroke='green' />
+<circle cx='-791' cy='-35' r='2' fill='blue' />
+<circle cx='-791' cy='-35' r='60' fill='none' stroke='green' />
+<circle cx='-791' cy='1365' r='2' fill='blue' />
+<circle cx='-791' cy='1365' r='60' fill='none' stroke='green' />
+<circle cx='-911' cy='1365' r='2' fill='blue' />
+<circle cx='-911' cy='1365' r='60' fill='none' stroke='green' />
+<circle cx='-451' cy='-85' r='2' fill='blue' />
+<circle cx='-481' cy='-185' r='2' fill='blue' />
+<polygon points='-1662.0055,1001.09705,-1654.0967,1007.2168,-1644.9171,995.35364,-1652.8258,989.2339' fill='green' stroke='black' />
+<polygon points='-1658.051,1004.1569,-1644.9171,995.35364,-1652.8258,989.2339' fill='none' stroke='black' />
+<polyline points='-1570.3995,981.7213,-1571.3591,981.77423,-1572.3206,981.8271,-1573.2844,981.87866,-1574.2515,981.9301,-1575.2212,981.9828,-1576.1942,982.037,-1577.1704,982.0933,-1578.1493,982.15137,-1579.1305,982.2093,-1580.1138,982.2679,-1581.099,982.3272,-1582.0859,982.38745,-1583.0752,982.4501,-1584.067,982.51404,-1585.0613,982.5793,-1586.0568,982.647,-1587.0542,982.71625,-1588.0535,982.78705,-1589.0543,982.85895,-1590.057,982.9311,-1591.0613,983.005,-1592.0668,983.0798,-1593.0748,983.1562,-1594.0851,983.23645,-1595.097,983.31903,-1596.1112,983.404,-1597.1259,983.49133,-1598.1422,983.5799,-1599.1592,983.6706,-1600.1774,983.76245,-1601.1968,983.8562,-1602.2177,983.9529,-1603.2397,984.05255,-1604.2632,984.1561,-1605.2877,984.26294,-1606.3135,984.3714,-1607.3394,984.482,-1608.366,984.59393,-1609.3933,984.7076,-1610.4221,984.82385,-1611.4524,984.9429,-1612.4834,985.0658,-1613.5157,985.1921,-1614.5488,985.3203,-1615.583,985.4513,-1616.6176,985.5844,-1617.6522,985.72015,-1618.6871,985.86066,-1619.7229,986.0052,-1620.7584,986.1531,-1621.7928,986.3027,-1622.8271,986.4533,-1623.8617,986.60724,-1624.8976,986.7643,-1625.9347,986.9251,-1626.9719,987.09045,-1628.0099,987.2591,-1629.048,987.4323,-1630.0864,987.6091,-1631.1234,987.7858,-1632.16,987.96204,-1633.196,988.1456,-1634.2338,988.32855,-1635.2714,988.5111,-1636.3064,988.7049,-1637.3392,988.91504,-1638.3639,989.15247,-1639.3741,989.4369,-1640.3711,989.7423,-1641.3494,990.073,-1642.3071,990.43335,-1643.2468,990.8243,-1644.167,991.2458,-1645.0636,991.6957,-1645.9363,992.17096,-1646.787,992.6697,-1647.614,993.19196,-1648.4165,993.7384,-1649.195,994.30597,-1649.9495,994.8944,-1650.6786,995.50397,-1651.3827,996.13416,-1652.0615,996.78357,-1652.7136,997.4509,-1653.3354,998.1379,-1653.9309,998.8376,-1654.494,999.554,-1655.0272,1000.2835,-1655.5316,1001.02484,-1656.007,1001.77655,-1656.4535,1002.53766,-1656.8721,1003.30743,-1657.2617,1004.0855,-1657.6221,1004.8713,-1657.9518,1005.66394,-1658.2529,1006.4618,-1658.5248,1007.26416,-1658.7659,1008.06964,-1658.9756,1008.87646,' stroke='gray' fill='none'/>
+<text x='-1658.051' y='1004.1569' font-size='10'>Naturals</text>
+<polygon points='-1138.2589,482.99243,-1148.0624,481.01978,-1151.0214,495.72504,-1141.2179,497.6977' fill='red' stroke='black' />
+<polygon points='-1143.1606,482.0061,-1151.0214,495.72504,-1141.2179,497.6977' fill='none' stroke='black' />
+<polyline points='-1095.7339,571.10895,-1096.4161,570.1778,-1097.0981,569.2461,-1097.7793,568.3141,-1098.4594,567.3812,-1099.1385,566.448,-1099.8173,565.51416,-1100.4951,564.5799,-1101.1715,563.64484,-1101.8474,562.70905,-1102.5222,561.77277,-1103.196,560.836,-1103.87,559.89874,-1104.5427,558.96106,-1105.2142,558.0224,-1105.8855,557.0838,-1106.5548,556.1445,-1107.2234,555.2042,-1107.8907,554.26355,-1108.557,553.3221,-1109.2219,552.3799,-1109.8864,551.43726,-1110.5497,550.4937,-1111.2122,549.5493,-1111.8737,548.6045,-1112.5345,547.65924,-1113.195,546.71356,-1113.8545,545.7676,-1114.5134,544.8212,-1115.1707,543.874,-1115.8273,542.9268,-1116.4832,541.9794,-1117.1373,541.03094,-1117.7905,540.08246,-1118.4434,539.1335,-1119.0947,538.18427,-1119.7457,537.23444,-1120.3956,536.28424,-1121.0448,535.33374,-1121.6937,534.3834,-1122.3418,533.43225,-1122.9886,532.48083,-1123.6344,531.529,-1124.2788,530.5768,-1124.9224,529.6242,-1125.5648,528.6713,-1126.2067,527.7197,-1126.8455,526.769,-1127.4824,525.8175,-1128.1189,524.8651,-1128.7548,523.911,-1129.3912,522.95575,-1130.0278,522.0003,-1130.6638,521.0448,-1131.2992,520.0895,-1131.9327,519.1346,-1132.5653,518.1802,-1133.1973,517.2266,-1133.8292,516.27435,-1134.4619,515.3234,-1135.0967,514.3753,-1135.7335,513.42896,-1136.3721,512.48126,-1137.0068,511.5332,-1137.6324,510.58652,-1138.2466,509.63846,-1138.8499,508.6856,-1139.4398,507.7262,-1140.0139,506.76022,-1140.57,505.7871,-1141.1052,504.8062,-1141.6166,503.8167,-1142.1006,502.8179,-1142.5546,501.80997,-1142.9738,500.7922,-1143.3551,499.76544,-1143.6948,498.7294,-1143.9882,497.68384,-1144.2362,496.63095,-1144.4375,495.57385,-1144.5917,494.51666,-1144.6992,493.46115,-1144.7516,492.40768,-1144.7463,491.3588,-1144.6868,490.3189,-1144.5721,489.2924,-1144.4028,488.28098,-1144.1796,487.28537,-1143.9023,486.3094,-1143.5767,485.35483,-1143.2058,484.42307,-1142.792,483.51614,-1142.3396,482.6337,-1141.8536,481.7759,-1141.3369,480.94287,-1140.794,480.13345,-1140.2274,479.34708,-1139.64,478.58292,-1139.0352,477.83994,-1138.4149,477.11694,' stroke='gray' fill='none'/>
+<text x='-1143.1606' y='482.0061' font-size='10'>elpatron</text>
+</g>
+<text x='20' y='35' font-size='40'>elpatron | 28: Out of boundaries</text>
+</svg>
