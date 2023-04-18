@@ -1,8 +1,12 @@
 ﻿# Changelog
 
+## 1.0.7
+
+- Add penalty viewer
+
 ## v1.0.6.2
 
-- Significantly decrease app loading time by removing *Network.Testport* in PreFlightCheck, which was redundant
+- Significantly decrease app loading time by removing *Network.Testport* in *PreFlightCheck*, which was redundant
 - Increase Discord image height
 - Minor refactorings, add some comments in code
 - Replace WPF *CheckBoxes* by MahApps *ToogleSwitches*
