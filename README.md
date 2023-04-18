@@ -17,6 +17,7 @@
 - ⛵ Instantly switch between up to 10 user-defined presets by hot key
 - 📃 Open game server log file and `snaps` directory directly from the application
 - :checkered_flag: View regatta results and series points in formatted tables and send them to *Discord*
+- :man_judge: Inspect and manage penalties
 - :broom: Clean up  `races` directory and start a new series (to be exactly: *archive all files to a zip file*)
 
 ![image-20230407193824206](./assets/image-20230407193824206.png)
@@ -53,9 +54,15 @@ Open *File* - *Manually edit configuration* to edit `server_cfg.kl` in the *Note
 
 You can open the server log `log.log` in the *Notepad* text editor by opening *File* - *Open server log*.
 
-### Snaps
+### Penalties
 
-The menu *Regattas* - *Snaps* - *Open snaps* opens an Windows *Explorer* window in your *snaps* directory. You can delete all snap files by selecting *Regattas* - *Snaps* - *Delete all files in snaps directory*.
+The menu *Regattas* - *Penalties* - *Penalty viewer* opens new window listing all penalties recorded. Click on an item in the list to view the details:
+
+![image-20230418183309417](./assets/image-20230418183309417.png)
+
+The window is re-sizable - if you to see more details, try to increase the window size.
+
+All penalty files can be deleted by selecting *Regattas* - *Penalties* - *Delete all penalties*.
 
 ### View results
 

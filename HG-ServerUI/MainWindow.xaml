@@ -135,7 +135,7 @@
                         <iconPacks:PackIconMaterial Kind="Camera" />
                     </MenuItem.Icon>
                     <MenuItem x:Name="MnOpenSnaps"
-                          Header="_Open penalties" 
+                          Header="_Penalty viewer" 
                           Click="MnOpenSnaps_Click"
                           >
                         <MenuItem.Icon>
