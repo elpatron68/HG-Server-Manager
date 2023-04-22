@@ -281,12 +281,11 @@ namespace HG_ServerUI
                 server.StartInfo.FileName = settingsModel.Exepath;
                 server.StartInfo.WorkingDirectory = Path.GetDirectoryName(settingsModel.Exepath);
                 server.EnableRaisingEvents = true;
-                server.StartInfo.RedirectStandardOutput = true;
-                server.OutputDataReceived += ConsoleOutputHandler;
+                //server.StartInfo.RedirectStandardOutput = true;
+                //server.OutputDataReceived += ConsoleOutputHandler;
                 server.Exited += new EventHandler(ProcessExited);
                 settingsModel.Serverprocessrunning = server.Start();
-                
-                server.BeginOutputReadLine();
+                //server.BeginOutputReadLine();
                 settingsModel.Processid = server.Id;
 
                 TestPortAsync();
@@ -354,116 +353,89 @@ namespace HG_ServerUI
         private void ConsoleOutputHandler(object sendingProcess,
             DataReceivedEventArgs outLine)
         {
-            Log.Debug($"hg_server.exe: {outLine.Data}");
-            if(outLine.Data != null)
+            if (outLine.Data != null)
             {
-                string _timestamp = $"[{DateTime.Now.ToString("HH:mm:ss")}]";
-                if (outLine.Data.Contains("Boat count"))
+                string _timestamp = $"[{DateTime.Now:HH:mm:ss}]";
+                try
                 {
-                    try
+                    if (outLine.Data.Contains("Boat count"))
                     {
                         settingsModel.Boatsinrace = outLine.Data.Split(':')[2].Trim();
+                        return;
                     }
-                    catch { }
-                }
-                if (outLine.Data.Contains("We now have"))
-                {
-                    try
+                    if (outLine.Data.Contains("We now have"))
                     {
                         // "[INFO] We now have 1 conns and 1 boats"
                         settingsModel.Boatsinrace = outLine.Data.Split(' ')[7].Trim();
+                        return;
                     }
-                    catch { }
-                }
-                if (outLine.Data.Contains("RaceState"))
-                {
-                    try
+                    if (outLine.Data.Contains("RaceState"))
                     {
                         settingsModel.Racestate = $"{outLine.Data.Split(':')[1].Split('(')[0].Trim()}";
+                        return;
                     }
-                    catch { }
+                    //if (outLine.Data.Contains("New connection from") && outLine.Data.Contains("is_connected: true"))
+                    //{
+                    //    string _peer = outLine.Data.Split("peer")[1].Split(' ')[1].Split(':')[0].Trim();
+                    //    Log.Information($"New connection from {_peer}");
+                    //    return;
+                    //}
+                    //if (outLine.Data.Contains("Course changed to"))
+                    //{
+                    //    settingsModel.Activecourse = outLine.Data.Split(' ')[4].Trim();
+                    //    return;
+                    //}
+                    //// [INFO] Spectator SGMConnectSpectator { protocol_version: 32, password: None, token: [20, 0, 0, 0, 104, 47, 8, 47, 216, 197, 223, 30, 17, 197, 223, 3, 1, 0, 16, 1, 151, 244, 52, 100, 24, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 193, 41, 251, 7, 234, 41, 36, 141, 159, 188, 235, 7, 13, 0, 0, 0, 178, 0, 0, 0, 50, 0, 0, 0, 4, 0, 0, 0, 17, 197, 223, 3, 1, 0, 16, 1, 116, 27, 22, 0, 238, 151, 151, 87, 57, 177, 168, 192, 0, 0, 0, 0, 220, 222, 51, 100, 92, 142, 79, 100, 1, 0, 242, 198, 7, 0, 0, 0, 0, 0, 222, 113, 114, 196, 249, 77, 50, 81, 177, 136, 18, 71, 56, 52, 5, 78, 65, 245, 50, 75, 37, 240, 207, 118, 175, 232, 106, 15, 34, 129, 189, 12, 167, 136, 251, 41, 192, 213, 46, 47, 143, 47, 234, 246, 138, 237, 38, 159, 171, 224, 160, 71, 154, 153, 36, 47, 124, 236, 255, 10, 188, 71, 254, 102, 17, 116, 80, 119, 100, 35, 72, 128, 163, 205, 140, 221, 193, 184, 174, 176, 173, 206, 29, 206, 176, 160, 146, 21, 84, 195, 211, 28, 249, 198, 106, 134, 179, 248, 153, 4, 253, 168, 1, 104, 50, 211, 211, 17, 177, 209, 89, 114, 235, 2, 157, 236, 163, 119, 229, 112, 5, 65, 47, 254, 112, 11, 130, 138], hash: 76561198025262353 }            connected
+                    //if (outLine.Data.Contains("SGMConnectSpectator") && outLine.Data.Contains("connected"))
+                    //{
+                    //    Log.Information($"New spectator connected");
+                    //    return;
+                    //}
+                    //// 16:11:23 [INFO] ServerLogic: ServerGameMessage::Connect received: SGMConnect { protocol_version: 32, password: None, boat_name: "elpatron", boat_model: "jx50", nation: "GER", skin: Skin("red white")
+                    //if (outLine.Data.Contains("ServerGameMessage") && outLine.Data.Contains("Connect received"))
+                    //{
+                    //    string _boatname = outLine.Data.Split("boat_name:")[1].Split(',')[0].Replace("\"", "").Trim();
+                    //    string _nation = outLine.Data.Split("nation:")[1].Split(',')[0].Replace("\"", "").Trim();
+                    //    Log.Information($"{_boatname} from {_nation} joined the race");
+                    //    return;
+                    //}
+                    //// 08:05:45 [WARN] on_timeline_crossed 'BoatTimelineCrossed { id: 0, timeline_index: 0, crossing: NegativeSide, timestamp: 350.4982578773766 }
+                    //if (outLine.Data.Contains("BoatTimelineCrossed"))
+                    //{
+                    //    string _boatid = outLine.Data.Split("id:")[1].Split(',')[0].Trim();
+                    //    Log.Information($"Umpire: Boat #{_boatid} crossed line");
+                    //    return;
+                    //}
+                    //// 16:36:50 [INFO] Removing SrvBoat: BoatDef { boat_name: "elpatron", boat_model: "jx50", skin: Skin("red white"
+                    //if (outLine.Data.Contains("Removing SrvBoat:"))
+                    //{
+                    //    Log.Information($"Boat left server: {outLine.Data.Split("boat_name:")[1]
+                    //            .Split(',')[0]
+                    //            .Replace("\"", "").Trim()}");
+                    //    return;
+                    //}
+                    // 09:11:16[INFO] CHAT: ChatMessage { origin: Boat(0), message: "Hallo Welt" }
+                    //if (outLine.Data.Contains("CHAT:"))
+                    //{
+                    //    string _boat = outLine.Data.Split("origin:")[1].Split(',')[0].Trim();
+                    //    string _message = outLine.Data.Split("message:")[1].Split("\"")[1].Trim();
+                    //    settingsModel.Chat = $"{_timestamp} {_boat} {_message}\n{settingsModel.Chat}";
+                    //    return;
+                    //}
+                    //// 08:06:09 [WARN] Boat 1 started after 44.5742s
+                    //if (outLine.Data.Contains(" started after "))
+                    //{
+                    //    Log.Information(outLine.Data.Split(' ')[2].Trim());
+                    //    return;
+                    //}
                 }
-                if (outLine.Data.Contains("New connection from") && outLine.Data.Contains("is_connected: true"))
+                catch (Exception ex)
                 {
-                    try
-                    {
-                        string _peer = outLine.Data.Split("peer")[1].Split(' ')[1].Split(':')[0].Trim();
-                        Log.Information($"New connection from {_peer}");
-                    }
-                    catch { }
-                }
-                if (outLine.Data.Contains("Course changed to"))
-                {
-                    try
-                    {
-                        settingsModel.Activecourse = outLine.Data.Split(' ')[4].Trim();
-                    }
-                    catch { }
-                }
-                // [INFO] Spectator SGMConnectSpectator { protocol_version: 32, password: None, token: [20, 0, 0, 0, 104, 47, 8, 47, 216, 197, 223, 30, 17, 197, 223, 3, 1, 0, 16, 1, 151, 244, 52, 100, 24, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 193, 41, 251, 7, 234, 41, 36, 141, 159, 188, 235, 7, 13, 0, 0, 0, 178, 0, 0, 0, 50, 0, 0, 0, 4, 0, 0, 0, 17, 197, 223, 3, 1, 0, 16, 1, 116, 27, 22, 0, 238, 151, 151, 87, 57, 177, 168, 192, 0, 0, 0, 0, 220, 222, 51, 100, 92, 142, 79, 100, 1, 0, 242, 198, 7, 0, 0, 0, 0, 0, 222, 113, 114, 196, 249, 77, 50, 81, 177, 136, 18, 71, 56, 52, 5, 78, 65, 245, 50, 75, 37, 240, 207, 118, 175, 232, 106, 15, 34, 129, 189, 12, 167, 136, 251, 41, 192, 213, 46, 47, 143, 47, 234, 246, 138, 237, 38, 159, 171, 224, 160, 71, 154, 153, 36, 47, 124, 236, 255, 10, 188, 71, 254, 102, 17, 116, 80, 119, 100, 35, 72, 128, 163, 205, 140, 221, 193, 184, 174, 176, 173, 206, 29, 206, 176, 160, 146, 21, 84, 195, 211, 28, 249, 198, 106, 134, 179, 248, 153, 4, 253, 168, 1, 104, 50, 211, 211, 17, 177, 209, 89, 114, 235, 2, 157, 236, 163, 119, 229, 112, 5, 65, 47, 254, 112, 11, 130, 138], hash: 76561198025262353 }            connected
-                if (outLine.Data.Contains("SGMConnectSpectator") && outLine.Data.Contains("connected"))
-                {
-                    try
-                    {
-                        Log.Information($"New spectator connected");
-                    }
-                    catch { }
-                }
-                // 16:11:23 [INFO] ServerLogic: ServerGameMessage::Connect received: SGMConnect { protocol_version: 32, password: None, boat_name: "elpatron", boat_model: "jx50", nation: "GER", skin: Skin("red white")
-                if (outLine.Data.Contains("ServerGameMessage") && outLine.Data.Contains("Connect received"))
-                {
-                    try
-                    {
-                        string _boatname = outLine.Data.Split("boat_name:")[1].Split(',')[0].Replace("\"", "").Trim();
-                        string _nation = outLine.Data.Split("nation:")[1].Split(',')[0].Replace("\"", "").Trim();
-                        Log.Information($"{_boatname} from {_nation} joined the race");
-                    }
-                    catch { }
-                }
-                // 08:05:45 [WARN] on_timeline_crossed 'BoatTimelineCrossed { id: 0, timeline_index: 0, crossing: NegativeSide, timestamp: 350.4982578773766 }
-                if (outLine.Data.Contains("BoatTimelineCrossed"))
-                {
-                    try
-                    {
-                        string _boatid = outLine.Data.Split("id:")[1].Split(',')[0].Trim();
-                        //string _index = outLine.Data.Split("timeline_index:")[1].Split(',')[0].Trim();
-                        Log.Information($"Umpire: Boat #{_boatid} crossed line");
-                    }
-                    catch { }
-                }
-                // 16:36:50 [INFO] Removing SrvBoat: BoatDef { boat_name: "elpatron", boat_model: "jx50", skin: Skin("red white"
-                if (outLine.Data.Contains("Removing SrvBoat:"))
-                {
-                    try
-                    {
-                        Log.Information($"Boat left server: {outLine.Data.Split("boat_name:")[1]
-                            .Split(',')[0]
-                            .Replace("\"", "").Trim()}");
-                    }
-                    catch { }
-                }
-                // 09:11:16[INFO] CHAT: ChatMessage { origin: Boat(0), message: "Hallo Welt" }
-                if (outLine.Data.Contains("CHAT:"))
-                {
-                    try
-                    {
-                        string _boat = outLine.Data.Split("origin:")[1].Split(',')[0].Trim();
-                        string _message = outLine.Data.Split("message:")[1].Split("\"")[1].Trim();
-                        settingsModel.Chat = $"{_timestamp} {_boat} {_message}\n{settingsModel.Chat}"; // _timestamp + _message + settingsModel.Chat;
-                    }
-                    catch { }
-                }
-                // 08:06:09 [WARN] Boat 1 started after 44.5742s
-                if (outLine.Data.Contains(" started after "))
-                {
-                    try
-                    {
-                        Log.Information(outLine.Data.Split(' ')[2].Trim());
-                    }
-                    catch { }
+                    Log.Information($"Failed parsing output: {ex.Message}");
                 }
             }
         }
+
 
         // Start or kill server process
         private void BtnStartServer_Click(object sender, RoutedEventArgs e)
