@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## 1.0.7.2
+
+- Fix asynchonous reading of `hg_server.exe` (crashed when first player joined)
+
 ## 1.0.7.1
 
 - Fix problem: `hg_server.exe` terminated after launching
