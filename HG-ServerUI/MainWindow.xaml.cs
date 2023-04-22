@@ -117,7 +117,8 @@ namespace HG_ServerUI
 
             // Check every 5 seconds if our server process is still running
             checkServerRunningTimer.Interval = TimeSpan.FromSeconds(5);
-            checkServerRunningTimer.Tick += checkServerRunningTimer_Tick;
+            checkServerRunningTimer.Tick += CheckServerRunningTimer_Tick;
+            checkServerRunningTimer.Start();
 
             // Set bindings
             TxExePath.DataContext = settingsModel;
@@ -205,7 +206,7 @@ namespace HG_ServerUI
         }
 
         // Check if server is running
-        private void checkServerRunningTimer_Tick(object? sender, EventArgs e)
+        private void CheckServerRunningTimer_Tick(object? sender, EventArgs e)
         {
             settingsModel.Serverprocessrunning = IsServerRunning();
             Log.Debug($"ServerRunning: {settingsModel.Serverprocessrunning}");
@@ -283,18 +284,21 @@ namespace HG_ServerUI
                 server.StartInfo.RedirectStandardOutput = true;
                 server.OutputDataReceived += ConsoleOutputHandler;
                 server.Exited += new EventHandler(ProcessExited);
-                server.Start();
+                settingsModel.Serverprocessrunning = server.Start();
+                
                 server.BeginOutputReadLine();
                 settingsModel.Processid = server.Id;
+
+                Thread.Sleep(8000);
+                TestPortAsync();
+                settingsModel.Btnservercontent = "_Stop [crtl+s]";
             }
 
-            settingsModel.Serverprocessrunning = true;
-            settingsModel.Btnservercontent = "_Stop [crtl+s]";
+
             //ToggleControls(false);
-            
+
             // Server port externally reachable?
-            TestPortAsync();
-            Thread.Sleep(1000);
+            
 
             // Discord regatta start message
             if (settingsModel.Serverreachable && settingsModel.DiscordracenotificationEnabled)
@@ -351,7 +355,7 @@ namespace HG_ServerUI
         private void ConsoleOutputHandler(object sendingProcess,
             DataReceivedEventArgs outLine)
         {
-            Debug.WriteLine(outLine.Data);
+            Log.Debug($"hg_server.exe: {outLine.Data}");
             if(outLine.Data != null)
             {
                 string _timestamp = $"[{DateTime.Now.ToString("HH:mm:ss")}]";
@@ -453,7 +457,11 @@ namespace HG_ServerUI
                 // 08:06:09 [WARN] Boat 1 started after 44.5742s
                 if (outLine.Data.Contains(" started after "))
                 {
-                    Log.Information(outLine.Data.Split(' ')[2].Trim());
+                    try
+                    {
+                        Log.Information(outLine.Data.Split(' ')[2].Trim());
+                    }
+                    catch { }
                 }
             }
         }
@@ -461,13 +469,14 @@ namespace HG_ServerUI
         // Start or kill server process
         private void BtnStartServer_Click(object sender, RoutedEventArgs e)
         {
-            if (!settingsModel.Serverprocessrunning)
+            //if (!settingsModel.Serverprocessrunning)
+            if (IsServerRunning())
             {
-                RunServerProcess();
+                KillServerProcess();
             }
             else
             {
-                KillServerProcess();
+                RunServerProcess();
             }
         }
 
@@ -477,7 +486,7 @@ namespace HG_ServerUI
             Process[] process = Process.GetProcesses();
             foreach (Process p in process)
             {
-                if (p.Id == settingsModel.Processid)
+                if (p.Id == settingsModel.Processid || p.ProcessName == "hg_server.exe")
                 {
                     try
                     {
@@ -602,18 +611,22 @@ namespace HG_ServerUI
             var timeoutTask = Task.Delay(connectTimeoutMilliseconds)
                 .ContinueWith<TcpClient>(task => null, TaskContinuationOptions.ExecuteSynchronously);
             var resultTask = Task.WhenAny(connectionTask, timeoutTask).Unwrap();
-            var resultTcpClient = await resultTask.ConfigureAwait(false);
-
-            if (resultTcpClient.Connected)
+            
+            try
             {
-                settingsModel.Serverreachable = true;
-                Log.Information("Server is accessible to the public");
+                TcpClient resultTcpClient = await resultTask.ConfigureAwait(false);
+                if (resultTcpClient.Connected)
+                {
+                    settingsModel.Serverreachable = true;
+                    Log.Information("Server is accessible to the public");
+                }
+                else
+                {
+                    settingsModel.Serverreachable = false;
+                    Log.Information("External port check failed: LAN-only server");
+                }
             }
-            else
-            {
-                settingsModel.Serverreachable = false;
-                Log.Information("External port check failed: LAN-only server");
-            }
+            catch (Exception ex) { Log.Warning($"Port test failed: {ex.Message}"); }
         }
 
         private void MetroWindow_Closing(object sender, CancelEventArgs e)
