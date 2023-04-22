@@ -52,6 +52,11 @@ namespace HG_ServerUI
             return penaltyList;
         }
 
+        /// <summary>
+        /// Remove columns from DataGrid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DgPenalties_AutoGeneratingColumn(object sender, System.Windows.Controls.DataGridAutoGeneratingColumnEventArgs e)
         {
             if (e.PropertyName == "PngFilename" || 
