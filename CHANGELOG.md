@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## 1.0.7.1
+
+- Fix problem: `hg_server.exe` terminated after launching
+
 ## 1.0.7
 
 - Add penalty viewer
