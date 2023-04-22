@@ -289,7 +289,6 @@ namespace HG_ServerUI
                 server.BeginOutputReadLine();
                 settingsModel.Processid = server.Id;
 
-                Thread.Sleep(8000);
                 TestPortAsync();
                 settingsModel.Btnservercontent = "_Stop [crtl+s]";
             }
