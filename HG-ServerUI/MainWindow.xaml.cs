@@ -423,7 +423,6 @@ namespace HG_ServerUI
                     Log.Information($"Failed parsing output: {ex.Message}");
                 }
             }
-
         }
 
         // Start or kill server process

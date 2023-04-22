@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace HG_ServerUI
 {
@@ -63,8 +60,8 @@ namespace HG_ServerUI
             if (process.HasExited == true)
                 throw new Exception("ProcessIoManager unable to set running process - the process has already existed.");
 
-            this.runningProcess = process;
-            this.streambuffer = new StringBuilder(256);
+            runningProcess = process;
+            streambuffer = new StringBuilder(256);
         }
         #endregion
 
