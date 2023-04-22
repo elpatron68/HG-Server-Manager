@@ -21,8 +21,6 @@ using Serilog;
 using Serilog.Sinks.RichTextBox.Themes;
 using System.IO.Compression;
 using Serilog.Events;
-using System.Text;
-using Discord.Rest;
 
 namespace HG_ServerUI
 {
@@ -238,10 +236,10 @@ namespace HG_ServerUI
             {
                 Log.Information("HG server config dir exists ✅");
             }
-            Log.Information($"{settingsModel.Boats.Count()} boats found");
-            Log.Information($"{settingsModel.Courses.Count()} courses found");
-            Log.Information($"{settingsModel.Locations.Count()} locations found");
-            Log.Information($"{Directory.GetFiles(settingsModel.Configfiledirectory).Count()} " +
+            Log.Information($"{settingsModel.Boats.Length} boats found");
+            Log.Information($"{settingsModel.Courses.Length} courses found");
+            Log.Information($"{settingsModel.Locations.Length} locations found");
+            Log.Information($"{Directory.GetFiles(settingsModel.Configfiledirectory).Length} " +
                 $"configuration files found");
             if (IsServerRunning())
             {
