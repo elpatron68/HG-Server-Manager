@@ -18,7 +18,21 @@
         <DataGrid 
             x:Name="DgPenalties"
             Grid.Column="0"
-            d:ItemsSource="{d:SampleData ItemCount=5}" AutoGeneratingColumn="DgPenalties_AutoGeneratingColumn" SelectedCellsChanged="DgPenalties_SelectedCellsChanged">
+            d:ItemsSource="{d:SampleData ItemCount=5}" AutoGeneratingColumn="DgPenalties_AutoGeneratingColumn" SelectedCellsChanged="DgPenalties_SelectedCellsChanged"
+            >
+            <DataGrid.ContextMenu>
+                <ContextMenu 
+                    x:Name="CmDelete" 
+                    DataContext="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}"
+                    >
+                    <MenuItem x:Name="MnDelete"
+                              Header="_Delele"
+                              CommandParameter="{Binding Parent, RelativeSource={RelativeSource Self}}" Click="MnDelete_Click"
+                              >
+                    </MenuItem>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+            
         </DataGrid>
         <Image 
             x:Name="ImgPenalty"

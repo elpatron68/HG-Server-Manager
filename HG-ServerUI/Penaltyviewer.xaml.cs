@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Media.Imaging;
@@ -46,8 +47,6 @@ namespace HG_ServerUI
                         }
                     }
                 }
-                penalty.Fullpath = pngfile;
-                penalty.Filename = Path.GetFileNameWithoutExtension(penalty.Fullpath) + ".png";
                 penaltyList.Add(penalty);
             }
             return penaltyList;
@@ -55,7 +54,9 @@ namespace HG_ServerUI
 
         private void DgPenalties_AutoGeneratingColumn(object sender, System.Windows.Controls.DataGridAutoGeneratingColumnEventArgs e)
         {
-            if (e.PropertyName == "Fullpath" || e.PropertyName== "Filename")
+            if (e.PropertyName == "PngFilename" || 
+                e.PropertyName== "PngFullpath" ||
+                e.PropertyName == "SvgFullpath")
             {
                 e.Column = null;
             }
@@ -64,7 +65,13 @@ namespace HG_ServerUI
         private void DgPenalties_SelectedCellsChanged(object sender, System.Windows.Controls.SelectedCellsChangedEventArgs e)
         {
             var _index = DgPenalties.SelectedIndex;
-            ImgPenalty.Source = new BitmapImage(new Uri(penaltyList[_index].Fullpath));
+            ImgPenalty.Source = new BitmapImage(new Uri(penaltyList[_index].PngFullpath));
+        }
+
+        private void MnDelete_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            IList rows = DgPenalties.SelectedItems;
+
         }
     }
 }
