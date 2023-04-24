@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HG_ServerUI"  
         mc:Ignorable="d"
@@ -29,6 +30,9 @@
                               Header="_Delele"
                               CommandParameter="{Binding Parent, RelativeSource={RelativeSource Self}}" Click="MnDelete_Click"
                               >
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="Delete" />
+                        </MenuItem.Icon>
                     </MenuItem>
                 </ContextMenu>
             </DataGrid.ContextMenu>
