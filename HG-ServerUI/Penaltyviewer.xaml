@@ -26,14 +26,14 @@
                     x:Name="CmDelete" 
                     DataContext="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}"
                     >
-                    <MenuItem x:Name="MnDelete"
+                    <!--<MenuItem x:Name="MnDelete"
                               Header="_Delele"
-                              CommandParameter="{Binding Parent, RelativeSource={RelativeSource Self}}" Click="MnDelete_Click"
+                              CommandParameter="{Binding Parent, RelativeSource={RelativeSource Self}}" 
                               >
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="Delete" />
                         </MenuItem.Icon>
-                    </MenuItem>
+                    </MenuItem>-->
                 </ContextMenu>
             </DataGrid.ContextMenu>
             

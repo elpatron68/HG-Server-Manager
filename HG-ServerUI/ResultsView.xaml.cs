@@ -192,8 +192,7 @@ namespace HG_ServerUI
                 .WithImageUrl($"attachment://{_filename}")
                 .WithDescription(_text)
                 .Build();
-
-            var channel = await client.GetChannelAsync(_discordRacebot.Discordchannelid) as IMessageChannel;
+            _ = await client.GetChannelAsync(_discordRacebot.Discordchannelid) as IMessageChannel;
 
             MemoryStream memoryStream = new MemoryStream();
             using (FileStream file = new FileStream(_filename, FileMode.Open, FileAccess.Read))
@@ -201,7 +200,6 @@ namespace HG_ServerUI
 
             var result = await client.GetChannelAsync(_discordRacebot.Discordchannelid) as IMessageChannel;
             await result!.SendFileAsync(stream: memoryStream, filename: _filename, embed: embed);
-            //try { File.Delete("results.png"); } catch (Exception) { }
         }
 
         private void BtSavePng_Click(object sender, RoutedEventArgs e)
